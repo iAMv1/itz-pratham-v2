@@ -6,14 +6,14 @@ import { CursorRing } from "@/components/layout/cursor-ring";
 import { Preloader } from "@/components/layout/preloader";
 import { LenisProvider } from "@/components/layout/lenis-provider";
 
-export function SiteShell({ children }: { children: React.ReactNode }) {
+export function SiteShell({ children, rail = false }: { children: React.ReactNode; rail?: boolean }) {
   return (
     <LenisProvider>
       <Preloader />
       <ScrollProgress />
       <CursorRing />
       <Nav />
-      <Rail />
+      {rail ? <Rail /> : null}
       {children}
       <Footer />
     </LenisProvider>
