@@ -56,6 +56,19 @@ test("resume link and 404 work", async ({ page }) => {
   await expect(page.getByText("THE PEEPAL TREE IS EMPTY")).toBeVisible();
 });
 
+test("mobile menu opens and navigates", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
+  const menu = page.getByRole("button", { name: "Open menu" });
+  await expect(menu).toBeVisible();
+  await menu.click();
+  await expect(page.getByRole("link", { name: /About/ })).toBeVisible();
+  await page.getByRole("link", { name: /About/ }).click();
+  await expect(page).toHaveURL(/\/about/);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
 test("mobile viewport renders hero content", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" });

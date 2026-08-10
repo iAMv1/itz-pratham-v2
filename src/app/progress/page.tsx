@@ -5,18 +5,19 @@ import { SiteShell } from "@/components/layout/site-shell";
 export const metadata: Metadata = { title: "Progress — Pratham Nahata" };
 
 const PIECES = [
-  { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system, palette roles, voice — critic: 9/10" },
-  { piece: "Multi-page structure", wave: "0", status: "DONE", note: "/ /work /work/[slug] /about /process /contact /progress — all 200" },
-  { piece: "Hero (cinematic)", wave: "1", status: "DONE", note: "6.8 → 8.5 (parallax, magnetic CTA, lockup swap, subhead)" },
-  { piece: "Case studies", wave: "1", status: "DONE", note: "7.2 → 8.5 (system-flow bridge, staggered, pull-quote)" },
-  { piece: "About: metro + rangoli", wave: "1", status: "DONE", note: "6.5 → 9.2 (self-drawing lines, spring stations, pulse hub)" },
-  { piece: "Work index", wave: "2", status: "DONE", note: "5.0 → 7.5 → clean read (LookOut parallax, kinetic reveals)" },
-  { piece: "Process page", wave: "2", status: "DONE", note: "5.5 → clean read (typewriter command, dedup headers, principles)" },
-  { piece: "Contact page", wave: "2", status: "DONE", note: "6.5 → 7.2 (clipboard CTA, anchored शुक्रिया, relative time, glow)" },
-  { piece: "QA gates", wave: "2", status: "DONE", note: "vitest 9/9 ✓ lint ✓ tsc ✓ build ✓" },
-  { piece: "Motion polish (20%/wave)", wave: "3", status: "PENDING", note: "per-loop gain bar vs Awwwards refs" },
-  { piece: "Playwright smoke + Lighthouse", wave: "3", status: "PENDING", note: "e2e smoke, prod audit" },
-  { piece: "Auto-deploy + domain", wave: "4", status: "PENDING", note: "Vercel git integration, custom domain" },
+  { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system — critic: 9/10" },
+  { piece: "Multi-page structure", wave: "0", status: "DONE", note: "7 routes, all 200, e2e locked" },
+  { piece: "Hero (cinematic)", wave: "1", status: "DONE", note: "6.8 → 8.5 (parallax, magnetic CTA, lockup)" },
+  { piece: "Case studies", wave: "1", status: "DONE", note: "7.2 → 8.5 (system flow, pull-quote)" },
+  { piece: "About: metro + rangoli", wave: "1-3", status: "DONE", note: "6.5 → 9.2; DMRC geometry round: 7.5 → shipping" },
+  { piece: "Work index", wave: "2", status: "DONE", note: "5.0 → 7.5 → clean (LookOut, kinetic)" },
+  { piece: "Process page", wave: "2", status: "DONE", note: "5.5 → clean (typewriter, principles)" },
+  { piece: "Contact page", wave: "2", status: "DONE", note: "6.5 → 7.2 (clipboard, relative time)" },
+  { piece: "Navbar", wave: "4", status: "DONE", note: "mobile FAIL → 6 → rebuilt: sheet menu, 44px targets, grouped actions — e2e verified" },
+  { piece: "Error pages", wave: "3", status: "DONE", note: "404 peacock + 500 haveli-coughed" },
+  { piece: "Navigation crash", wave: "3", status: "DONE", note: "preloader DOM race fixed; React-idiomatic; e2e 5/5" },
+  { piece: "QA gates", wave: "3", status: "DONE", note: "vitest 9/9 · lint · tsc · Playwright 5/5 · LH 81/100/96/100" },
+  { piece: "Auto-deploy + domain", wave: "5", status: "PENDING", note: "Vercel git integration, custom domain" },
 ];
 
 export default function ProgressPage() {
