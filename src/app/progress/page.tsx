@@ -5,13 +5,13 @@ import { SiteShell } from "@/components/layout/site-shell";
 export const metadata: Metadata = { title: "Progress — Pratham Nahata" };
 
 const PIECES = [
-  { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system, palette roles, voice" },
-  { piece: "Multi-page structure", wave: "0", status: "DONE", note: "/ /work /work/[slug] /about /process /contact /progress" },
-  { piece: "Hero (cinematic)", wave: "1", status: "IN LOOP", note: "blind A/B vs Awwwards bars" },
-  { piece: "Work index + case studies", wave: "1", status: "IN LOOP", note: "4 studies, arch windows, impact metrics" },
-  { piece: "About: metro map + rangoli", wave: "2", status: "PENDING", note: "Delhi Metro career map, contribution bandhani" },
-  { piece: "Process page", wave: "2", status: "PENDING", note: "terminal + steps + principles" },
-  { piece: "404 + mascot", wave: "2", status: "DONE", note: "peacock flock, cursor-tracking mascot" },
+  { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system, palette roles, voice — critic: 9/10" },
+  { piece: "Multi-page structure", wave: "0", status: "DONE", note: "/ /work /work/[slug] /about /process /contact /progress — all 200" },
+  { piece: "Hero (cinematic)", wave: "1", status: "IN LOOP", note: "critic rounds: 6.8 → 8.5 (parallax, magnetic CTA, lockup swap, subhead)" },
+  { piece: "Case studies", wave: "1", status: "IN LOOP", note: "critic rounds: 7.2 → 8.5 (system-flow bridge, staggered, pull-quote)" },
+  { piece: "About: metro + rangoli", wave: "1", status: "IN LOOP", note: "critic rounds: 6.5 → 9.2 (self-drawing lines, spring stations, pulse hub)" },
+  { piece: "Work index", wave: "1", status: "IN LOOP", note: "critic round 1: 5.0 — kinetic reveals shipped, round 2 pending" },
+  { piece: "404 + mascot", wave: "2", status: "DONE", note: "peacock flock (legible), cursor-tracking mascot" },
   { piece: "Motion polish (20%/wave)", wave: "3", status: "PENDING", note: "per-loop gain bar vs Awwwards refs" },
   { piece: "QA gates", wave: "3", status: "PENDING", note: "vitest, playwright smoke, Lighthouse" },
   { piece: "Auto-deploy + domain", wave: "4", status: "PENDING", note: "Vercel git integration, custom domain" },
