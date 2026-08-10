@@ -59,7 +59,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
                       {p.title}
                     </span>
                     <span className="text-[14px] leading-relaxed">{p.blurb}</span>
-                    <span className="mt-auto pt-3 font-mono text-[12px] tracking-[0.1em] text-cobalt">
+                    <span className="mt-auto flex min-h-11 items-center pt-3 font-mono text-[12px] tracking-[0.1em] text-cobalt">
                       OPEN CASE <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
                     </span>
                   </span>

@@ -13,11 +13,11 @@ export function FlowDiagram({ slug }: { slug: string }) {
   const flow = FLOWS[slug];
   if (!flow) return null;
   return (
-    <div className="flex flex-wrap items-stretch gap-3">
+    <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-3">
       {flow.map((node, i) => (
         <motion.div
           key={node}
-          className="flex flex-1 items-center gap-3"
+          className="flex flex-1 items-center gap-2 sm:gap-3"
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -27,7 +27,9 @@ export function FlowDiagram({ slug }: { slug: string }) {
             <span className="mr-1.5 text-saffron">{String(i + 1).padStart(2, "0")}</span>
             {node}
           </div>
-          {i < flow.length - 1 && <span aria-hidden className="text-saffron">→</span>}
+          {i < flow.length - 1 && (
+            <span aria-hidden className="rotate-90 text-saffron sm:rotate-0">→</span>
+          )}
         </motion.div>
       ))}
     </div>

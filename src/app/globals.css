@@ -131,6 +131,8 @@
   body {
     @apply bg-background text-foreground antialiased;
     overflow-x: clip;
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
   ::selection {
     background: var(--marigold);
