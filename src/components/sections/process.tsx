@@ -13,21 +13,7 @@ function TerminalLine({ kind, text, num, cursor }: { kind: string; text: string;
         <span className="block">{text}</span>
       </span>
     );
-  if (kind === "cmd")
-    return (
-      <span className="text-paper">
-        <span className="font-medium text-mint">pratham@nahata</span>
-        <span className="text-paper/40">:</span>
-        <span className="text-cobalt">~/process</span>
-        <span className="font-medium text-paper">$</span>{" "}
-        {text.split(" ").map((w, i) => (
-          <span key={i} className={i >= 3 ? "text-marigold" : ""}>
-            {w}{" "}
-          </span>
-        ))}
-        {cursor && <span className="animate-[cursor-blink_1s_step-end_infinite] text-mint">▊</span>}
-      </span>
-    );
+  if (kind === "cmd") return <CmdLine text={text} cursor={cursor} />;
   if (kind === "step")
     return (
       <span className="block">
@@ -35,6 +21,50 @@ function TerminalLine({ kind, text, num, cursor }: { kind: string; text: string;
       </span>
     );
   return <span className="block text-mint">{text}</span>;
+}
+
+/** Types the command out when the terminal scrolls into view. */
+function CmdLine({ text, cursor }: { text: string; cursor?: boolean }) {
+  const [typed, setTyped] = useState("");
+  useEffect(() => {
+    let i = 0;
+    let done = false;
+    const el = document.querySelector(".terminal-cmd");
+    if (!el || !("IntersectionObserver" in window)) {
+      const raf = requestAnimationFrame(() => setTyped(text));
+      return () => cancelAnimationFrame(raf);
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting || done) return;
+        done = true;
+        io.disconnect();
+        const id = window.setInterval(() => {
+          i += 1;
+          setTyped(text.slice(0, i));
+          if (i >= text.length) window.clearInterval(id);
+        }, 28);
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [text]);
+
+  return (
+    <span className="terminal-cmd text-paper">
+      <span className="font-medium text-mint">pratham@nahata</span>
+      <span className="text-paper/40">:</span>
+      <span className="text-cobalt">~/process</span>
+      <span className="font-medium text-paper">$</span>{" "}
+      {typed.split(" ").map((w, i) => (
+        <span key={i} className={i >= 3 ? "text-marigold" : ""}>
+          {w}{" "}
+        </span>
+      ))}
+      {cursor && <span className="animate-[cursor-blink_1s_step-end_infinite] text-mint">▊</span>}
+    </span>
+  );
 }
 
 export function Process() {

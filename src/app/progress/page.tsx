@@ -7,13 +7,15 @@ export const metadata: Metadata = { title: "Progress — Pratham Nahata" };
 const PIECES = [
   { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system, palette roles, voice — critic: 9/10" },
   { piece: "Multi-page structure", wave: "0", status: "DONE", note: "/ /work /work/[slug] /about /process /contact /progress — all 200" },
-  { piece: "Hero (cinematic)", wave: "1", status: "IN LOOP", note: "critic rounds: 6.8 → 8.5 (parallax, magnetic CTA, lockup swap, subhead)" },
-  { piece: "Case studies", wave: "1", status: "IN LOOP", note: "critic rounds: 7.2 → 8.5 (system-flow bridge, staggered, pull-quote)" },
-  { piece: "About: metro + rangoli", wave: "1", status: "IN LOOP", note: "critic rounds: 6.5 → 9.2 (self-drawing lines, spring stations, pulse hub)" },
-  { piece: "Work index", wave: "1", status: "IN LOOP", note: "critic round 1: 5.0 — kinetic reveals shipped, round 2 pending" },
-  { piece: "404 + mascot", wave: "2", status: "DONE", note: "peacock flock (legible), cursor-tracking mascot" },
+  { piece: "Hero (cinematic)", wave: "1", status: "DONE", note: "6.8 → 8.5 (parallax, magnetic CTA, lockup swap, subhead)" },
+  { piece: "Case studies", wave: "1", status: "DONE", note: "7.2 → 8.5 (system-flow bridge, staggered, pull-quote)" },
+  { piece: "About: metro + rangoli", wave: "1", status: "DONE", note: "6.5 → 9.2 (self-drawing lines, spring stations, pulse hub)" },
+  { piece: "Work index", wave: "2", status: "DONE", note: "5.0 → 7.5 → clean read (LookOut parallax, kinetic reveals)" },
+  { piece: "Process page", wave: "2", status: "DONE", note: "5.5 → clean read (typewriter command, dedup headers, principles)" },
+  { piece: "Contact page", wave: "2", status: "DONE", note: "6.5 → 7.2 (clipboard CTA, anchored शुक्रिया, relative time, glow)" },
+  { piece: "QA gates", wave: "2", status: "DONE", note: "vitest 9/9 ✓ lint ✓ tsc ✓ build ✓" },
   { piece: "Motion polish (20%/wave)", wave: "3", status: "PENDING", note: "per-loop gain bar vs Awwwards refs" },
-  { piece: "QA gates", wave: "3", status: "PENDING", note: "vitest, playwright smoke, Lighthouse" },
+  { piece: "Playwright smoke + Lighthouse", wave: "3", status: "PENDING", note: "e2e smoke, prod audit" },
   { piece: "Auto-deploy + domain", wave: "4", status: "PENDING", note: "Vercel git integration, custom domain" },
 ];
 

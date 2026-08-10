@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
-import { AnnotationCard } from "@/components/annotations/annotation-card";
 import { Process } from "@/components/sections/process";
 import { SiteShell } from "@/components/layout/site-shell";
 
@@ -17,24 +16,9 @@ export default function ProcessPage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1">
-        <section className="px-[clamp(20px,4vw,48px)] pt-[110px]">
-          <Reveal>
-            <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
-              PROCESS · HOW I BUILD
-            </p>
-            <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
-              THE<br />
-              <span className="text-cobalt">PROCESS</span>
-            </h1>
-            <div className="mt-5">
-              <AnnotationCard label="terminal · note" rotate={1.5}>
-                yes, it&apos;s a real terminal. deal with it.
-              </AnnotationCard>
-            </div>
-          </Reveal>
-        </section>
-
-        <Process />
+        <div className="pt-[72px]">
+          <Process />
+        </div>
 
         <section className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           <Reveal>

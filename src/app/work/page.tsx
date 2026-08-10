@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { KineticArt } from "@/components/motion/kinetic-art";
+import { LookOut } from "@/components/motion/look-out";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -22,7 +23,8 @@ export default function WorkPage() {
               <span className="text-cobalt">PROJECTS</span>
             </h1>
             <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Four systems, each opened like a jharokha window — tap any to read the full story.
+              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim links to
+              a real repo.
             </p>
           </Reveal>
 
@@ -35,7 +37,9 @@ export default function WorkPage() {
                 >
                   <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
                     <KineticArt className="absolute inset-0">
-                      <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
+                      <LookOut className="h-full w-full">
+                        <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]" />
+                      </LookOut>
                     </KineticArt>
                     <span
                       aria-hidden
