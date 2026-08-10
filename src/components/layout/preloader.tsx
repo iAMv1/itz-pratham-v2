@@ -1,37 +1,38 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useReducedMotion } from "motion/react";
 
+let preloaderShown = false; // session flag: the curtain plays once, not on every client navigation
+
 export function Preloader() {
   const reduced = useReducedMotion();
+  const [done, setDone] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const pctRef = useRef<HTMLSpanElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
+    const finish = () => {
+      preloaderShown = true;
+      document.body.classList.add("hero-ready");
+      requestAnimationFrame(() => setDone(true)); // React removes the node cleanly
+    };
 
     const noloader = new URLSearchParams(window.location.search).has("noloader");
-    const kill = () => root.remove();
-    const reveal = () => document.body.classList.add("hero-ready");
-
-    if (reduced || noloader) {
-      kill();
-      reveal();
+    if (preloaderShown || reduced || noloader) {
+      finish();
       return;
     }
-
-    if (typeof gsap === "undefined") {
-      kill();
-      reveal();
+    const root = rootRef.current;
+    if (!root || typeof gsap === "undefined") {
+      finish();
       return;
     }
 
     const counter = { v: 0 };
-    gsap.to(counter, {
+    const countTween = gsap.to(counter, {
       v: 100,
       duration: 1.0,
       ease: "power2.inOut",
@@ -41,25 +42,27 @@ export function Preloader() {
         }
       },
     });
-    if (fillRef.current) {
-      gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power2.inOut" });
-    }
-    gsap.to(root, {
+    const fillTween = fillRef.current
+      ? gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power2.inOut" })
+      : null;
+    const curtainTween = gsap.to(root, {
       yPercent: -100,
       duration: 0.8,
       ease: "power4.inOut",
       delay: 1.1,
-      onComplete: () => {
-        kill();
-        reveal();
-      },
+      onComplete: finish,
     });
-    const failsafe = window.setTimeout(() => {
-      kill();
-      reveal();
-    }, 4500);
-    return () => window.clearTimeout(failsafe);
+    const failsafe = window.setTimeout(finish, 4500);
+
+    return () => {
+      window.clearTimeout(failsafe);
+      countTween.kill();
+      fillTween?.kill();
+      curtainTween.kill();
+    };
   }, [reduced]);
+
+  if (done) return null;
 
   return (
     <div
