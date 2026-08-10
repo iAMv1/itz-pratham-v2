@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,6 +43,12 @@ export function useLenis() {
       lenisRef.current = null;
     };
   }, []);
+
+  /* client navigation: reset scroll to top (App Router preserves position otherwise) */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    lenisRef.current?.scrollTo(0, { immediate: true });
+  }, [pathname]);
 
   return lenisRef;
 }

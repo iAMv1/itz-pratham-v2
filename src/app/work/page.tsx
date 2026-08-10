@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { KineticArt } from "@/components/motion/kinetic-art";
 import { LookOut } from "@/components/motion/look-out";
+import { MaskTitle } from "@/components/motion/mask-title";
+import { FloatingStats } from "@/components/motion/floating-stats";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -18,13 +20,15 @@ export default function WorkPage() {
             <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
               WORK · 01—04
             </p>
-            <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
-              SELECTED<br />
-              <span className="text-cobalt">PROJECTS</span>
-            </h1>
+            <MaskTitle
+              lines={["SELECTED", "PROJECTS"]}
+              accent={[1]}
+              as="h1"
+              className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]"
+            />
             <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim links to
-              a real repo.
+              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim links to a
+              real repo.
             </p>
           </Reveal>
 
@@ -38,9 +42,14 @@ export default function WorkPage() {
                   <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
                     <KineticArt className="absolute inset-0">
                       <LookOut className="h-full w-full">
-                        <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]" />
+                        <ArtImage
+                          src={p.art}
+                          alt=""
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]"
+                        />
                       </LookOut>
                     </KineticArt>
+                    <FloatingStats items={p.metrics.split(" · ")} />
                     <span
                       aria-hidden
                       className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest"
@@ -54,7 +63,7 @@ export default function WorkPage() {
                       {p.title}
                     </span>
                     <span className="text-[14.5px] leading-relaxed">{p.blurb}</span>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-3 font-mono text-[12.5px] tracking-[0.1em] text-cobalt">
+                    <span className="mt-auto flex min-h-11 items-center pt-3 font-mono text-[12.5px] tracking-[0.1em] text-cobalt">
                       OPEN CASE STUDY <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
                     </span>
                   </span>

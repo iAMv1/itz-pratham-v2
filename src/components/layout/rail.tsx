@@ -4,13 +4,8 @@ import { useEffect, useState } from "react";
 
 const SECTIONS = [
   { id: "top", num: "00", label: "TOP" },
-  { id: "vibe", num: "01", label: "VIBE" },
-  { id: "process", num: "02", label: "PROCESS" },
-  { id: "built", num: "03", label: "BUILT" },
-  { id: "wins", num: "04", label: "WINS" },
-  { id: "work", num: "05", label: "WORK" },
-  { id: "stack", num: "06", label: "STACK" },
-  { id: "contact", num: "07", label: "TALK" },
+  { id: "featured", num: "01", label: "WORK" },
+  { id: "talk", num: "02", label: "TALK" },
 ] as const;
 
 export function Rail() {

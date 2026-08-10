@@ -4,6 +4,8 @@ import { Hero } from "@/components/sections/hero";
 import { SkillsMarquee, NameMarquee } from "@/components/sections/marquee-band";
 import { Reveal } from "@/components/motion/reveal";
 import { KineticArt } from "@/components/motion/kinetic-art";
+import { MaskTitle } from "@/components/motion/mask-title";
+import { FloatingStats } from "@/components/motion/floating-stats";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 
@@ -20,17 +22,18 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         <NameMarquee />
 
         {/* featured work → /work/[slug] */}
-        <section className="px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
+        <section id="featured" className="scroll-mt-24 px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
                   01 · FEATURED
                 </p>
-                <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
-                  SELECTED<br />
-                  <span className="text-cobalt">WORK</span>
-                </h2>
+                <MaskTitle
+                  lines={["SELECTED", "WORK"]}
+                  accent={[1]}
+                  className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]"
+                />
               </div>
               <Link href="/work" className="group inline-flex items-center gap-2 font-mono text-sm tracking-wider text-cobalt">
                 ALL PROJECTS <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
@@ -49,6 +52,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
                     <KineticArt className="absolute inset-0">
                       <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
                     </KineticArt>
+                    <FloatingStats items={p.metrics.split(" · ")} />
                     <span aria-hidden className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest">
                       {p.index} · {p.year}
                     </span>
@@ -70,7 +74,7 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
         </section>
 
         {/* CTA band */}
-        <section className="border-y-2 border-ink bg-ink-2 px-[clamp(20px,4vw,48px)] py-[clamp(56px,8vh,90px)] text-paper">
+        <section id="talk" className="scroll-mt-24 border-y-2 border-ink bg-ink-2 px-[clamp(20px,4vw,48px)] py-[clamp(56px,8vh,90px)] text-paper">
           <Reveal>
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
               <div>
