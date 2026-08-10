@@ -22,7 +22,7 @@ function PeacockSymbol() {
   return (
     <svg aria-hidden className="absolute h-0 w-0">
       <defs>
-        <symbol id={PEA_SYMBOL_ID} viewBox="0 0 40 40">
+        <symbol id={PEA_SYMBOL_ID} viewBox="0 0 40 40" width="40" height="40">
           <g fill="none" stroke="#051024" strokeWidth="1.6" strokeLinecap="round">
             <path d="M20 14 C13 2 5 4 6 12 C2 11 2 19 8 19" />
             <path d="M20 14 C20 2 27 4 26 12 C31 11 31 19 25 19" />
@@ -63,17 +63,22 @@ export function PeacockFlock({ className = "" }: { className?: string }) {
       raf = requestAnimationFrame(loop);
       const t = performance.now() * 0.001;
       uses.forEach((u) => {
-        const base = parseFloat(u.dataset.rot ?? "0");
+        const cx = parseFloat(u.dataset.cx ?? "0");
+        const cy = parseFloat(u.dataset.cy ?? "0");
+        const rot = parseFloat(u.dataset.rot ?? "0");
         const d = parseFloat(u.dataset.delay ?? "0");
         const breath = Math.sin(t * 1.4 + d) * 3;
-        u.setAttribute("transform", `translate(0 0) rotate(${base + breath})`);
+        u.setAttribute(
+          "transform",
+          `translate(${cx} ${cy}) rotate(${rot + breath}) translate(-20 -20)`
+        );
       });
     };
     loop();
     return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
-  const cells: { x: number; y: number; rot: number; delay: number }[] = [];
+  const cells: { cx: number; cy: number; rot: number; delay: number }[] = [];
   const text = "404";
   let col = 0;
   for (const ch of text) {
@@ -82,10 +87,10 @@ export function PeacockFlock({ className = "" }: { className?: string }) {
     for (let r = 0; r < rows.length; r++) {
       for (let c = 0; c < rows[r].length; c++) {
         if (rows[r][c] !== "1") continue;
-        const flow = (c < w / 2 ? -1 : 1) * (14 + (r % 3) * 6);
+        const flow = (c < w / 2 ? -1 : 1) * (14 + (r % 3) * 6) + ((i * 7) % 5 - 2) * 4;
         cells.push({
-          x: (col + c) * (CELL + GAP),
-          y: r * (CELL + GAP),
+          cx: (col + c) * (CELL + GAP) + CELL / 2,
+          cy: r * (CELL + GAP) + CELL / 2,
           rot: flow,
           delay: (r * 5 + c * 2 + col) * 0.11,
         });
@@ -112,14 +117,11 @@ export function PeacockFlock({ className = "" }: { className?: string }) {
             key={i}
             href={`#${PEA_SYMBOL_ID}`}
             data-flock
+            data-cx={c.cx}
+            data-cy={c.cy}
             data-rot={c.rot}
             data-delay={c.delay}
-            width={CELL}
-            height={CELL}
-            x={c.x}
-            y={c.y}
-            transform={`rotate(${c.rot})`}
-            className="origin-center"
+            transform={`translate(${c.cx} ${c.cy}) rotate(${c.rot}) translate(-20 -20)`}
           />
         ))}
       </svg>
