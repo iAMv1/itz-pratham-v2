@@ -87,7 +87,8 @@ export function PeacockFlock({ className = "" }: { className?: string }) {
     for (let r = 0; r < rows.length; r++) {
       for (let c = 0; c < rows[r].length; c++) {
         if (rows[r][c] !== "1") continue;
-        const flow = (c < w / 2 ? -1 : 1) * (14 + (r % 3) * 6) + ((i * 7) % 5 - 2) * 4;
+        const flow =
+          (c < w / 2 ? -1 : 1) * (14 + (r % 3) * 6) + (((col * 3 + r * 5 + c * 2) % 5) - 2) * 4;
         cells.push({
           cx: (col + c) * (CELL + GAP) + CELL / 2,
           cy: r * (CELL + GAP) + CELL / 2,
