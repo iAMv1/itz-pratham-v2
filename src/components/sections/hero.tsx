@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 import { CountUp } from "@/components/motion/count-up";
@@ -94,12 +95,12 @@ export function Hero({ shot }: { shot?: boolean }) {
             Start a project <span aria-hidden>→</span>
           </a>
         </Magnetic>
-        <a
+        <Link
           href="/work"
           className="inline-flex items-center gap-2.5 border-2 border-ink px-6 py-3.5 font-mono text-sm tracking-wider transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97]"
         >
           View projects <span aria-hidden>↓</span>
-        </a>
+        </Link>
       </div>
 
       <ul className="relative z-10 mt-8 flex flex-col gap-2 font-mono text-sm tracking-wider">
