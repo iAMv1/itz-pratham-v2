@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 import { CountUp } from "@/components/motion/count-up";
+import { Magnetic } from "@/components/motion/magnetic";
 import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_INTERVAL = 2600;
@@ -12,6 +13,13 @@ export function Hero({ shot }: { shot?: boolean }) {
   const reduced = useReducedMotion();
   const [role, setRole] = useState(profile.rota[0]);
   const [roleVisible, setRoleVisible] = useState(true);
+
+  const { scrollY } = useScroll();
+  const titleY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : 120]);
+  const titleOpacity = useTransform(scrollY, [0, 700], [1, reduced ? 1 : 0.15]);
+  const portraitY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : -90]);
+  const namasteX = useTransform(scrollY, [0, 600], [0, reduced ? 0 : 70]);
+  const watermarkY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : 160]);
 
   useEffect(() => {
     if (reduced) return;
@@ -34,27 +42,35 @@ export function Hero({ shot }: { shot?: boolean }) {
         shot ? "min-h-[820px]" : "min-h-svh"
       }`}
     >
-      <span
+      <motion.span
         aria-hidden
+        style={{ y: watermarkY }}
         className="pointer-events-none absolute right-[-2%] top-[22%] z-0 select-none font-dev text-[clamp(10rem,30vw,26rem)] leading-none text-ink opacity-[0.045]"
       >
         जयपुर
-      </span>
+      </motion.span>
       <HeroField className="absolute inset-0 z-0 h-full w-full" />
 
       <p className="relative z-10 font-mono text-[13px] tracking-widest text-muted-foreground">
         PORTFOLIO ©2026 — DELHI, INDIA · जयपुर VIBES
       </p>
 
-      <h1 className="relative z-10 mt-6 font-display text-[clamp(4.5rem,15vw,14rem)] font-semibold uppercase leading-[0.82] tracking-wide">
-        <span className="block text-transparent [-webkit-text-stroke:3.5px_#051024]">PRATHAM</span>
-        <span className="block pl-[0.2em]">
+      <motion.h1
+        style={{ y: titleY, opacity: titleOpacity }}
+        className="relative z-10 mt-4 font-display text-[clamp(4.5rem,15vw,14rem)] font-semibold uppercase leading-[0.8] tracking-wide"
+      >
+        <span className="block pl-[0.05em]">PRATHAM</span>
+        <span className="block pl-[0.28em] text-transparent [-webkit-text-stroke:3.5px_#051024]">
           NAHATA
-          <span className="inline-block animate-[cursor-blink_1.1s_step-end_infinite] text-saffron">▮</span>
+          <span className="inline-block animate-[cursor-blink_1.1s_step-end_infinite] text-saffron [-webkit-text-stroke:0px]">▮</span>
         </span>
-      </h1>
+      </motion.h1>
 
-      <p className="relative z-10 mt-6 font-mono text-sm tracking-widest">
+      <p className="relative z-10 mt-5 max-w-[46ch] font-mono text-[12px] tracking-[0.2em] text-muted-foreground">
+        FULL-STACK × ML SYSTEMS — DELHI, INDIA → THE WORLD
+      </p>
+
+      <p className="relative z-10 mt-4 font-mono text-sm tracking-widest">
         <span className="text-muted-foreground">▸ I am a</span>{" "}
         <span
           aria-live="polite"
@@ -70,14 +86,16 @@ export function Hero({ shot }: { shot?: boolean }) {
       </p>
 
       <div className="relative z-10 mt-8 flex flex-wrap gap-4">
+        <Magnetic>
+          <a
+            href={`mailto:${profile.email}`}
+            className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[box-shadow] duration-150 ease-out hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+          >
+            Start a project <span aria-hidden>→</span>
+          </a>
+        </Magnetic>
         <a
-          href={`mailto:${profile.email}`}
-          className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
-        >
-          Start a project <span aria-hidden>→</span>
-        </a>
-        <a
-          href="#work"
+          href="/work"
           className="inline-flex items-center gap-2.5 border-2 border-ink px-6 py-3.5 font-mono text-sm tracking-wider transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97]"
         >
           View projects <span aria-hidden>↓</span>
@@ -100,6 +118,7 @@ export function Hero({ shot }: { shot?: boolean }) {
 
       {/* jharokha portrait window */}
       <motion.div
+        style={{ y: portraitY }}
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -130,12 +149,13 @@ export function Hero({ shot }: { shot?: boolean }) {
         </div>
       </motion.div>
 
-      <p
+      <motion.p
         aria-hidden
+        style={{ x: namasteX }}
         className="absolute right-[calc(clamp(20px,5vw,90px)+2.5rem)] top-[7%] z-[2] hidden rotate-[-4deg] font-dev text-[clamp(2.6rem,5.5vw,4.6rem)] text-saffron [text-shadow:3px_3px_0_#051024] lg:block"
       >
         नमस्ते
-      </p>
+      </motion.p>
 
       <div
         aria-hidden

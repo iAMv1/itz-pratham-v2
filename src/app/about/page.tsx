@@ -2,54 +2,10 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { AnnotationCard } from "@/components/annotations/annotation-card";
 import { metro, contribution, profile } from "@/data/profile";
+import { MetroMap } from "./metro-map";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "About — Pratham Nahata" };
-
-function MetroMap() {
-  const rowH = 64;
-  const hubX = 90;
-  const startX = 150;
-  const stepX = 210;
-  return (
-    <svg viewBox="0 0 980 300" role="img" aria-label={metro.title} className="w-full">
-      {metro.lines.map((line, li) => {
-        const y = 40 + li * rowH + 14;
-        const xs = line.stations.map((_, si) => startX + si * stepX);
-        return (
-          <g key={line.id}>
-            <path
-              d={`M ${hubX} ${y} L ${xs[0]} ${y} ${xs.map((x, i) => (i ? `L ${x} ${y}` : "")).join(" ")}`}
-              fill="none"
-              stroke={line.color}
-              strokeWidth="10"
-              strokeLinecap="round"
-              opacity="0.85"
-            />
-            <rect x={hubX - 26} y={y - 12} width="52" height="24" rx="12" fill={line.color} />
-            <text x={hubX} y={y + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill="#F4EFE6">
-              {li + 1}
-            </text>
-            {xs.map((x, si) => (
-              <g key={si}>
-                <circle cx={x} cy={y} r="9" fill="#F4EFE6" stroke={line.color} strokeWidth="4" />
-                <text x={x} y={y + 34} textAnchor="middle" fontSize="10" letterSpacing="1" fill="#4A5266" fontFamily="DM Mono, monospace">
-                  {line.stations[si]}
-                </text>
-              </g>
-            ))}
-            <text x={startX - 8} y={y - 18} textAnchor="end" fontSize="10" letterSpacing="2" fill="#4A5266" fontFamily="DM Mono, monospace">
-              {line.name}
-            </text>
-          </g>
-        );
-      })}
-      <text x={hubX} y={292} textAnchor="middle" fontSize="12" letterSpacing="2" fill="#051024" fontFamily="DM Mono, monospace" fontWeight="700">
-        {metro.hub}
-      </text>
-    </svg>
-  );
-}
 
 function ContributionRangoli() {
   const cells = [];

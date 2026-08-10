@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
@@ -14,6 +15,37 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const s = caseStudies.find((c) => c.slug === slug);
   return { title: s ? `${s.title} — Pratham Nahata` : "Case study — Pratham Nahata" };
+}
+
+const FLOWS: Record<string, string[]> = {
+  "mindpulse-pro": ["Keystroke & mouse capture", "50+ temporal features", "XGBoost → ONNX", "Browser inference <20ms", "SHAP + WebLLM coach"],
+  "unified-dta": ["ESM-2 protein embeddings", "GIN molecular graph", "Joint representation", "CI / MSE benchmarks", "Dockerized API"],
+  sentinel: ["Anonymized signals", "Burnout scoring agent", "Graph team analysis", "Talent discovery agent", "Natural-language queries"],
+  omnisectester: ["Target selection", "7 surface adapters", "Defense-in-depth engine", "Unified reports"],
+};
+
+function FlowDiagram({ slug }: { slug: string }) {
+  const flow = FLOWS[slug] ?? ["Input", "Process", "Output"];
+  return (
+    <div className="flex flex-wrap items-stretch gap-3">
+      {flow.map((node, i) => (
+        <motion.div
+          key={node}
+          className="flex flex-1 items-center gap-3"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ delay: 0.15 + i * 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="flex-1 border border-paper/30 bg-paper/[0.06] px-3 py-2.5 text-center font-mono text-[11px] tracking-wider text-paper/85">
+            <span className="mr-1.5 text-saffron">{String(i + 1).padStart(2, "0")}</span>
+            {node}
+          </div>
+          {i < flow.length - 1 && <span aria-hidden className="text-saffron">→</span>}
+        </motion.div>
+      ))}
+    </div>
+  );
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,12 +84,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </span>
           </header>
 
+          {/* system flow — dark bridge into the body */}
+          <div className="border-x-2 border-b-2 border-ink bg-ink-2 px-[clamp(20px,4vw,40px)] py-8 text-paper">
+            <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
+            <FlowDiagram slug={study.slug} />
+          </div>
+
           {/* sections */}
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
             <Reveal>
               <section>
                 <h2 className="mb-3 font-display text-3xl font-semibold uppercase">THE PROBLEM</h2>
                 <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.challenge}</p>
+                <p className="mt-5 border-l-4 border-saffron bg-paper-2 py-2 pl-4 font-mono text-[13px] italic leading-relaxed text-saffron-deep">
+                  {study.impact[0]}
+                </p>
               </section>
             </Reveal>
             <Reveal delay={0.08}>
