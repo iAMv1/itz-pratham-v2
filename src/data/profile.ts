@@ -18,8 +18,9 @@ export const profile: {
   process: {
     title: string;
     lines: { kind: string; text: string; num?: string; cursor?: boolean }[];
-    steps: { num: string; title: string; sub: string }[];
+    steps: { num: string; title: string; sub: string; cmd: string; out: string; artifacts: string[] }[];
     tools: string[];
+    stats: { value: string; label: string }[];
   };
   background: { years: string; role: string; co: string; desc: string; tags: string; status: string }[];
   wins: {
@@ -92,10 +93,16 @@ export const profile: {
       { kind: "ok", text: "✓ done in 2 weeks, not 2 months — you keep the source, I keep the vibes" },
     ],
     steps: [
-      { num: "01", title: "DISCOVER", sub: "talk to real humans · find the pain" },
-      { num: "02", title: "DESIGN", sub: "moodboards · type · motion language" },
-      { num: "03", title: "BUILD", sub: "semantic HTML · tokens · fast" },
-      { num: "04", title: "POLISH", sub: "a11y · perf · feel expensive" },
+      { num: "01", title: "DISCOVER", sub: "talk to real humans · find the pain", cmd: "pratham --plan", out: "unpack the problem — real users, real constraints, the actual pain underneath the ask", artifacts: ["USER INTERVIEWS", "PAIN MAP", "ONE-PAGE BRIEF"] },
+      { num: "02", title: "DESIGN", sub: "moodboards · type · motion language", cmd: "pratham --design", out: "sketch the vibe — moodboards, type scale, motion language, lo-fi prototypes you can click", artifacts: ["MOODBOARDS", "DESIGN TOKENS", "LO-FI PROTOTYPE"] },
+      { num: "03", title: "BUILD", sub: "semantic HTML · tokens · fast", cmd: "pratham --build", out: "ship fast — semantic markup, tokens not chaos, CI-green, preview links every day", artifacts: ["COMPONENT LIBRARY", "CI GREEN", "DAILY PREVIEWS"] },
+      { num: "04", title: "POLISH", sub: "a11y · perf · feel expensive", cmd: "pratham --polish", out: "measure & refine — a11y pass, perf budget, micro-interactions until it feels expensive", artifacts: ["A11Y PASS", "PERF BUDGET", "SHIP LOG"] },
+    ],
+    stats: [
+      { value: "4", label: "PHASES" },
+      { value: "2WK", label: "AVG LOOP" },
+      { value: "AA", label: "CONTRAST" },
+      { value: "100%", label: "VIBES" },
     ],
     tools: ["STACK — FastAPI · Next.js · PyTorch · ONNX · Supabase · Docker", "VIBES — motion-first · tokens · a11y · perf budgets"],
   },

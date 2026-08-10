@@ -7,18 +7,21 @@ export const metadata: Metadata = { title: "Progress — Pratham Nahata" };
 const PIECES = [
   { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system — critic: 9/10" },
   { piece: "Multi-page structure", wave: "0", status: "DONE", note: "7 routes, all 200, e2e locked" },
-  { piece: "Hero (cinematic)", wave: "1", status: "DONE", note: "6.8 → 8.5 (parallax, magnetic CTA, lockup)" },
+  { piece: "Hero (cinematic)", wave: "1", status: "DONE", note: "6.8 → 8.5 (parallax, magnetic, char reveal)" },
   { piece: "Case studies", wave: "1", status: "DONE", note: "7.2 → 8.5 (system flow, pull-quote)" },
-  { piece: "About: metro + rangoli", wave: "1-3", status: "DONE", note: "6.5 → 9.2; DMRC geometry round: 7.5 → shipping" },
-  { piece: "Work index", wave: "2", status: "DONE", note: "5.0 → 7.5 → clean (LookOut, kinetic)" },
-  { piece: "Process page", wave: "2", status: "DONE", note: "5.5 → clean (typewriter, principles)" },
+  { piece: "Work index", wave: "2", status: "DONE", note: "5.0 → 7.5 → clean (LookOut, kinetic, floating stats)" },
+  { piece: "Process page", wave: "6", status: "DONE", note: "scroll-executed terminal session (4 commands type + output + artifact chips), synced rail, stats strip — pixel + e2e verified" },
   { piece: "Contact page", wave: "2", status: "DONE", note: "6.5 → 7.2 (clipboard, relative time)" },
-  { piece: "Navbar", wave: "4", status: "DONE", note: "mobile FAIL → 6 → rebuilt: sheet menu, 44px targets, grouped actions — e2e verified" },
+  { piece: "Navbar", wave: "4", status: "DONE", note: "mobile FAIL → rebuilt: sheet menu, 44px targets — e2e verified" },
+  { piece: "Metro map", wave: "6", status: "DONE", note: "DMRC casing + roundels + moving trains + MINDPULSE interchange corridor + tooltips + legend — pixel-verified; vision re-round pending (quota)" },
   { piece: "Error pages", wave: "3", status: "DONE", note: "404 peacock + 500 haveli-coughed" },
-  { piece: "Navigation crash", wave: "3", status: "DONE", note: "preloader DOM race fixed; React-idiomatic; e2e 5/5" },
+  { piece: "Navigation crash", wave: "3", status: "DONE", note: "preloader DOM race fixed; e2e 5/5" },
   { piece: "QA gates", wave: "3", status: "DONE", note: "vitest 9/9 · lint · tsc · Playwright 5/5 · LH 81/100/96/100" },
-  { piece: "Auto-deploy + domain", wave: "5", status: "PENDING", note: "Vercel git integration, custom domain" },
+  { piece: "Vision critic loop", wave: "6", status: "PAUSED", note: "gemini daily quota hit — rounds resume next session (key installed: GEMINI_API_KEY)" },
+  { piece: "Auto-deploy + domain", wave: "7", status: "PENDING", note: "Vercel git integration, custom domain" },
 ];
+
+const ESTIMATE = 55; // user: 45% at wave 5 → this wave advances metro + process
 
 export default function ProgressPage() {
   return (
@@ -34,8 +37,9 @@ export default function ProgressPage() {
               <span className="text-cobalt">PROGRESS</span>
             </h1>
             <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Every piece is built, screenshot-rendered, and blind-A/B&apos;d against Awwwards-level references by an
-              independent critic. A piece ships only after two clean rounds. Updated live as the loop runs.
+              Owner estimate at wave 5: <strong className="text-saffron-deep">45%</strong>. Current estimate:{" "}
+              <strong className="text-saffron-deep">{ESTIMATE}%</strong> — metro + process rebuilt this wave, verified
+              by pixel checks and e2e; vision re-rounds pending quota reset.
             </p>
           </Reveal>
 
