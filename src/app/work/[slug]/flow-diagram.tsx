@@ -10,7 +10,8 @@ const FLOWS: Record<string, string[]> = {
 };
 
 export function FlowDiagram({ slug }: { slug: string }) {
-  const flow = FLOWS[slug] ?? ["Input", "Process", "Output"];
+  const flow = FLOWS[slug];
+  if (!flow) return null;
   return (
     <div className="flex flex-wrap items-stretch gap-3">
       {flow.map((node, i) => (

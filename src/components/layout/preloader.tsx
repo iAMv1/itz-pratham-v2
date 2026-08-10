@@ -65,7 +65,7 @@ export function Preloader() {
     <div
       ref={rootRef}
       aria-hidden
-      className="fixed inset-0 z-[300] hidden flex-col items-center justify-center gap-4 bg-ink-2 text-paper [html.js_&]:flex"
+      className="fixed inset-0 z-[300] flex flex-col items-center justify-center gap-4 bg-ink-2 text-paper"
     >
       <p className="font-display text-[clamp(2.4rem,7vw,4.5rem)] font-semibold uppercase tracking-wider">
         Pratham Nahata<span className="text-saffron">▮</span>

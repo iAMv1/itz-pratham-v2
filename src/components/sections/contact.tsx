@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { MehndiField } from "@/components/canvas/fields";
 import { useLatestRepos, langColor } from "@/data/github";
@@ -19,6 +19,12 @@ function relativeTime(iso: string): string {
 export function Contact() {
   const repos = useLatestRepos();
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const copyEmail = async () => {
     try {
@@ -64,6 +70,9 @@ export function Contact() {
               >
                 {copied ? "COPIED ✓" : profile.email} <span aria-hidden>{copied ? "" : "→"}</span>
               </button>
+              <p role="status" aria-live="polite" className="sr-only">
+                {copied ? "Email copied to clipboard" : ""}
+              </p>
               <a
                 href={profile.resume}
                 className="inline-flex min-w-[min(320px,100%)] items-center justify-center gap-2.5 border-2 border-paper px-8 py-5 font-mono text-[17px] tracking-wide text-paper transition-colors duration-200 hover:bg-paper hover:text-ink active:scale-[0.97]"
@@ -108,7 +117,7 @@ export function Contact() {
                   <a href={`${profile.links.github}/${r.name}`} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-marigold">
                     {r.name}
                   </a>
-                  <span className="text-[11px] tabular-nums text-paper/50">{relativeTime(r.pushed_at)}</span>
+                  <span className="text-[11px] tabular-nums text-paper/50">{mounted ? relativeTime(r.pushed_at) : ""}</span>
                 </li>
               ))}
             </ul>

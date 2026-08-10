@@ -42,7 +42,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <p className="mt-3 max-w-[52ch] text-lg text-paper/80">{study.blurb}</p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {study.stack.map((s) => (
-                  <span key={s} className="border border-paper/30 px-2.5 py-1 font-mono text-[11px] tracking-wider text-paper/80">
+                  <span key={s} className="border border-paper/45 px-2.5 py-1 font-mono text-[11px] tracking-wider text-paper/85">
                     {s}
                   </span>
                 ))}
@@ -53,10 +53,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </span>
           </header>
 
-          {/* system flow — dark bridge into the body */}
-          <div className="border-x-2 border-b-2 border-ink bg-ink-2 px-[clamp(20px,4vw,40px)] py-8 text-paper">
-            <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
-            <FlowDiagram slug={study.slug} />
+          {/* system flow — dark bridge into the body, full-bleed */}
+          <div className="border-b-2 border-ink bg-ink-2 py-8 text-paper">
+            <div className="px-[clamp(20px,4vw,40px)]">
+              <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
+              <FlowDiagram slug={study.slug} />
+            </div>
           </div>
 
           {/* sections */}

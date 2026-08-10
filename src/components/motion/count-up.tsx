@@ -18,20 +18,27 @@ export function CountUp({
 }) {
   const reduced = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(
-    () => (!reduced && typeof window !== "undefined" && "IntersectionObserver" in window ? 0 : value)
-  );
-  const [started, setStarted] = useState(false);
+  const [display, setDisplay] = useState(value); // hydration-safe: server + first client render identical
+  const [run, setRun] = useState(false);
 
   useEffect(() => {
-    if (reduced) return;
+    const id = requestAnimationFrame(() => setRun(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
+    if (!run || reduced) return;
     const el = ref.current;
-    if (!el || started) return;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      const raf = requestAnimationFrame(() => setDisplay(value));
+      return () => cancelAnimationFrame(raf);
+    }
     const io = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting) return;
         io.disconnect();
-        setStarted(true);
+        setDisplay(0);
         const start = performance.now();
         const tick = (now: number) => {
           const p = Math.min(1, (now - start) / duration);
@@ -45,7 +52,7 @@ export function CountUp({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [value, duration, reduced, started]);
+  }, [value, duration, reduced, run]);
 
   return (
     <span ref={ref} className={className}>

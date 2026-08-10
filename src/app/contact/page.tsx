@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/motion/reveal";
 import { Contact } from "@/components/sections/contact";
 import { SiteShell } from "@/components/layout/site-shell";
 

@@ -194,6 +194,11 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Preloader: hidden without JS (CSS-only gate — hydration-safe) */
+html:not(.js) .preloader {
+  display: none;
+}
+
 /* Editorial helpers */
 .drop-cap::first-letter {
   font-family: var(--font-teko);
@@ -207,5 +212,36 @@ html.lenis body {
 @keyframes cursor-blink {
   50% {
     opacity: 0;
+  }
+}
+
+/* 404 life */
+.flock-bob {
+  animation: flock-bob 4s ease-in-out infinite;
+}
+@keyframes flock-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.wm-drift {
+  animation: wm-drift 36s ease-in-out infinite alternate;
+}
+@keyframes wm-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-26px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flock-bob,
+  .wm-drift {
+    animation: none;
   }
 }

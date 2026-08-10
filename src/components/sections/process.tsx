@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { AnnotationCard } from "@/components/annotations/annotation-card";
 import { JaliField } from "@/components/canvas/fields";
@@ -26,10 +26,12 @@ function TerminalLine({ kind, text, num, cursor }: { kind: string; text: string;
 /** Types the command out when the terminal scrolls into view. */
 function CmdLine({ text, cursor }: { text: string; cursor?: boolean }) {
   const [typed, setTyped] = useState("");
+  const spanRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     let i = 0;
     let done = false;
-    const el = document.querySelector(".terminal-cmd");
+    let timer: number | undefined;
+    const el = spanRef.current;
     if (!el || !("IntersectionObserver" in window)) {
       const raf = requestAnimationFrame(() => setTyped(text));
       return () => cancelAnimationFrame(raf);
@@ -39,20 +41,23 @@ function CmdLine({ text, cursor }: { text: string; cursor?: boolean }) {
         if (!entries[0].isIntersecting || done) return;
         done = true;
         io.disconnect();
-        const id = window.setInterval(() => {
+        timer = window.setInterval(() => {
           i += 1;
           setTyped(text.slice(0, i));
-          if (i >= text.length) window.clearInterval(id);
+          if (i >= text.length) window.clearInterval(timer);
         }, 28);
       },
       { threshold: 0.3 }
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      if (timer !== undefined) window.clearInterval(timer);
+    };
   }, [text]);
 
   return (
-    <span className="terminal-cmd text-paper">
+    <span ref={spanRef} className="terminal-cmd text-paper">
       <span className="font-medium text-mint">pratham@nahata</span>
       <span className="text-paper/40">:</span>
       <span className="text-cobalt">~/process</span>

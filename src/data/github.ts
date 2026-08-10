@@ -15,6 +15,8 @@ const FALLBACK: Repo[] = [
 ];
 
 const fetcher = async (url: string): Promise<Repo[]> => {
+  const cached = readCache();
+  if (cached) return cached;
   const res = await fetch(url);
   if (!res.ok) throw new Error("github");
   const data: { name: string; language: string | null; pushed_at: string }[] = await res.json();
@@ -28,6 +30,7 @@ const fetcher = async (url: string): Promise<Repo[]> => {
 };
 
 function readCache(): Repo[] | null {
+  if (typeof window === "undefined") return null;
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
@@ -43,7 +46,7 @@ export function useLatestRepos() {
   const { data } = useSWR<Repo[]>(
     "https://api.github.com/users/iAMv1/repos?sort=updated&per_page=5",
     fetcher,
-    { fallbackData: readCache() ?? FALLBACK, revalidateOnFocus: false, dedupingInterval: TTL }
+    { fallbackData: FALLBACK, revalidateOnFocus: false, dedupingInterval: TTL }
   );
   return data ?? FALLBACK;
 }
