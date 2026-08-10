@@ -1,0 +1,211 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body);
+  --font-body: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+  --font-display: var(--font-teko);
+  --font-dev: var(--font-yatra-one);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-cobalt: var(--cobalt);
+  --color-saffron: var(--saffron);
+  --color-saffron-deep: var(--saffron-deep);
+  --color-terracotta: var(--terracotta);
+  --color-rose: var(--rose);
+  --color-marigold: var(--marigold);
+  --color-mint: var(--mint);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+  --shadow-hard: 5px 5px 0 0 var(--ink);
+  --shadow-hard-lg: 8px 8px 0 0 var(--ink);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+:root {
+  /* Jaipur identity palette */
+  --paper: #f4efe6;
+  --paper-2: #fffdf8;
+  --ink: #051024;
+  --ink-2: #0b0b0b;
+  --cobalt: #1d5b9e;
+  --saffron: #f58e20;
+  --saffron-deep: #b35a00;
+  --terracotta: #c96f4a;
+  --rose: #d9607e;
+  --marigold: #f9ce34;
+  --mint: #8de254;
+
+  /* shadcn mapping (identity-first) */
+  --background: #f4efe6;
+  --foreground: #051024;
+  --card: #fffdf8;
+  --card-foreground: #051024;
+  --popover: #fffdf8;
+  --popover-foreground: #051024;
+  --primary: #f58e20;
+  --primary-foreground: #051024;
+  --secondary: #1d5b9e;
+  --secondary-foreground: #f4efe6;
+  --muted: #e9e2d4;
+  --muted-foreground: #4a5266;
+  --accent: #1d5b9e;
+  --accent-foreground: #f4efe6;
+  --destructive: #ff3333;
+  --border: #051024;
+  --input: #051024;
+  --ring: #1d5b9e;
+  --chart-1: #f58e20;
+  --chart-2: #1d5b9e;
+  --chart-3: #d9607e;
+  --chart-4: #c96f4a;
+  --chart-5: #8de254;
+  --radius: 0rem;
+}
+
+.dark {
+  --background: #0b0b0b;
+  --foreground: #f4efe6;
+  --card: #141414;
+  --card-foreground: #f4efe6;
+  --popover: #141414;
+  --popover-foreground: #f4efe6;
+  --primary: #f58e20;
+  --primary-foreground: #051024;
+  --secondary: #1d5b9e;
+  --secondary-foreground: #f4efe6;
+  --muted: #1c1c1c;
+  --muted-foreground: #a8a8a8;
+  --accent: #f58e20;
+  --accent-foreground: #051024;
+  --destructive: #ff3333;
+  --border: rgba(244, 239, 230, 0.2);
+  --input: rgba(244, 239, 230, 0.3);
+  --ring: #f58e20;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--marigold);
+    color: var(--ink);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--paper);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink);
+    border: 2px solid var(--paper);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cobalt);
+  }
+  :focus-visible {
+    outline: 3px solid var(--cobalt);
+    outline-offset: 3px;
+  }
+  /* film grain */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+}
+
+/* Jaipur heritage patterns */
+.bg-jali {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M48 10 L86 48 L48 86 L10 48 Z' fill='none' stroke='%23051024' stroke-opacity='0.09'/%3E%3Ccircle cx='48' cy='48' r='26' fill='none' stroke='%23051024' stroke-opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+}
+.bg-jali-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M48 10 L86 48 L48 86 L10 48 Z' fill='none' stroke='%23F4EFE6' stroke-opacity='0.12'/%3E%3Ccircle cx='48' cy='48' r='26' fill='none' stroke='%23F4EFE6' stroke-opacity='0.09'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+}
+.bg-bandhani {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='10' cy='10' r='1.6' fill='%23051024' fill-opacity='0.10'/%3E%3Ccircle cx='30' cy='30' r='1.6' fill='%23051024' fill-opacity='0.10'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Editorial helpers */
+.drop-cap::first-letter {
+  font-family: var(--font-teko);
+  font-size: 3.1em;
+  line-height: 0.78;
+  color: var(--saffron);
+  float: left;
+  margin: 8px 10px 0 0;
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#F4EFE6"/>
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#051024" stroke-width="4"/>
+  <g font-family="Teko, Arial Narrow, sans-serif">
+    <text x="72" y="200" font-size="180" font-weight="600" letter-spacing="1" fill="#051024">ITZ PRATHAM</text>
+    <text x="72" y="290" font-size="40" font-weight="400" letter-spacing="8" fill="#0F35FF">VIBE BUILDER · FRONTEND ENGINEER · PRODUCT DESIGNER</text>
+    <text x="72" y="380" font-size="34" font-weight="400" letter-spacing="6" fill="#051024">I BUILD INTERFACES THAT FEEL ALIVE.</text>
+  </g>
+  <g font-family="DM Mono, monospace" font-size="24" letter-spacing="4">
+    <text x="72" y="520" fill="#051024">PORTFOLIO — 2026</text>
+    <text x="936" y="520" fill="#051024">v1.0</text>
+  </g>
+  <g>
+    <rect x="1032" y="72" width="96" height="96" fill="#0F35FF"/>
+    <rect x="1048" y="88" width="15" height="64" fill="#F4EFE6"/>
+    <path d="M1063 88 h21 a15 15 0 0 1 0 30 h-21 z" fill="#F4EFE6"/>
+    <circle cx="1080" cy="200" r="10" fill="#FF3333"/>
+    <circle cx="1112" cy="200" r="10" fill="#F9CE34"/>
+    <circle cx="1144" cy="200" r="10" fill="#8DE254"/>
+  </g>
+  <text x="600" y="600" font-family="Gloria Hallelujah, cursive" font-size="34" fill="#FF3333" text-anchor="middle">let's build something weird</text>
+</svg>
