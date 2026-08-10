@@ -1,81 +1,104 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Work — Pratham Nahata" };
+export function generateStaticParams() {
+  return caseStudies.map((c) => ({ slug: c.slug }));
+}
 
-export default function WorkPage() {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const s = caseStudies.find((c) => c.slug === slug);
+  return { title: s ? `${s.title} — Pratham Nahata` : "Case study — Pratham Nahata" };
+}
+
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const study = caseStudies.find((c) => c.slug === slug);
+  if (!study) notFound();
+  const idx = caseStudies.indexOf(study);
+  const next = caseStudies[(idx + 1) % caseStudies.length];
+
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
-          <Reveal>
-            <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
-              WORK · 01—04
-            </p>
-            <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
-              SELECTED<br />
-              <span className="text-cobalt">PROJECTS</span>
-            </h1>
-            <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Four systems, each opened like a jharokha window — tap any to read the full story.
-            </p>
-          </Reveal>
+        <article className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+          {/* header */}
+          <header className="relative overflow-hidden border-2 border-ink bg-ink-2 text-paper">
+            <ArtImage src={study.art} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-ink-2/60 to-transparent" />
+            <div className="relative z-10 px-[clamp(20px,4vw,40px)] pb-10 pt-[clamp(60px,8vh,90px)]">
+              <p className="font-mono text-xs tracking-[0.18em] text-paper/60">
+                CASE {study.index} · {study.year} · {study.role}
+              </p>
+              <h1 className="mt-4 font-display text-[clamp(2.6rem,7vw,6rem)] font-semibold uppercase leading-[0.9]">
+                {study.title}
+              </h1>
+              <p className="mt-3 max-w-[52ch] text-lg text-paper/80">{study.blurb}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {study.stack.map((s) => (
+                  <span key={s} className="border border-paper/30 px-2.5 py-1 font-mono text-[11px] tracking-wider text-paper/80">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <span aria-hidden className="absolute right-6 top-4 font-dev text-[clamp(3rem,8vw,7rem)] text-paper/10">
+              {study.index}
+            </span>
+          </header>
 
-          <div className="mt-12 grid gap-[clamp(20px,3vw,40px)] md:grid-cols-2">
-            {caseStudies.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.06} className="h-full">
-                <Link
-                  href={`/work/${p.slug}`}
-                  className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024]"
-                >
-                  <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={p.art}
-                      alt=""
-                      width={640}
-                      height={384}
-                      loading="lazy"
-                      onError={(e) => (e.currentTarget.style.display = "none")}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-                    />
-                    <span
-                      aria-hidden
-                      className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest"
-                    >
-                      {p.index} · {p.year}
-                    </span>
-                  </span>
-                  <span className="flex flex-1 flex-col gap-2 p-[clamp(18px,2.4vw,26px)]">
-                    <span className="font-mono text-[11px] tracking-widest text-cobalt">{p.role}</span>
-                    <span className="font-display text-[clamp(1.9rem,3.2vw,2.6rem)] font-semibold uppercase leading-none">
-                      {p.title}
-                    </span>
-                    <span className="text-[14.5px] leading-relaxed">{p.blurb}</span>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-3 font-mono text-[12.5px] tracking-[0.1em] text-cobalt">
-                      OPEN CASE STUDY <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
-                    </span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+          {/* sections */}
+          <div className="mt-10 grid gap-10 lg:grid-cols-2">
+            <Reveal>
+              <section>
+                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">THE PROBLEM</h2>
+                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.challenge}</p>
+              </section>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <section>
+                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">HOW IT&apos;S BUILT</h2>
+                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.build}</p>
+              </section>
+            </Reveal>
           </div>
 
-          <Reveal className="mt-12">
-            <a
-              href="https://github.com/iAMv1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
-            >
-              + 18 MORE REPOS ON GITHUB <span aria-hidden>↗</span>
-            </a>
+          <Reveal>
+            <section className="mt-12 border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,36px)] shadow-hard">
+              <h2 className="font-display text-3xl font-semibold uppercase">IMPACT</h2>
+              <ul className="mt-5 grid gap-3 md:grid-cols-2">
+                {study.impact.map((im) => (
+                  <li key={im} className="flex items-baseline gap-3 border-b border-ink/15 pb-3 font-mono text-[13.5px] tracking-wide">
+                    <span aria-hidden className="size-2 flex-none rounded-full" style={{ background: study.accent }} />
+                    {im}
+                  </li>
+                ))}
+              </ul>
+            </section>
           </Reveal>
-        </section>
+
+          <Reveal className="mt-12">
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <a
+                href={study.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+              >
+                VIEW ON GITHUB <span aria-hidden>↗</span>
+              </a>
+              <Link href={`/work/${next.slug}`} className="group inline-flex items-center gap-3 font-mono text-sm tracking-wider">
+                NEXT: <span className="font-display text-2xl font-semibold uppercase text-cobalt">{next.title}</span>
+                <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
+          </Reveal>
+        </article>
       </main>
     </SiteShell>
   );
