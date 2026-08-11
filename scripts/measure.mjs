@@ -14,7 +14,7 @@ const res = spawnSync(
   "npx",
   [
     "lighthouse",
-    url,
+    `"${url}"`,
     "--quiet",
     "--chrome-flags=--headless --no-sandbox",
     "--only-categories=performance,accessibility,best-practices,seo",
