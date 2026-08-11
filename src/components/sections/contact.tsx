@@ -55,8 +55,8 @@ export function Contact() {
 
           <Reveal>
             <p className="mt-6 max-w-[44ch] text-lg font-medium leading-relaxed">
-              A product, a model, a website, a hackathon team — my inbox is open for things that deserve to feel alive.
-              Tell me what you&apos;re building.
+              Have a product, system, or research problem worth solving? My inbox is open. Tell me what you&apos;re
+              building.
             </p>
           </Reveal>
 

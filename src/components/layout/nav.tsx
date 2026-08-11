@@ -11,20 +11,9 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 const NAV_LINKS = [
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/process", label: "Process" },
+  { href: "/resume", label: "Resume" },
   { href: "/contact", label: "Contact" },
 ] as const;
-
-function ResumeLink({ className = "" }: { className?: string }) {
-  return (
-    <Link
-      href="/resume"
-      className={`inline-flex min-w-[96px] items-center justify-center gap-1.5 border-2 border-ink px-3 py-2 font-mono text-[13px] tracking-widest transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97] ${className}`}
-    >
-      Resume <span aria-hidden className="text-[15px]">↗</span>
-    </Link>
-  );
-}
 
 export function Nav() {
   const reduced = useReducedMotion();
@@ -95,7 +84,6 @@ export function Nav() {
             <span aria-hidden className="size-2 rounded-full bg-mint" />
             Open to work
           </p>
-          <ResumeLink className="hidden sm:inline-flex" />
 
           {/* mobile menu */}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -136,8 +124,7 @@ export function Nav() {
                 ))}
               </nav>
               <div className="mt-auto border-t-2 border-ink px-6 py-5">
-                <ResumeLink className="w-full py-3 text-sm" />
-                <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-3">
                   <p className="flex items-center gap-2 font-mono text-[11px] tracking-widest text-muted-foreground">
                     <span aria-hidden className="size-2 rounded-full bg-mint" />
                     Open to work · Delhi

@@ -19,6 +19,9 @@ export function Wins() {
             <br />
             <span className="text-ink-2">WORK</span>
           </h2>
+          <p aria-hidden className="mt-3 font-mono text-[10px] tracking-[0.18em] text-ink/50">
+            MANDALA BACKGROUND IS ARTISTIC — THE NUMBERS ABOVE ARE REAL
+          </p>
         </Reveal>
 
         <Reveal>

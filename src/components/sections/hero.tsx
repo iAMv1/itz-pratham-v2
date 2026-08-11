@@ -2,24 +2,21 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { profile } from "@/data/profile";
 import { CountUp } from "@/components/motion/count-up";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Spotlight } from "@/components/motion/spotlight";
 import { Annotate } from "@/components/ui/annotate";
-import { MirrorTitle } from "@/components/ui/mirror-title";
 import { HeroAscii } from "@/components/ui/hero-ascii";
 import { NowBuilding } from "@/components/ui/now-building";
 import { HeroField } from "@/components/canvas/fields";
 
-const ROTA_INTERVAL = 2600;
+const ROTA_EGG = 900;
 
 export function Hero() {
   const reduced = useReducedMotion();
-  const [role, setRole] = useState(profile.rota[0]);
-  const [roleVisible, setRoleVisible] = useState(true);
-  const [customRole, setCustomRole] = useState<string | null>(null);
+  const [eggIdx, setEggIdx] = useState<number | null>(null);
 
   const { scrollY } = useScroll();
   const titleY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : 120]);
@@ -28,19 +25,21 @@ export function Hero() {
   const namasteX = useTransform(scrollY, [0, 600], [0, reduced ? 0 : 70]);
   const watermarkY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : 160]);
 
-  useEffect(() => {
-    if (reduced || customRole) return;
-    let i = 0;
+  /* easter egg: click the identity and it cycles the old role labels once, then settles */
+  const cycleIdentity = () => {
+    if (eggIdx !== null) return;
+    setEggIdx(1);
+    let i = 1;
     const id = window.setInterval(() => {
-      i = (i + 1) % profile.rota.length;
-      setRoleVisible(false);
-      window.setTimeout(() => {
-        setRole(profile.rota[i]);
-        setRoleVisible(true);
-      }, 220);
-    }, ROTA_INTERVAL);
-    return () => window.clearInterval(id);
-  }, [reduced, customRole]);
+      i += 1;
+      if (i >= profile.rota.length) {
+        window.clearInterval(id);
+        setEggIdx(null);
+        return;
+      }
+      setEggIdx(i);
+    }, ROTA_EGG);
+  };
 
   return (
     <section
@@ -73,7 +72,20 @@ export function Hero() {
         </span>
       </motion.h1>
 
-      <div className="relative z-10 mt-5 max-w-[46ch] font-mono text-[12px] tracking-[0.2em] text-muted-foreground">
+      <div className="relative z-10 mt-5 font-mono text-[13px] tracking-[0.2em] text-cobalt">
+        FULL-STACK × ML ENGINEER
+        <button
+          type="button"
+          onClick={cycleIdentity}
+          aria-label="Show other role labels"
+          title="psst — click me"
+          className="ml-3 hidden cursor-help border-b-2 border-dashed border-cobalt/50 align-middle font-mono text-[10px] tracking-widest text-muted-foreground transition-colors hover:border-cobalt lg:inline-block"
+        >
+          {eggIdx !== null ? profile.rota[eggIdx].toUpperCase() : "(?)"}
+        </button>
+      </div>
+
+      <div className="relative z-10 mt-4 max-w-[46ch] font-mono text-[12px] tracking-[0.2em] text-muted-foreground">
         FULL-STACK × ML SYSTEMS —{" "}
         <Annotate
           title="Delhi — why here"
@@ -94,32 +106,8 @@ export function Hero() {
         → THE WORLD
       </div>
 
-      <p className="relative z-10 mt-4 font-mono text-sm tracking-widest">
-        <span className="text-muted-foreground">▸ I am a</span>{" "}
-        <span
-          aria-live="polite"
-          className={`font-medium text-cobalt transition-opacity duration-200 ${roleVisible ? "opacity-100" : "opacity-0"}`}
-        >
-          <MirrorTitle
-            defaultValue={customRole ?? role}
-            onCommit={(v) => setCustomRole(v)}
-            key={customRole ? "custom" : "rota"}
-          />
-        </span>
-        {customRole && (
-          <button
-            type="button"
-            onClick={() => setCustomRole(null)}
-            className="ml-2 border border-ink px-1.5 py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-ink hover:text-paper"
-            aria-label="Reset title to the automatic rota"
-          >
-            RESET
-          </button>
-        )}
-      </p>
-
-      <div className="relative z-10 mt-4 max-w-[38ch] text-lg font-medium leading-[1.55]">
-        CS undergrad building <mark className="bg-marigold px-1 text-ink">full-stack + ML</mark>{" "}
+      <div className="relative z-10 mt-5 max-w-[46ch] text-lg font-medium leading-[1.55]">
+        I build full-stack products and ML{" "}
         <Annotate
           title="systems — three readings"
           body={
@@ -132,7 +120,7 @@ export function Hero() {
         >
           systems
         </Annotate>{" "}
-        — interfaces that feel alive, models that actually ship.
+        — browser inference, AI workflows, realtime interfaces. Models that actually ship.
       </div>
 
       <div className="relative z-10 mt-8 flex flex-wrap gap-4">

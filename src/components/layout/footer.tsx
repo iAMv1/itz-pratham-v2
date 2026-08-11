@@ -17,6 +17,13 @@ export function Footer() {
         >
           RESUME ↗
         </a>{" "}
+        ·{" "}
+        <a
+          href="/process"
+          className="underline-offset-4 transition-colors hover:text-marigold"
+        >
+          PROCESS ↗
+        </a>{" "}
         · NO TEMPLATES WERE HARMED
       </p>
     </footer>

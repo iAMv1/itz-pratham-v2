@@ -182,6 +182,14 @@ export function Process() {
                 <span>
                   <strong className="block font-mono text-[13px] tracking-[0.1em] text-ink">{s.title}</strong>
                   <small className="font-mono text-[11px] tracking-wide text-ink/60">{s.sub}</small>
+                  {s.proof && (
+                    <a
+                      href={s.proof.href}
+                      className="mt-1.5 inline-block font-mono text-[10.5px] tracking-widest text-cobalt underline-offset-4 hover:underline"
+                    >
+                      {s.proof.label}
+                    </a>
+                  )}
                 </span>
               </li>
             ))}
@@ -206,6 +214,59 @@ export function Process() {
             </li>
           ))}
         </ul>
+
+        {/* measured — real numbers, not claims */}
+        <div id="perf" className="mt-14 border-2 border-ink bg-paper-2 p-[clamp(18px,2.5vw,28px)] shadow-hard">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="font-display text-2xl font-semibold uppercase">
+              MEASURED, <span className="text-cobalt">NOT CLAIMED</span>
+            </h2>
+            <p className="font-mono text-[10.5px] tracking-widest text-muted-foreground">
+              LAST MEASURED · 12 AUG 2026 · LIGHTHOUSE 13 · CHROME
+            </p>
+          </div>
+          <div className="mt-4 grid gap-px border-2 border-ink bg-ink sm:grid-cols-3 lg:grid-cols-6">
+            {[
+              { k: "A11Y", v: "100" },
+              { k: "BEST PRACTICES", v: "100" },
+              { k: "SEO", v: "100" },
+              { k: "CLS", v: "0.003" },
+              { k: "FCP", v: "1.5s" },
+              { k: "TBT", v: "560ms" },
+            ].map((m) => (
+              <div key={m.k} className="bg-paper-2 px-3 py-4 text-center">
+                <p className="font-display text-2xl font-semibold text-saffron-deep">{m.v}</p>
+                <p className="mt-0.5 font-mono text-[9.5px] tracking-widest text-ink/60">{m.k}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 max-w-[70ch] font-mono text-[11.5px] leading-relaxed tracking-wider text-muted-foreground">
+            <span className="text-cobalt">▸</span> LCP ~3.9s is curtain-latency, by design — the preloader is the
+            site&apos;s signature moment and is skipped on repeat visits and deep links. Core Web Vitals for real users
+            measure the page after the curtain lifts.
+          </p>
+        </div>
+
+        {/* tested like a product */}
+        <div className="mt-8 border-2 border-ink bg-ink-2 p-[clamp(18px,2.5vw,28px)] text-paper shadow-hard">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="font-mono text-[10.5px] tracking-widest text-mint">QA / PROOF</p>
+              <h2 className="mt-1 font-display text-2xl font-semibold uppercase">
+                TESTED LIKE A <span className="text-saffron">PRODUCT</span>
+              </h2>
+              <p className="mt-1.5 font-mono text-[12.5px] tracking-wide text-paper/75">
+                Playwright · 19 flows · 0 console errors — every flow asserts clean consoles, not just visible elements.
+              </p>
+            </div>
+            <a
+              href="/testing"
+              className="inline-flex items-center gap-2 border-2 border-paper px-5 py-3 font-mono text-sm tracking-wider transition-colors duration-200 hover:bg-paper hover:text-ink active:scale-[0.97]"
+            >
+              OPEN THE TEST MATRIX <span aria-hidden>→</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

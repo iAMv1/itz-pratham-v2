@@ -34,8 +34,9 @@ test("client-side navigation works (nav links + CTAs)", async ({ page }) => {
   await expect(page).toHaveURL(/\/work\/mindpulse-pro/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("MIND PULSE PRO");
 
-  await page.getByRole("link", { name: "Process", exact: true }).click();
-  await expect(page).toHaveURL(/\/process/);
+  await page.getByRole("link", { name: "Resume", exact: true }).click();
+  await expect(page).toHaveURL(/\/resume/);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
   await page.getByRole("link", { name: "Contact", exact: true }).click();
   await expect(page).toHaveURL(/\/contact/);

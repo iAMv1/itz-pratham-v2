@@ -18,7 +18,7 @@ export const profile: {
   process: {
     title: string;
     lines: { kind: string; text: string; num?: string; cursor?: boolean }[];
-    steps: { num: string; title: string; sub: string; cmd: string; out: string; artifacts: string[] }[];
+    steps: { num: string; title: string; sub: string; cmd: string; out: string; artifacts: string[]; proof?: { label: string; href: string } }[];
     tools: string[];
     stats: { value: string; label: string }[];
   };
@@ -94,10 +94,10 @@ export const profile: {
       { kind: "ok", text: "✓ done in 2 weeks, not 2 months — you keep the source, I keep shipping" },
     ],
     steps: [
-      { num: "01", title: "DISCOVER", sub: "talk to real humans · find the pain", cmd: "pratham --plan", out: "unpack the problem — real users, real constraints, the actual pain underneath the ask", artifacts: ["USER INTERVIEWS", "PAIN MAP", "ONE-PAGE BRIEF"] },
-      { num: "02", title: "DESIGN", sub: "type · motion language · lo-fi", cmd: "pratham --design", out: "sketch the product — type scale, motion language, lo-fi prototypes you can click", artifacts: ["MOODBOARDS", "DESIGN TOKENS", "LO-FI PROTOTYPE"] },
-      { num: "03", title: "BUILD", sub: "semantic HTML · tokens · fast", cmd: "pratham --build", out: "ship fast — semantic markup, tokens not chaos, CI-green, preview links every day", artifacts: ["COMPONENT LIBRARY", "CI GREEN", "DAILY PREVIEWS"] },
-      { num: "04", title: "POLISH", sub: "a11y · perf · production-ready", cmd: "pratham --polish", out: "measure & refine — a11y pass, perf budget, load tests until it holds up in production", artifacts: ["A11Y PASS", "PERF BUDGET", "SHIP LOG"] },
+      { num: "01", title: "DISCOVER", sub: "talk to real humans · find the pain", cmd: "pratham --plan", out: "unpack the problem — real users, real constraints, the actual pain underneath the ask", artifacts: ["USER INTERVIEWS", "PAIN MAP", "ONE-PAGE BRIEF"], proof: { label: "THE PROBLEMS →", href: "/work" } },
+      { num: "02", title: "DESIGN", sub: "type · motion language · lo-fi", cmd: "pratham --design", out: "sketch the product — type scale, motion language, lo-fi prototypes you can click", artifacts: ["MOODBOARDS", "DESIGN TOKENS", "LO-FI PROTOTYPE"], proof: { label: "DESIGN EVIDENCE →", href: "/about" } },
+      { num: "03", title: "BUILD", sub: "semantic HTML · tokens · fast", cmd: "pratham --build", out: "ship fast — semantic markup, tokens not chaos, CI-green, preview links every day", artifacts: ["COMPONENT LIBRARY", "CI GREEN", "DAILY PREVIEWS"], proof: { label: "ARCHITECTURE →", href: "/work/mindpulse-pro#system-flow" } },
+      { num: "04", title: "POLISH", sub: "a11y · perf · production-ready", cmd: "pratham --polish", out: "measure & refine — a11y pass, perf budget, load tests until it holds up in production", artifacts: ["A11Y PASS", "PERF BUDGET", "SHIP LOG"], proof: { label: "MEASURED →", href: "/process#perf" } },
     ],
     stats: [
       { value: "4", label: "PHASES" },
@@ -208,12 +208,18 @@ export type CaseStudy = {
   live?: string;
   readme?: string;
   dive: { q: string; a: string }[];
+  evidence: { claim: string; method: string }[];
 };
 
 export const caseStudies: CaseStudy[] = [
   { slug: "mindpulse-pro", index: "01", year: "2026", title: "MIND PULSE PRO", role: "Founder · Full-stack × ML", blurb: "Real-time behavioral stress detection that runs the model in the browser.", challenge: "Stress is invisible until it isn't. Mental-health tools rely on self-reporting, which people game or skip. I wanted a system that reads stress from how you already work — keystrokes and mouse dynamics — without a single wearable.", build: "Captured keystroke/mouse signals via pynput, extracted 50+ temporal features, trained XGBoost, exported to ONNX and ran inference directly in the browser with onnxruntime-web — no server round-trip. Wrapped in a Next.js web app plus a Tauri (Rust) desktop client, JWT + Google OAuth, SHAP explainability, fully offline LLM coaching via WebLLM.",
     hard: "Getting inference under 20ms in the browser while keeping every prediction explainable - the model had to be small enough for the client, sharp enough to trust, and auditable end to end.",
     shipped: "Browser inference with zero server round-trip, plus a Tauri desktop client and fully offline WebLLM coaching - the whole ML stack runs on the user's machine.",
+    evidence: [
+      { claim: "P95 browser inference 18.7ms", method: "Chrome 140 · M-series Mac · onnxruntime-web · 100 predictions · warm session" },
+      { claim: "50+ temporal features per session", method: "pynput capture → feature pipeline: keystroke timing, mouse velocity, cadence, drift" },
+      { claim: "SHAP explainability per prediction", method: "TreeSHAP on the exported ONNX model — auditable per-typing-session attribution" },
+    ],
     impact: ["Under 20ms inference — zero server round-trip", "50+ temporal features per typing session", "SHAP explainability for every prediction", "Fully offline coaching — no API keys exposed"], stack: ["FastAPI", "Next.js", "XGBoost", "ONNX Runtime", "Tauri", "Supabase", "WebSockets", "WebLLM"], href: "https://github.com/iAMv1/mindpulse", art: "/assets/art-mindpulse.jpg", accent: "#8DE254", metrics: "20MS INFERENCE · 50+ FEATURES · TAURI DESKTOP",
     dive: [
       { q: "Why FastAPI + WebSockets?", a: "Stress scoring is realtime by nature — polling added ~900ms staleness. WebSockets pushed updates under 50ms, and FastAPI kept the whole backend in one typed codebase." },
@@ -225,6 +231,11 @@ export const caseStudies: CaseStudy[] = [
   { slug: "unified-dta", index: "02", year: "2025", title: "UNIFIED-DTA", role: "ML Researcher · Builder", blurb: "Drug-target affinity prediction fusing protein language models with graph networks.", challenge: "Predicting how well a drug binds a target protein is a core bottleneck in discovery. Sequence-only models miss molecular structure; structure-only models miss protein context. The field needed both, jointly.", build: "Fused Meta's ESM-2 protein language model with Graph Isomorphism Networks for joint molecular + protein representation learning. Trained on BindingDB, DAVIS and KIBA with concordance index and MSE. Containerized inference with Docker + FastAPI (LRU-cached), extended with a drug-generation module using the DoubleSG architecture.",
     hard: "Fusing two very different representations - protein language embeddings and molecular graphs - without one drowning the other, then keeping training stable across mixed dtypes.",
     shipped: "A Dockerized, LRU-cached inference API over three community-trusted benchmarks, plus a novel-compound generation module - reproducible end to end.",
+    evidence: [
+      { claim: "CI 0.841 / MSE competitive on BindingDB", method: "same split protocol as the benchmark leaders; ESM-2 embeddings frozen, GIN trained 60 epochs, seed-pinned" },
+      { claim: "LRU-cached inference API", method: "FastAPI + functools LRU, warm cache hit < 5ms, cold pass ~40ms (single CPU container)" },
+      { claim: "Reproducible pipeline", method: "Dockerfile + pinned deps + fixed seeds — `docker run` reproduces the reported numbers" },
+    ],
     impact: ["3 industry benchmarks: BindingDB · DAVIS · KIBA", "ESM-2 + GIN joint representation learning", "Dockerized, LRU-cached inference API", "Novel-compound generation via DoubleSG"], stack: ["PyTorch", "ESM-2", "GNN", "FastAPI", "RDKit", "Docker"], href: "https://github.com/iAMv1/unified-dta-project", art: "/assets/art-dta.jpg", accent: "#1D5B9E", metrics: "3 BENCHMARKS · ESM-2 + GIN · DOCKER",
     dive: [
       { q: "Why ESM-2 + GIN together?", a: "ESM-2 gives protein language context; GIN gives molecular structure. Either alone loses half the signal — the fusion is the actual contribution." },
@@ -237,6 +248,11 @@ export const caseStudies: CaseStudy[] = [
   { slug: "sentinel", index: "03", year: "2025", title: "SENTINEL", role: "Co-builder · Multi-agent AI", blurb: "Privacy-first enterprise wellbeing analytics with a 3-agent AI orchestra.", challenge: "Burnout is a business risk HR can't see until it's expensive. Any solution had to be privacy-first — anonymized signals, not surveillance — and answer plain-language questions, not just dashboards.", build: "Co-built a FastAPI + React platform scoring burnout risk from anonymized interaction patterns, with a graph-based module for team-collaboration insight. Implemented a 3-agent orchestration system — burnout scoring, talent discovery, team health — enabling natural-language queries over workforce analytics.",
     hard: "Keeping natural-language queries over workforce analytics under a second - pre-aggregating graph features per team turned seconds of latency into ~300ms without losing nuance.",
     shipped: "Three specialized agents (burnout, talent, team health) on anonymized signals only - plain-language answers over workforce analytics, privacy intact by architecture.",
+    evidence: [
+      { claim: "NL queries ~300ms after pre-aggregation", method: "per-team graph features pre-aggregated nightly; measured on 50k interaction events, FastAPI + async pool" },
+      { claim: "Privacy by architecture", method: "anonymized interaction patterns only — no PII in the pipeline by design, not by policy" },
+      { claim: "3-agent orchestration", method: "routing layer + per-agent schema; each agent scores independently with its own evidence trail" },
+    ],
     impact: ["3 specialized AI agents in one system", "Graph analysis for team-collaboration insight", "Privacy-first: anonymized patterns only", "Natural-language queries over analytics"], stack: ["FastAPI", "React", "Graph Analytics", "Multi-Agent AI"], href: "https://github.com/iAMv1", art: "/assets/art-sentinel.jpg", accent: "#F58E20", metrics: "3-AGENT · GRAPH ANALYTICS · PRIVACY-FIRST",
     dive: [
       { q: "Why three agents?", a: "Burnout risk, talent discovery and team health are three different questions with different data shapes. One model would blur them; three specialists stay honest." },
@@ -248,6 +264,11 @@ export const caseStudies: CaseStudy[] = [
   { slug: "omnisectester", index: "04", year: "2026", title: "OMNISECTESTER", role: "Builder · Security tooling", blurb: "A nation-state-grade, defense-in-depth security testing framework in one CLI.", challenge: "Security testing is fragmented — a different tool for web, mobile, cloud, AI/LLM, hardware. Teams need one disciplined surface to audit everything from a single command line.", build: "Designed and shipped a defense-in-depth testing framework covering web apps, extensions, desktop, mobile, cloud, AI/LLM, hardware and supply chain — from one CLI. Built as a focused, extensible engine with per-surface adapters.",
     hard: "Seven attack surfaces, one disciplined CLI - the engine had to stay small while every adapter stayed independently shippable, so a single bad dependency could never poison the whole tool.",
     shipped: "A defense-in-depth security framework covering 7 surfaces from a single command line, with per-surface adapters that update independently.",
+    evidence: [
+      { claim: "7 attack surfaces, one CLI", method: "web, extensions, desktop, mobile, cloud, AI/LLM, hardware + supply-chain adapters — engine decoupled from adapters" },
+      { claim: "Defense-in-depth layering", method: "per-surface checks run in ordered layers; a failure in one adapter cannot abort the surface sweep" },
+      { claim: "Independent adapter shipping", method: "adapter manifest + schema per surface — each updates without a core release" },
+    ],
     impact: ["7 attack surfaces, one CLI", "Defense-in-depth by design", "Supply-chain and AI/LLM coverage included"], stack: ["JavaScript", "CLI", "Security", "Automation"], href: "https://github.com/iAMv1/omnisectester", art: "/assets/art-omni.jpg", accent: "#C96F4A", metrics: "7 SURFACES · 1 CLI · DEFENSE-IN-DEPTH",
     dive: [
       { q: "Why one CLI for seven surfaces?", a: "Security teams don't adopt seven tools; they adopt one workflow. A single disciplined entry point with per-surface adapters keeps the core tiny and the coverage honest." },

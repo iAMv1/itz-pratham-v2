@@ -20,10 +20,13 @@ export function Preloader() {
     };
 
     const noloader = new URLSearchParams(window.location.search).has("noloader");
-    if (preloaderShown || reduced || noloader) {
+    const visited = sessionStorage.getItem("itz-preloader-shown") === "1";
+    const deepLink = window.location.pathname !== "/";
+    if (preloaderShown || reduced || noloader || visited || deepLink) {
       finish();
       return;
     }
+    sessionStorage.setItem("itz-preloader-shown", "1");
     const root = rootRef.current;
     if (!root) {
       finish();
