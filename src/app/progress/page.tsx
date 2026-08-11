@@ -20,7 +20,7 @@ const PIECES = [
   { piece: "Second Layer (wave 7)", wave: "7", status: "DONE", note: "dialog reality quickviews, popover annotations, timeline-machine scrubber, mirror title, unresolved deep-dives, case counterfactuals, offline archive SW, details-upgraded boxes — e2e 13/13" },
   { piece: "Second Layer v2 (wave 7.2)", wave: "7", status: "DONE", note: "completed the unfinished: dive-deeper nested knowledge on every case, repo-inside live README iframes (jsDelivr), Delhi annotation, process WHY IT MATTERS, view-transition dialog + case nav, offline banner archive facts — e2e 13/13" },
   { piece: "Vision critic loop", wave: "7", status: "DONE", note: "resumed via gemini-creative vision tool — live mobile + about screenshots critiqued; findings were LLM misreads of intentional brutalist choices (contrast, overflow, shadows all verified in code)" },
-  { piece: "Auto-deploy + domain", wave: "7", status: "HALF", note: "itzpratham.in attached to project, canonical URLs switched from dead itzpratham.dev → itzpratham.in (sitemap, robots, og:image). BLOCKED on user: point itzpratham.in DNS at Vercel (A record @ → 76.76.21.21, CNAME www → cname.vercel-dns.com), then cert issues automatically" },
+  { piece: "Auto-deploy + domain", wave: "7", status: "DONE", note: "itzpratham.in LIVE — A @ → 76.76.21.21 + CNAME www → cname.vercel-dns.com set by owner at Hostinger; cert issued, aliases created for apex + www; canonical URLs (sitemap/robots/og:image) resolving on the custom domain" },
 ];
 
 const ESTIMATE = 62; // user: 45% at wave 5 → wave 6 metro/process → wave 7 second-layer interaction layer
