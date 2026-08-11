@@ -103,8 +103,7 @@
 }
 
 .dark {
-  color-scheme: dark;
-  /* identity tokens invert — every bg-paper/text-ink/border-ink flips automatically */
+  color-scheme: dark;  /* identity tokens invert — every bg-paper/text-ink/border-ink flips automatically */
   --paper: #0d1320;
   --paper-2: #161e30;
   --ink: #f4efe6;
@@ -141,6 +140,11 @@
   --chart-3: #e77a96;
   --chart-4: #e08a63;
   --chart-5: #9fe86a;
+}
+
+/* saffron surfaces keep dark ink text in dark mode — light text on orange fails AA */
+.dark .bg-saffron {
+  --ink: #051024;
 }
 
 @layer base {
