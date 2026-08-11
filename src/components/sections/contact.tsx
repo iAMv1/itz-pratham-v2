@@ -123,7 +123,10 @@ export function Contact() {
                   <a href={`${profile.links.github}/${r.name}`} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-saffron-deep">
                     {r.name}
                   </a>
-                  <span className="text-[11px] tabular-nums text-ink/50">{mounted && r.pushed_at ? relativeTime(r.pushed_at) : ""}</span>
+                  <span className="flex items-center gap-2 text-[11px] tabular-nums text-ink/50">
+                    {r.stars > 0 && <span title="GitHub stars">★ {r.stars}</span>}
+                    {mounted && r.pushed_at ? relativeTime(r.pushed_at) : ""}
+                  </span>
                 </li>
               ))}
             </ul>

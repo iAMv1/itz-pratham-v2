@@ -170,14 +170,26 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
           <Reveal className="mt-12">
             <div className="flex flex-wrap items-center justify-between gap-6">
-              <a
-                href={study.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
-              >
-                VIEW ON GITHUB <span aria-hidden>↗</span>
-              </a>
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href={study.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+                >
+                  VIEW ON GITHUB <span aria-hidden>↗</span>
+                </a>
+                {study.readme && (
+                  <a
+                    href={`https://github.com/${study.readme.split("@")[0]}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 border-2 border-ink px-6 py-3.5 font-mono text-sm tracking-wider transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97]"
+                  >
+                    STAR THE REPO <span aria-hidden>★</span>
+                  </a>
+                )}
+              </div>
               <VtLink href={`/work/${next.slug}`} className="group inline-flex items-center gap-3 font-mono text-sm tracking-wider">
                 NEXT: <span className="font-display text-2xl font-semibold uppercase text-cobalt">{next.title}</span>
                 <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>

@@ -95,3 +95,23 @@ test("process principles reveal why it matters", async ({ page }) => {
   await expect(page.getByText(/100\/100 Lighthouse accessibility score/)).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
 });
+
+test("now building widget shows live github activity + ist clock", async ({ page }) => {
+  await page.goto(`${BASE}/?noloader=1`, { waitUntil: "networkidle" });
+  await expect(page.getByText("NOW BUILDING")).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/IST \d{2}:\d{2}/)).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
+test("contribution graph renders the year in commits", async ({ page }) => {
+  await page.goto(`${BASE}/about?noloader=1`, { waitUntil: "networkidle" });
+  await expect(page.getByText("THE YEAR IN COMMITS")).toBeVisible({ timeout: 10000 });
+  await expect(page.getByText(/CONTRIBUTIONS THIS YEAR/)).toBeVisible({ timeout: 10000 });
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
+test("case page offers star the repo", async ({ page }) => {
+  await page.goto(`${BASE}/work/unified-dta?noloader=1`, { waitUntil: "networkidle" });
+  await expect(page.getByRole("link", { name: /STAR THE REPO/ })).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});

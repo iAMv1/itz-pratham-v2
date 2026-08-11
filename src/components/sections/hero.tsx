@@ -10,6 +10,7 @@ import { Spotlight } from "@/components/motion/spotlight";
 import { Annotate } from "@/components/ui/annotate";
 import { MirrorTitle } from "@/components/ui/mirror-title";
 import { HeroAscii } from "@/components/ui/hero-ascii";
+import { NowBuilding } from "@/components/ui/now-building";
 import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_INTERVAL = 2600;
@@ -207,16 +208,8 @@ export function Hero() {
         नमस्ते
       </motion.p>
 
-      <div
-        aria-hidden
-        className="absolute bottom-[clamp(96px,12vh,140px)] right-[clamp(20px,5vw,90px)] z-[2] hidden min-w-[200px] border border-ink bg-paper-2 p-3 shadow-hard lg:block"
-      >
-        <p className="flex items-center gap-2 font-mono text-[11.5px] tracking-widest">
-          <span className="size-[7px] rounded-full bg-mint shadow-[0_0_0_3px_rgba(141,226,84,0.25)]" /> STATUS: SHIPPING
-        </p>
-        <p className="mt-1 font-mono text-[11.5px] tracking-widest">
-          ▸ mindpulse-pro <span className="animate-[cursor-blink_1s_step-end_infinite] text-saffron">▊</span>
-        </p>
+      <div className="absolute bottom-[clamp(96px,12vh,140px)] right-[clamp(20px,5vw,90px)] z-[2] hidden min-w-[200px] lg:block">
+        <NowBuilding />
       </div>
     </section>
   );

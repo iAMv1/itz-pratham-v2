@@ -2,18 +2,18 @@
 
 import useSWR from "swr";
 
-export type Repo = { name: string; language: string | null; pushed_at: string };
+export type Repo = { name: string; language: string | null; pushed_at: string; stars: number };
 export type RepoState = { repos: Repo[]; source: "live" | "cache" | "fallback" };
 
 const CACHE_KEY = "ns-repos";
 const TTL = 5 * 60 * 1000;
 
 const FALLBACK: Repo[] = [
-  { name: "itz-pratham-v2", language: "TypeScript", pushed_at: "" },
-  { name: "iAMv1", language: "Python", pushed_at: "" },
-  { name: "portfolio", language: "TypeScript", pushed_at: "" },
-  { name: "opencode-pet", language: "Python", pushed_at: "" },
-  { name: "omnisectester", language: "JavaScript", pushed_at: "" },
+  { name: "itz-pratham-v2", language: "TypeScript", pushed_at: "", stars: 0 },
+  { name: "iAMv1", language: "Python", pushed_at: "", stars: 0 },
+  { name: "portfolio", language: "TypeScript", pushed_at: "", stars: 0 },
+  { name: "opencode-pet", language: "Python", pushed_at: "", stars: 0 },
+  { name: "omnisectester", language: "JavaScript", pushed_at: "", stars: 0 },
 ];
 
 function readCache(): { at: number; repos: Repo[] } | null {
@@ -32,8 +32,8 @@ const fetcher = async (url: string): Promise<RepoState> => {
   try {
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) throw new Error(String(res.status));
-    const data: { name: string; language: string | null; pushed_at: string }[] = await res.json();
-    const repos = data.map((r) => ({ name: r.name, language: r.language, pushed_at: r.pushed_at }));
+    const data: { name: string; language: string | null; pushed_at: string; stargazers_count: number }[] = await res.json();
+    const repos = data.map((r) => ({ name: r.name, language: r.language, pushed_at: r.pushed_at, stars: r.stargazers_count }));
     try {
       localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), repos }));
     } catch {

@@ -4,6 +4,7 @@ import { AnnotationCard } from "@/components/annotations/annotation-card";
 import { metro, contribution, profile, unresolved, timelineMachine } from "@/data/profile";
 import { MetroMap } from "./metro-map";
 import { TimelineMachine } from "@/components/ui/timeline-machine";
+import { ContributionGraph } from "@/components/ui/contribution-graph";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "About — Pratham Nahata" };
@@ -170,6 +171,11 @@ export default function AboutPage() {
                 </details>
               ))}
             </div>
+          </Reveal>
+
+          {/* the year in commits */}
+          <Reveal className="mt-16">
+            <ContributionGraph />
           </Reveal>
 
           {/* background timeline */}
