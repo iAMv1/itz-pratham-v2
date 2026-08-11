@@ -34,7 +34,7 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="relative px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+        <section className="bg-jali relative px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">
             शिल्प
           </span>

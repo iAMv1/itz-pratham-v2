@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
+import { Tilt } from "@/components/motion/tilt";
 import { Process } from "@/components/sections/process";
 import { SiteShell } from "@/components/layout/site-shell";
 
@@ -49,22 +50,29 @@ export default function ProcessPage() {
           <div className="mt-8 grid gap-[clamp(14px,2vw,28px)] md:grid-cols-2">
             {PRINCIPLES.map((p, i) => (
               <Reveal key={p.num} delay={i * 0.06}>
-                <article className="h-full border-2 border-ink bg-paper-2 p-[clamp(18px,2.4vw,28px)] shadow-hard">
-                  <p className="font-mono text-xs tracking-widest text-cobalt">{p.num}</p>
-                  <h3 className="mt-2 font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold uppercase leading-none">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2.5 text-[15px] leading-relaxed">{p.body}</p>
-                  <details className="group mt-4">
-                    <summary className="flex cursor-pointer list-none items-center gap-2 font-mono text-[11px] tracking-widest text-cobalt [&::-webkit-details-marker]:hidden">
-                      <span aria-hidden className="text-saffron-deep transition-transform duration-200 group-open:rotate-45">+</span>
-                      WHY IT MATTERS
-                    </summary>
-                    <p className="mt-2.5 border-l-2 border-cobalt pl-3 text-[14px] leading-relaxed text-muted-foreground">
-                      {p.why}
+                <Tilt max={5} className="h-full">
+                  <article className="group h-full border-2 border-ink bg-paper-2 p-[clamp(18px,2.4vw,28px)] shadow-hard transition-[transform,box-shadow] duration-200 ease-out hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0_0_var(--shadow-ink)]">
+                    <p className="flex items-center justify-between font-mono text-xs tracking-widest text-cobalt">
+                      {p.num}
+                      <span aria-hidden className="text-saffron-deep opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                        ✦
+                      </span>
                     </p>
-                  </details>
-                </article>
+                    <h3 className="mt-2 font-display text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold uppercase leading-none transition-transform duration-200 group-hover:translate-x-1">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2.5 text-[15px] leading-relaxed">{p.body}</p>
+                    <details className="group/details mt-4">
+                      <summary className="flex cursor-pointer list-none items-center gap-2 font-mono text-[11px] tracking-widest text-cobalt [&::-webkit-details-marker]:hidden">
+                        <span aria-hidden className="text-saffron-deep transition-transform duration-200 group-open/details:rotate-45">+</span>
+                        WHY IT MATTERS
+                      </summary>
+                      <p className="mt-2.5 border-l-2 border-cobalt pl-3 text-[14px] leading-relaxed text-muted-foreground">
+                        {p.why}
+                      </p>
+                    </details>
+                  </article>
+                </Tilt>
               </Reveal>
             ))}
           </div>

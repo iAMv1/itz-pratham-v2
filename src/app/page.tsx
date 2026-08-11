@@ -22,7 +22,7 @@ export default function Home() {
         <NameMarquee />
 
         {/* featured work → /work/[slug] */}
-        <section id="featured" className="scroll-mt-24 px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
+        <section id="featured" className="bg-jali scroll-mt-24 px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>

@@ -68,7 +68,7 @@ function CmdBlock({ block, active, onDone }: { block: Block; active: boolean; on
     <div ref={rootRef} className={`block border-l-2 pl-4 transition-opacity duration-300 ${active ? "border-l-saffron opacity-100" : "border-l-ink/20 opacity-60"}`}>
       <p className="text-ink">
         <span className="font-medium text-cobalt">pratham@nahata</span>
-        <span className="text-ink/40">:</span>
+        <span className="text-ink/60">:</span>
         <span className="text-saffron-deep">~/process</span>
         <span className="font-medium text-ink">$</span>{" "}
         <span className="text-saffron-deep">{typed}</span>
@@ -134,11 +134,11 @@ export function Process() {
               <span className="size-3 rounded-full border border-ink bg-red" />
               <span className="size-3 rounded-full border border-ink bg-marigold" />
               <span className="size-3 rounded-full border border-ink bg-mint" />
-              <span className="ml-auto font-mono text-xs text-ink/55">{profile.process.title}</span>
+              <span className="ml-auto font-mono text-xs text-ink/70">{profile.process.title}</span>
             </div>
             <div className="flex flex-col gap-5 px-[clamp(20px,4vw,34px)] py-[clamp(20px,4vw,34px)] font-mono text-[clamp(12.5px,1.5vw,15px)] leading-[1.9]">
-              <p className="text-ink/40"># shipping vibe-first systems since 2023</p>
-              <p className="text-ink/30"># काम में विश्वास — faith in the work</p>
+              <p className="text-ink/60"># shipping vibe-first systems since 2023</p>
+              <p className="text-ink/65"># काम में विश्वास — faith in the work</p>
               {profile.process.steps.map((s, i) => (
                 <div key={s.num} className="process-block">
                   <CmdBlock
@@ -159,7 +159,7 @@ export function Process() {
               ))}
               <p className="text-cobalt">✓ done in 2 weeks, not 2 months — you keep the source, I keep the vibes</p>
             </div>
-            <div className="flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-2.5 font-mono text-[11px] text-ink/55">
+            <div className="flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-2.5 font-mono text-[11px] text-ink/70">
               <span className="flex items-center gap-2 text-cobalt">
                 <span className="size-2 rounded-full border border-ink bg-mint" /> READY
               </span>
@@ -176,12 +176,12 @@ export function Process() {
                   activeStep === i ? "border-l-saffron opacity-100" : "border-l-ink/15 opacity-30"
                 }`}
               >
-                <span className={`font-mono text-xl ${activeStep === i ? "text-saffron-deep" : "text-ink/40"}`}>
+                <span className={`font-mono text-xl ${activeStep === i ? "text-saffron-deep" : "text-ink/60"}`}>
                   {s.num}
                 </span>
                 <span>
                   <strong className="block font-mono text-[13px] tracking-[0.1em] text-ink">{s.title}</strong>
-                  <small className="font-mono text-[11px] tracking-wide text-ink/45">{s.sub}</small>
+                  <small className="font-mono text-[11px] tracking-wide text-ink/60">{s.sub}</small>
                 </span>
               </li>
             ))}
@@ -193,7 +193,7 @@ export function Process() {
           {profile.process.stats.map((s) => (
             <div key={s.label} className="bg-paper-2 px-4 py-4 text-center">
               <p className="font-display text-3xl font-semibold text-saffron-deep">{s.value}</p>
-              <p className="mt-0.5 font-mono text-[10px] tracking-widest text-ink/50">{s.label}</p>
+              <p className="mt-0.5 font-mono text-[10px] tracking-widest text-ink/65">{s.label}</p>
             </div>
           ))}
         </div>

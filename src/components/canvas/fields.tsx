@@ -31,7 +31,7 @@ export function HeroField({ className }: { className?: string }) {
         ox = (dx / d) * 2.2;
         oy = (dy / d) * 2.2;
       }
-      const a = 0.22 + 0.18 * Math.sin(time * 2 + seed);
+      const a = dark() ? 0.3 + 0.25 * Math.sin(time * 2 + seed) : 0.22 + 0.18 * Math.sin(time * 2 + seed);
       const r = 1.5 + (i % 3);
       const rose = i % 3 === 0;
       ctx.fillStyle = rose ? `rgba(217,96,126,${a})` : `rgba(245,142,32,${a})`;
@@ -68,7 +68,7 @@ export function PaisleyField({ className }: { className?: string }) {
         ox = (dx / d) * 2.2;
         oy = (dy / d) * 2.2;
       }
-      const a = 0.18 + 0.15 * Math.sin(time * 2 + seed);
+      const a = dark() ? 0.26 + 0.22 * Math.sin(time * 2 + seed) : 0.18 + 0.15 * Math.sin(time * 2 + seed);
       const r = 1.5 + (i % 3);
       const rose = i % 3 === 0;
       ctx.fillStyle = rose ? `rgba(217,96,126,${a})` : `rgba(245,142,32,${a})`;

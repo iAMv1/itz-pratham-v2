@@ -37,7 +37,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden border-t-2 border-ink bg-paper px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
+    <section id="contact" className="bg-jali relative overflow-hidden border-t-2 border-ink bg-paper px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
       <span aria-hidden className="pointer-events-none absolute -left-[15%] top-[-20%] h-[60%] w-[60%] rounded-full bg-cobalt/10 blur-[120px]" />
       <div className="relative z-10 grid items-start gap-[clamp(28px,4vw,64px)] lg:grid-cols-[1.35fr_1fr]">

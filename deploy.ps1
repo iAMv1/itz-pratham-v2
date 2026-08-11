@@ -26,5 +26,5 @@ Start-Sleep 5
 $tmp = "$env:TEMP\opencode\deploy-verify.html"
 curl.exe -s --max-time 20 -o $tmp "https://itzpratham.in/"
 $c = [System.IO.File]::ReadAllText($tmp)
-if ($c.Contains("BUILD 12.08.26")) { Write-Host "itzpratham.in serving latest build: OK" -ForegroundColor Green }
+if ($c.Contains("JAI BIKANER")) { Write-Host "itzpratham.in serving latest build: OK" -ForegroundColor Green }
 else { Write-Host "WARNING: itzpratham.in may be serving stale content" -ForegroundColor Yellow }
