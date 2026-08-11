@@ -269,8 +269,24 @@ export const timelineMachine = {
   ],
 };
 
-export const unresolved = [
-  { title: "Distributed systems, properly", understand: "Single-node ML inference inside a browser — ONNX, WebLLM, real constraints.", dont: "Consensus, partitioning, exactly-once semantics in the wild.", trying: "Building a toy RAFT log in Rust on weekends.", reading: "Designing Data-Intensive Applications (chapter 8, slowly).", next: "A distributed version of MindPulse's backend with zero-downtime inference." },
+export const offClock = {
+  title: "OFF THE CLOCK",
+  sub: "what feeds the builder when the repo is closed",
+  books: [
+    { title: "Designing Data-Intensive Applications", take: "chapter 8, still slowly — the closest thing to a system-design gym" },
+    { title: "The Pragmatic Programmer", take: "the 'broken windows' chapter is why this site's 404 has a peacock" },
+    { title: "Atomic Habits", take: "2 weeks not 2 months — the 1% rule applied to shipping" },
+    { title: "Deep Work", take: "4 AM hackathon hours, but with the phone in another room" },
+  ],
+  setup: [
+    { name: "EDITOR", detail: "Cursor + VSCode — AI pair programmer, human reviewer" },
+    { name: "SHELL", detail: "PowerShell → WSL zsh → Starship — the journey is the setup" },
+    { name: "STACK", detail: "Next.js · FastAPI · PyTorch · ONNX · Tauri · Supabase" },
+    { name: "MACHINE", detail: "Windows 11 laptop that's been to more hackathons than hotels" },
+  ],
+};
+
+export const unresolved = [  { title: "Distributed systems, properly", understand: "Single-node ML inference inside a browser — ONNX, WebLLM, real constraints.", dont: "Consensus, partitioning, exactly-once semantics in the wild.", trying: "Building a toy RAFT log in Rust on weekends.", reading: "Designing Data-Intensive Applications (chapter 8, slowly).", next: "A distributed version of MindPulse's backend with zero-downtime inference." },
   { title: "WebGPU compute", understand: "Canvas 2D particle systems, DPR discipline, rAF budgets.", dont: "Shader pipelines, compute shaders, why my first WGSL kernel was 8× slower than JS.", trying: "Porting the jali lattice field to a WebGPU compute pass.", reading: "WebGPU Fundamentals + every blog post that mentions 'coalesced memory'.", next: "A real-time inference playground running small models fully in the browser." },
   { title: "A better testing strategy", understand: "Vitest units, Playwright smoke suites, Lighthouse gates.", dont: "Visual regression at scale — my canvases are hostile to pixel diffs.", trying: "Golden-image testing on the five canvas fields with deterministic seeds.", reading: "Testing on the toilet archives, honestly.", next: "A CI visual gate that catches canvas regressions without flaking." },
   { title: "Motion that never betrays content", understand: "Reduced-motion, IO-gated reveals, mount-driven visibility.", dont: "When a scrub-parallax fights a pinned section — the physics of scroll.", trying: "A single motion token map that designers and engineers share.", reading: "animations.dev essays + every SOTD motion I can inspect.", next: "Publish the token map as a tiny npm package." },

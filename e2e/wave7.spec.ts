@@ -92,14 +92,14 @@ test("delhi annotation popover opens", async ({ page }) => {
 test("process principles reveal why it matters", async ({ page }) => {
   await page.goto(`${BASE}/process?noloader=1`, { waitUntil: "networkidle" });
   await page.getByText("WHY IT MATTERS").first().click();
-  await expect(page.getByText(/100\/100 Lighthouse accessibility score/)).toBeVisible();
+  await expect(page.getByText(/the page has failed its own pitch/)).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
 });
 
 test("now building widget shows live github activity + ist clock", async ({ page }) => {
   await page.goto(`${BASE}/?noloader=1`, { waitUntil: "networkidle" });
   await expect(page.getByText("NOW BUILDING")).toBeVisible({ timeout: 10000 });
-  await expect(page.getByText(/IST \d{2}:\d{2}/)).toBeVisible();
+  await expect(page.getByText(/IST \d{2}:\d{2}/).first()).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
 });
 

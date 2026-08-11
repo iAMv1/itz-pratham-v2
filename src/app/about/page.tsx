@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { AnnotationCard } from "@/components/annotations/annotation-card";
-import { metro, contribution, profile, unresolved, timelineMachine } from "@/data/profile";
+import { metro, contribution, profile, unresolved, timelineMachine, offClock } from "@/data/profile";
 import { MetroMap } from "./metro-map";
 import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { ContributionGraph } from "@/components/ui/contribution-graph";
@@ -170,6 +170,40 @@ export default function AboutPage() {
                   </dl>
                 </details>
               ))}
+            </div>
+          </Reveal>
+
+          {/* off the clock */}
+          <Reveal className="mt-16">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
+                OFF THE <span className="text-cobalt">CLOCK</span>
+              </h2>
+              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{offClock.sub}</p>
+            </div>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              <div className="border-2 border-ink bg-paper-2 p-[clamp(18px,2.5vw,26px)] shadow-hard">
+                <p className="mb-3 font-mono text-[11px] tracking-widest text-cobalt">BOOKS — THE SHELF</p>
+                <ul className="space-y-3">
+                  {offClock.books.map((b) => (
+                    <li key={b.title} className="border-b border-ink/15 pb-2.5 last:border-b-0">
+                      <p className="font-display text-[15px] font-semibold uppercase leading-tight">{b.title}</p>
+                      <p className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">{b.take}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border-2 border-ink bg-paper-2 p-[clamp(18px,2.5vw,26px)] shadow-hard">
+                <p className="mb-3 font-mono text-[11px] tracking-widest text-cobalt">SETUP — THE WORKBENCH</p>
+                <dl className="space-y-3">
+                  {offClock.setup.map((s) => (
+                    <div key={s.name} className="border-b border-ink/15 pb-2.5 last:border-b-0">
+                      <dt className="font-mono text-[12px] tracking-widest text-saffron-deep">{s.name}</dt>
+                      <dd className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">{s.detail}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </div>
           </Reveal>
 
