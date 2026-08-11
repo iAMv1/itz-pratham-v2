@@ -133,6 +133,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   </p>
                 </a>
               </div>
+              {study.evidence?.length > 0 && (
+                <ul className="mt-4 grid gap-3 md:grid-cols-3">
+                  {study.evidence.map((e) => (
+                    <li key={e.claim} className="border-l-2 border-saffron pl-3">
+                      <p className="font-mono text-[13px] font-medium tracking-wide text-ink">{e.claim}</p>
+                      <p className="mt-0.5 font-mono text-[11px] leading-relaxed text-muted-foreground">{e.method}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           </Reveal>
 
