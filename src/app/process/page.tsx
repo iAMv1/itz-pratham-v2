@@ -4,12 +4,12 @@ import { Tilt } from "@/components/motion/tilt";
 import { Process } from "@/components/sections/process";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Process — Pratham Nahata", description: "How I build: a live terminal session of the process — ship the vibe, prove everything, 2 weeks not 2 months, craft is invisible." };
+export const metadata: Metadata = { title: "Process — Pratham Nahata", description: "How I build: a live terminal session of the process — discover, design, build, polish. 2 weeks not 2 months, everything proven." };
 
 const PRINCIPLES = [
   {
     num: "01",
-    title: "SHIP THE VIBE",
+    title: "POLISH IS A FEATURE",
     body: "Motion, tone and personality are features. If it doesn't feel right, it isn't done.",
     why: "A portfolio that feels alive beats one that's merely correct — the same way a product that feels right gets used. Every animation here is a working demo of this principle: if the reveal stutters, the page has failed its own pitch.",
   },

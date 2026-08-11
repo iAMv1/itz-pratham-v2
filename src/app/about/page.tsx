@@ -59,7 +59,7 @@ export default function AboutPage() {
                 pulse, and work you can verify — every claim on this site links to a real repo.
               </p>
               <AnnotationCard label="brand · promise" rotate={-2}>
-                builds that feel alive — nothing shipped without a vibe
+                builds systems that actually ship — nothing leaves without receipts
               </AnnotationCard>
             </Reveal>
             <Reveal delay={0.1}>

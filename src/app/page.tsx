@@ -21,6 +21,23 @@ export default function Home() {
         <SkillsMarquee />
         <NameMarquee />
 
+        {/* engineering credibility — what I build, in one band */}
+        <section aria-label="Engineering capabilities" className="border-b-2 border-ink bg-paper">
+          <div className="mx-auto grid max-w-[1400px] gap-px bg-ink px-[clamp(20px,4vw,48px)] py-0 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { k: "REAL-TIME INFERENCE", v: "ONNX in the browser — <20ms, zero server round-trip" },
+              { k: "GRAPH NEURAL NETWORKS", v: "ESM-2 + GIN fused for drug-target affinity" },
+              { k: "MULTI-AGENT SYSTEMS", v: "3-agent orchestration over workforce analytics" },
+              { k: "FULL-STACK PRODUCTS", v: "Next.js · FastAPI · Tauri · Supabase · Docker" },
+            ].map((c) => (
+              <div key={c.k} className="bg-paper px-4 py-5">
+                <p className="font-mono text-[11px] tracking-widest text-cobalt">{c.k}</p>
+                <p className="mt-1 font-mono text-[12.5px] leading-snug text-ink/70">{c.v}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* featured work → /work/[slug] */}
         <section id="featured" className="bg-jali scroll-mt-24 px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
           <Reveal>

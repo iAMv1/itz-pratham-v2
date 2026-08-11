@@ -59,7 +59,7 @@ export function Hero() {
       <Spotlight />
 
       <p className="relative z-10 font-mono text-[13px] tracking-widest text-muted-foreground">
-        PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर VIBES
+        PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN
       </p>
 
       <motion.h1
@@ -152,16 +152,17 @@ export function Hero() {
         </Link>
       </div>
 
-      <ul className="relative z-10 mt-8 flex flex-col gap-2 font-mono text-sm tracking-wider">
+      <ul className="relative z-10 mt-8 flex flex-col gap-3 font-mono text-sm tracking-wider">
         {profile.stats.map((s) => (
-          <li key={s.label}>
-            <CountUp
-              value={s.value}
-              prefix={s.prefix ?? ""}
-              suffix={s.suffix ?? ""}
-              className="text-lg font-medium text-red"
-            />{" "}
-            {s.label}
+          <li key={s.label} className="flex flex-col gap-0.5">
+            <span className="text-lg font-medium text-red">
+              {s.headline ? (
+                s.headline
+              ) : (
+                <CountUp value={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
+              )}
+            </span>
+            <span className="text-[12px] leading-snug text-muted-foreground">{s.label}</span>
           </li>
         ))}
       </ul>

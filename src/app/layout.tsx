@@ -31,7 +31,7 @@ const yatraOne = Yatra_One({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pratham Nahata — Vibe Builder · Full-Stack & ML Engineer",
+    default: "Pratham Nahata — Full-Stack & ML Engineer",
     template: "%s — Pratham Nahata",
   },
   description:
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://itzpratham.in/",
     siteName: "Pratham Nahata — Portfolio",
-    title: "Pratham Nahata — Vibe Builder",
+    title: "Pratham Nahata — Full-Stack & ML Engineer",
     description:
       "Full-stack + ML systems that feel alive. CS undergrad, SIH 2024 grand finalist.",
-    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Pratham Nahata — Vibe Builder · Full-Stack × ML Engineer" }],
+    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Pratham Nahata — Full-Stack × ML Engineer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pratham Nahata — Vibe Builder",
+    title: "Pratham Nahata — Full-Stack & ML Engineer",
     description: "Full-stack + ML systems that feel alive. CS undergrad, SIH 2024 grand finalist.",
     images: ["/assets/og-image.png"],
   },

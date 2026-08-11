@@ -137,7 +137,7 @@ export function Process() {
               <span className="ml-auto font-mono text-xs text-ink/70">{profile.process.title}</span>
             </div>
             <div className="flex flex-col gap-5 px-[clamp(20px,4vw,34px)] py-[clamp(20px,4vw,34px)] font-mono text-[clamp(12.5px,1.5vw,15px)] leading-[1.9]">
-              <p className="text-ink/60"># shipping vibe-first systems since 2023</p>
+              <p className="text-ink/60"># shipping production systems since 2023</p>
               <p className="text-ink/65"># काम में विश्वास — faith in the work</p>
               {profile.process.steps.map((s, i) => (
                 <div key={s.num} className="process-block">
@@ -157,7 +157,7 @@ export function Process() {
                   )}
                 </div>
               ))}
-              <p className="text-cobalt">✓ done in 2 weeks, not 2 months — you keep the source, I keep the vibes</p>
+              <p className="text-cobalt">✓ done in 2 weeks, not 2 months — you keep the source, I keep shipping</p>
             </div>
             <div className="flex items-center justify-between gap-4 border-t-2 border-ink px-4 py-2.5 font-mono text-[11px] text-ink/70">
               <span className="flex items-center gap-2 text-cobalt">

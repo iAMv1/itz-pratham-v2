@@ -66,7 +66,7 @@ test("unresolved section descends into what i dont know", async ({ page }) => {
 
 test("case page dive descends four layers deep", async ({ page }) => {
   await page.goto(`${BASE}/work/mindpulse-pro?noloader=1`, { waitUntil: "networkidle" });
-  await expect(page.getByText("DIVE DEEPER")).toBeVisible();
+  await expect(page.getByRole("heading", { name: /DIVE DEEPER/ })).toBeVisible();
   await page.getByText("Why FastAPI + WebSockets?").first().click();
   await expect(page.getByText(/polling added ~900ms staleness/)).toBeVisible();
   await page.getByText("What went wrong?").first().click();

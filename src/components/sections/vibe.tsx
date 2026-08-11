@@ -13,7 +13,7 @@ export function Vibe() {
       <div className="relative z-10">
         <Reveal>
           <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
-            01 · THE VIBE
+            01 · THE CRAFT
           </p>
           <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
             WHAT I

@@ -86,7 +86,7 @@ export function Preloader() {
       <div className="h-2 w-[min(360px,60vw)] border border-paper/30 bg-paper/10">
         <span ref={fillRef} className="block h-full origin-left scale-x-0 bg-cobalt" />
       </div>
-      <p className="font-mono text-xs tracking-[0.22em] text-paper/55">LOADING THE VIBES…</p>
+      <p className="font-mono text-xs tracking-[0.22em] text-paper/55">LOADING THE GOODS…</p>
     </div>
   );
 }

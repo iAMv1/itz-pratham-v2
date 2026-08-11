@@ -55,14 +55,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </header>
 
           {/* system flow — dark bridge into the body, full-bleed */}
-          <div className="border-b-2 border-ink bg-ink-2 py-8 text-paper">
+          <div id="system-flow" className="border-b-2 border-ink bg-ink-2 py-8 text-paper">
             <div className="px-[clamp(20px,4vw,40px)]">
               <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
               <FlowDiagram slug={study.slug} />
             </div>
           </div>
 
-          {/* sections */}
+          {/* sections — narrative: problem → approach → hard part → shipped */}
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
             <Reveal>
               <section>
@@ -75,11 +75,66 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </Reveal>
             <Reveal delay={0.08}>
               <section>
-                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">HOW IT&apos;S BUILT</h2>
+                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">MY APPROACH</h2>
                 <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.build}</p>
               </section>
             </Reveal>
+            <Reveal delay={0.04}>
+              <section>
+                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">
+                  THE HARD <span className="text-cobalt">PART</span>
+                </h2>
+                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.hard}</p>
+              </section>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <section>
+                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">
+                  WHAT <span className="text-cobalt">SHIPPED</span>
+                </h2>
+                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.shipped}</p>
+              </section>
+            </Reveal>
           </div>
+
+          {/* evidence — receipts, not claims */}
+          <Reveal className="mt-12">
+            <section className="border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,32px)] shadow-hard">
+              <div className="flex flex-wrap items-baseline justify-between gap-3">
+                <h2 className="font-display text-2xl font-semibold uppercase">
+                  THE <span className="text-cobalt">RECEIPTS</span>
+                </h2>
+                <p className="font-mono text-[11px] tracking-widest text-muted-foreground">
+                  SOURCE · ARCHITECTURE · NUMBERS — NO CLAIMS WITHOUT EVIDENCE
+                </p>
+              </div>
+              <div className="mt-4 grid gap-px border-2 border-ink bg-ink sm:grid-cols-3">
+                <a
+                  href={study.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-paper-2 p-4 transition-colors hover:bg-paper"
+                >
+                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">SOURCE</p>
+                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
+                    GITHUB REPO <span aria-hidden>↗</span>
+                  </p>
+                </a>
+                <a href="#system-flow" className="group bg-paper-2 p-4 transition-colors hover:bg-paper">
+                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">ARCHITECTURE</p>
+                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
+                    SYSTEM FLOW <span aria-hidden>↓</span>
+                  </p>
+                </a>
+                <a href="#dive" className="group bg-paper-2 p-4 transition-colors hover:bg-paper">
+                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">WRITE-UP · BENCHMARKS</p>
+                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
+                    DIVE DEEPER <span aria-hidden>↓</span>
+                  </p>
+                </a>
+              </div>
+            </section>
+          </Reveal>
 
           <Reveal>
             <section className="mt-12 border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,36px)] shadow-hard">
@@ -125,7 +180,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           {/* dive deeper — progressive information density */}
           {study.dive?.length > 0 && (
             <Reveal className="mt-12">
-              <section>
+              <section id="dive">
                 <h2 className="font-display text-3xl font-semibold uppercase">
                   DIVE <span className="text-cobalt">DEEPER</span>
                 </h2>
