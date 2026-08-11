@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   title: "Pratham Nahata — Vibe Builder · Full-Stack & ML Engineer",
   description:
     "Pratham Nahata builds full-stack + ML systems that feel alive — real-time inference, graph neural networks, multi-agent AI. Interfaces that feel right, models that actually ship.",
-  metadataBase: new URL("https://itzpratham.dev"),
+  metadataBase: new URL("https://itzpratham.in"),
   openGraph: {
     title: "Pratham Nahata — Vibe Builder",
     description:
