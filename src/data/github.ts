@@ -21,7 +21,10 @@ function readCache(): { at: number; repos: Repo[] } | null {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as { at: number; repos: Repo[] };
+    const parsed = JSON.parse(raw) as { at: number; repos: Repo[] };
+    // P1: the persisted cache MUST respect the TTL — otherwise "5 min freshness" is a lie
+    if (Date.now() - parsed.at > TTL) return null;
+    return parsed;
   } catch {
     return null;
   }

@@ -1,0 +1,32 @@
+# Pratham Nahata — Full-Stack & ML Engineer
+
+## About
+CS undergrad (B.Tech CSE, BVCOE Delhi) building full-stack + ML systems: real-time browser inference (ONNX), graph neural networks (ESM-2 + GIN), multi-agent AI, and production-grade web products (Next.js, FastAPI, Tauri). Bikaner-born, Delhi-built.
+
+- Home: https://itzpratham.in/
+- Work / projects: https://itzpratham.in/work
+- Resume (PDF): https://itzpratham.in/assets/Pratham_Nahata_Resume_ATS.pdf
+- Resume page: https://itzpratham.in/resume
+- GitHub: https://github.com/iAMv1
+- Contact: https://itzpratham.in/contact
+
+## Agent toolkit
+Machine-readable actions are exposed at https://itzpratham.in/api/agent
+Supported actions: get_profile, find_project(skill), get_project(slug), get_experience, get_contact, get_resume, compare_projects, find_evidence(claim), get_skills.
+Full data: https://itzpratham.in/api/data
+
+## Projects
+- MindPulse Pro — real-time behavioral stress detection; XGBoost → ONNX browser inference (<20ms), WebSockets, SHAP, WebLLM offline coaching, Tauri desktop. https://itzpratham.in/work/mindpulse-pro
+- Unified-DTA — drug-target affinity; ESM-2 + Graph Isomorphism Networks, BindingDB/DAVIS/KIBA, Dockerized FastAPI. https://itzpratham.in/work/unified-dta
+- Sentinel — privacy-first wellbeing analytics; 3-agent orchestration + graph analytics. https://itzpratham.in/work/sentinel
+- OmniSecTester — defense-in-depth security testing framework; 7 attack surfaces, one CLI. https://itzpratham.in/work/omnisectester
+
+## Key facts
+- Grand Finalist, Smart India Hackathon 2024 (national, 492k+ participants)
+- Top 5 AlgoQuest (300+ teams)
+- Live GitHub activity: https://itzpratham.in/contact (repos + stars, refreshed every 5 min)
+- This portfolio is tested like a product: 19 Playwright flows, zero console errors. Test matrix: https://itzpratham.in/testing
+- Built with Next.js 16, TypeScript, Tailwind 4, Motion/GSAP/Lenis. Dark/light mode via token inversion. Fully static (SSG), served from Vercel.
+
+## Contact
+Email: iam1nahata@gmail.com · GitHub: https://github.com/iAMv1 · LinkedIn: https://linkedin.com/in/iamprathamnahata

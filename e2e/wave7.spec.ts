@@ -132,6 +132,35 @@ test("resume page embeds the pdf viewer", async ({ page }) => {
   expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });
 
+test("agent toolkit exposes machine-readable actions", async ({ page }) => {
+  const list = await page.request.get(`${BASE}/api/agent?action=list`);
+  expect(list.status()).toBe(200);
+  const body = await list.json();
+  expect(body.ok).toBe(true);
+  expect(body.data.actions.length).toBeGreaterThan(8);
+
+  const proj = await page.request.get(`${BASE}/api/agent?action=get_project&slug=mindpulse-pro`);
+  expect(proj.status()).toBe(200);
+  const pj = await proj.json();
+  expect(pj.data.hardPart.length).toBeGreaterThan(20);
+  expect(pj.data.evidence.length).toBeGreaterThan(0);
+
+  const ev = await page.request.get(`${BASE}/api/agent?action=find_evidence&claim=P95`);
+  expect(ev.status()).toBe(200);
+  const evBody = await ev.json();
+  expect(evBody.data.evidence.length).toBeGreaterThan(0);
+});
+
+test("llms.txt and api/data are served", async ({ page }) => {
+  const llms = await page.request.get(`${BASE}/llms.txt`);
+  expect(llms.status()).toBe(200);
+  expect((await llms.text()).includes("Agent toolkit")).toBe(true);
+  const data = await page.request.get(`${BASE}/api/data`);
+  expect(data.status()).toBe(200);
+  const body = await data.json();
+  expect(body.caseStudies.length).toBe(4);
+});
+
 test("dark mode toggles and persists", async ({ page }) => {
   await page.goto(`${BASE}/?noloader=1`, { waitUntil: "networkidle" });
   const toggle = page.getByRole("button", { name: /Switch to dark mode/ }).first();

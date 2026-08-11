@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-/** GitHub README rendered inside a real iframe (jsDelivr CDN — no X-Frame-Options wall). */
+/**
+ * GitHub README rendered inside a real iframe (jsDelivr CDN — no X-Frame-Options wall).
+ *
+ * Markdown SUBSET (documented contract — see README):
+ *   h1-h3, ordered/unordered lists, fenced code blocks, inline code, links, tables,
+ *   **bold**, *emphasis*, hr (---/***), paragraphs.
+ * NOT supported: images, blockquotes, nested lists, footnotes, HTML passthrough.
+ * Anything outside the subset renders as plain text — safe by design.
+ */
 export function RepoFrame({ src }: { src?: string }) {
   const [state, setState] = useState<"loading" | "ready" | "error">(src ? "loading" : "error");
   const [srcdoc, setSrcdoc] = useState("");
@@ -12,15 +20,39 @@ export function RepoFrame({ src }: { src?: string }) {
     let alive = true;
     const ctl = new AbortController();
     const timer = window.setTimeout(() => ctl.abort(), 8000);
+    const cacheKey = `repo-frame:${src}`;
+
+    // fallback chain: live fetch → last-rendered copy (localStorage) → error state
+    const fromCache = () => {
+      try {
+        return localStorage.getItem(cacheKey);
+      } catch {
+        return null;
+      }
+    };
+
     fetch(`https://cdn.jsdelivr.net/gh/${src}`, { signal: ctl.signal })
       .then((r) => (r.ok ? r.text() : Promise.reject(new Error(String(r.status)))))
       .then((md) => {
         if (!alive) return;
-        setSrcdoc(renderMarkdown(md));
+        const html = renderMarkdown(md);
+        try {
+          localStorage.setItem(cacheKey, html);
+        } catch {
+          /* storage unavailable */
+        }
+        setSrcdoc(html);
         setState("ready");
       })
       .catch(() => {
-        if (alive) setState("error");
+        if (!alive) return;
+        const cached = fromCache();
+        if (cached) {
+          setSrcdoc(cached);
+          setState("ready");
+        } else {
+          setState("error");
+        }
       })
       .finally(() => window.clearTimeout(timer));
     return () => {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Teko, DM_Sans, DM_Mono, Yatra_One } from "next/font/google";
+import { caseStudies } from "@/data/profile";
 import "./globals.css";
 
 const teko = Teko({
@@ -103,8 +104,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 name: "Pratham Nahata — Portfolio",
                 url: "https://itzpratham.in/",
                 inLanguage: "en",
-                description: "Full-stack + ML systems that feel alive. Portfolio of Pratham Nahata.",
+                description: "Full-stack + ML systems that ship. Portfolio of Pratham Nahata.",
               },
+              ...caseStudies.map((c) => ({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                name: c.title,
+                url: `https://itzpratham.in/work/${c.slug}`,
+                applicationCategory: "DeveloperApplication",
+                operatingSystem: "Web",
+                description: c.blurb,
+                author: { "@type": "Person", name: "Pratham Nahata", url: "https://itzpratham.in/" },
+                softwareRequirements: c.stack.join(", "),
+                offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              })),
             ]),
           }}
         />

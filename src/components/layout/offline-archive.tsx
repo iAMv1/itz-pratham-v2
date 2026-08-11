@@ -26,8 +26,8 @@ export function OfflineArchive() {
   return (
     <div className="fixed bottom-4 left-1/2 z-[150] w-[min(520px,92vw)] -translate-x-1/2 border-2 border-ink bg-ink-2 px-4 py-3 text-paper shadow-[5px_5px_0_0_#F58E20]">
       <p className="font-mono text-[11px] tracking-widest">
-        <span className="text-saffron">OFFLINE ARCHIVE</span> — you&apos;re reading the cached me. The whole site still
-        works.
+        <span className="text-saffron">OFFLINE ARCHIVE</span> — you&apos;re reading the cached me. Every page and case
+        study works offline.
       </p>
       <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 border-t border-paper/20 pt-2 font-mono text-[10.5px] tracking-wider text-paper/70">
         <span>▸ BUILT: 4 REAL PROJECTS</span>

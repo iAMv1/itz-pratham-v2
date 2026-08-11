@@ -47,9 +47,9 @@ export function Contact() {
               07 · LET&apos;S TALK
             </p>
             <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
-              LET&apos;S BUILD
+              A PROBLEM
               <br />
-              <span className="text-saffron-deep">SOMETHING REAL</span>
+              <span className="text-saffron-deep">WORTH SOLVING?</span>
             </h1>
           </Reveal>
 

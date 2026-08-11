@@ -147,6 +147,12 @@
   --ink: #051024;
 }
 
+/* ink-2/ink are always-dark surfaces in both themes — paper must stay light there */
+.dark .bg-ink-2,
+.dark .bg-ink {
+  --paper: #f4efe6;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

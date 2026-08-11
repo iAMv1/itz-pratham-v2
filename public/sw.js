@@ -1,7 +1,21 @@
 // Offline Archive â€” cache the app shell; when the network dies, the portfolio
 // switches to an intentionally-designed offline state (banner + archived content).
-const CACHE = "itz-pratham-v2";
-const SHELL = ["/", "/about", "/work", "/process", "/contact", "/progress"];
+const CACHE = "itz-pratham-v3";
+// shell + every static route, including all four case studies — the whole static site works offline
+const SHELL = [
+  "/",
+  "/about",
+  "/work",
+  "/work/mindpulse-pro",
+  "/work/unified-dta",
+  "/work/sentinel",
+  "/work/omnisectester",
+  "/process",
+  "/contact",
+  "/resume",
+  "/testing",
+  "/progress",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

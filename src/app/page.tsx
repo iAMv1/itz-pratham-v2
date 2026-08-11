@@ -44,11 +44,11 @@ export default function Home() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
-                  01 · FEATURED
+                  01 · ENGINEERING
                 </p>
                 <MaskTitle
-                  lines={["SELECTED", "WORK"]}
-                  accent={[1]}
+                  lines={["ML SYSTEMS +", "FULL-STACK PRODUCTS"]}
+                  accent={[0]}
                   className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]"
                 />
               </div>
