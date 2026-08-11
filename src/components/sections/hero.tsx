@@ -9,6 +9,7 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { Spotlight } from "@/components/motion/spotlight";
 import { Annotate } from "@/components/ui/annotate";
 import { MirrorTitle } from "@/components/ui/mirror-title";
+import { HeroAscii } from "@/components/ui/hero-ascii";
 import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_INTERVAL = 2600;
@@ -53,6 +54,7 @@ export function Hero() {
         जयपुर
       </motion.span>
       <HeroField className="absolute inset-0 z-0 h-full w-full" />
+      <HeroAscii />
       <Spotlight />
 
       <p className="relative z-10 font-mono text-[13px] tracking-widest text-muted-foreground">

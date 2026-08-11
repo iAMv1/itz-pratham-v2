@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "motion/react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function Marquee({
   children,
@@ -21,26 +17,35 @@ export function Marquee({
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track || reduced || typeof gsap === "undefined") return;
-    if (!("ScrollTrigger" in gsap)) return;
+    if (!track || reduced) return;
 
-    const tween = gsap.to(track, {
-      xPercent: -50,
-      ease: "none",
-      duration: speed,
-      repeat: -1,
-    });
-    const st = ScrollTrigger.create({
-      trigger: track.parentElement,
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => tween.timeScale(0.4 + self.progress * 2.4),
-      onLeave: () => tween.timeScale(1),
-      onLeaveBack: () => tween.timeScale(1),
-    });
+    let cleanup: (() => void) | null = null;
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")])
+      .then(([{ default: gsap }, { ScrollTrigger }]) => {
+        gsap.registerPlugin(ScrollTrigger);
+        const tween = gsap.to(track, {
+          xPercent: -50,
+          ease: "none",
+          duration: speed,
+          repeat: -1,
+        });
+        const st = ScrollTrigger.create({
+          trigger: track.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => tween.timeScale(0.4 + self.progress * 2.4),
+          onLeave: () => tween.timeScale(1),
+          onLeaveBack: () => tween.timeScale(1),
+        });
+        cleanup = () => {
+          st.kill();
+          tween.kill();
+        };
+      })
+      .catch(() => {});
+
     return () => {
-      st.kill();
-      tween.kill();
+      cleanup?.();
     };
   }, [reduced, speed]);
 

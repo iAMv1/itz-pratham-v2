@@ -81,7 +81,8 @@ export function PaisleyField({ className }: { className?: string }) {
 }
 
 /** Process: breathing hexagonal jali lattice, saffron glow near cursor. */
-export function JaliField({ className }: { className?: string }) {
+/** Jali lattice — hexagonal jaali lattice. tone: dark (on ink) or light (on paper). */
+export function JaliField({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   const ptr = usePointer();
   const ref = useCanvasField((ctx, W, H, t) => {
     const R = small() ? 34 : 40;
@@ -100,7 +101,11 @@ export function JaliField({ className }: { className?: string }) {
         const glow = Math.max(0, 1 - d / 220);
         const a = 0.05 + breathe * 0.05 + glow * 0.4;
         ctx.strokeStyle =
-          glow > 0.05 ? `rgba(245,142,32,${a})` : `rgba(244,239,230,${a})`;
+          glow > 0.05
+            ? `rgba(245,142,32,${a})`
+            : tone === "light"
+              ? `rgba(5,16,36,${Math.min(0.16, a * 2)})`
+              : `rgba(244,239,230,${a})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (let k = 0; k < 6; k++) {
@@ -169,7 +174,7 @@ export function MehndiField({ className }: { className?: string }) {
       const p = trail[i];
       p.a *= 0.965;
       const wig = Math.sin(i * 0.9) * 3;
-      ctx.fillStyle = `rgba(244,239,230,${p.a * 0.55})`;
+      ctx.fillStyle = `rgba(5,16,36,${p.a * 0.5})`;
       ctx.beginPath();
       ctx.arc(p.x + wig, p.y, 1.6, 0, Math.PI * 2);
       ctx.fill();
