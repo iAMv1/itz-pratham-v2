@@ -51,14 +51,14 @@ export function Hero() {
         style={{ y: watermarkY }}
         className="pointer-events-none absolute right-[-2%] top-[22%] z-0 select-none font-dev text-[clamp(10rem,30vw,26rem)] leading-none text-ink opacity-[0.045]"
       >
-        जयपुर
+        बीकानेर
       </motion.span>
       <HeroField className="absolute inset-0 z-0 h-full w-full" />
       <HeroAscii />
       <Spotlight />
 
       <p className="relative z-10 font-mono text-[13px] tracking-widest text-muted-foreground">
-        PORTFOLIO ©2026 — DELHI, INDIA · जयपुर VIBES
+        PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर VIBES
       </p>
 
       <motion.h1
@@ -79,8 +79,8 @@ export function Hero() {
           body={
             <>
               <p>
-                Jaipur-born, Delhi-built. The metro city that made me fast: 4 AM hackathons, NCR startup runs, and a
-                college network that ships instead of just talking.
+                Bikaner-born (camel country, Junagarh Fort), Delhi-built. The metro city made me fast: 4 AM hackathons,
+                NCR startup runs, and a college network that ships instead of just talking.
               </p>
               <p className="mt-2 font-mono text-[11px] text-cobalt">
                 THE LINE I KEEP STEALING — &quot;built in Delhi, deployed everywhere&quot;

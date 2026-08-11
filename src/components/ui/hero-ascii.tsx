@@ -15,7 +15,7 @@ function skyline(units = 9): string {
   return lines.join("\n");
 }
 
-/** ASCII Jaipur skyline — subtle backdrop strip under the hero (chhatris over a honeycomb facade). */
+/** ASCII Bikaner skyline — subtle backdrop strip under the hero (chhatris over a honeycomb facade). */
 export function HeroAscii() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none overflow-hidden">
@@ -23,7 +23,7 @@ export function HeroAscii() {
         {skyline()}
       </pre>
       <p className="mt-1 text-center font-dev text-[clamp(0.8rem,1.6vw,1.3rem)] leading-none text-ink/10">
-        जयपुर → दिल्ली → दुनिया
+        बीकानेर → दिल्ली → दुनिया
       </p>
     </div>
   );

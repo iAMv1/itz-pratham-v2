@@ -51,7 +51,7 @@ export default function AboutPage() {
             <Reveal className="space-y-5">
               <p className="max-w-[52ch] text-lg font-medium leading-relaxed drop-cap">
                 I&apos;m a CS undergrad from Delhi building full-stack + ML systems with the patience of a craftsman and
-                the impatience of a hacker. Jaipur-raised in spirit, internet-raised in practice.
+                the impatience of a hacker. Bikaner-raised in spirit, internet-raised in practice.
               </p>
               <p className="max-w-[52ch] border-t border-ink/15 pt-5 text-lg font-medium leading-relaxed">
                 My brand promise is simple: <strong>builds that feel alive.</strong> Models that ship, interfaces with a

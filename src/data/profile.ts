@@ -46,7 +46,7 @@ export const profile: {
   name: "Pratham Nahata",
   shortName: "Pratham",
   location: "Delhi, India",
-  region: "जयपुर · राजस्थान",
+  region: "बीकानेर · राजस्थान",
   email: "iam1nahata@gmail.com",
   resume: "/assets/Pratham_Nahata_Resume_ATS.pdf",
   links: {
@@ -184,7 +184,7 @@ export const profile: {
     { name: "TOOLS", pills: ["Git", "Docker", "n8n", "Vercel", "Supabase", "GitHub Actions", "Postman", "WebSockets", "Tauri"] },
   ],
   skillsMarquee: ["PYTHON", "FASTAPI", "NEXT.JS", "REACT", "PYTORCH", "ONNX", "TYPESCRIPT", "GRAPH NEURAL NETWORKS", "LLMs & RAG", "DOCKER", "SUPABASE", "TAURI"],
-  nameMarquee: ["PRATHAM NAHATA", "नमस्ते", "जयपुर", "JAI JAIPUR"],
+  nameMarquee: ["PRATHAM NAHATA", "नमस्ते", "बीकानेर", "JAI BIKANER"],
 };
 
 export type CaseStudy = {

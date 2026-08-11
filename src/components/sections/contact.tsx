@@ -17,7 +17,7 @@ function relativeTime(iso: string): string {
 }
 
 export function Contact() {
-  const repos = useLatestRepos();
+  const { repos, source } = useLatestRepos();
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -104,11 +104,17 @@ export function Contact() {
 
         <Reveal delay={0.15} className="lg:sticky lg:top-[110px] lg:space-y-6">
           <div className="w-full border-2 border-ink bg-paper-2 p-[clamp(16px,2.5vw,24px)] shadow-hard">
-            <p className="font-mono text-xs tracking-[0.1em] text-cobalt">
-              ▸ NOW SHIPPING — LIVE FROM{" "}
-              <a href={profile.links.github} target="_blank" rel="noopener noreferrer" className="underline underline-offset-3">
-                GITHUB
-              </a>
+            <p className="flex items-center gap-2 font-mono text-xs tracking-[0.1em] text-cobalt">
+              <span
+                aria-hidden
+                className={`size-2 rounded-full ${source === "live" ? "animate-pulse bg-mint shadow-[0_0_0_3px_rgba(141,226,84,0.25)]" : "bg-ink/25"}`}
+              />
+              <span>
+                {source === "live" ? "LIVE" : "CACHED"} — FROM{" "}
+                <a href={profile.links.github} target="_blank" rel="noopener noreferrer" className="underline underline-offset-3">
+                  GITHUB
+                </a>
+              </span>
             </p>
             <ul className="mt-3.5 flex flex-col gap-2.5 font-mono text-[12.5px]">
               {repos.map((r) => (
@@ -117,7 +123,7 @@ export function Contact() {
                   <a href={`${profile.links.github}/${r.name}`} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-saffron-deep">
                     {r.name}
                   </a>
-                  <span className="text-[11px] tabular-nums text-ink/50">{mounted ? relativeTime(r.pushed_at) : ""}</span>
+                  <span className="text-[11px] tabular-nums text-ink/50">{mounted && r.pushed_at ? relativeTime(r.pushed_at) : ""}</span>
                 </li>
               ))}
             </ul>
