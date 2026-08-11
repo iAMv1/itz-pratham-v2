@@ -28,3 +28,14 @@ curl.exe -s --max-time 20 -o $tmp "https://itzpratham.in/"
 $c = [System.IO.File]::ReadAllText($tmp)
 if ($c.Contains("JAI BIKANER")) { Write-Host "itzpratham.in serving latest build: OK" -ForegroundColor Green }
 else { Write-Host "WARNING: itzpratham.in may be serving stale content" -ForegroundColor Yellow }
+
+Write-Host "==> measure (Lighthouse → src/data/performance.ts)" -ForegroundColor Cyan
+node scripts/measure.mjs
+if ($LASTEXITCODE -eq 0) {
+  git add src/data/performance.ts
+  git commit -m "chore(perf): refresh measured Lighthouse numbers" | Out-Null
+  git push origin main | Out-Null
+  Write-Host "measurements refreshed — next deploy ships them" -ForegroundColor Green
+} else {
+  Write-Host "measurement skipped (lighthouse unavailable)" -ForegroundColor Yellow
+}
