@@ -1,6 +1,6 @@
-// Offline Archive — cache the app shell; when the network dies, the portfolio
+// Offline Archive â€” cache the app shell; when the network dies, the portfolio
 // switches to an intentionally-designed offline state (banner + archived content).
-const CACHE = "itz-pratham-v1";
+const CACHE = "itz-pratham-v2";
 const SHELL = ["/", "/about", "/work", "/process", "/contact", "/progress"];
 
 self.addEventListener("install", (event) => {

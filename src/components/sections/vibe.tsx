@@ -12,7 +12,7 @@ export function Vibe() {
       <PaisleyField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
       <div className="relative z-10">
         <Reveal>
-          <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
+          <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
             01 · THE VIBE
           </p>
           <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
@@ -62,7 +62,7 @@ export function Vibe() {
           {profile.cards.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.1} className={i === 1 ? "md:mt-0" : "md:mt-11"}>
               <article
-                className={`flex h-full flex-col gap-2.5 border-2 border-ink bg-paper-2 p-[clamp(20px,2.6vw,30px)] shadow-hard transition-transform duration-300 ease-out hover:-translate-y-1.5 hover:rotate-[-0.5deg] hover:shadow-[8px_8px_0_0_#051024] ${
+                className={`flex h-full flex-col gap-2.5 border-2 border-ink bg-paper-2 p-[clamp(20px,2.6vw,30px)] shadow-hard transition-transform duration-300 ease-out hover:-translate-y-1.5 hover:rotate-[-0.5deg] hover:shadow-[8px_8px_0_0_var(--shadow-ink)] ${
                   i === 1 ? "border-t-[6px] border-t-saffron" : ""
                 }`}
               >

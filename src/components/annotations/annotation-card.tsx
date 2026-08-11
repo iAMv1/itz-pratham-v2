@@ -22,7 +22,7 @@ export function AnnotationCard({
     >
       <span
         aria-hidden
-        className="absolute -top-2 left-1/2 size-3.5 -translate-x-1/2 rounded-full border-2 border-ink bg-saffron shadow-[0_2px_0_0_#051024]"
+        className="absolute -top-2 left-1/2 size-3.5 -translate-x-1/2 rounded-full border-2 border-ink bg-saffron shadow-[0_2px_0_0_var(--shadow-ink)]"
       />
       <p className="border-b border-ink bg-saffron/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
         {label}

@@ -67,7 +67,7 @@ export function Hero() {
         className="relative z-10 mt-4 font-display text-[clamp(4.5rem,15vw,14rem)] font-semibold uppercase leading-[0.8] tracking-wide"
       >
         <span className="block pl-[0.05em]">PRATHAM</span>
-        <span className="block pl-[0.28em] text-transparent [-webkit-text-stroke:3.5px_#051024]">
+        <span className="block pl-[0.28em] text-transparent [-webkit-text-stroke:3.5px_var(--ink)]">
           NAHATA
           <span className="inline-block animate-[cursor-blink_1.1s_step-end_infinite] text-saffron [-webkit-text-stroke:0px]">▮</span>
         </span>
@@ -139,7 +139,7 @@ export function Hero() {
         <Magnetic>
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[box-shadow] duration-150 ease-out hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+            className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[box-shadow] duration-150 ease-out hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
           >
             Start a project <span aria-hidden>→</span>
           </a>
@@ -203,7 +203,7 @@ export function Hero() {
       <motion.p
         aria-hidden
         style={{ x: namasteX }}
-        className="absolute right-[calc(clamp(20px,5vw,90px)+2.5rem)] top-[7%] z-[2] hidden rotate-[-4deg] font-dev text-[clamp(2.6rem,5.5vw,4.6rem)] text-saffron [text-shadow:3px_3px_0_#051024] lg:block"
+        className="absolute right-[calc(clamp(20px,5vw,90px)+2.5rem)] top-[7%] z-[2] hidden rotate-[-4deg] font-dev text-[clamp(2.6rem,5.5vw,4.6rem)] text-saffron [text-shadow:3px_3px_0_var(--ink)] lg:block"
       >
         नमस्ते
       </motion.p>

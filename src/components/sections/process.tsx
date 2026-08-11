@@ -109,10 +109,10 @@ export function Process() {
 
   return (
     <section id="process" className="relative border-y-2 border-ink bg-paper px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
-      <JaliField tone="light" className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+      <JaliField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
       <div className="relative z-10">
         <Reveal>
-          <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_#051024]">
+          <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_var(--shadow-ink)]">
             02 · HOW I BUILD
           </p>
           <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">

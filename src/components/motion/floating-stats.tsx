@@ -20,7 +20,7 @@ export function FloatingStats({ items }: { items: string[] }) {
           <motion.span
             key={item}
             aria-hidden
-            className="pointer-events-none absolute z-10 hidden border border-ink bg-paper-2/95 px-2 py-1 font-mono text-[9.5px] tracking-wider text-saffron-deep shadow-[2px_2px_0_0_#051024] md:block"
+            className="pointer-events-none absolute z-10 hidden border border-ink bg-paper-2/95 px-2 py-1 font-mono text-[9.5px] tracking-wider text-saffron-deep shadow-[2px_2px_0_0_var(--shadow-ink)] md:block"
             style={pos}
             animate={{ y: [0, -7, 0], rotate: [pos.rotate, pos.rotate + 1.5, pos.rotate] }}
             transition={{ duration: 4 + i * 0.9, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}

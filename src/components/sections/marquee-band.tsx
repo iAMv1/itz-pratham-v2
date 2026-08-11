@@ -34,7 +34,7 @@ export function NameMarquee() {
         {[0, 1].map((i) => (
           <span
             key={i}
-            className="whitespace-nowrap px-1 py-3 font-display text-[clamp(3rem,7.5vw,7.5rem)] font-semibold uppercase leading-[1.1] tracking-wide text-transparent [-webkit-text-stroke:2px_#051024]"
+            className="whitespace-nowrap px-1 py-3 font-display text-[clamp(3rem,7.5vw,7.5rem)] font-semibold uppercase leading-[1.1] tracking-wide text-transparent [-webkit-text-stroke:2px_var(--ink)]"
           >
             {profile.nameMarquee.map((s) => (
               <span key={s}>

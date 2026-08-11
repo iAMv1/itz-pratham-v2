@@ -34,7 +34,7 @@ function ProjCard({ p, index }: { p: (typeof profile.projects)[number]; index: n
         href={p.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024] active:scale-[0.99]"
+        className="flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)] active:scale-[0.99]"
       >
         <span className="border-b-2 border-ink bg-paper">
           <ArchSvg />
@@ -68,7 +68,7 @@ export function Work() {
   return (
     <section id="work" className="px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <Reveal>
-        <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
+        <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
           05 · SELECTED WORK
         </p>
         <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">PROJECTS</h2>
@@ -80,7 +80,7 @@ export function Work() {
           href={featured.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group mt-10 grid border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024] md:grid-cols-[1.15fr_1fr]"
+          className="group mt-10 grid border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)] md:grid-cols-[1.15fr_1fr]"
         >
           <span className="relative aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper md:border-b-0 md:border-r-2">
             <ArtImage src={featured.art} alt="" />
@@ -112,7 +112,7 @@ export function Work() {
             href="https://github.com/iAMv1"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024] active:scale-[0.99]"
+            className="flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)] active:scale-[0.99]"
           >
             <span className="relative flex aspect-[640/384] items-center justify-center border-b-2 border-ink bg-saffron">
               <span className="text-center">

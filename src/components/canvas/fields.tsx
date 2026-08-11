@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useCanvasField, usePointer } from "./use-canvas";
 
 const small = () => window.matchMedia("(max-width: 768px)").matches;
+const dark = () => document.documentElement.classList.contains("dark");
 
 /** Hero: drifting marigold dots + rose teardrops with mouse repel. */
 export function HeroField({ className }: { className?: string }) {
@@ -81,8 +82,8 @@ export function PaisleyField({ className }: { className?: string }) {
 }
 
 /** Process: breathing hexagonal jali lattice, saffron glow near cursor. */
-/** Jali lattice — hexagonal jaali lattice. tone: dark (on ink) or light (on paper). */
-export function JaliField({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
+/** Jali lattice — hexagonal jaali lattice, theme-aware (saffron glow + ink-or-paper lines). */
+export function JaliField({ className }: { className?: string }) {
   const ptr = usePointer();
   const ref = useCanvasField((ctx, W, H, t) => {
     const R = small() ? 34 : 40;
@@ -103,9 +104,9 @@ export function JaliField({ className, tone = "dark" }: { className?: string; to
         ctx.strokeStyle =
           glow > 0.05
             ? `rgba(245,142,32,${a})`
-            : tone === "light"
-              ? `rgba(5,16,36,${Math.min(0.16, a * 2)})`
-              : `rgba(244,239,230,${a})`;
+            : dark()
+              ? `rgba(244,239,230,${Math.min(0.16, a * 2)})`
+              : `rgba(5,16,36,${Math.min(0.16, a * 2)})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (let k = 0; k < 6; k++) {
@@ -135,7 +136,7 @@ export function RangoliField({ className }: { className?: string }) {
     const bloom = Math.max(0, 1 - d / 260);
     const R = Math.min(W, H) * 0.32 * (1 + bloom * 0.25);
     const rot = time + bloom * 0.6;
-    ctx.strokeStyle = "rgba(5,16,36,0.10)";
+    ctx.strokeStyle = dark() ? "rgba(244,239,230,0.12)" : "rgba(5,16,36,0.10)";
     ctx.lineWidth = 1.2;
     for (let k = 0; k < 8; k++) {
       const ang = rot + (Math.PI / 4) * k;
@@ -174,7 +175,7 @@ export function MehndiField({ className }: { className?: string }) {
       const p = trail[i];
       p.a *= 0.965;
       const wig = Math.sin(i * 0.9) * 3;
-      ctx.fillStyle = `rgba(5,16,36,${p.a * 0.5})`;
+      ctx.fillStyle = dark() ? `rgba(244,239,230,${p.a * 0.5})` : `rgba(5,16,36,${p.a * 0.5})`;
       ctx.beginPath();
       ctx.arc(p.x + wig, p.y, 1.6, 0, Math.PI * 2);
       ctx.fill();

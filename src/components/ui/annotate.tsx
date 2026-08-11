@@ -75,7 +75,7 @@ export function Annotate({
       <div
         ref={popRef}
         popover="manual"
-        className="fixed z-[140] w-[min(300px,80vw)] border-2 border-ink bg-paper-2 p-4 shadow-[6px_6px_0_0_#051024]"
+        className="fixed z-[140] w-[min(300px,80vw)] border-2 border-ink bg-paper-2 p-4 shadow-[6px_6px_0_0_var(--shadow-ink)]"
       >
         {title && <p className="mb-1.5 font-display text-lg font-semibold uppercase leading-none text-cobalt">{title}</p>}
         <div className={`text-[13.5px] leading-relaxed ${reduced ? "" : "pop-in"}`}>{body}</div>

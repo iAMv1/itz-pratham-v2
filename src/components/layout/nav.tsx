@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { MenuIcon, XIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { profile } from "@/data/profile";
 
 const NAV_LINKS = [
@@ -90,6 +91,7 @@ export function Nav() {
 
         {/* actions */}
         <div className="flex items-center gap-3">
+          <ThemeToggle className="hidden md:inline-flex" />
           <p className="hidden items-center gap-2 font-mono text-[11px] tracking-widest text-muted-foreground lg:flex">
             <span aria-hidden className="size-2 rounded-full bg-mint" />
             Open to work
@@ -136,10 +138,13 @@ export function Nav() {
               </nav>
               <div className="mt-auto border-t-2 border-ink px-6 py-5">
                 <ResumeLink className="w-full py-3 text-sm" />
-                <p className="mt-4 flex items-center gap-2 font-mono text-[11px] tracking-widest text-muted-foreground">
-                  <span aria-hidden className="size-2 rounded-full bg-mint" />
-                  Open to work · Delhi, India
-                </p>
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <p className="flex items-center gap-2 font-mono text-[11px] tracking-widest text-muted-foreground">
+                    <span aria-hidden className="size-2 rounded-full bg-mint" />
+                    Open to work · Delhi
+                  </p>
+                  <ThemeToggle />
+                </div>
               </div>
             </SheetContent>
           </Sheet>

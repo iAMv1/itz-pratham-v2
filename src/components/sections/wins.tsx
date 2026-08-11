@@ -22,7 +22,7 @@ export function Wins() {
         </Reveal>
 
         <Reveal>
-          <article className="mt-10 grid items-center gap-[clamp(18px,3vw,40px)] border-2 border-ink bg-ink-2 p-[clamp(20px,3vw,34px)] text-paper shadow-[8px_8px_0_0_#051024] md:grid-cols-[auto_1fr_auto]">
+          <article className="mt-10 grid items-center gap-[clamp(18px,3vw,40px)] border-2 border-ink bg-ink-2 p-[clamp(20px,3vw,34px)] text-paper shadow-[8px_8px_0_0_var(--shadow-ink)] md:grid-cols-[auto_1fr_auto]">
             <CountUp
               value={profile.wins.featured.value}
               suffix={profile.wins.featured.suffix}

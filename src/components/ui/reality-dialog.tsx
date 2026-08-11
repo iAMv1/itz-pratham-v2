@@ -78,7 +78,7 @@ export function RealityDialog({
       </span>
       <dialog
         ref={dialogRef}
-        className="reality-dialog m-auto w-[min(960px,92vw)] max-h-[88vh] border-2 border-ink bg-paper p-0 shadow-[10px_10px_0_0_#051024] backdrop:bg-ink/60 backdrop:backdrop-blur-[2px]"
+        className="reality-dialog m-auto w-[min(960px,92vw)] max-h-[88vh] border-2 border-ink bg-paper p-0 shadow-[10px_10px_0_0_var(--shadow-ink)] backdrop:bg-ink/60 backdrop:backdrop-blur-[2px]"
       >
         <RealityCloseContext.Provider value={closeFn}>{children}</RealityCloseContext.Provider>
       </dialog>

@@ -26,7 +26,7 @@ export default function Home() {
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
+                <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
                   01 · FEATURED
                 </p>
                 <MaskTitle
@@ -46,7 +46,7 @@ export default function Home() {
               <Reveal key={p.slug} delay={i * 0.08} className="h-full">
                 <RealityDialog
                   trigger={
-                    <div className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024]">
+                    <div className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)]">
                       <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
                         <KineticArt className="absolute inset-0">
                           <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />

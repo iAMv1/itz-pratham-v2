@@ -5,7 +5,7 @@ export function Background() {
   return (
     <section id="built" className="px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <Reveal>
-        <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
+        <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
           03 · BACKGROUND
         </p>
         <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">

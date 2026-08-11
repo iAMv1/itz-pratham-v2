@@ -23,7 +23,7 @@ function PeacockSymbol() {
     <svg aria-hidden className="absolute h-0 w-0">
       <defs>
         <symbol id={PEA_SYMBOL_ID} viewBox="0 0 40 40" width="40" height="40">
-          <g fill="none" stroke="#051024" strokeWidth="1.6" strokeLinecap="round">
+          <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
             <path d="M20 14 C13 2 5 4 6 12 C2 11 2 19 8 19" />
             <path d="M20 14 C20 2 27 4 26 12 C31 11 31 19 25 19" />
             <path d="M20 14 C16 4 10 6 11 13" />
@@ -32,11 +32,11 @@ function PeacockSymbol() {
           <circle cx="25" cy="15" r="2" fill="#F58E20" stroke="none" />
           <circle cx="12" cy="9" r="1.6" fill="#1D5B9E" stroke="none" />
           <circle cx="28" cy="9" r="1.6" fill="#1D5B9E" stroke="none" />
-          <circle cx="20" cy="27" r="7" fill="#1D5B9E" stroke="#051024" strokeWidth="1.6" />
+          <circle cx="20" cy="27" r="7" fill="#1D5B9E" stroke="currentColor" strokeWidth="1.6" />
           <circle cx="17.5" cy="26" r="1.4" fill="#051024" stroke="none" />
           <circle cx="22.5" cy="26" r="1.4" fill="#051024" stroke="none" />
-          <path d="M18 30 Q20 32 22 30" fill="none" stroke="#051024" strokeWidth="1.2" />
-          <g stroke="#051024" strokeWidth="1.4">
+          <path d="M18 30 Q20 32 22 30" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          <g stroke="currentColor" strokeWidth="1.4">
             <path d="M18 20 V14 M20 20 V12 M22 20 V14" />
           </g>
           <circle cx="18" cy="13" r="1.3" fill="#F58E20" stroke="none" />
@@ -111,7 +111,7 @@ export function PeacockFlock({ className = "" }: { className?: string }) {
         viewBox={`0 0 ${width} ${height}`}
         role="img"
         aria-label="404 — a flock of peacocks"
-        className="mx-auto block h-auto max-w-full"
+        className="mx-auto block h-auto max-w-full text-ink"
       >
         {cells.map((c, i) => (
           <use

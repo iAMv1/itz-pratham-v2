@@ -62,7 +62,7 @@ export function ProjectQuickView({ study }: { study: CaseStudy }) {
             href={study.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border-2 border-ink bg-saffron px-5 py-2.5 font-mono text-sm tracking-wider shadow-[3px_3px_0_0_#051024] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_#051024]"
+            className="inline-flex items-center gap-2 border-2 border-ink bg-saffron px-5 py-2.5 font-mono text-sm tracking-wider shadow-[3px_3px_0_0_var(--shadow-ink)] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_var(--shadow-ink)]"
           >
             GITHUB <span aria-hidden>↗</span>
           </a>

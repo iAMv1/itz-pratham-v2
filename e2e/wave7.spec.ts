@@ -115,3 +115,20 @@ test("case page offers star the repo", async ({ page }) => {
   await expect(page.getByRole("link", { name: /STAR THE REPO/ })).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
 });
+
+test("dark mode toggles and persists", async ({ page }) => {
+  await page.goto(`${BASE}/?noloader=1`, { waitUntil: "networkidle" });
+  const toggle = page.getByRole("button", { name: /Switch to dark mode/ }).first();
+  await toggle.click();
+  const hasDark = await page.evaluate(() => document.documentElement.classList.contains("dark"));
+  expect(hasDark).toBe(true);
+  const stored = await page.evaluate(() => localStorage.getItem("theme"));
+  expect(stored).toBe("dark");
+  await page.reload({ waitUntil: "networkidle" });
+  const persists = await page.evaluate(() => document.documentElement.classList.contains("dark"));
+  expect(persists).toBe(true);
+  await page.getByRole("button", { name: /Switch to light mode/ }).first().click();
+  const backToLight = await page.evaluate(() => !document.documentElement.classList.contains("dark"));
+  expect(backToLight).toBe(true);
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});

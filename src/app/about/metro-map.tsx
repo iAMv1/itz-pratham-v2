@@ -86,19 +86,19 @@ function geom(id: string): LineGeom {
 export function MetroMap() {
   return (
     <div>
-      <svg viewBox="0 0 920 300" role="img" aria-label={metro.title} className="w-full">
+      <svg viewBox="0 0 920 300" role="img" aria-label={metro.title} className="w-full text-ink">
         {(["blue", "yellow", "pink", "violet"] as const).map((lid, li) => {
           const g = geom(lid);
           const color = DMRC[lid];
           return (
             <g key={lid}>
-              <path d={g.path} fill="none" stroke="#051024" strokeWidth="11" strokeLinecap="round" />
+              <path d={g.path} fill="none" stroke="currentColor" strokeWidth="11" strokeLinecap="round" />
               <path d={g.path} fill="none" stroke={color} strokeWidth="8" strokeLinecap="round" />
               {/* moving train */}
               <motion.circle
                 r="5"
                 fill="#F4EFE6"
-                stroke="#051024"
+                stroke="currentColor"
                 strokeWidth="2"
                 style={{ offsetPath: `path('${g.path}')`, offsetRotate: "0deg" }}
                 animate={{ offsetDistance: ["0%", "100%"] }}
@@ -107,7 +107,7 @@ export function MetroMap() {
               <rect x={g.terminusTick.x} y={g.terminusTick.y - 7} width="5" height="14" fill="#051024" />
               {/* line roundel */}
               <motion.g initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + li * 0.25, type: "spring", stiffness: 200, damping: 15 }}>
-                <circle cx={HUB.x - 38} cy={HUB.y} r="13" fill={color} stroke="#051024" strokeWidth="2" />
+                <circle cx={HUB.x - 38} cy={HUB.y} r="13" fill={color} stroke="currentColor" strokeWidth="2" />
                 <text x={HUB.x - 38} y={HUB.y + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill="#F4EFE6">
                   {li + 1}
                 </text>
@@ -129,7 +129,7 @@ export function MetroMap() {
                   >
                     <title>{`${s.name} — ${STATION_NOTES[s.name] ?? LINE_NAMES[lid]}`}</title>
                     <circle cx={s.x} cy={s.y} r="9" fill="#F4EFE6" stroke={color} strokeWidth="4.5" />
-                    {important && <circle cx={s.x} cy={s.y} r="13.5" fill="none" stroke="#051024" strokeWidth="2" />}
+                    {important && <circle cx={s.x} cy={s.y} r="13.5" fill="none" stroke="currentColor" strokeWidth="2" />}
                     <text
                       x={s.x}
                       y={s.y + 30}

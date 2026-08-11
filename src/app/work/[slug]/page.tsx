@@ -107,7 +107,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 </p>
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
                   {caseCounterfactuals[study.slug].map((cf) => (
-                    <details key={cf.label} className="group border-2 border-ink bg-paper-2 shadow-[4px_4px_0_0_#051024]">
+                    <details key={cf.label} className="group border-2 border-ink bg-paper-2 shadow-[4px_4px_0_0_var(--shadow-ink)]">
                       <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-mono text-[13px] tracking-wide [&::-webkit-details-marker]:hidden">
                         {cf.label}
                         <span aria-hidden className="text-lg text-saffron-deep transition-transform duration-200 group-open:rotate-45">
@@ -175,7 +175,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   href={study.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+                  className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
                 >
                   VIEW ON GITHUB <span aria-hidden>↗</span>
                 </a>

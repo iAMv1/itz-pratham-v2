@@ -43,7 +43,7 @@ export function Contact() {
       <div className="relative z-10 grid items-start gap-[clamp(28px,4vw,64px)] lg:grid-cols-[1.35fr_1fr]">
         <div>
           <Reveal>
-            <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_#051024]">
+            <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_var(--shadow-ink)]">
               07 · LET&apos;S TALK
             </p>
             <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
@@ -66,7 +66,7 @@ export function Contact() {
                 type="button"
                 onClick={copyEmail}
                 aria-label="Copy email address to clipboard"
-                className="relative inline-flex min-w-[min(320px,100%)] items-center justify-center gap-2.5 border-2 border-ink bg-saffron px-8 py-5 font-mono text-[17px] font-medium tracking-wide text-ink shadow-[4px_4px_0_0_#051024] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+                className="relative inline-flex min-w-[min(320px,100%)] items-center justify-center gap-2.5 border-2 border-ink bg-saffron px-8 py-5 font-mono text-[17px] font-medium tracking-wide text-ink shadow-[4px_4px_0_0_var(--shadow-ink)] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
               >
                 {copied ? "COPIED ✓" : profile.email} <span aria-hidden>{copied ? "" : "→"}</span>
               </button>

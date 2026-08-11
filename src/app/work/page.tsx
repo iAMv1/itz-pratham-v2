@@ -20,7 +20,7 @@ export default function WorkPage() {
             काम
           </span>
           <Reveal>
-            <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_#051024]">
+            <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
               WORK · 01—04
             </p>
             <MaskTitle
@@ -40,7 +40,7 @@ export default function WorkPage() {
               <Reveal key={p.slug} delay={i * 0.06} className="h-full">
                 <Link
                   href={`/work/${p.slug}`}
-                  className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024]"
+                  className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)]"
                 >
                   <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
                     <KineticArt className="absolute inset-0">
@@ -80,7 +80,7 @@ export default function WorkPage() {
               href="https://github.com/iAMv1"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#051024] active:scale-[0.97]"
+              className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
             >
               + 18 MORE REPOS ON GITHUB <span aria-hidden>↗</span>
             </a>
