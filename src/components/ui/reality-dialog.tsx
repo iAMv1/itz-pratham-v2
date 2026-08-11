@@ -26,27 +26,50 @@ export function RealityDialog({
 
   useEffect(() => {
     const id = requestAnimationFrame(() =>
-      setCloseFn(() => () => dialogRef.current?.close())
+      setCloseFn(() => () => {
+        const dlg = dialogRef.current;
+        if (!dlg) return;
+        const doClose = () => dlg.close();
+        if ("startViewTransition" in document) {
+          (document as unknown as { startViewTransition: (cb: () => void) => unknown }).startViewTransition(doClose);
+        } else {
+          doClose();
+        }
+      })
     );
-    const dlg = dialogRef.current;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && dlg?.open) dlg.close();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      cancelAnimationFrame(id);
-      document.removeEventListener("keydown", onKey);
-    };
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const open = () => {
     const dlg = dialogRef.current;
-    if (!dlg) return;
-    if (typeof dlg.showModal === "function") {
+    if (!dlg || typeof dlg.showModal !== "function") return;
+    const doOpen = () => {
       dlg.showModal();
       onOpen?.();
+    };
+    if ("startViewTransition" in document) {
+      (document as unknown as { startViewTransition: (cb: () => void) => unknown }).startViewTransition(doOpen);
+    } else {
+      doOpen();
     }
   };
+
+  // Escape closes through the same transition path
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && dialogRef.current?.open) {
+        const dlg = dialogRef.current;
+        const doClose = () => dlg.close();
+        if ("startViewTransition" in document) {
+          (document as unknown as { startViewTransition: (cb: () => void) => unknown }).startViewTransition(doClose);
+        } else {
+          doClose();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <>
@@ -55,7 +78,7 @@ export function RealityDialog({
       </span>
       <dialog
         ref={dialogRef}
-        className="m-auto w-[min(960px,92vw)] max-h-[88vh] border-2 border-ink bg-paper p-0 shadow-[10px_10px_0_0_#051024] backdrop:bg-ink/60 backdrop:backdrop-blur-[2px]"
+        className="reality-dialog m-auto w-[min(960px,92vw)] max-h-[88vh] border-2 border-ink bg-paper p-0 shadow-[10px_10px_0_0_#051024] backdrop:bg-ink/60 backdrop:backdrop-blur-[2px]"
       >
         <RealityCloseContext.Provider value={closeFn}>{children}</RealityCloseContext.Provider>
       </dialog>

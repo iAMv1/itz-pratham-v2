@@ -70,9 +70,26 @@ export function Hero() {
         </span>
       </motion.h1>
 
-      <p className="relative z-10 mt-5 max-w-[46ch] font-mono text-[12px] tracking-[0.2em] text-muted-foreground">
-        FULL-STACK × ML SYSTEMS — DELHI, INDIA → THE WORLD
-      </p>
+      <div className="relative z-10 mt-5 max-w-[46ch] font-mono text-[12px] tracking-[0.2em] text-muted-foreground">
+        FULL-STACK × ML SYSTEMS —{" "}
+        <Annotate
+          title="Delhi — why here"
+          body={
+            <>
+              <p>
+                Jaipur-born, Delhi-built. The metro city that made me fast: 4 AM hackathons, NCR startup runs, and a
+                college network that ships instead of just talking.
+              </p>
+              <p className="mt-2 font-mono text-[11px] text-cobalt">
+                THE LINE I KEEP STEALING — &quot;built in Delhi, deployed everywhere&quot;
+              </p>
+            </>
+          }
+        >
+          DELHI, INDIA
+        </Annotate>{" "}
+        → THE WORLD
+      </div>
 
       <p className="relative z-10 mt-4 font-mono text-sm tracking-widest">
         <span className="text-muted-foreground">▸ I am a</span>{" "}

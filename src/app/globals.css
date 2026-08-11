@@ -211,6 +211,40 @@ html:not(.js) .preloader {
   margin: 8px 10px 0 0;
 }
 
+.reality-dialog {
+  view-transition-name: reality-dialog;
+}
+::view-transition-group(reality-dialog) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-new(reality-dialog) {
+  animation: reality-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+::view-transition-old(reality-dialog) {
+  animation: reality-out 0.2s ease-in both;
+}
+@keyframes reality-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reality-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
 .pop-in {
   animation: pop-in 0.18s ease-out;
 }

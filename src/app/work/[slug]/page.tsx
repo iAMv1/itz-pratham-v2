@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
+import { RepoFrame } from "@/components/ui/repo-frame";
+import { VtLink } from "@/components/ui/vt-link";
 import { caseStudies, caseCounterfactuals } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
 import { FlowDiagram } from "./flow-diagram";
@@ -121,6 +122,52 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </Reveal>
           )}
 
+          {/* dive deeper — progressive information density */}
+          {study.dive?.length > 0 && (
+            <Reveal className="mt-12">
+              <section>
+                <h2 className="font-display text-3xl font-semibold uppercase">
+                  DIVE <span className="text-cobalt">DEEPER</span>
+                </h2>
+                <p className="mt-2 max-w-[56ch] text-[15px] text-muted-foreground">
+                  Built it — now the descent. Each question opens the next layer: why, why this architecture, what
+                  broke, what I&apos;d change.
+                </p>
+                <div className="mt-5 border-2 border-ink">
+                  {study.dive.map((d, i) => (
+                    <details key={d.q} className="group border-b border-ink/20 last:border-b-0">
+                      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 transition-colors hover:bg-paper-2 [&::-webkit-details-marker]:hidden">
+                        <span className="flex items-baseline gap-4">
+                          <span className="font-mono text-xs text-saffron-deep">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="font-display text-lg font-semibold uppercase leading-none">{d.q}</span>
+                        </span>
+                        <span aria-hidden className="font-mono text-lg text-cobalt transition-transform duration-200 group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="border-t border-ink/15 px-4 py-3.5 text-[14.5px] leading-relaxed">{d.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            </Reveal>
+          )}
+
+          {/* repo inside — the project's README rendered in a real iframe */}
+          <Reveal className="mt-12">
+            <section>
+              <h2 className="font-display text-3xl font-semibold uppercase">
+                THE REPO, <span className="text-cobalt">INSIDE</span>
+              </h2>
+              <p className="mt-2 max-w-[56ch] text-[15px] text-muted-foreground">
+                Not a screenshot — a live iframe pulling this repo&apos;s README straight from the CDN.
+              </p>
+              <div className="mt-5">
+                <RepoFrame src={study.readme} />
+              </div>
+            </section>
+          </Reveal>
+
           <Reveal className="mt-12">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <a
@@ -131,10 +178,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               >
                 VIEW ON GITHUB <span aria-hidden>↗</span>
               </a>
-              <Link href={`/work/${next.slug}`} className="group inline-flex items-center gap-3 font-mono text-sm tracking-wider">
+              <VtLink href={`/work/${next.slug}`} className="group inline-flex items-center gap-3 font-mono text-sm tracking-wider">
                 NEXT: <span className="font-display text-2xl font-semibold uppercase text-cobalt">{next.title}</span>
                 <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
-              </Link>
+              </VtLink>
             </div>
           </Reveal>
         </article>

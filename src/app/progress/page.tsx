@@ -17,7 +17,8 @@ const PIECES = [
   { piece: "Error pages", wave: "3", status: "DONE", note: "404 peacock + 500 haveli-coughed" },
   { piece: "Navigation crash", wave: "3", status: "DONE", note: "preloader DOM race fixed; e2e 5/5" },
   { piece: "QA gates", wave: "3", status: "DONE", note: "vitest 9/9 · lint · tsc · Playwright 10/10 · LH 81/100/96/100" },
-  { piece: "Second Layer (wave 7)", wave: "7", status: "DONE", note: "dialog reality quickviews, anchored popover annotations, timeline-machine scrubber, mirror title, unresolved deep-dives, case counterfactuals, offline archive SW, details-upgraded boxes — e2e 10/10" },
+  { piece: "Second Layer (wave 7)", wave: "7", status: "DONE", note: "dialog reality quickviews, popover annotations, timeline-machine scrubber, mirror title, unresolved deep-dives, case counterfactuals, offline archive SW, details-upgraded boxes — e2e 13/13" },
+  { piece: "Second Layer v2 (wave 7.2)", wave: "7", status: "DONE", note: "completed the unfinished: dive-deeper nested knowledge on every case, repo-inside live README iframes (jsDelivr), Delhi annotation, process WHY IT MATTERS, view-transition dialog + case nav, offline banner archive facts — e2e 13/13" },
   { piece: "Vision critic loop", wave: "6", status: "PAUSED", note: "gemini daily quota hit — rounds resume next session (key installed: GEMINI_API_KEY)" },
   { piece: "Auto-deploy + domain", wave: "7", status: "PENDING", note: "Vercel git integration, custom domain" },
 ];

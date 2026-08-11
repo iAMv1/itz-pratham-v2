@@ -63,3 +63,35 @@ test("unresolved section descends into what i dont know", async ({ page }) => {
   await expect(page.getByText("Building a toy RAFT log in Rust on weekends.")).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
 });
+
+test("case page dive descends four layers deep", async ({ page }) => {
+  await page.goto(`${BASE}/work/mindpulse-pro?noloader=1`, { waitUntil: "networkidle" });
+  await expect(page.getByText("DIVE DEEPER")).toBeVisible();
+  await page.getByText("Why FastAPI + WebSockets?").first().click();
+  await expect(page.getByText(/polling added ~900ms staleness/)).toBeVisible();
+  await page.getByText("What went wrong?").first().click();
+  await expect(page.getByText(/rewrote the transport to WebSockets/)).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
+test("repo inside iframe renders the README", async ({ page }) => {
+  await page.goto(`${BASE}/work/unified-dta?noloader=1`, { waitUntil: "networkidle" });
+  await expect(page.getByText("THE REPO, INSIDE")).toBeVisible();
+  const frame = page.frameLocator('iframe[title="Project README"]');
+  await expect(frame.locator("h1").first()).toBeVisible({ timeout: 15000 });
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
+test("delhi annotation popover opens", async ({ page }) => {
+  await page.goto(`${BASE}/?noloader=1`, { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "DELHI, INDIA", exact: true }).click();
+  await expect(page.getByText("Delhi — why here")).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
+
+test("process principles reveal why it matters", async ({ page }) => {
+  await page.goto(`${BASE}/process?noloader=1`, { waitUntil: "networkidle" });
+  await page.getByText("WHY IT MATTERS").first().click();
+  await expect(page.getByText(/100\/100 Lighthouse accessibility score/)).toBeVisible();
+  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+});
