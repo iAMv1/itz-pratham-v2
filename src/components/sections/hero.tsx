@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 import { CountUp } from "@/components/motion/count-up";
 import { Magnetic } from "@/components/motion/magnetic";
+import { Spotlight } from "@/components/motion/spotlight";
+import { Annotate } from "@/components/ui/annotate";
+import { MirrorTitle } from "@/components/ui/mirror-title";
 import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_INTERVAL = 2600;
@@ -14,6 +17,7 @@ export function Hero({ shot }: { shot?: boolean }) {
   const reduced = useReducedMotion();
   const [role, setRole] = useState(profile.rota[0]);
   const [roleVisible, setRoleVisible] = useState(true);
+  const [customRole, setCustomRole] = useState<string | null>(null);
 
   const { scrollY } = useScroll();
   const titleY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : 120]);
@@ -23,7 +27,7 @@ export function Hero({ shot }: { shot?: boolean }) {
   const watermarkY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : 160]);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || customRole) return;
     let i = 0;
     const id = window.setInterval(() => {
       i = (i + 1) % profile.rota.length;
@@ -34,7 +38,7 @@ export function Hero({ shot }: { shot?: boolean }) {
       }, 220);
     }, ROTA_INTERVAL);
     return () => window.clearInterval(id);
-  }, [reduced]);
+  }, [reduced, customRole]);
 
   return (
     <section
@@ -51,6 +55,7 @@ export function Hero({ shot }: { shot?: boolean }) {
         जयपुर
       </motion.span>
       <HeroField className="absolute inset-0 z-0 h-full w-full" />
+      <Spotlight />
 
       <p className="relative z-10 font-mono text-[13px] tracking-widest text-muted-foreground">
         PORTFOLIO ©2026 — DELHI, INDIA · जयपुर VIBES
@@ -77,14 +82,40 @@ export function Hero({ shot }: { shot?: boolean }) {
           aria-live="polite"
           className={`font-medium text-cobalt transition-opacity duration-200 ${roleVisible ? "opacity-100" : "opacity-0"}`}
         >
-          {role}
+          <MirrorTitle
+            defaultValue={customRole ?? role}
+            onCommit={(v) => setCustomRole(v)}
+            key={customRole ? "custom" : "rota"}
+          />
         </span>
+        {customRole && (
+          <button
+            type="button"
+            onClick={() => setCustomRole(null)}
+            className="ml-2 border border-ink px-1.5 py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-ink hover:text-paper"
+            aria-label="Reset title to the automatic rota"
+          >
+            RESET
+          </button>
+        )}
       </p>
 
-      <p className="relative z-10 mt-4 max-w-[38ch] text-lg font-medium leading-[1.55]">
-        CS undergrad building <mark className="bg-marigold px-1 text-ink">full-stack + ML systems</mark> — real-time
-        inference, graph neural networks, multi-agent AI. Interfaces that feel alive, models that actually ship.
-      </p>
+      <div className="relative z-10 mt-4 max-w-[38ch] text-lg font-medium leading-[1.55]">
+        CS undergrad building <mark className="bg-marigold px-1 text-ink">full-stack + ML</mark>{" "}
+        <Annotate
+          title="systems — three readings"
+          body={
+            <ul className="space-y-1.5">
+              <li><strong className="text-cobalt">PERSONAL</strong> — things that outgrow the demo: products people keep using after the hackathon.</li>
+              <li><strong className="text-cobalt">TECHNICAL</strong> — pipelines where the model, the API and the UI are one deployable whole, not three side-projects.</li>
+              <li><strong className="text-cobalt">EXAMPLES</strong> — MindPulse (client-side inference), Unified-DTA (Dockerized API), Sentinel (3-agent orchestration).</li>
+            </ul>
+          }
+        >
+          systems
+        </Annotate>{" "}
+        — interfaces that feel alive, models that actually ship.
+      </div>
 
       <div className="relative z-10 mt-8 flex flex-wrap gap-4">
         <Magnetic>

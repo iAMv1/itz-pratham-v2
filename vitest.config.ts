@@ -5,6 +5,6 @@ import { fileURLToPath } from "node:url";
 const dir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  test: { environment: "node" },
+  test: { environment: "node", include: ["src/**/*.test.ts"] },
   resolve: { alias: { "@": path.resolve(dir, "./src") } },
 });

@@ -223,3 +223,43 @@ export const metro = {
 };
 
 export const contribution = { title: "CONTRIBUTION RAANGOLI", weeks: 52, days: 7, levels: 5 };
+
+export const timelineMachine = {
+  title: "THE TIMELINE MACHINE",
+  sub: "scrub the years — watch the builder change",
+  years: [
+    { year: "2023", stage: "first repo, first doubts", building: "mini Python projects · a chatbot nobody asked for", learning: "CS50 — how computers actually work", identity: "confused but curious" },
+    { year: "2024", stage: "hackathon blooded", building: "SIH prototype · GSSoC PRs · a stress-detection idea nobody liked yet", learning: "Web (CS50W) · ML specialization · FastAPI", identity: "builder with receipts" },
+    { year: "2025", stage: "systems, not scripts", building: "Unified-DTA · Sentinel · production-shaped pipelines", learning: "GNNs · ESM-2 · multi-agent orchestration", identity: "engineer who designs" },
+    { year: "2026", stage: "products with a pulse", building: "MindPulse Pro v2 · OmniSecTester · this portfolio", learning: "ONNX in-browser · Tauri · motion craft", identity: "vibe builder · full-stack × ML" },
+    { year: "2027", stage: "whatever ships next", building: "the thing you're about to hire me to build", learning: "webgpu · distributed inference · better questions", identity: "still iterating" },
+  ],
+};
+
+export const unresolved = [
+  { title: "Distributed systems, properly", understand: "Single-node ML inference inside a browser — ONNX, WebLLM, real constraints.", dont: "Consensus, partitioning, exactly-once semantics in the wild.", trying: "Building a toy RAFT log in Rust on weekends.", reading: "Designing Data-Intensive Applications (chapter 8, slowly).", next: "A distributed version of MindPulse's backend with zero-downtime inference." },
+  { title: "WebGPU compute", understand: "Canvas 2D particle systems, DPR discipline, rAF budgets.", dont: "Shader pipelines, compute shaders, why my first WGSL kernel was 8× slower than JS.", trying: "Porting the jali lattice field to a WebGPU compute pass.", reading: "WebGPU Fundamentals + every blog post that mentions 'coalesced memory'.", next: "A real-time inference playground running small models fully in the browser." },
+  { title: "A better testing strategy", understand: "Vitest units, Playwright smoke suites, Lighthouse gates.", dont: "Visual regression at scale — my canvases are hostile to pixel diffs.", trying: "Golden-image testing on the five canvas fields with deterministic seeds.", reading: "Testing on the toilet archives, honestly.", next: "A CI visual gate that catches canvas regressions without flaking." },
+  { title: "Motion that never betrays content", understand: "Reduced-motion, IO-gated reveals, mount-driven visibility.", dont: "When a scrub-parallax fights a pinned section — the physics of scroll.", trying: "A single motion token map that designers and engineers share.", reading: "animations.dev essays + every SOTD motion I can inspect.", next: "Publish the token map as a tiny npm package." },
+];
+
+export type Counterfactual = { label: string; answer: string };
+
+export const caseCounterfactuals: Record<string, Counterfactual[]> = {
+  "mindpulse-pro": [
+    { label: "What if the model ran on the server, not the browser?", answer: "Latency would drop from 20ms to ~80ms on good networks (and much worse on Jio-tier mobile), privacy dies (keystroke patterns leave the device), and WebLLM's offline coaching becomes impossible. The browser was the constraint that forced the best architecture — 20ms inference with zero server cost and zero data leaving the machine. The trade is a ~1.5MB ONNX payload; I'd accept it again." },
+    { label: "What if 10× users (10M typing sessions/day)?", answer: "The stateless design saves us: features are computed client-side, so load scales with the dashboard, not the model. I'd add: session-level feature stores with TTL, a clickhouse-style analytics sink for SHAP aggregates, and edge-cached onboarding — but the inference core stays client-side. Cost cliff: none for inference; infra spend stays ~flat." },
+  ],
+  "unified-dta": [
+    { label: "What if we skipped ESM-2 and used sequence-only embeddings?", answer: "GIN alone on molecular graphs with one-hot protein encodings would lose the semantic protein context ESM-2 provides — CI on KIBA would drop measurably. The language model is the expensive but load-bearing part; the fusion layer is where the real engineering lives. I'd keep both." },
+    { label: "What if we needed 10× throughput?", answer: "Today: LRU-cached FastAPI with batch inference. Scaling path: precompute ESM-2 embeddings once (they're the slow part — ~seconds per protein), cache them permanently, and serve only the GIN forward pass (milliseconds). That's a ~100× effective speedup for repeated targets — which is exactly how drug repos behave." },
+  ],
+  sentinel: [
+    { label: "What if you used a single LLM instead of 3 agents?", answer: "One model doing scoring + talent + health would blur the evidence trails and make audits impossible — and hallucinate team conclusions. The three-agent split keeps each system small, testable, and accountable; the orchestrator only routes. More moving parts, but each one is honest." },
+    { label: "What if the board demanded per-person scores?", answer: "Refuse, architecturally. The whole design is privacy-first: anonymized patterns only, no identity in the pipeline. I'd show them cohort-level risk trends, team-collaboration graphs, and department aggregates — the same insight without the surveillance." },
+  ],
+  omnisectester: [
+    { label: "What if you'd written it in Rust instead of JS?", answer: "Compile-time memory safety and a faster engine, but a steeper contributor curve and slower shipping — for a security CLI the attack surface is the adapters, not the runtime. JS won on iteration speed and ecosystem reach (Playwright, fetch everywhere). I'd still pick JS today." },
+    { label: "What if it had 10× the adapters?", answer: "The per-surface adapter contract is the moat: if each adapter is small and dependency-light, 10× adapters means 10× small plugins, not 10× complexity. The risk becomes maintenance drift — so I'd add an adapter manifest + schema tests + a monthly compatibility CI before scaling the catalog." },
+  ],
+};

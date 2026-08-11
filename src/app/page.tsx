@@ -6,6 +6,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { KineticArt } from "@/components/motion/kinetic-art";
 import { MaskTitle } from "@/components/motion/mask-title";
 import { FloatingStats } from "@/components/motion/floating-stats";
+import { RealityDialog } from "@/components/ui/reality-dialog";
+import { ProjectQuickView } from "@/components/ui/project-quickview";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 
@@ -44,30 +46,33 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
           <div className="mt-10 grid gap-[clamp(20px,3vw,40px)] md:grid-cols-3">
             {featured.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08} className="h-full">
-                <Link
-                  href={`/work/${p.slug}`}
-                  className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024]"
+                <RealityDialog
+                  trigger={
+                    <div className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_#051024]">
+                      <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
+                        <KineticArt className="absolute inset-0">
+                          <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
+                        </KineticArt>
+                        <FloatingStats items={p.metrics.split(" · ")} />
+                        <span aria-hidden className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest">
+                          {p.index} · {p.year}
+                        </span>
+                      </span>
+                      <span className="flex flex-1 flex-col gap-2 p-5">
+                        <span className="font-mono text-[11px] tracking-widest text-cobalt">{p.role}</span>
+                        <span className="font-display text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold uppercase leading-none">
+                          {p.title}
+                        </span>
+                        <span className="text-[14px] leading-relaxed">{p.blurb}</span>
+                        <span className="mt-auto flex min-h-11 items-center gap-2 pt-3 font-mono text-[12px] tracking-[0.1em] text-cobalt">
+                          OPEN QUICK VIEW <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
+                        </span>
+                      </span>
+                    </div>
+                  }
                 >
-                  <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
-                    <KineticArt className="absolute inset-0">
-                      <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
-                    </KineticArt>
-                    <FloatingStats items={p.metrics.split(" · ")} />
-                    <span aria-hidden className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest">
-                      {p.index} · {p.year}
-                    </span>
-                  </span>
-                  <span className="flex flex-1 flex-col gap-2 p-5">
-                    <span className="font-mono text-[11px] tracking-widest text-cobalt">{p.role}</span>
-                    <span className="font-display text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold uppercase leading-none">
-                      {p.title}
-                    </span>
-                    <span className="text-[14px] leading-relaxed">{p.blurb}</span>
-                    <span className="mt-auto flex min-h-11 items-center pt-3 font-mono text-[12px] tracking-[0.1em] text-cobalt">
-                      OPEN CASE <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
-                    </span>
-                  </span>
-                </Link>
+                  <ProjectQuickView study={p} />
+                </RealityDialog>
               </Reveal>
             ))}
           </div>

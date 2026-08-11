@@ -16,12 +16,13 @@ const PIECES = [
   { piece: "Metro map", wave: "6", status: "DONE", note: "DMRC casing + roundels + moving trains + MINDPULSE interchange corridor + tooltips + legend — pixel-verified; vision re-round pending (quota)" },
   { piece: "Error pages", wave: "3", status: "DONE", note: "404 peacock + 500 haveli-coughed" },
   { piece: "Navigation crash", wave: "3", status: "DONE", note: "preloader DOM race fixed; e2e 5/5" },
-  { piece: "QA gates", wave: "3", status: "DONE", note: "vitest 9/9 · lint · tsc · Playwright 5/5 · LH 81/100/96/100" },
+  { piece: "QA gates", wave: "3", status: "DONE", note: "vitest 9/9 · lint · tsc · Playwright 10/10 · LH 81/100/96/100" },
+  { piece: "Second Layer (wave 7)", wave: "7", status: "DONE", note: "dialog reality quickviews, anchored popover annotations, timeline-machine scrubber, mirror title, unresolved deep-dives, case counterfactuals, offline archive SW, details-upgraded boxes — e2e 10/10" },
   { piece: "Vision critic loop", wave: "6", status: "PAUSED", note: "gemini daily quota hit — rounds resume next session (key installed: GEMINI_API_KEY)" },
   { piece: "Auto-deploy + domain", wave: "7", status: "PENDING", note: "Vercel git integration, custom domain" },
 ];
 
-const ESTIMATE = 55; // user: 45% at wave 5 → this wave advances metro + process
+const ESTIMATE = 62; // user: 45% at wave 5 → wave 6 metro/process → wave 7 second-layer interaction layer
 
 export default function ProgressPage() {
   return (

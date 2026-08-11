@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { AnnotationCard } from "@/components/annotations/annotation-card";
-import { metro, contribution, profile } from "@/data/profile";
+import { metro, contribution, profile, unresolved, timelineMachine } from "@/data/profile";
 import { MetroMap } from "./metro-map";
+import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "About — Pratham Nahata" };
@@ -98,6 +99,73 @@ export default function AboutPage() {
             </p>
             <div className="mt-5">
               <ContributionRangoli />
+            </div>
+          </Reveal>
+
+          {/* timeline machine */}
+          <Reveal className="mt-16">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
+                {timelineMachine.title}
+              </h2>
+              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{timelineMachine.sub}</p>
+            </div>
+            <p className="mt-3 max-w-[60ch] text-[15px] text-muted-foreground">
+              Drag the scrubber — the years change what I was building, learning, and becoming. A media timeline as a
+              time machine.
+            </p>
+            <div className="mt-5">
+              <TimelineMachine />
+            </div>
+          </Reveal>
+
+          {/* currently unresolved */}
+          <Reveal className="mt-16">
+            <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
+              CURRENTLY <span className="text-cobalt">UNRESOLVED</span>
+            </h2>
+            <p className="mt-3 max-w-[60ch] text-[15px] text-muted-foreground">
+              Not a wall of wins — a map of open problems. Click any to descend: what I understand, what I don&apos;t,
+              what I&apos;m trying, what I&apos;m reading, what&apos;s next.
+            </p>
+            <div className="mt-6 border-t-2 border-ink">
+              {unresolved.map((u, i) => (
+                <details key={u.title} className="group border-b border-ink/20">
+                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-2 py-3 transition-colors hover:bg-paper-2 [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-baseline gap-4">
+                      <span className="font-mono text-xs text-saffron-deep">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="font-display text-xl font-semibold uppercase leading-none md:text-2xl">
+                        {u.title}
+                      </span>
+                    </span>
+                    <span aria-hidden className="font-mono text-lg text-cobalt transition-transform duration-200 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <dl className="grid gap-3 px-2 pb-5 text-[14px] leading-relaxed sm:grid-cols-2">
+                    <div className="border-l-2 border-mint pl-3">
+                      <dt className="font-mono text-[10px] tracking-widest text-muted-foreground">WHAT I UNDERSTAND</dt>
+                      <dd className="mt-1">{u.understand}</dd>
+                    </div>
+                    <div className="border-l-2 border-red/60 pl-3">
+                      <dt className="font-mono text-[10px] tracking-widest text-muted-foreground">WHAT I DON&apos;T</dt>
+                      <dd className="mt-1">{u.dont}</dd>
+                    </div>
+                    <div className="border-l-2 border-cobalt pl-3">
+                      <dt className="font-mono text-[10px] tracking-widest text-muted-foreground">WHAT I&apos;M TRYING</dt>
+                      <dd className="mt-1">{u.trying}</dd>
+                    </div>
+                    <div className="border-l-2 border-saffron pl-3">
+                      <dt className="font-mono text-[10px] tracking-widest text-muted-foreground">READING · NEXT</dt>
+                      <dd className="mt-1">
+                        {u.reading}
+                        <br />
+                        <strong className="text-cobalt">→ {u.next}</strong>
+                      </dd>
+                    </div>
+                  </dl>
+                </details>
+              ))}
             </div>
           </Reveal>
 

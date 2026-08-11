@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
-import { caseStudies } from "@/data/profile";
+import { caseStudies, caseCounterfactuals } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
 import { FlowDiagram } from "./flow-diagram";
 
@@ -93,6 +93,33 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </ul>
             </section>
           </Reveal>
+
+          {/* counterfactuals — engineering judgment, not just implementation */}
+          {caseCounterfactuals[study.slug] && (
+            <Reveal className="mt-12">
+              <section>
+                <h2 className="font-display text-3xl font-semibold uppercase">
+                  WHAT IF <span className="text-cobalt">…</span>
+                </h2>
+                <p className="mt-2 max-w-[56ch] text-[15px] text-muted-foreground">
+                  Ask the project a different question. The architecture has to defend itself.
+                </p>
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  {caseCounterfactuals[study.slug].map((cf) => (
+                    <details key={cf.label} className="group border-2 border-ink bg-paper-2 shadow-[4px_4px_0_0_#051024]">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-mono text-[13px] tracking-wide [&::-webkit-details-marker]:hidden">
+                        {cf.label}
+                        <span aria-hidden className="text-lg text-saffron-deep transition-transform duration-200 group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="border-t border-ink/15 px-4 py-3 text-[14px] leading-relaxed">{cf.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            </Reveal>
+          )}
 
           <Reveal className="mt-12">
             <div className="flex flex-wrap items-center justify-between gap-6">

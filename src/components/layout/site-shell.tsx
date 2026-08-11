@@ -5,6 +5,7 @@ import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { CursorRing } from "@/components/layout/cursor-ring";
 import { Preloader } from "@/components/layout/preloader";
 import { LenisProvider } from "@/components/layout/lenis-provider";
+import { OfflineArchive } from "@/components/layout/offline-archive";
 
 export function SiteShell({ children, rail = false }: { children: React.ReactNode; rail?: boolean }) {
   return (
@@ -15,6 +16,7 @@ export function SiteShell({ children, rail = false }: { children: React.ReactNod
       <Nav />
       {rail ? <Rail /> : null}
       {children}
+      <OfflineArchive />
       <Footer />
     </LenisProvider>
   );
