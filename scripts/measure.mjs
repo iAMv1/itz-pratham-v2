@@ -21,7 +21,7 @@ const res = spawnSync(
     "--output=json",
     `--output-path=${out}`,
   ],
-  { stdio: "inherit", shell: process.platform === "win32" }
+  { stdio: "inherit", shell: process.platform === "win32", cwd: tmpdir() }
 );
 
 if (!existsSync(out)) {
