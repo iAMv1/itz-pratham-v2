@@ -40,6 +40,7 @@ export function MirrorTitle({ defaultValue, onCommit }: { defaultValue: string; 
         tabIndex={0}
         contentEditable
         suppressContentEditableWarning
+        aria-label="Edit my title — type your own version"
         onFocus={() => setEditing(true)}
         onBlur={commit}
         onKeyDown={(e) => {

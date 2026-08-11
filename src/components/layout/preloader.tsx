@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
 import { useReducedMotion } from "motion/react";
 
 let preloaderShown = false; // session flag: the curtain plays once, not on every client navigation
@@ -26,39 +25,47 @@ export function Preloader() {
       return;
     }
     const root = rootRef.current;
-    if (!root || typeof gsap === "undefined") {
+    if (!root) {
       finish();
       return;
     }
 
-    const counter = { v: 0 };
-    const countTween = gsap.to(counter, {
-      v: 100,
-      duration: 1.0,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        if (pctRef.current) {
-          pctRef.current.textContent = String(Math.round(counter.v)).padStart(3, "0");
-        }
-      },
+    // gsap is the only heavy dep here — code-split it out of the shell bundle.
+    // If the import fails (offline etc.), the failsafe curtain lift still runs.
+    const tweens: { kill: () => void }[] = [];
+    void import("gsap").then(({ default: gsap }) => {
+      if (!root.isConnected) return;
+      const counter = { v: 0 };
+      tweens.push(
+        gsap.to(counter, {
+          v: 100,
+          duration: 1.0,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            if (pctRef.current) {
+              pctRef.current.textContent = String(Math.round(counter.v)).padStart(3, "0");
+            }
+          },
+        })
+      );
+      if (fillRef.current) {
+        tweens.push(gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power2.inOut" }));
+      }
+      tweens.push(
+        gsap.to(root, {
+          yPercent: -100,
+          duration: 0.8,
+          ease: "power4.inOut",
+          delay: 1.1,
+          onComplete: finish,
+        })
+      );
     });
-    const fillTween = fillRef.current
-      ? gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power2.inOut" })
-      : null;
-    const curtainTween = gsap.to(root, {
-      yPercent: -100,
-      duration: 0.8,
-      ease: "power4.inOut",
-      delay: 1.1,
-      onComplete: finish,
-    });
-    const failsafe = window.setTimeout(finish, 4500);
 
+    const failsafe = window.setTimeout(finish, 4500);
     return () => {
       window.clearTimeout(failsafe);
-      countTween.kill();
-      fillTween?.kill();
-      curtainTween.kill();
+      tweens.forEach((t) => t.kill());
     };
   }, [reduced]);
 

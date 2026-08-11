@@ -13,7 +13,7 @@ import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_INTERVAL = 2600;
 
-export function Hero({ shot }: { shot?: boolean }) {
+export function Hero() {
   const reduced = useReducedMotion();
   const [role, setRole] = useState(profile.rota[0]);
   const [roleVisible, setRoleVisible] = useState(true);
@@ -43,9 +43,7 @@ export function Hero({ shot }: { shot?: boolean }) {
   return (
     <section
       id="top"
-      className={`relative flex flex-col justify-end overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(40px,6vh,70px)] pt-[clamp(110px,12vh,160px)] ${
-        shot ? "min-h-[820px]" : "min-h-svh"
-      }`}
+      className="relative flex flex-col justify-end overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(40px,6vh,70px)] pt-[clamp(110px,12vh,160px)] min-h-svh"
     >
       <motion.span
         aria-hidden
@@ -166,6 +164,7 @@ export function Hero({ shot }: { shot?: boolean }) {
               alt=""
               width={640}
               height={384}
+              fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover opacity-90 [clip-path:path('M0_0_L320_0_L320_400_L24_400_C24_310_60_250_160_250_C260_250_296_310_296_400_L0_400_Z')]"
             />
             <svg viewBox="0 0 320 400" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full opacity-75">

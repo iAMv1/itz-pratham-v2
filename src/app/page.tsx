@@ -11,15 +11,13 @@ import { ProjectQuickView } from "@/components/ui/project-quickview";
 import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 
-export default async function Home({ searchParams }: { searchParams?: Promise<{ shot?: string }> }) {
-  const sp = (await searchParams) ?? {};
-  const shot = Boolean(sp.shot);
+export default function Home() {
   const featured = caseStudies.slice(0, 3);
 
   return (
     <SiteShell rail>
       <main id="main" className="flex-1">
-        <Hero shot={shot} />
+        <Hero />
         <SkillsMarquee />
         <NameMarquee />
 
