@@ -39,7 +39,7 @@ export function Preloader() {
       tweens.push(
         gsap.to(counter, {
           v: 100,
-          duration: 1.0,
+          duration: 0.7,
           ease: "power2.inOut",
           onUpdate: () => {
             if (pctRef.current) {
@@ -49,14 +49,14 @@ export function Preloader() {
         })
       );
       if (fillRef.current) {
-        tweens.push(gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power2.inOut" }));
+        tweens.push(gsap.fromTo(fillRef.current, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }));
       }
       tweens.push(
         gsap.to(root, {
           yPercent: -100,
-          duration: 0.8,
+          duration: 0.55,
           ease: "power4.inOut",
-          delay: 1.1,
+          delay: 0.75,
           onComplete: finish,
         })
       );
