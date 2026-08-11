@@ -12,7 +12,7 @@ export function Footer() {
         </a>{" "}
         ·{" "}
         <a
-          href="/assets/Pratham_Nahata_Resume_ATS.pdf"
+          href="/resume"
           className="underline-offset-4 transition-colors hover:text-marigold"
         >
           RESUME ↗

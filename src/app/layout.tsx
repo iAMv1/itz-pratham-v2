@@ -30,17 +30,32 @@ const yatraOne = Yatra_One({
 });
 
 export const metadata: Metadata = {
-  title: "Pratham Nahata — Vibe Builder · Full-Stack & ML Engineer",
+  title: {
+    default: "Pratham Nahata — Vibe Builder · Full-Stack & ML Engineer",
+    template: "%s — Pratham Nahata",
+  },
   description:
     "Pratham Nahata builds full-stack + ML systems that feel alive — real-time inference, graph neural networks, multi-agent AI. Interfaces that feel right, models that actually ship.",
   metadataBase: new URL("https://itzpratham.in"),
+  alternates: { canonical: "/" },
   openGraph: {
+    type: "website",
+    url: "https://itzpratham.in/",
+    siteName: "Pratham Nahata — Portfolio",
     title: "Pratham Nahata — Vibe Builder",
     description:
       "Full-stack + ML systems that feel alive. CS undergrad, SIH 2024 grand finalist.",
-    images: [{ url: "/assets/og-image.svg", width: 1200, height: 630 }],
+    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Pratham Nahata — Vibe Builder · Full-Stack × ML Engineer" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pratham Nahata — Vibe Builder",
+    description: "Full-stack + ML systems that feel alive. CS undergrad, SIH 2024 grand finalist.",
+    images: ["/assets/og-image.png"],
   },
   icons: { icon: "/assets/favicon.svg" },
+  robots: { index: true, follow: true },
+  other: { "theme-color": "#f4efe6" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -58,6 +73,41 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Pratham Nahata",
+                url: "https://itzpratham.in/",
+                image: "https://itzpratham.in/assets/og-image.png",
+                jobTitle: "Full-Stack × ML Engineer",
+                description:
+                  "CS undergrad building full-stack + ML systems — real-time browser inference, graph neural networks, multi-agent AI.",
+                knowsAbout: [
+                  "FastAPI", "Next.js", "XGBoost", "ONNX Runtime", "PyTorch", "ESM-2",
+                  "Graph Neural Networks", "Tauri", "Multi-Agent AI", "WebSockets",
+                ],
+                alumniOf: { "@type": "CollegeOrUniversity", name: "B.Tech Computer Science" },
+                sameAs: [
+                  "https://github.com/iAMv1",
+                  "https://www.linkedin.com/in/itzpratham",
+                  "https://itzpratham.in/",
+                ],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Pratham Nahata — Portfolio",
+                url: "https://itzpratham.in/",
+                inLanguage: "en",
+                description: "Full-stack + ML systems that feel alive. Portfolio of Pratham Nahata.",
+              },
+            ]),
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
     </html>

@@ -7,7 +7,6 @@ import { motion, useReducedMotion } from "motion/react";
 import { MenuIcon, XIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { profile } from "@/data/profile";
 
 const NAV_LINKS = [
   { href: "/work", label: "Work" },
@@ -18,12 +17,12 @@ const NAV_LINKS = [
 
 function ResumeLink({ className = "" }: { className?: string }) {
   return (
-    <a
-      href={profile.resume}
+    <Link
+      href="/resume"
       className={`inline-flex min-w-[96px] items-center justify-center gap-1.5 border-2 border-ink px-3 py-2 font-mono text-[13px] tracking-widest transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97] ${className}`}
     >
       Resume <span aria-hidden className="text-[15px]">↗</span>
-    </a>
+    </Link>
   );
 }
 

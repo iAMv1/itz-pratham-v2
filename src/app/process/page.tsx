@@ -4,7 +4,7 @@ import { Tilt } from "@/components/motion/tilt";
 import { Process } from "@/components/sections/process";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Process — Pratham Nahata" };
+export const metadata: Metadata = { title: "Process — Pratham Nahata", description: "How I build: a live terminal session of the process — ship the vibe, prove everything, 2 weeks not 2 months, craft is invisible." };
 
 const PRINCIPLES = [
   {

@@ -7,7 +7,7 @@ import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { ContributionGraph } from "@/components/ui/contribution-graph";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "About — Pratham Nahata" };
+export const metadata: Metadata = { title: "About — Pratham Nahata", description: "Bikaner-raised, Delhi-built. CS undergrad engineering full-stack + ML systems — metro map career route, timeline machine, the year in commits." };
 
 function ContributionRangoli() {
   const cells = [];

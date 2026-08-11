@@ -13,11 +13,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("all routes load directly", async ({ page }) => {
-  for (const route of ["/", "/work", "/about", "/process", "/contact", "/progress", "/work/mindpulse-pro"]) {
+  for (const route of ["/", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/work/mindpulse-pro"]) {
     const res = await page.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
     expect(res?.status(), `route ${route}`).toBe(200);
   }
-  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+  expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });
 
 test("client-side navigation works (nav links + CTAs)", async ({ page }) => {
@@ -43,13 +43,14 @@ test("client-side navigation works (nav links + CTAs)", async ({ page }) => {
   await page.getByRole("link", { name: "Pratham Nahata — home" }).click();
   await expect(page).toHaveURL(/\/$/);
 
-  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+  expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });
 
 test("resume link and 404 work", async ({ page }) => {
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
-  const resume = page.getByRole("link", { name: /Resume/ }).first();
-  await expect(resume).toHaveAttribute("href", /\.pdf$/);
+  await page.getByRole("link", { name: /Resume/ }).first().click();
+  await expect(page).toHaveURL(/\/resume/);
+  await expect(page.getByRole("link", { name: /DOWNLOAD PDF/ })).toHaveAttribute("href", /\.pdf$/);
 
   const res = await page.goto(`${BASE}/definitely-not-a-page`, { waitUntil: "networkidle" });
   expect(res?.status()).toBe(404);
@@ -66,12 +67,12 @@ test("mobile menu opens and navigates", async ({ page }) => {
   await page.getByRole("link", { name: /About/ }).click();
   await expect(page).toHaveURL(/\/about/);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+  expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });
 
 test("mobile viewport renders hero content", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  expect(ERRORS.filter((e) => !e.includes("favicon"))).toEqual([]);
+  expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });

@@ -46,11 +46,11 @@ export function Contact() {
             <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_var(--shadow-ink)]">
               07 · LET&apos;S TALK
             </p>
-            <h2 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
+            <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
               LET&apos;S BUILD
               <br />
               <span className="text-saffron-deep">SOMETHING REAL</span>
-            </h2>
+            </h1>
           </Reveal>
 
           <Reveal>

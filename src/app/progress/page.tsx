@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Progress — Pratham Nahata" };
+export const metadata: Metadata = { title: "Progress — Pratham Nahata", description: "The build log of this portfolio — every wave documented: brand, structure, interaction layer, dark mode, SEO." };
 
 const PIECES = [
   { piece: "Brand foundation", wave: "0", status: "DONE", note: "BRAND.md, logo system — critic: 9/10" },

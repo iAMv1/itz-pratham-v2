@@ -9,7 +9,7 @@ import { ArtImage } from "@/components/ui/art-image";
 import { caseStudies } from "@/data/profile";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Work — Pratham Nahata" };
+export const metadata: Metadata = { title: "Work — Pratham Nahata", description: "Four systems, each opened like a jharokha window — MindPulse Pro, Unified-DTA, Sentinel, OmniSecTester. Every claim links to a real repo." };
 
 export default function WorkPage() {
   return (
@@ -76,14 +76,19 @@ export default function WorkPage() {
           </div>
 
           <Reveal className="mt-12">
-            <a
-              href="https://github.com/iAMv1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
-            >
-              + 18 MORE REPOS ON GITHUB <span aria-hidden>↗</span>
-            </a>
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-ink pt-8">
+              <p className="font-mono text-[12px] tracking-widest text-muted-foreground">
+                ▸ 4 FEATURED — <span className="text-cobalt">18+ MORE REPOS LIVE ON GITHUB</span>
+              </p>
+              <a
+                href="https://github.com/iAMv1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 border-2 border-ink bg-saffron px-6 py-3.5 font-mono text-sm tracking-wider shadow-hard transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
+              >
+                EXPLORE ALL REPOS <span aria-hidden>↗</span>
+              </a>
+            </div>
           </Reveal>
         </section>
       </main>

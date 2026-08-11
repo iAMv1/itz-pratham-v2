@@ -4,7 +4,7 @@ import { caseStudies } from "@/data/profile";
 const BASE = "https://itzpratham.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/work", "/about", "/process", "/contact", "/progress"].map((r) => ({
+  const staticRoutes = ["", "/work", "/about", "/process", "/contact", "/progress", "/resume"].map((r) => ({
     url: `${BASE}${r}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
