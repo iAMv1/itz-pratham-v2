@@ -140,9 +140,9 @@ export function Hero() {
         </Link>
       </div>
 
-      <ul className="relative z-10 mt-8 flex flex-col gap-3 font-mono text-sm tracking-wider">
+      <ul className="relative z-10 mt-8 w-fit min-w-[min(300px,72vw)] border-2 border-ink bg-paper-2/70 shadow-hard">
         {profile.stats.map((s) => (
-          <li key={s.label} className="flex flex-col gap-0.5">
+          <li key={s.label} className="flex flex-col gap-0.5 border-b border-ink/15 px-4 py-2.5 last:border-b-0">
             <span className="text-lg font-medium text-red">
               {s.headline ? (
                 s.headline
@@ -150,7 +150,7 @@ export function Hero() {
                 <CountUp value={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
               )}
             </span>
-            <span className="text-[12px] leading-snug text-muted-foreground">{s.label}</span>
+            <span className="text-[11px] leading-snug text-muted-foreground">{s.label}</span>
           </li>
         ))}
       </ul>

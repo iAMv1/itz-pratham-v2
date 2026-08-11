@@ -103,11 +103,13 @@
 }
 
 .dark {
-  color-scheme: dark;  /* identity tokens invert — every bg-paper/text-ink/border-ink flips automatically */
-  --paper: #0d1320;
-  --paper-2: #161e30;
+  color-scheme: dark;
+  /* identity tokens invert — every bg-paper/text-ink/border-ink flips automatically.
+     Elevation stays within ONE near-black family: page #0a0a0a · card #121212 · deep #040404. */
+  --paper: #0a0a0a;
+  --paper-2: #121212;
   --ink: #f4efe6;
-  --ink-2: #060a12;
+  --ink-2: #040404;
   --cobalt: #7db4f5;
   --saffron: #f58e20;
   --saffron-deep: #ffb25e;
