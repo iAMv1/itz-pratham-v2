@@ -39,7 +39,7 @@ export function Rail() {
           <a
             key={s.id}
             href={`#${s.id}`}
-            className={`flex items-center gap-2.5 transition-colors duration-150 ${
+            className={`group flex items-center gap-2.5 transition-colors duration-150 ${
               isActive ? "text-ink" : "text-ink/60 hover:text-ink"
             }`}
           >
@@ -47,8 +47,8 @@ export function Rail() {
               {s.num}
             </span>
             <span
-              className={`max-w-0 overflow-hidden whitespace-nowrap font-mono text-[10px] tracking-[0.14em] transition-all duration-200 ${
-                isActive ? "max-w-24 opacity-100" : "opacity-0"
+              className={`overflow-hidden whitespace-nowrap font-mono text-[10px] tracking-[0.14em] transition-all duration-200 ${
+                isActive ? "max-w-24 opacity-100" : "max-w-0 group-hover:max-w-24 opacity-0 group-hover:opacity-80"
               }`}
             >
               {s.label}
