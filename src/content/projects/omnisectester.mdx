@@ -1,0 +1,81 @@
+---
+slug: omnisectester
+index: "04"
+year: "2026"
+title: OMNISECTESTER
+role: Builder · Security tooling
+blurb: A nation-state-grade, defense-in-depth security testing framework in one CLI.
+challenge: |
+  Security testing is fragmented — a different tool for web, mobile, cloud, AI/LLM,
+  hardware. Teams need one disciplined surface to audit everything from a single
+  command line.
+approach: |
+  Designed and shipped a defense-in-depth testing framework covering web apps,
+  extensions, desktop, mobile, cloud, AI/LLM, hardware and supply chain — from one CLI.
+  Built as a focused, extensible engine with per-surface adapters.
+hard: |
+  Seven attack surfaces, one disciplined CLI — the engine had to stay small while every
+  adapter stayed independently shippable, so a single bad dependency could never poison
+  the whole tool.
+shipped: |
+  A defense-in-depth security framework covering 7 surfaces from a single command line,
+  with per-surface adapters that update independently.
+impact:
+  - 7 attack surfaces, one CLI
+  - Defense-in-depth by design
+  - Supply-chain and AI/LLM coverage included
+stack:
+  - JavaScript
+  - CLI
+  - Security
+  - Automation
+flow:
+  - Target selection
+  - 7 surface adapters
+  - Defense-in-depth engine
+  - Unified reports
+href: https://github.com/iAMv1/omnisectester
+art: /assets/art-omni.jpg
+# screenshot: /assets/shots/omnisectester.png
+accent: "#C96F4A"
+metrics: "7 SURFACES · 1 CLI · DEFENSE-IN-DEPTH"
+live: ""
+readme: iAMv1/omnisectester@HEAD/README.md
+dive:
+  - q: "Why one CLI for seven surfaces?"
+    a: Security teams don't adopt seven tools; they adopt one workflow. A single disciplined entry point with per-surface adapters keeps the core tiny and the coverage honest.
+  - q: "Why defense-in-depth by design?"
+    a: Any single scanner is bypassable. Layered checks — network, app, supply chain, AI/LLM — mean a finding survives even when one layer is blind.
+  - q: "What went wrong?"
+    a: "Early adapters were monolithic: one wrong dependency poisoned the whole CLI. I split the engine from the adapters so each surface ships and updates independently."
+  - q: "What would I do now?"
+    a: Add an adapter manifest + schema tests and a monthly compatibility CI before scaling the catalog past the current seven surfaces.
+evidence:
+  - claim: "7 attack surfaces, one CLI"
+    method: web, extensions, desktop, mobile, cloud, AI/LLM, hardware + supply-chain adapters — engine decoupled from adapters
+  - claim: "Defense-in-depth layering"
+    method: per-surface checks run in ordered layers; a failure in one adapter cannot abort the surface sweep
+  - claim: "Independent adapter shipping"
+    method: adapter manifest + schema per surface — each updates without a core release
+counterfactuals:
+  - label: "What if you'd written it in Rust instead of JS?"
+    answer: Compile-time memory safety and a faster engine, but a steeper contributor curve and slower shipping — for a security CLI the attack surface is the adapters, not the runtime. JS won on iteration speed and ecosystem reach (Playwright, fetch everywhere). I'd still pick JS today.
+  - label: "What if it had 10× the adapters?"
+    answer: "The per-surface adapter contract is the moat: if each adapter is small and dependency-light, 10× adapters means 10× small plugins, not 10× complexity. The risk becomes maintenance drift — so I'd add an adapter manifest + schema tests + a monthly compatibility CI before scaling the catalog."
+---
+
+## The story
+
+Security tooling has a fragmentation problem: a different scanner for every surface,
+each with its own syntax, its own CI wiring, its own blind spots. Teams don't adopt
+seven tools — they adopt one workflow. So the product decision came first: one
+disciplined CLI, seven surfaces.
+
+The engine is deliberately boring. The interesting part is the adapter contract —
+every surface ships independently, so a bad dependency in the cloud adapter can never
+poison the web sweeper. That split happened because the first version was monolithic
+and one wrong package broke everything.
+
+**Defense-in-depth is the design thesis.** Any single scanner is bypassable; layered
+checks mean a finding survives even when one layer is blind. That's the difference
+between a tool that reports and a framework that holds.

@@ -188,98 +188,6 @@ export const profile: {
   nameMarquee: ["PRATHAM NAHATA", "नमस्ते", "बीकानेर", "JAI BIKANER"],
 };
 
-export type CaseStudy = {
-  slug: string;
-  index: string;
-  year: string;
-  title: string;
-  role: string;
-  blurb: string;
-  challenge: string;
-  build: string;
-  hard: string;
-  shipped: string;
-  impact: string[];
-  stack: string[];
-  href: string;
-  art: string;
-  accent: string;
-  metrics: string;
-  live?: string;
-  readme?: string;
-  dive: { q: string; a: string }[];
-  evidence: { claim: string; method: string }[];
-};
-
-export const caseStudies: CaseStudy[] = [
-  { slug: "mindpulse-pro", index: "01", year: "2026", title: "MIND PULSE PRO", role: "Founder · Full-stack × ML", blurb: "Real-time behavioral stress detection that runs the model in the browser.", challenge: "Stress is invisible until it isn't. Mental-health tools rely on self-reporting, which people game or skip. I wanted a system that reads stress from how you already work — keystrokes and mouse dynamics — without a single wearable.", build: "Captured keystroke/mouse signals via pynput, extracted 50+ temporal features, trained XGBoost, exported to ONNX and ran inference directly in the browser with onnxruntime-web — no server round-trip. Wrapped in a Next.js web app plus a Tauri (Rust) desktop client, JWT + Google OAuth, SHAP explainability, fully offline LLM coaching via WebLLM.",
-    hard: "Getting inference under 20ms in the browser while keeping every prediction explainable - the model had to be small enough for the client, sharp enough to trust, and auditable end to end.",
-    shipped: "Browser inference with zero server round-trip, plus a Tauri desktop client and fully offline WebLLM coaching - the whole ML stack runs on the user's machine.",
-    evidence: [
-      { claim: "P95 browser inference 18.7ms", method: "Chrome 140 · M-series Mac · onnxruntime-web · 100 predictions · warm session" },
-      { claim: "50+ temporal features per session", method: "pynput capture → feature pipeline: keystroke timing, mouse velocity, cadence, drift" },
-      { claim: "SHAP explainability per prediction", method: "TreeSHAP on the exported ONNX model — auditable per-typing-session attribution" },
-    ],
-    impact: ["Under 20ms inference — zero server round-trip", "50+ temporal features per typing session", "SHAP explainability for every prediction", "Fully offline coaching — no API keys exposed"], stack: ["FastAPI", "Next.js", "XGBoost", "ONNX Runtime", "Tauri", "Supabase", "WebSockets", "WebLLM"], href: "https://github.com/iAMv1/mindpulse", art: "/assets/art-mindpulse.jpg", accent: "#8DE254", metrics: "20MS INFERENCE · 50+ FEATURES · TAURI DESKTOP",
-    dive: [
-      { q: "Why FastAPI + WebSockets?", a: "Stress scoring is realtime by nature — polling added ~900ms staleness. WebSockets pushed updates under 50ms, and FastAPI kept the whole backend in one typed codebase." },
-      { q: "Why XGBoost instead of deep learning?", a: "We extract 50+ tabular features from keystroke/mouse dynamics. XGBoost matched the accuracy of a small NN at a tenth of the latency, and ONNX made it run in the browser." },
-      { q: "What went wrong?", a: "The first prototype polled a REST endpoint and overfit on keyboard-only features. I rewrote the transport to WebSockets and added mouse dynamics + SHAP so every prediction is auditable." },
-      { q: "What would I do now?", a: "Distill to a smaller model, run federated feature extraction, and validate thresholds with a proper user study instead of my own typing." },
-    ],
-    live: "" },
-  { slug: "unified-dta", index: "02", year: "2025", title: "UNIFIED-DTA", role: "ML Researcher · Builder", blurb: "Drug-target affinity prediction fusing protein language models with graph networks.", challenge: "Predicting how well a drug binds a target protein is a core bottleneck in discovery. Sequence-only models miss molecular structure; structure-only models miss protein context. The field needed both, jointly.", build: "Fused Meta's ESM-2 protein language model with Graph Isomorphism Networks for joint molecular + protein representation learning. Trained on BindingDB, DAVIS and KIBA with concordance index and MSE. Containerized inference with Docker + FastAPI (LRU-cached), extended with a drug-generation module using the DoubleSG architecture.",
-    hard: "Fusing two very different representations - protein language embeddings and molecular graphs - without one drowning the other, then keeping training stable across mixed dtypes.",
-    shipped: "A Dockerized, LRU-cached inference API over three community-trusted benchmarks, plus a novel-compound generation module - reproducible end to end.",
-    evidence: [
-      { claim: "CI 0.841 / MSE competitive on BindingDB", method: "same split protocol as the benchmark leaders; ESM-2 embeddings frozen, GIN trained 60 epochs, seed-pinned" },
-      { claim: "LRU-cached inference API", method: "FastAPI + functools LRU, warm cache hit < 5ms, cold pass ~40ms (single CPU container)" },
-      { claim: "Reproducible pipeline", method: "Dockerfile + pinned deps + fixed seeds — `docker run` reproduces the reported numbers" },
-    ],
-    impact: ["3 industry benchmarks: BindingDB · DAVIS · KIBA", "ESM-2 + GIN joint representation learning", "Dockerized, LRU-cached inference API", "Novel-compound generation via DoubleSG"], stack: ["PyTorch", "ESM-2", "GNN", "FastAPI", "RDKit", "Docker"], href: "https://github.com/iAMv1/unified-dta-project", art: "/assets/art-dta.jpg", accent: "#1D5B9E", metrics: "3 BENCHMARKS · ESM-2 + GIN · DOCKER",
-    dive: [
-      { q: "Why ESM-2 + GIN together?", a: "ESM-2 gives protein language context; GIN gives molecular structure. Either alone loses half the signal — the fusion is the actual contribution." },
-      { q: "Why those benchmarks?", a: "BindingDB, DAVIS and KIBA are the three the community actually trusts. CI/MSE there is the only claim reviewers accept." },
-      { q: "What went wrong?", a: "First training runs diverged — mixed dtypes between ESM-2 embeddings and graph features. I normalized both streams and pinned seeds before trusting a single number." },
-      { q: "What would I do now?", a: "Add uncertainty estimates and a LoRA head instead of full fine-tuning — cheaper and more honest for drug discovery." },
-    ],
-    live: "",
-    readme: "iAMv1/unified-dta-project@HEAD/README.md" },
-  { slug: "sentinel", index: "03", year: "2025", title: "SENTINEL", role: "Co-builder · Multi-agent AI", blurb: "Privacy-first enterprise wellbeing analytics with a 3-agent AI orchestra.", challenge: "Burnout is a business risk HR can't see until it's expensive. Any solution had to be privacy-first — anonymized signals, not surveillance — and answer plain-language questions, not just dashboards.", build: "Co-built a FastAPI + React platform scoring burnout risk from anonymized interaction patterns, with a graph-based module for team-collaboration insight. Implemented a 3-agent orchestration system — burnout scoring, talent discovery, team health — enabling natural-language queries over workforce analytics.",
-    hard: "Keeping natural-language queries over workforce analytics under a second - pre-aggregating graph features per team turned seconds of latency into ~300ms without losing nuance.",
-    shipped: "Three specialized agents (burnout, talent, team health) on anonymized signals only - plain-language answers over workforce analytics, privacy intact by architecture.",
-    evidence: [
-      { claim: "NL queries ~300ms after pre-aggregation", method: "per-team graph features pre-aggregated nightly; measured on 50k interaction events, FastAPI + async pool" },
-      { claim: "Privacy by architecture", method: "anonymized interaction patterns only — no PII in the pipeline by design, not by policy" },
-      { claim: "3-agent orchestration", method: "routing layer + per-agent schema; each agent scores independently with its own evidence trail" },
-    ],
-    impact: ["3 specialized AI agents in one system", "Graph analysis for team-collaboration insight", "Privacy-first: anonymized patterns only", "Natural-language queries over analytics"], stack: ["FastAPI", "React", "Graph Analytics", "Multi-Agent AI"], href: "https://github.com/iAMv1", art: "/assets/art-sentinel.jpg", accent: "#F58E20", metrics: "3-AGENT · GRAPH ANALYTICS · PRIVACY-FIRST",
-    dive: [
-      { q: "Why three agents?", a: "Burnout risk, talent discovery and team health are three different questions with different data shapes. One model would blur them; three specialists stay honest." },
-      { q: "Why privacy-first from day one?", a: "Wellbeing analytics dies the moment it feels like surveillance. Anonymized patterns only — no names attached to scores." },
-      { q: "What went wrong?", a: "Natural-language queries were slow until I pre-aggregated graph features per team. Latency dropped from seconds to ~300ms." },
-      { q: "What would I do now?", a: "Add temporal decay to signals and a human-in-the-loop review queue before any score leaves the system." },
-    ],
-    live: "" },
-  { slug: "omnisectester", index: "04", year: "2026", title: "OMNISECTESTER", role: "Builder · Security tooling", blurb: "A nation-state-grade, defense-in-depth security testing framework in one CLI.", challenge: "Security testing is fragmented — a different tool for web, mobile, cloud, AI/LLM, hardware. Teams need one disciplined surface to audit everything from a single command line.", build: "Designed and shipped a defense-in-depth testing framework covering web apps, extensions, desktop, mobile, cloud, AI/LLM, hardware and supply chain — from one CLI. Built as a focused, extensible engine with per-surface adapters.",
-    hard: "Seven attack surfaces, one disciplined CLI - the engine had to stay small while every adapter stayed independently shippable, so a single bad dependency could never poison the whole tool.",
-    shipped: "A defense-in-depth security framework covering 7 surfaces from a single command line, with per-surface adapters that update independently.",
-    evidence: [
-      { claim: "7 attack surfaces, one CLI", method: "web, extensions, desktop, mobile, cloud, AI/LLM, hardware + supply-chain adapters — engine decoupled from adapters" },
-      { claim: "Defense-in-depth layering", method: "per-surface checks run in ordered layers; a failure in one adapter cannot abort the surface sweep" },
-      { claim: "Independent adapter shipping", method: "adapter manifest + schema per surface — each updates without a core release" },
-    ],
-    impact: ["7 attack surfaces, one CLI", "Defense-in-depth by design", "Supply-chain and AI/LLM coverage included"], stack: ["JavaScript", "CLI", "Security", "Automation"], href: "https://github.com/iAMv1/omnisectester", art: "/assets/art-omni.jpg", accent: "#C96F4A", metrics: "7 SURFACES · 1 CLI · DEFENSE-IN-DEPTH",
-    dive: [
-      { q: "Why one CLI for seven surfaces?", a: "Security teams don't adopt seven tools; they adopt one workflow. A single disciplined entry point with per-surface adapters keeps the core tiny and the coverage honest." },
-      { q: "Why defense-in-depth by design?", a: "Any single scanner is bypassable. Layered checks — network, app, supply chain, AI/LLM — mean a finding survives even when one layer is blind." },
-      { q: "What went wrong?", a: "Early adapters were monolithic: one wrong dependency poisoned the whole CLI. I split the engine from the adapters so each surface ships and updates independently." },
-      { q: "What would I do now?", a: "Add an adapter manifest + schema tests and a monthly compatibility CI before scaling the catalog past the current seven surfaces." },
-    ],
-    live: "",
-    readme: "iAMv1/omnisectester@HEAD/README.md" },
-];
-
 export const metro = {
   title: "DELHI METRO — THE CAREER LINE MAP",
   lines: [
@@ -291,7 +199,6 @@ export const metro = {
   hub: "PRATHAM CENTRAL",
 };
 
-export const contribution = { title: "CONTRIBUTION RAANGOLI", weeks: 52, days: 7, levels: 5 };
 
 export const timelineMachine = {
   title: "THE TIMELINE MACHINE",
@@ -327,24 +234,3 @@ export const unresolved = [  { title: "Distributed systems, properly", understan
   { title: "A better testing strategy", understand: "Vitest units, Playwright smoke suites, Lighthouse gates.", dont: "Visual regression at scale — my canvases are hostile to pixel diffs.", trying: "Golden-image testing on the five canvas fields with deterministic seeds.", reading: "Testing on the toilet archives, honestly.", next: "A CI visual gate that catches canvas regressions without flaking." },
   { title: "Motion that never betrays content", understand: "Reduced-motion, IO-gated reveals, mount-driven visibility.", dont: "When a scrub-parallax fights a pinned section — the physics of scroll.", trying: "A single motion token map that designers and engineers share.", reading: "animations.dev essays + every SOTD motion I can inspect.", next: "Publish the token map as a tiny npm package." },
 ];
-
-export type Counterfactual = { label: string; answer: string };
-
-export const caseCounterfactuals: Record<string, Counterfactual[]> = {
-  "mindpulse-pro": [
-    { label: "What if the model ran on the server, not the browser?", answer: "Latency would drop from 20ms to ~80ms on good networks (and much worse on Jio-tier mobile), privacy dies (keystroke patterns leave the device), and WebLLM's offline coaching becomes impossible. The browser was the constraint that forced the best architecture — 20ms inference with zero server cost and zero data leaving the machine. The trade is a ~1.5MB ONNX payload; I'd accept it again." },
-    { label: "What if 10× users (10M typing sessions/day)?", answer: "The stateless design saves us: features are computed client-side, so load scales with the dashboard, not the model. I'd add: session-level feature stores with TTL, a clickhouse-style analytics sink for SHAP aggregates, and edge-cached onboarding — but the inference core stays client-side. Cost cliff: none for inference; infra spend stays ~flat." },
-  ],
-  "unified-dta": [
-    { label: "What if we skipped ESM-2 and used sequence-only embeddings?", answer: "GIN alone on molecular graphs with one-hot protein encodings would lose the semantic protein context ESM-2 provides — CI on KIBA would drop measurably. The language model is the expensive but load-bearing part; the fusion layer is where the real engineering lives. I'd keep both." },
-    { label: "What if we needed 10× throughput?", answer: "Today: LRU-cached FastAPI with batch inference. Scaling path: precompute ESM-2 embeddings once (they're the slow part — ~seconds per protein), cache them permanently, and serve only the GIN forward pass (milliseconds). That's a ~100× effective speedup for repeated targets — which is exactly how drug repos behave." },
-  ],
-  sentinel: [
-    { label: "What if you used a single LLM instead of 3 agents?", answer: "One model doing scoring + talent + health would blur the evidence trails and make audits impossible — and hallucinate team conclusions. The three-agent split keeps each system small, testable, and accountable; the orchestrator only routes. More moving parts, but each one is honest." },
-    { label: "What if the board demanded per-person scores?", answer: "Refuse, architecturally. The whole design is privacy-first: anonymized patterns only, no identity in the pipeline. I'd show them cohort-level risk trends, team-collaboration graphs, and department aggregates — the same insight without the surveillance." },
-  ],
-  omnisectester: [
-    { label: "What if you'd written it in Rust instead of JS?", answer: "Compile-time memory safety and a faster engine, but a steeper contributor curve and slower shipping — for a security CLI the attack surface is the adapters, not the runtime. JS won on iteration speed and ecosystem reach (Playwright, fetch everywhere). I'd still pick JS today." },
-    { label: "What if it had 10× the adapters?", answer: "The per-surface adapter contract is the moat: if each adapter is small and dependency-light, 10× adapters means 10× small plugins, not 10× complexity. The risk becomes maintenance drift — so I'd add an adapter manifest + schema tests + a monthly compatibility CI before scaling the catalog." },
-  ],
-};

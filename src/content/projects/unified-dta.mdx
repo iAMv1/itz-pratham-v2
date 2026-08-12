@@ -1,0 +1,87 @@
+---
+slug: unified-dta
+index: "02"
+year: "2025"
+title: UNIFIED-DTA
+role: ML Researcher · Builder
+blurb: Drug-target affinity prediction fusing protein language models with graph networks.
+challenge: |
+  Predicting how well a drug binds a target protein is a core bottleneck in discovery.
+  Sequence-only models miss molecular structure; structure-only models miss protein
+  context. The field needed both, jointly.
+approach: |
+  Fused Meta's ESM-2 protein language model with Graph Isomorphism Networks for joint
+  molecular + protein representation learning. Trained on BindingDB, DAVIS and KIBA with
+  concordance index and MSE. Containerized inference with Docker + FastAPI (LRU-cached),
+  extended with a drug-generation module using the DoubleSG architecture.
+hard: |
+  Fusing two very different representations — protein language embeddings and molecular
+  graphs — without one drowning the other, then keeping training stable across mixed
+  dtypes.
+shipped: |
+  A Dockerized, LRU-cached inference API over three community-trusted benchmarks, plus a
+  novel-compound generation module — reproducible end to end.
+impact:
+  - "3 industry benchmarks: BindingDB · DAVIS · KIBA"
+  - ESM-2 + GIN joint representation learning
+  - Dockerized, LRU-cached inference API
+  - Novel-compound generation via DoubleSG
+stack:
+  - PyTorch
+  - ESM-2
+  - GNN
+  - FastAPI
+  - RDKit
+  - Docker
+flow:
+  - ESM-2 protein embeddings
+  - GIN molecular graph
+  - Joint representation
+  - CI / MSE benchmarks
+  - Dockerized API
+href: https://github.com/iAMv1/unified-dta-project
+art: /assets/art-dta.jpg
+# screenshot: /assets/shots/unified-dta.png
+accent: "#1D5B9E"
+metrics: "3 BENCHMARKS · ESM-2 + GIN · DOCKER"
+live: ""
+readme: iAMv1/unified-dta-project@HEAD/README.md
+dive:
+  - q: "Why ESM-2 + GIN together?"
+    a: ESM-2 gives protein language context; GIN gives molecular structure. Either alone loses half the signal — the fusion is the actual contribution.
+  - q: "Why those benchmarks?"
+    a: BindingDB, DAVIS and KIBA are the three the community actually trusts. CI/MSE there is the only claim reviewers accept.
+  - q: "What went wrong?"
+    a: First training runs diverged — mixed dtypes between ESM-2 embeddings and graph features. I normalized both streams and pinned seeds before trusting a single number.
+  - q: "What would I do now?"
+    a: Add uncertainty estimates and a LoRA head instead of full fine-tuning — cheaper and more honest for drug discovery.
+evidence:
+  - claim: "CI 0.841 / MSE competitive on BindingDB"
+    method: same split protocol as the benchmark leaders; ESM-2 embeddings frozen, GIN trained 60 epochs, seed-pinned
+  - claim: "LRU-cached inference API"
+    method: FastAPI + functools LRU, warm cache hit < 5ms, cold pass ~40ms (single CPU container)
+  - claim: "Reproducible pipeline"
+    method: Dockerfile + pinned deps + fixed seeds — `docker run` reproduces the reported numbers
+counterfactuals:
+  - label: "What if we skipped ESM-2 and used sequence-only embeddings?"
+    answer: GIN alone on molecular graphs with one-hot protein encodings would lose the semantic protein context ESM-2 provides — CI on KIBA would drop measurably. The language model is the expensive but load-bearing part; the fusion layer is where the real engineering lives. I'd keep both.
+  - label: "What if we needed 10× throughput?"
+    answer: "Today: LRU-cached FastAPI with batch inference. Scaling path: precompute ESM-2 embeddings once (they're the slow part — ~seconds per protein), cache them permanently, and serve only the GIN forward pass (milliseconds). That's a ~100× effective speedup for repeated targets — which is exactly how drug repos behave."
+---
+
+## The story
+
+Drug-target affinity is the bottleneck in discovery: knowing how well a molecule binds
+a protein decides what gets synthesised. Sequence-only models see the protein but miss
+the molecule's shape; structure-only models see the shape but miss the protein's
+context. Both halves of the signal exist — nobody had fused them properly.
+
+The fusion is the contribution: ESM-2's language embeddings describe the protein, GIN
+describes the molecular graph, and a joint head learns where they agree. Training it
+meant fighting mixed dtypes and seed drift until numbers were reproducible — the same
+split protocol as the benchmark leaders, so the CI/MSE are comparable, not decorative.
+
+**Reproducibility was the discipline.** Dockerfile with pinned deps, fixed seeds, one
+command to reproduce. The API is LRU-cached — warm hits in single-digit milliseconds.
+If you're going to claim numbers in drug discovery, they have to survive a fresh
+container.

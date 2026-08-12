@@ -9,10 +9,10 @@ import { FloatingStats } from "@/components/motion/floating-stats";
 import { RealityDialog } from "@/components/ui/reality-dialog";
 import { ProjectQuickView } from "@/components/ui/project-quickview";
 import { ArtImage } from "@/components/ui/art-image";
-import { caseStudies } from "@/data/profile";
+import { allProjects } from "@/content/projects";
 
 export default function Home() {
-  const featured = caseStudies.slice(0, 3);
+  const featured = allProjects().slice(0, 3);
 
   return (
     <SiteShell rail>

@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { ArtImage } from "@/components/ui/art-image";
 import { useRealityClose } from "@/components/ui/reality-dialog";
-import type { CaseStudy } from "@/data/profile";
+import type { Project } from "@/content/projects";
 
 /** QuickView — the dialog's temporary reality: full project context without leaving the page. */
-export function ProjectQuickView({ study }: { study: CaseStudy }) {
+export function ProjectQuickView({ study }: { study: Project }) {
   const close = useRealityClose();
   return (
     <div className="max-h-[88vh] overflow-y-auto">

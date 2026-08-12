@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { caseStudies } from "@/data/profile";
+import { allProjects } from "@/content/projects";
 
 const BASE = "https://itzpratham.in";
 
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: r === "" ? 1 : 0.7,
   }));
-  const cases = caseStudies.map((c) => ({
+  const cases = allProjects().map((c) => ({
     url: `${BASE}/work/${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,

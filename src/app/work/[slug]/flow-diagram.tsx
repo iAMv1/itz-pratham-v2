@@ -2,16 +2,8 @@
 
 import { motion } from "motion/react";
 
-const FLOWS: Record<string, string[]> = {
-  "mindpulse-pro": ["Keystroke & mouse capture", "50+ temporal features", "XGBoost → ONNX", "Browser inference <20ms", "SHAP + WebLLM coach"],
-  "unified-dta": ["ESM-2 protein embeddings", "GIN molecular graph", "Joint representation", "CI / MSE benchmarks", "Dockerized API"],
-  sentinel: ["Anonymized signals", "Burnout scoring agent", "Graph team analysis", "Talent discovery agent", "Natural-language queries"],
-  omnisectester: ["Target selection", "7 surface adapters", "Defense-in-depth engine", "Unified reports"],
-};
-
-export function FlowDiagram({ slug }: { slug: string }) {
-  const flow = FLOWS[slug];
-  if (!flow) return null;
+export function FlowDiagram({ flow }: { flow?: string[] }) {
+  if (!flow?.length) return null;
   return (
     <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-3">
       {flow.map((node, i) => (

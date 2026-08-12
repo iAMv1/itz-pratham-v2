@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { caseStudies, caseCounterfactuals, unresolved, timelineMachine, offClock, profile } from "@/data/profile";
+import { unresolved, timelineMachine, offClock, profile } from "@/data/profile";
+import { allProjects } from "@/content/projects";
 
 /** Machine-readable mirror of the typed content model (src/data/profile.ts). */
 export async function GET() {
@@ -32,7 +33,7 @@ export async function GET() {
       timelineMachine,
       offClock,
     },
-    caseStudies: caseStudies.map((c) => ({
+    caseStudies: allProjects().map((c) => ({
       slug: c.slug,
       index: c.index,
       year: c.year,
@@ -40,18 +41,20 @@ export async function GET() {
       role: c.role,
       blurb: c.blurb,
       problem: c.challenge,
-      approach: c.build,
+      approach: c.approach,
       hardPart: c.hard,
       shipped: c.shipped,
       impact: c.impact,
       stack: c.stack,
+      flow: c.flow,
       source: c.href,
-      art: c.art,
+      art: c.screenshot ?? c.art,
       accent: c.accent,
       metrics: c.metrics,
       dive: c.dive,
       evidence: c.evidence,
-      counterfactuals: caseCounterfactuals[c.slug] ?? [],
+      counterfactuals: c.counterfactuals,
+      bodyHtml: c.bodyHtml,
     })),
     unresolved,
   });

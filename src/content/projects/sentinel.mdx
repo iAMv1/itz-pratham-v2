@@ -1,0 +1,84 @@
+---
+slug: sentinel
+index: "03"
+year: "2025"
+title: SENTINEL
+role: Co-builder · Multi-agent AI
+blurb: Privacy-first enterprise wellbeing analytics with a 3-agent AI orchestra.
+challenge: |
+  Burnout is a business risk HR can't see until it's expensive. Any solution had to be
+  privacy-first — anonymized signals, not surveillance — and answer plain-language
+  questions, not just dashboards.
+approach: |
+  Co-built a FastAPI + React platform scoring burnout risk from anonymized interaction
+  patterns, with a graph-based module for team-collaboration insight. Implemented a
+  3-agent orchestration system — burnout scoring, talent discovery, team health —
+  enabling natural-language queries over workforce analytics.
+hard: |
+  Keeping natural-language queries over workforce analytics under a second —
+  pre-aggregating graph features per team turned seconds of latency into ~300ms without
+  losing nuance.
+shipped: |
+  Three specialized agents (burnout, talent, team health) on anonymized signals only —
+  plain-language answers over workforce analytics, privacy intact by architecture.
+impact:
+  - 3 specialized AI agents in one system
+  - Graph analysis for team-collaboration insight
+  - "Privacy-first: anonymized patterns only"
+  - Natural-language queries over analytics
+stack:
+  - FastAPI
+  - React
+  - Graph Analytics
+  - Multi-Agent AI
+flow:
+  - Anonymized signals
+  - Burnout scoring agent
+  - Graph team analysis
+  - Talent discovery agent
+  - Natural-language queries
+href: https://github.com/iAMv1
+art: /assets/art-sentinel.jpg
+# screenshot: /assets/shots/sentinel.png
+accent: "#F58E20"
+metrics: "3-AGENT · GRAPH ANALYTICS · PRIVACY-FIRST"
+live: ""
+dive:
+  - q: "Why three agents?"
+    a: Burnout risk, talent discovery and team health are three different questions with different data shapes. One model would blur them; three specialists stay honest.
+  - q: "Why privacy-first from day one?"
+    a: Wellbeing analytics dies the moment it feels like surveillance. Anonymized patterns only — no names attached to scores.
+  - q: "What went wrong?"
+    a: Natural-language queries were slow until I pre-aggregated graph features per team. Latency dropped from seconds to ~300ms.
+  - q: "What would I do now?"
+    a: Add temporal decay to signals and a human-in-the-loop review queue before any score leaves the system.
+evidence:
+  - claim: "NL queries ~300ms after pre-aggregation"
+    method: per-team graph features pre-aggregated nightly; measured on 50k interaction events, FastAPI + async pool
+  - claim: "Privacy by architecture"
+    method: anonymized interaction patterns only — no PII in the pipeline by design, not by policy
+  - claim: "3-agent orchestration"
+    method: routing layer + per-agent schema; each agent scores independently with its own evidence trail
+counterfactuals:
+  - label: "What if you used a single LLM instead of 3 agents?"
+    answer: One model doing scoring + talent + health would blur the evidence trails and make audits impossible — and hallucinate team conclusions. The three-agent split keeps each system small, testable, and accountable; the orchestrator only routes. More moving parts, but each one is honest.
+  - label: "What if the board demanded per-person scores?"
+    answer: "Refuse, architecturally. The whole design is privacy-first: anonymized patterns only, no identity in the pipeline. I'd show them cohort-level risk trends, team-collaboration graphs, and department aggregates — the same insight without the surveillance."
+---
+
+## The story
+
+Burnout is the most expensive invisible problem in a company — and the moment you
+build anything to measure it, you're one bad decision away from surveillance. So the
+privacy constraint was set before a single line of code: anonymized patterns only,
+no identity in the pipeline, by architecture not policy.
+
+Three different questions needed three different data shapes. Burnout scoring wants
+individual behavioural signals; talent discovery wants strengths and patterns; team
+health wants collaboration structure. One model would blur all three. Three
+specialists with a routing layer keep each one small, testable, and accountable.
+
+**The latency fight was the engineering story.** Natural-language queries over
+workforce analytics started at seconds. Pre-aggregating graph features per team
+nightly turned that into ~300ms — the same insight, the same nuance, just arranged
+before anyone asks.

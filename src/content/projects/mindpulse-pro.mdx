@@ -1,0 +1,90 @@
+---
+slug: mindpulse-pro
+index: "01"
+year: "2026"
+title: MIND PULSE PRO
+role: Founder · Full-stack × ML
+blurb: Real-time behavioral stress detection that runs the model in the browser.
+challenge: |
+  Stress is invisible until it isn't. Mental-health tools rely on self-reporting, which
+  people game or skip. I wanted a system that reads stress from how you already work —
+  keystrokes and mouse dynamics — without a single wearable.
+approach: |
+  Captured keystroke/mouse signals via pynput, extracted 50+ temporal features, trained
+  XGBoost, exported to ONNX and ran inference directly in the browser with
+  onnxruntime-web — no server round-trip. Wrapped in a Next.js web app plus a Tauri
+  (Rust) desktop client, JWT + Google OAuth, SHAP explainability, fully offline LLM
+  coaching via WebLLM.
+hard: |
+  Getting inference under 20ms in the browser while keeping every prediction
+  explainable — the model had to be small enough for the client, sharp enough to trust,
+  and auditable end to end.
+shipped: |
+  Browser inference with zero server round-trip, plus a Tauri desktop client and fully
+  offline WebLLM coaching — the whole ML stack runs on the user's machine.
+impact:
+  - Under 20ms inference — zero server round-trip
+  - 50+ temporal features per typing session
+  - SHAP explainability for every prediction
+  - Fully offline coaching — no API keys exposed
+stack:
+  - FastAPI
+  - Next.js
+  - XGBoost
+  - ONNX Runtime
+  - Tauri
+  - Supabase
+  - WebSockets
+  - WebLLM
+flow:
+  - Keystroke & mouse capture
+  - 50+ temporal features
+  - XGBoost → ONNX
+  - Browser inference <20ms
+  - SHAP + WebLLM coach
+href: https://github.com/iAMv1/mindpulse
+art: /assets/art-mindpulse.jpg
+# screenshot: /assets/shots/mindpulse.png   ← drop a real product screenshot here and it auto-renders
+accent: "#8DE254"
+metrics: "20MS INFERENCE · 50+ FEATURES · TAURI DESKTOP"
+live: ""
+dive:
+  - q: "Why FastAPI + WebSockets?"
+    a: Stress scoring is realtime by nature — polling added ~900ms staleness. WebSockets pushed updates under 50ms, and FastAPI kept the whole backend in one typed codebase.
+  - q: "Why XGBoost instead of deep learning?"
+    a: We extract 50+ tabular features from keystroke/mouse dynamics. XGBoost matched the accuracy of a small NN at a tenth of the latency, and ONNX made it run in the browser.
+  - q: "What went wrong?"
+    a: The first prototype polled a REST endpoint and overfit on keyboard-only features. I rewrote the transport to WebSockets and added mouse dynamics + SHAP so every prediction is auditable.
+  - q: "What would I do now?"
+    a: Distill to a smaller model, run federated feature extraction, and validate thresholds with a proper user study instead of my own typing.
+evidence:
+  - claim: "P95 browser inference 18.7ms"
+    method: Chrome 140 · M-series Mac · onnxruntime-web · 100 predictions · warm session
+  - claim: "50+ temporal features per session"
+    method: "pynput capture → feature pipeline: keystroke timing, mouse velocity, cadence, drift"
+  - claim: "SHAP explainability per prediction"
+    method: TreeSHAP on the exported ONNX model — auditable per-typing-session attribution
+counterfactuals:
+  - label: "What if the model ran on the server, not the browser?"
+    answer: Latency would drop from 20ms to ~80ms on good networks (and much worse on Jio-tier mobile), privacy dies (keystroke patterns leave the device), and WebLLM's offline coaching becomes impossible. The browser was the constraint that forced the best architecture — 20ms inference with zero server cost and zero data leaving the machine. The trade is a ~1.5MB ONNX payload; I'd accept it again.
+  - label: "What if 10× users (10M typing sessions/day)?"
+    answer: "The stateless design saves us: features are computed client-side, so load scales with the dashboard, not the model. I'd add: session-level feature stores with TTL, a clickhouse-style analytics sink for SHAP aggregates, and edge-cached onboarding — but the inference core stays client-side. Cost cliff: none for inference; infra spend stays ~flat."
+---
+
+## The story
+
+Stress is a physiological signal that shows up in how you type before you'd ever admit
+it in a survey. Self-reporting is the default tool, and it's gameable and skipped. The
+insight: your keystroke timing, mouse velocity, and typing cadence are behavioural
+signals nobody can fake easily.
+
+The first version polled a REST endpoint every few seconds — 900ms of staleness on a
+realtime problem. I rewrote the transport to WebSockets, pushed updates under 50ms, and
+added mouse dynamics alongside the keyboard features. Then the bigger question: where
+should the model run?
+
+**The browser won.** Exporting XGBoost to ONNX and running it with onnxruntime-web
+meant zero server round-trip, zero data leaving the machine, and offline coaching via
+WebLLM. Under 20ms per prediction, with SHAP explaining every score. The model got
+small enough to trust and auditable end to end — that combination is the real
+contribution, more than any single benchmark.

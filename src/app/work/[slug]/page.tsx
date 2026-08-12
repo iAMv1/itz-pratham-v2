@@ -4,26 +4,28 @@ import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
 import { RepoFrame } from "@/components/ui/repo-frame";
 import { VtLink } from "@/components/ui/vt-link";
-import { caseStudies, caseCounterfactuals } from "@/data/profile";
+import { markdownContentClass } from "@/lib/markdown";
+import { allProjects, getProject } from "@/content/projects";
 import { SiteShell } from "@/components/layout/site-shell";
 import { FlowDiagram } from "./flow-diagram";
 
 export function generateStaticParams() {
-  return caseStudies.map((c) => ({ slug: c.slug }));
+  return allProjects().map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const s = caseStudies.find((c) => c.slug === slug);
+  const s = getProject(slug);
   return { title: s ? `${s.title} — Pratham Nahata` : "Case study — Pratham Nahata" };
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const study = caseStudies.find((c) => c.slug === slug);
+  const projects = allProjects();
+  const study = getProject(slug);
   if (!study) notFound();
-  const idx = caseStudies.indexOf(study);
-  const next = caseStudies[(idx + 1) % caseStudies.length];
+  const idx = projects.findIndex((p) => p.slug === study.slug);
+  const next = projects[(idx + 1) % projects.length];
 
   return (
     <SiteShell>
@@ -31,7 +33,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <article className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           {/* header */}
           <header className="relative overflow-hidden border-2 border-ink bg-ink-2 text-paper">
-            <ArtImage src={study.art} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45" />
+            <ArtImage src={study.screenshot ?? study.art} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-ink-2/60 to-transparent" />
             <div className="relative z-10 px-[clamp(20px,4vw,40px)] pb-10 pt-[clamp(60px,8vh,90px)]">
               <p className="font-mono text-xs tracking-[0.18em] text-paper/60">
@@ -58,7 +60,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div id="system-flow" className="border-b-2 border-ink bg-ink-2 py-8 text-paper">
             <div className="px-[clamp(20px,4vw,40px)]">
               <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
-              <FlowDiagram slug={study.slug} />
+              <FlowDiagram flow={study.flow} />
             </div>
           </div>
 
@@ -76,7 +78,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <Reveal delay={0.08}>
               <section>
                 <h2 className="mb-3 font-display text-3xl font-semibold uppercase">MY APPROACH</h2>
-                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.build}</p>
+                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.approach}</p>
               </section>
             </Reveal>
             <Reveal delay={0.04}>
@@ -96,6 +98,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </section>
             </Reveal>
           </div>
+
+          {/* full story — rendered from the project's .mdx body */}
+          {study.bodyHtml && (
+            <Reveal className="mt-12">
+              <section>
+                <h2 className="font-display text-3xl font-semibold uppercase">
+                  THE FULL <span className="text-cobalt">STORY</span>
+                </h2>
+                <div
+                  className={`mt-4 border-t-2 border-ink pt-4 ${markdownContentClass}`}
+                  dangerouslySetInnerHTML={{ __html: study.bodyHtml }}
+                />
+              </section>
+            </Reveal>
+          )}
 
           {/* evidence — receipts, not claims */}
           <Reveal className="mt-12">
@@ -161,7 +178,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </Reveal>
 
           {/* counterfactuals — engineering judgment, not just implementation */}
-          {caseCounterfactuals[study.slug] && (
+          {study.counterfactuals.length > 0 && (
             <Reveal className="mt-12">
               <section>
                 <h2 className="font-display text-3xl font-semibold uppercase">
@@ -171,7 +188,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   Ask the project a different question. The architecture has to defend itself.
                 </p>
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
-                  {caseCounterfactuals[study.slug].map((cf) => (
+                  {study.counterfactuals.map((cf) => (
                     <details key={cf.label} className="group border-2 border-ink bg-paper-2 shadow-[4px_4px_0_0_var(--shadow-ink)]">
                       <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-mono text-[13px] tracking-wide [&::-webkit-details-marker]:hidden">
                         {cf.label}

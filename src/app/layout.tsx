@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Teko, DM_Sans, DM_Mono, Yatra_One } from "next/font/google";
-import { caseStudies } from "@/data/profile";
+import { allProjects } from "@/content/projects";
 import "./globals.css";
 
 const teko = Teko({
@@ -106,7 +106,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 inLanguage: "en",
                 description: "Full-stack + ML systems that ship. Portfolio of Pratham Nahata.",
               },
-              ...caseStudies.map((c) => ({
+              ...allProjects().map((c) => ({
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
                 name: c.title,

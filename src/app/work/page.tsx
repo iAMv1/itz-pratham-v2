@@ -6,7 +6,7 @@ import { LookOut } from "@/components/motion/look-out";
 import { MaskTitle } from "@/components/motion/mask-title";
 import { FloatingStats } from "@/components/motion/floating-stats";
 import { ArtImage } from "@/components/ui/art-image";
-import { caseStudies } from "@/data/profile";
+import { allProjects } from "@/content/projects";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "Work — Pratham Nahata", description: "Four systems, each opened like a jharokha window — MindPulse Pro, Unified-DTA, Sentinel, OmniSecTester. Every claim links to a real repo." };
@@ -36,7 +36,7 @@ export default function WorkPage() {
           </Reveal>
 
           <div className="mt-12 grid gap-[clamp(20px,3vw,40px)] md:grid-cols-2">
-            {caseStudies.map((p, i) => (
+            {allProjects().map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.06} className="h-full">
                 <Link
                   href={`/work/${p.slug}`}

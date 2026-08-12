@@ -79,8 +79,38 @@ hand-drawn-style set matching the site's ink-brush aesthetic.
 
 ---
 
+## 5. LOADER CHARACTER — walk-loop animation (video → I composite)
+
+**Purpose:** the cinematic loader's character — a builder who walks in from the corner,
+reaches the jharokha door, and opens it (camera zooms as he arrives). The door, beam and
+timing already exist in code; **the figure is the only missing piece** — it must be a real
+animation, not a vector.
+
+- **Format:** MP4/WebM with **alpha channel** (VP9/ProRes) preferred; GIF on a flat matte
+  `#0b0b0b` (loader bg) acceptable fallback. 24fps, loop length 2.5–3s.
+- **Size:** 240×320 px at 2× (480×640) — side view, **walking toward screen-right**, feet
+  roughly at the frame bottom.
+- **Character:** same person as the hero character (ASSETS.md §1): young Indian
+  full-stack builder, ink-black hair, saffron hoodie with jali pattern, cobalt accents,
+  small laptop tucked under the arm. Full walk cycle (2 steps), natural weight shift,
+  slight arm swing, tiny head bob — **real physics, not idle sway**.
+- **Style:** clean 2D anime, bold outlines, flat shading; **no background**, no shadows
+  baked in (I composite the shadow).
+- **Palette:** hoodie `#F58E20`, trim `#C96F4A`, pants `#1D5B9E`, skin warm tone, hair
+  near-black — readable on the dark loader stage.
+- **Prompt seed (for animators / image-to-video):**
+  `2D anime walk cycle, side view, young Indian male creative technologist, ink-black
+  hair, saffron hoodie with jali lattice pattern, cobalt pants, small laptop under arm,
+  full two-step walk, natural weight shift and arm swing, bold clean linework, flat
+  shading, transparent background, facing right, 24fps loop`
+- **Handoff:** `public/assets/loader-walk.mp4|.webm|.gif` — I convert, key out (if GIF),
+  composite with a walking bob + foot-shadow, wire it into the loader timeline, and
+  theme it (light/dark stage tints).
+
+---
+
 **Handoff checklist for me:** files land in `public/assets/` →
-`hero-anime.gif|.mp4`, `bg-jaali.jpg`, `bg-bandhani.jpg`, `bg-fort.jpg`,
-`icons/*.svg`. I will: convert video→GIF (ffmpeg), compress, implement with lazy
-loading + theme variants, wire them into the right sections, verify visually, and
-deploy.
+`hero-anime.gif|.mp4`, `loader-walk.mp4|.webm|.gif`, `bg-jaali.jpg`, `bg-bandhani.jpg`,
+`bg-fort.jpg`, `icons/*.svg`. I will: convert video→GIF (ffmpeg), compress, implement
+with lazy loading + theme variants, wire them into the right sections, verify visually,
+and deploy (after your approval).

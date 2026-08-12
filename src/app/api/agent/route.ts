@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { caseStudies, caseCounterfactuals, unresolved, timelineMachine, profile } from "@/data/profile";
+import { unresolved, timelineMachine, profile } from "@/data/profile";
+import { allProjects, getProject } from "@/content/projects";
 
 /**
  * PRATHAM TOOLKIT — agent-readable actions (WebMCP-aligned).
@@ -36,13 +37,13 @@ export async function GET(request: Request) {
       });
 
     case "find_project": {
-      const matches = caseStudies.filter(
+      const matches = allProjects().filter(
         (c) =>
           c.title.toLowerCase().includes(q) ||
           c.blurb.toLowerCase().includes(q) ||
           c.stack.some((s) => s.toLowerCase().includes(q)) ||
-          c.build.toLowerCase().includes(q) ||
-          (c.hard ?? "").toLowerCase().includes(q)
+          c.approach.toLowerCase().includes(q) ||
+          c.hard.toLowerCase().includes(q)
       );
       return ok(matches.map((c) => ({ slug: c.slug, title: c.title, blurb: c.blurb, stack: c.stack })), {
         query: q,
@@ -51,8 +52,8 @@ export async function GET(request: Request) {
     }
 
     case "get_project": {
-      const c = caseStudies.find((s) => s.slug === slug);
-      if (!c) return err(`no project with slug "${slug}" — try: ${caseStudies.map((s) => s.slug).join(", ")}`);
+      const c = getProject(slug);
+      if (!c) return err(`no project with slug "${slug}" — try: ${allProjects().map((s) => s.slug).join(", ")}`);
       return ok({
         slug: c.slug,
         title: c.title,
@@ -60,7 +61,7 @@ export async function GET(request: Request) {
         role: c.role,
         blurb: c.blurb,
         problem: c.challenge,
-        approach: c.build,
+        approach: c.approach,
         hardPart: c.hard,
         shipped: c.shipped,
         impact: c.impact,
@@ -69,7 +70,8 @@ export async function GET(request: Request) {
         source: c.href,
         dive: c.dive,
         evidence: c.evidence,
-        counterfactuals: caseCounterfactuals[c.slug] ?? [],
+        counterfactuals: c.counterfactuals,
+        flow: c.flow,
       });
     }
 
@@ -86,8 +88,8 @@ export async function GET(request: Request) {
       return ok({ email: profile.email, links: profile.links, resume: profile.resume, liveFeed: "https://api.github.com/users/iAMv1/repos?sort=pushed&per_page=5" });
 
     case "compare_projects": {
-      const a = caseStudies.find((s) => s.slug === slug);
-      const b = caseStudies.find((s) => s.slug === (searchParams.get("with") ?? ""));
+      const a = getProject(slug);
+      const b = getProject(searchParams.get("with") ?? "");
       if (!a || !b) return err("compare_projects needs ?slug=A&with=B");
       return ok({
         a: { slug: a.slug, title: a.title, stack: a.stack, metrics: a.metrics, focus: a.blurb },
@@ -97,7 +99,7 @@ export async function GET(request: Request) {
     }
 
     case "find_evidence": {
-      const hits = caseStudies
+      const hits = allProjects()
         .flatMap((c) =>
           (c.evidence ?? []).map((e) => ({ project: c.slug, claim: e.claim, method: e.method }))
         )
@@ -121,7 +123,7 @@ export async function GET(request: Request) {
           "compare_projects?slug=A&with=B",
           "find_evidence?claim=<term>",
         ],
-        slugs: caseStudies.map((s) => s.slug),
+        slugs: allProjects().map((s) => s.slug),
       });
 
     default:
