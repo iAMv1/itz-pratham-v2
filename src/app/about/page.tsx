@@ -5,6 +5,7 @@ import { metro, profile, unresolved, timelineMachine, offClock } from "@/data/pr
 import { MetroMap } from "./metro-map";
 import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { ContributionGraph } from "@/components/ui/contribution-graph";
+import { PaisleyField } from "@/components/canvas/fields";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "About — Pratham Nahata", description: "Bikaner-raised, Delhi-built. CS undergrad engineering full-stack + ML systems — metro map career route, timeline machine, the year in commits." };
@@ -13,14 +14,18 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="relative px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
-          <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">
+        <section className="relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+          <PaisleyField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+          <span aria-hidden className="pointer-events-none absolute -right-[8%] top-[34%] h-[26rem] w-[26rem] rounded-full border-[3px] border-ink/10" />
+          <span aria-hidden className="pointer-events-none absolute -left-[10%] top-[62%] h-[20rem] w-[20rem] rounded-full border-2 border-dashed border-cobalt/15" />
+          <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] z-0 font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">
             शिल्प
           </span>
-          <Reveal>
-            <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
-              ABOUT · THE BUILDER
-            </p>
+          <div className="relative z-10">
+            <Reveal>
+              <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
+                ABOUT · THE BUILDER
+              </p>
             <h1 className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]">
               PRATHAM<br />
               <span className="text-cobalt">NAHATA</span>
@@ -167,11 +172,6 @@ export default function AboutPage() {
             </div>
           </Reveal>
 
-          {/* the year in commits — real GitHub data */}
-          <Reveal className="mt-16">
-            <ContributionGraph />
-          </Reveal>
-
           {/* background timeline */}
           <Reveal className="mt-16">
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
@@ -201,6 +201,7 @@ export default function AboutPage() {
               ))}
             </div>
           </Reveal>
+          </div>
         </section>
       </main>
     </SiteShell>

@@ -1,8 +1,20 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 
-/** MaskTitle — each line rises from behind an overflow mask, letters staggered (Awwwards-style). */
+const lineVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.014, delayChildren: 0.05 } },
+};
+
+const letterVariants: Variants = {
+  hidden: { y: "115%" },
+  visible: { y: "0%", transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+};
+
+/** MaskTitle — each line rises from behind an overflow mask, letters staggered (Awwwards-style).
+ *  The IntersectionObserver targets LINE-sized containers (same mechanics as Reveal) —
+ *  per-letter observers inside overflow-hidden never fired reliably. */
 export function MaskTitle({
   lines,
   accent = [],
@@ -18,21 +30,26 @@ export function MaskTitle({
   return (
     <Tag className={className}>
       {lines.map((line, li) => (
-        <span key={li} className="block overflow-hidden">
+        <motion.span
+          key={li}
+          className="block overflow-hidden"
+          variants={lineVariants}
+          initial={reduced ? false : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-8% 0px" }}
+        >
           {line.split("").map((ch, ci) => (
             <motion.span
               key={ci}
               aria-hidden
+              variants={letterVariants}
               className={`inline-block ${accent.includes(li) ? "text-cobalt" : ""}`}
-              initial={reduced ? false : { y: "115%" }}
-              whileInView={{ y: "0%" }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ delay: 0.05 + li * 0.12 + ci * 0.014, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: li * 0.12 }}
             >
               {ch === " " ? "\u00A0" : ch}
             </motion.span>
           ))}
-        </span>
+        </motion.span>
       ))}
     </Tag>
   );
