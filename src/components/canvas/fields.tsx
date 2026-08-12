@@ -6,9 +6,33 @@ import { useCanvasField, usePointer } from "./use-canvas";
 const small = () => window.matchMedia("(max-width: 768px)").matches;
 const dark = () => document.documentElement.classList.contains("dark");
 
+/** HeroBackdrop dust — stars above the horizon, sand glints below; brighter in dark mode. */
+export function DustField({ className }: { className?: string }) {
+  const ref = useCanvasField((ctx, W, H, t) => {
+    ctx.clearRect(0, 0, W, H);
+    const time = t * 0.0004;
+    const isDark = dark();
+    const n = 72;
+    for (let i = 0; i < n; i++) {
+      const seed = i * 12.9898;
+      const sx = Math.sin(seed) * 0.5 + 0.5;
+      const sy = Math.cos(seed * 1.7) * 0.5 + 0.5;
+      const y = ((sy - time * (0.02 + (i % 5) * 0.008)) % 1 + 1) % 1;
+      const x = (sx + Math.sin(y * 7 + seed) * 0.015) % 1;
+      const tw = 0.35 + 0.65 * Math.abs(Math.sin(time * 1.5 + seed * 3));
+      const star = y < 0.45;
+      const a = star ? (isDark ? 0.25 + tw * 0.55 : 0.12 + tw * 0.3) : 0.06 + tw * 0.12;
+      ctx.fillStyle = star ? `rgba(244,239,230,${a})` : `rgba(245,142,32,${a})`;
+      ctx.beginPath();
+      ctx.arc(x * W, y * H, star ? 0.8 + tw * 1.1 : 1.1, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  });
+  return <canvas ref={ref} aria-hidden className={className} />;
+}
+
 /** Hero: drifting marigold dots + rose teardrops with mouse repel. */
-export function HeroField({ className }: { className?: string }) {
-  const ptr = usePointer();
+export function HeroField({ className }: { className?: string }) {  const ptr = usePointer();
   const ref = useCanvasField((ctx, W, H, t) => {
     const n = small() ? 26 : 44;
     ctx.clearRect(0, 0, W, H);

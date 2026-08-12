@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
 
 test("all routes load directly", async ({ page }) => {
   for (const route of ["/", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/work/mindpulse-pro"]) {
-    const res = await page.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+    const res = await page.goto(`${BASE}${route}`, { waitUntil: "load" });
     expect(res?.status(), `route ${route}`).toBe(200);
   }
   expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);

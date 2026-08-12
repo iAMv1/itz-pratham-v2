@@ -9,8 +9,8 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { Spotlight } from "@/components/motion/spotlight";
 import { Annotate } from "@/components/ui/annotate";
 import { HeroAscii } from "@/components/ui/hero-ascii";
+import { HeroBackdrop } from "@/components/ui/hero-backdrop";
 import { NowBuilding } from "@/components/ui/now-building";
-import { HeroField } from "@/components/canvas/fields";
 
 const ROTA_EGG = 900;
 
@@ -53,7 +53,7 @@ export function Hero() {
       >
         बीकानेर
       </motion.span>
-      <HeroField className="absolute inset-0 z-0 h-full w-full" />
+      <HeroBackdrop />
       <HeroAscii />
       <Spotlight />
 
