@@ -68,7 +68,7 @@ export function Hero() {
         <span className="block pl-[0.05em]">PRATHAM</span>
         <span className="block pl-[0.28em] text-transparent [-webkit-text-stroke:3.5px_var(--ink)]">
           NAHATA
-          <span className="inline-block animate-[cursor-blink_1.1s_step-end_infinite] text-saffron [-webkit-text-stroke:0px]">▮</span>
+          <span aria-hidden className="ml-[0.05em] inline-block h-6 w-1.5 translate-y-[-0.1em] animate-[cursor-blink_1.1s_step-end_infinite] bg-saffron [-webkit-text-stroke:0px]" />
         </span>
       </motion.h1>
 
