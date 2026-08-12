@@ -22,8 +22,8 @@ export default function Home() {
         <NameMarquee />
 
         {/* engineering credibility — what I build, in one band */}
-        <section aria-label="Engineering capabilities" className="border-y-2 border-ink bg-ink-2 text-paper">
-          <div className="mx-auto grid max-w-[1400px] divide-y-2 divide-paper/15 px-[clamp(20px,4vw,48px)] sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x-2 lg:divide-y-0">
+        <section aria-label="Engineering capabilities" className="border-y-2 border-ink bg-paper">
+          <div className="mx-auto grid max-w-[1400px] divide-y-2 divide-ink/15 px-[clamp(20px,4vw,48px)] sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x-2">
             {[
               { k: "REAL-TIME INFERENCE", v: "ONNX in the browser — <20ms, zero server round-trip" },
               { k: "GRAPH NEURAL NETWORKS", v: "ESM-2 + GIN fused for drug-target affinity" },
@@ -31,8 +31,8 @@ export default function Home() {
               { k: "FULL-STACK PRODUCTS", v: "Next.js · FastAPI · Tauri · Supabase · Docker" },
             ].map((c) => (
               <div key={c.k} className="px-4 py-5">
-                <p className="font-mono text-[11px] tracking-widest text-cobalt">{c.k}</p>
-                <p className="mt-1 font-mono text-[12.5px] leading-snug text-paper/75">{c.v}</p>
+                <p className="font-mono text-[11px] tracking-widest text-saffron-deep">{c.k}</p>
+                <p className="mt-1 font-mono text-[12.5px] leading-snug text-ink/70">{c.v}</p>
               </div>
             ))}
           </div>

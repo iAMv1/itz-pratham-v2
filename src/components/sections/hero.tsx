@@ -140,20 +140,20 @@ export function Hero() {
         </Link>
       </div>
 
-      <ul className="relative z-10 mt-8 w-fit min-w-[min(300px,72vw)] border-2 border-ink bg-paper-2/70 shadow-hard">
+      <div className="relative z-10 mt-8 grid w-fit max-w-full grid-cols-2 border-2 border-ink bg-paper shadow-hard divide-x divide-y divide-ink/15 sm:grid-cols-4 sm:divide-y-0">
         {profile.stats.map((s) => (
-          <li key={s.label} className="flex flex-col gap-0.5 border-b border-ink/15 px-4 py-2.5 last:border-b-0">
-            <span className="text-lg font-medium text-red">
+          <div key={s.label} className="px-4 py-3">
+            <p className="font-mono text-[15px] font-medium text-saffron-deep">
               {s.headline ? (
                 s.headline
               ) : (
                 <CountUp value={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
               )}
-            </span>
-            <span className="text-[11px] leading-snug text-muted-foreground">{s.label}</span>
-          </li>
+            </p>
+            <p className="mt-0.5 text-[10.5px] leading-snug text-muted-foreground">{s.label}</p>
+          </div>
         ))}
-      </ul>
+      </div>
 
       {/* jharokha portrait window */}
       <motion.div
