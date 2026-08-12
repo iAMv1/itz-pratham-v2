@@ -379,3 +379,72 @@ html:not(.js) .preloader {
     animation: none;
   }
 }
+
+/* Jharokha portrait — breathing float (idle) */
+.portrait-breathe {
+  animation: portrait-breathe 6.5s ease-in-out infinite;
+}
+@keyframes portrait-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.008);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-breathe {
+    animation: none;
+  }
+}
+
+/* Jharokha frame — slow-rotating outline arcs */
+.portrait-ring {
+  animation: portrait-ring-spin 42s linear infinite;
+}
+@keyframes portrait-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Identity ticker — crossfade between role labels */
+.rota-fade {
+  animation: rota-fade 4s ease-in-out infinite;
+}
+@keyframes rota-fade {
+  0%,
+  62% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70%,
+  92% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow sweep across the portrait on hover */
+.portrait-sweep {
+  transition: opacity 0.4s ease-out;
+  opacity: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 28%,
+    color-mix(in oklab, var(--saffron) 30%, transparent) 44%,
+    color-mix(in oklab, var(--saffron) 12%, transparent) 50%,
+    transparent 62%
+  );
+}
+.group:hover .portrait-sweep {
+  opacity: 1;
+}
