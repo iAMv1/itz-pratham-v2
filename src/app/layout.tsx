@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   other: { "theme-color": "#f4efe6" },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
