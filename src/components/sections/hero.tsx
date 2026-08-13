@@ -4,7 +4,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import Link from "next/link";
 import { useState } from "react";
 import { profile } from "@/data/profile";
-import { CountUp } from "@/components/motion/count-up";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Spotlight } from "@/components/motion/spotlight";
 import { Annotate } from "@/components/ui/annotate";
@@ -14,7 +13,7 @@ import { NowBuilding } from "@/components/ui/now-building";
 
 const ROTA_EGG = 900;
 
-export function Hero({ stats }: { stats: { value: number; prefix?: string; suffix?: string; label: string; headline?: string }[] }) {
+export function Hero() {
   const reduced = useReducedMotion();
   const [eggIdx, setEggIdx] = useState<number | null>(null);
 
@@ -137,21 +136,6 @@ export function Hero({ stats }: { stats: { value: number; prefix?: string; suffi
         >
           View projects <span aria-hidden>↓</span>
         </Link>
-      </div>
-
-      <div className="relative z-10 mt-8 grid w-fit max-w-full grid-cols-2 border-2 border-ink bg-paper shadow-hard divide-x divide-y divide-ink/15 sm:grid-cols-4 sm:divide-y-0">
-        {stats.map((s) => (
-          <div key={s.label} className="px-4 py-3">
-            <p className="font-mono text-[15px] font-medium text-saffron-deep">
-              {s.headline ? (
-                s.headline
-              ) : (
-                <CountUp value={s.value} prefix={s.prefix ?? ""} suffix={s.suffix ?? ""} />
-              )}
-            </p>
-            <p className="mt-0.5 text-[10.5px] leading-snug text-muted-foreground">{s.label}</p>
-          </div>
-        ))}
       </div>
 
       {/* stamp portrait — silhouette base, hover sweeps to reveal */}
