@@ -7,6 +7,7 @@ import { MaskTitle } from "@/components/motion/mask-title";
 import { FloatingStats } from "@/components/motion/floating-stats";
 import { ArtImage } from "@/components/ui/art-image";
 import { allProjects } from "@/content/projects";
+import { MehndiField } from "@/components/canvas/fields";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "Work — Pratham Nahata", description: "Four systems, each opened like a jharokha window — MindPulse Pro, Unified-DTA, Sentinel, OmniSecTester. Every claim documented — repos where public, methodology always." };
@@ -16,10 +17,11 @@ export default function WorkPage() {
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
         <section className="relative px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
-          <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">
+          <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+          <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] z-0 font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">
             काम
           </span>
-          <Reveal>
+          <Reveal className="relative z-10">
             <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
               WORK · 01—{allProjects().length}
             </p>
@@ -35,7 +37,7 @@ export default function WorkPage() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-[clamp(20px,3vw,40px)] md:grid-cols-2">
+          <div className="relative z-10 mt-12 grid gap-[clamp(20px,3vw,40px)] md:grid-cols-2">
             {allProjects().map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.06} className="h-full">
                 <Link
@@ -78,7 +80,7 @@ export default function WorkPage() {
             ))}
           </div>
 
-          <Reveal className="mt-12">
+          <Reveal className="relative z-10 mt-12">
             <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-ink pt-8">
               <p className="font-mono text-[12px] tracking-widest text-muted-foreground">
                 ▸ {allProjects().length} FEATURED — <span className="text-cobalt">18+ MORE REPOS LIVE ON GITHUB</span>

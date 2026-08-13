@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
+import { MehndiField } from "@/components/canvas/fields";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "Resume — Pratham Nahata" };
@@ -10,7 +11,9 @@ export default function ResumePage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+        <section className="relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+          <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+          <div className="relative z-10">
           <Reveal>
             <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_var(--shadow-ink)]">
               RESUME · THE ONE-PAGER
@@ -62,6 +65,7 @@ export default function ResumePage() {
               browser; on phones, use OPEN IN TAB for the best view.
             </p>
           </Reveal>
+          </div>
         </section>
       </main>
     </SiteShell>

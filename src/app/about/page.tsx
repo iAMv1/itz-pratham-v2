@@ -5,7 +5,7 @@ import { about, timeline, unresolved, metro } from "@/content/site";
 import { MetroMap } from "./metro-map";
 import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { ContributionGraph } from "@/components/ui/contribution-graph";
-import { PaisleyField } from "@/components/canvas/fields";
+import { PaisleyField, MehndiField } from "@/components/canvas/fields";
 import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = { title: "About — Pratham Nahata", description: "Bikaner-raised, Delhi-built. CS undergrad engineering full-stack + ML systems — metro map career route, timeline machine, the year in commits." };
@@ -16,6 +16,7 @@ export default function AboutPage() {
       <main id="main" className="flex-1 pt-[96px]">
         <section className="relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           <PaisleyField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+          <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
           <span aria-hidden className="pointer-events-none absolute -right-[8%] top-[34%] h-[26rem] w-[26rem] rounded-full border-[3px] border-ink/10" />
           <span aria-hidden className="pointer-events-none absolute -left-[10%] top-[62%] h-[20rem] w-[20rem] rounded-full border-2 border-dashed border-cobalt/15" />
           <span aria-hidden className="wm-drift pointer-events-none absolute right-[2%] top-[2%] z-0 font-dev text-[clamp(6rem,18vw,14rem)] leading-none text-ink opacity-[0.04]">

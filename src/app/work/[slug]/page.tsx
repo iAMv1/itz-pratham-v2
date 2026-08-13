@@ -88,48 +88,66 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </span>
           </header>
 
-          {/* system flow — dark bridge into the body, full-bleed */}
-          <div id="system-flow" className="border-b-2 border-ink bg-ink-2 py-8 text-paper">
-            <div className="px-[clamp(20px,4vw,40px)]">
-              <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
-              <FlowDiagram flow={study.flow} />
-            </div>
-          </div>
-
-          {/* sections — narrative: problem → approach → hard part → shipped */}
-          <div className="mt-10 grid gap-10 lg:grid-cols-2">
+          {/* narrative beats — story order: problem → hard part → shipped */}
+          <div className="mt-10 space-y-12">
             <Reveal>
               <section>
-                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">THE PROBLEM</h2>
+                <p className="font-mono text-xs tracking-widest text-saffron-deep">01</p>
+                <h2 className="mb-3 mt-1 font-display text-3xl font-semibold uppercase">THE PROBLEM</h2>
                 <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.challenge}</p>
                 <p className="mt-5 border-l-4 border-saffron bg-paper-2 py-2 pl-4 font-mono text-[13px] italic leading-relaxed text-saffron-deep">
                   {study.impact[0]}
                 </p>
               </section>
             </Reveal>
-            <Reveal delay={0.08}>
+            <Reveal>
               <section>
-                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">MY APPROACH</h2>
-                <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.approach}</p>
-              </section>
-            </Reveal>
-            <Reveal delay={0.04}>
-              <section>
-                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">
+                <p className="font-mono text-xs tracking-widest text-saffron-deep">02</p>
+                <h2 className="mb-3 mt-1 font-display text-3xl font-semibold uppercase">
                   THE HARD <span className="text-cobalt">PART</span>
                 </h2>
                 <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.hard}</p>
               </section>
             </Reveal>
-            <Reveal delay={0.08}>
+            <Reveal>
               <section>
-                <h2 className="mb-3 font-display text-3xl font-semibold uppercase">
+                <p className="font-mono text-xs tracking-widest text-saffron-deep">03</p>
+                <h2 className="mb-3 mt-1 font-display text-3xl font-semibold uppercase">
                   WHAT <span className="text-cobalt">SHIPPED</span>
                 </h2>
                 <p className="border-t-2 border-ink pt-4 text-[16px] leading-relaxed">{study.shipped}</p>
               </section>
             </Reveal>
           </div>
+
+          {/* full story — rendered from the project's .mdx body */}
+          {study.bodyHtml && (
+            <Reveal className="mt-12">
+              <section>
+                <h2 className="font-display text-3xl font-semibold uppercase">
+                  THE FULL <span className="text-cobalt">STORY</span>
+                </h2>
+                <div
+                  className={`mt-4 border-t-2 border-ink pt-4 ${markdownContentClass}`}
+                  dangerouslySetInnerHTML={{ __html: study.bodyHtml }}
+                />
+              </section>
+            </Reveal>
+          )}
+
+          <Reveal>
+            <section className="mt-12 border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,36px)] shadow-hard">
+              <h2 className="font-display text-3xl font-semibold uppercase">IMPACT</h2>
+              <ul className="mt-5 grid gap-3 md:grid-cols-2">
+                {study.impact.map((im) => (
+                  <li key={im} className="flex items-baseline gap-3 border-b border-ink/15 pb-3 font-mono text-[13.5px] tracking-wide">
+                    <span aria-hidden className="size-2 flex-none rounded-full" style={{ background: study.accent }} />
+                    {im}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </Reveal>
 
           {/* architecture — the real diagram, data-driven from the project file */}
           {study.architecture.length > 0 && (
@@ -148,103 +166,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </Reveal>
           )}
 
-          {/* full story — rendered from the project's .mdx body */}
-          {study.bodyHtml && (
-            <Reveal className="mt-12">
-              <section>
-                <h2 className="font-display text-3xl font-semibold uppercase">
-                  THE FULL <span className="text-cobalt">STORY</span>
-                </h2>
-                <div
-                  className={`mt-4 border-t-2 border-ink pt-4 ${markdownContentClass}`}
-                  dangerouslySetInnerHTML={{ __html: study.bodyHtml }}
-                />
-              </section>
-            </Reveal>
-          )}
-
-          {/* evidence — receipts, not claims */}
-          <Reveal className="mt-12">
-            <section className="border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,32px)] shadow-hard">
-              <div className="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 className="font-display text-2xl font-semibold uppercase">
-                  THE <span className="text-cobalt">RECEIPTS</span>
-                </h2>
-                <p className="font-mono text-[11px] tracking-widest text-muted-foreground">
-                  SOURCE · ARCHITECTURE · NUMBERS — NO CLAIMS WITHOUT EVIDENCE
-                </p>
-              </div>
-              <div className="mt-4 grid gap-px border-2 border-ink bg-ink sm:grid-cols-3">
-                <a
-                  href={study.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-paper-2 p-4 transition-colors hover:bg-paper"
-                >
-                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">SOURCE</p>
-                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
-                    GITHUB REPO <span aria-hidden>↗</span>
-                  </p>
-                  {!study.readme && (
-                    <p className="mt-1 font-mono text-[9.5px] tracking-widest text-saffron-deep">
-                      NO PUBLIC REPO — PRIVATE WORKSPACE
-                    </p>
-                  )}
-                </a>
-                <a href="#system-flow" className="group bg-paper-2 p-4 transition-colors hover:bg-paper">
-                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">ARCHITECTURE</p>
-                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
-                    SYSTEM FLOW <span aria-hidden>↓</span>
-                  </p>
-                </a>
-                <a href="#dive" className="group bg-paper-2 p-4 transition-colors hover:bg-paper">
-                  <p className="font-mono text-[10px] tracking-widest text-muted-foreground">WRITE-UP · BENCHMARKS</p>
-                  <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
-                    DIVE DEEPER <span aria-hidden>↓</span>
-                  </p>
-                </a>
-              </div>
-              {study.evidence?.length > 0 && (
-                <ul className="mt-4 grid gap-3 md:grid-cols-3">
-                  {study.evidence.map((e) => (
-                    <li key={e.claim} className="border-l-2 border-saffron pl-3">
-                      <p className="font-mono text-[13px] font-medium tracking-wide text-ink">{e.claim}</p>
-                      <p className="mt-0.5 font-mono text-[11px] leading-relaxed text-muted-foreground">{e.method}</p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {study.receipts && study.receipts.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-3">
-                  {study.receipts.map((r) => (
-                    <a
-                      key={r.label}
-                      href={r.href}
-                      target={r.href.startsWith("http") ? "_blank" : undefined}
-                      rel={r.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-2 border-2 border-ink px-3 py-1.5 font-mono text-[11px] tracking-wider transition-colors duration-200 hover:bg-ink hover:text-paper"
-                    >
-                      {r.label} <span aria-hidden>↗</span>
-                    </a>
-                  ))}
-                </div>
-              )}
-            </section>
-          </Reveal>
-
-          <Reveal>
-            <section className="mt-12 border-2 border-ink bg-paper-2 p-[clamp(20px,3vw,36px)] shadow-hard">
-              <h2 className="font-display text-3xl font-semibold uppercase">IMPACT</h2>
-              <ul className="mt-5 grid gap-3 md:grid-cols-2">
-                {study.impact.map((im) => (
-                  <li key={im} className="flex items-baseline gap-3 border-b border-ink/15 pb-3 font-mono text-[13.5px] tracking-wide">
-                    <span aria-hidden className="size-2 flex-none rounded-full" style={{ background: study.accent }} />
-                    {im}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </Reveal>
+          {/* system flow — dark bridge */}
+          <div id="system-flow" className="mt-12 border-b-2 border-ink bg-ink-2 py-8 text-paper">
+            <div className="px-[clamp(20px,4vw,40px)]">
+              <p className="mb-4 font-mono text-xs tracking-[0.18em] text-paper/60">SYSTEM FLOW</p>
+              <FlowDiagram flow={study.flow} />
+            </div>
+          </div>
 
           {/* counterfactuals — engineering judgment, not just implementation */}
           {study.counterfactuals.length > 0 && (
