@@ -53,6 +53,23 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 {study.title}
               </h1>
               <p className="mt-3 max-w-[52ch] text-lg text-paper/80">{study.blurb}</p>
+
+              {/* at a glance — status, outcome, limitations (fast, non-technical reading) */}
+              <div className="mt-6 grid gap-3 border border-paper/25 bg-paper/[0.06] p-4 sm:grid-cols-2">
+                <div>
+                  <p className="font-mono text-[9.5px] tracking-[0.18em] text-saffron">STATUS</p>
+                  <p className="mt-0.5 font-mono text-[12.5px] tracking-wide text-paper/90">{study.status}</p>
+                </div>
+                <div>
+                  <p className="font-mono text-[9.5px] tracking-[0.18em] text-saffron">RESULT</p>
+                  <p className="mt-0.5 font-mono text-[12.5px] leading-snug tracking-wide text-paper/90">{study.outcome}</p>
+                </div>
+                <div className="sm:col-span-2">
+                  <p className="font-mono text-[9.5px] tracking-[0.18em] text-saffron">LIMITATIONS</p>
+                  <p className="mt-0.5 font-mono text-[11.5px] leading-relaxed text-paper/70">{study.limitations}</p>
+                </div>
+              </div>
+
               <div className="mt-6 flex flex-wrap gap-2">
                 {study.stack.map((s) => (
                   <span key={s} className="border border-paper/45 px-2.5 py-1 font-mono text-[11px] tracking-wider text-paper/85">
@@ -61,6 +78,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 ))}
               </div>
             </div>
+            {study.disclaimer && (
+              <p className="relative z-10 mx-[clamp(20px,4vw,40px)] mb-5 border-2 border-saffron/60 bg-ink-2 px-4 py-3 font-mono text-[11px] leading-relaxed tracking-wide text-saffron">
+                ⚠ {study.disclaimer}
+              </p>
+            )}
             <span aria-hidden className="absolute right-6 top-4 font-dev text-[clamp(3rem,8vw,7rem)] text-paper/10">
               {study.index}
             </span>

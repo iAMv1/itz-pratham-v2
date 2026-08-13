@@ -81,7 +81,7 @@ export function Hero({ stats }: { stats: { value: number; prefix?: string; suffi
           title="psst — click me"
           className="ml-3 hidden cursor-help border-b-2 border-dashed border-cobalt/50 align-middle font-mono text-[10px] tracking-widest text-muted-foreground transition-colors hover:border-cobalt lg:inline-block"
         >
-          {eggIdx !== null ? profile.rota[eggIdx].toUpperCase() : "(?)"}
+          {eggIdx !== null ? profile.rota[eggIdx].toUpperCase() : "WHAT I DO ▾"}
         </button>
       </div>
 

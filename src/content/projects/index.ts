@@ -18,6 +18,10 @@ export type Project = {
   title: string;
   role: string;
   blurb: string;
+  outcome: string;
+  status: string;
+  limitations: string;
+  disclaimer?: string;
   challenge: string;
   approach: string;
   hard: string;
@@ -47,7 +51,7 @@ function validateProject(raw: Record<string, unknown>, file: string): void {
   const fail = (field: string, detail = "") => {
     throw new Error(`content/projects/${file}: invalid or missing "${field}" ${detail}`);
   };
-  for (const f of ["slug", "index", "year", "title", "role", "blurb", "challenge", "approach", "hard", "shipped", "href", "art", "accent", "metrics"] as const) {
+  for (const f of ["slug", "index", "year", "title", "role", "blurb", "challenge", "approach", "hard", "shipped", "href", "art", "accent", "metrics", "outcome", "status", "limitations"] as const) {
     if (typeof raw[f] !== "string" || (raw[f] as string).length === 0) fail(f);
   }
   for (const f of ["impact", "stack", "flow"] as const) {
@@ -72,6 +76,10 @@ function loadFile(file: string): Project {
     title: String(data.title),
     role: String(data.role),
     blurb: String(data.blurb),
+    outcome: String(data.outcome ?? ""),
+    status: String(data.status ?? ""),
+    limitations: String(data.limitations ?? ""),
+    disclaimer: data.disclaimer ? String(data.disclaimer) : undefined,
     challenge: String(data.challenge),
     approach: String(data.approach),
     hard: String(data.hard),

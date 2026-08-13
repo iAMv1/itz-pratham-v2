@@ -55,11 +55,9 @@ describe("content repository (src/content/projects/*.mdx)", () => {
 });
 
 describe("site content repository (src/content/site/*.mdx)", () => {
-  it("about carries stats, wins, proofBand and offClock", () => {
+  it("about carries stats, offClock and background", () => {
     const a = about();
     expect(a.stats).toHaveLength(4);
-    expect(a.wins.list).toHaveLength(5);
-    expect(a.proofBand).toHaveLength(4);
     expect(a.offClock.books.length).toBeGreaterThanOrEqual(4);
     expect(a.background.length).toBeGreaterThanOrEqual(4);
     expect(a.facts.length).toBeGreaterThanOrEqual(4);

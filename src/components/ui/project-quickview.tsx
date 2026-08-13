@@ -35,6 +35,9 @@ export function ProjectQuickView({ study }: { study: Project }) {
           <p className="font-mono text-[11px] tracking-widest text-cobalt">{study.role}</p>
           <h3 className="mt-1 font-display text-3xl font-semibold uppercase leading-none">{study.title}</h3>
           <p className="mt-2 text-[15px] leading-relaxed">{study.blurb}</p>
+          <p className="mt-1.5 font-mono text-[11.5px] leading-snug tracking-wide text-saffron-deep">
+            ▸ {study.outcome}
+          </p>
         </div>
 
         <div>

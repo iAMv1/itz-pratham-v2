@@ -11,8 +11,6 @@ import { ProjectQuickView } from "@/components/ui/project-quickview";
 import { ArtImage } from "@/components/ui/art-image";
 import { allProjects } from "@/content/projects";
 import { about } from "@/content/site";
-import { Vibe } from "@/components/sections/vibe";
-import { Wins } from "@/components/sections/wins";
 
 export default function Home() {
   const featured = allProjects().slice(0, 3);
@@ -82,6 +80,9 @@ export default function Home() {
                           {p.title}
                         </span>
                         <span className="text-[14px] leading-relaxed">{p.blurb}</span>
+                        <span className="mt-1 font-mono text-[10.5px] leading-snug tracking-wide text-saffron-deep">
+                          ▸ {p.outcome}
+                        </span>
                         <span className="mt-auto flex min-h-11 items-center gap-2 pt-3 font-mono text-[12px] tracking-[0.1em] text-cobalt">
                           OPEN QUICK VIEW <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
                         </span>
@@ -95,12 +96,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        {/* proof of work — the receipts */}
-        <Wins wins={about().wins} />
-
-        {/* craft — what I optimize for */}
-        <Vibe manifesto={about().manifesto} cards={about().cards} facts={about().facts} />
 
         {/* CTA band */}
         <section id="talk" className="scroll-mt-24 border-y-2 border-ink bg-ink-2 px-[clamp(20px,4vw,48px)] py-[clamp(56px,8vh,90px)] text-paper">

@@ -9,7 +9,7 @@ import { ArtImage } from "@/components/ui/art-image";
 import { allProjects } from "@/content/projects";
 import { SiteShell } from "@/components/layout/site-shell";
 
-export const metadata: Metadata = { title: "Work — Pratham Nahata", description: "Four systems, each opened like a jharokha window — MindPulse Pro, Unified-DTA, Sentinel, OmniSecTester. Every claim links to a real repo." };
+export const metadata: Metadata = { title: "Work — Pratham Nahata", description: "Four systems, each opened like a jharokha window — MindPulse Pro, Unified-DTA, Sentinel, OmniSecTester. Every claim documented — repos where public, methodology always." };
 
 export default function WorkPage() {
   return (
@@ -30,8 +30,8 @@ export default function WorkPage() {
               className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]"
             />
             <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim links to a
-              real repo.
+              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim is
+              documented: repos where public, methodology always.
             </p>
           </Reveal>
 
@@ -66,6 +66,9 @@ export default function WorkPage() {
                       {p.title}
                     </span>
                     <span className="text-[14.5px] leading-relaxed">{p.blurb}</span>
+                    <span className="mt-1 font-mono text-[11px] leading-snug tracking-wide text-saffron-deep">
+                      ▸ {p.outcome}
+                    </span>
                     <span className="mt-auto flex min-h-11 items-center pt-3 font-mono text-[12.5px] tracking-[0.1em] text-cobalt">
                       OPEN CASE STUDY <span aria-hidden className="transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
                     </span>

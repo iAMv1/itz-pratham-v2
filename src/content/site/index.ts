@@ -16,14 +16,7 @@ function load<T>(file: string): T {
 
 export type About = {
   facts: { key: string; value: string }[];
-  manifesto: { html: string }[];
-  cards: { label: string; title: string; body: string }[];
   stats: { value: number; prefix?: string; suffix?: string; label: string; headline?: string }[];
-  wins: {
-    featured: { value: number; suffix: string; title: string; desc: string; tag: string };
-    list: { num: string; title: string; sub: string; year: string }[];
-  };
-  proofBand: { value: number; prefix?: string; suffix?: string; label: string }[];
   background: { years: string; role: string; co: string; desc: string; tags: string; status: string }[];
   offClock: { title: string; sub: string; books: { title: string; take: string }[]; setup: { name: string; detail: string }[] };
 };

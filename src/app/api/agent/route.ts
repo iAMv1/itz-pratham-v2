@@ -34,7 +34,6 @@ export async function GET(request: Request) {
         deck: profile.deck,
         stats: about().stats,
         facts: about().facts,
-        manifesto: about().manifesto,
       });
 
     case "find_project": {
@@ -77,7 +76,7 @@ export async function GET(request: Request) {
     }
 
     case "get_experience":
-      return ok({ background: about().background, wins: about().wins, timeline: timeline().years, facts: about().facts });
+      return ok({ background: about().background, timeline: timeline().years, facts: about().facts });
 
     case "get_skills":
       return ok({ groups: profile.stack, process: { steps: processContent().steps, tools: processContent().tools, stats: processContent().stats } });

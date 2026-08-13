@@ -15,7 +15,7 @@ export function Footer() {
           href="/resume"
           className="underline-offset-4 transition-colors hover:text-marigold"
         >
-          RESUME ↗
+          RESUME →
         </a>{" "}
         ·{" "}
         <a

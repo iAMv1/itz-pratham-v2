@@ -24,6 +24,16 @@ export function Preloader() {
   const beamRef = useRef<HTMLDivElement>(null);
   const pctRef = useRef<HTMLSpanElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
+  const tweensRef = useRef<{ kill: () => void }[]>([]);
+
+  /** Visible "Enter portfolio" path — the show is skippable. */
+  const skip = () => {
+    tweensRef.current.forEach((t) => t.kill());
+    tweensRef.current = [];
+    preloaderShown = true;
+    document.body.classList.add("hero-ready");
+    requestAnimationFrame(() => setDone(true));
+  };
 
   useEffect(() => {
     const finish = () => {
@@ -46,7 +56,7 @@ export function Preloader() {
       return;
     }
 
-    const tweens: { kill: () => void }[] = [];
+    const tweens = tweensRef.current;
     void import("gsap").then(({ default: gsap }) => {
       if (!root.isConnected) return;
       const counter = { v: 0 };
@@ -196,6 +206,14 @@ export function Preloader() {
       <p className="absolute bottom-6 right-7 font-mono text-[10px] tracking-[0.22em] text-paper/45">
         LOADING THE GOODS…
       </p>
+      <button
+        type="button"
+        onClick={skip}
+        aria-label="Skip intro and enter the portfolio"
+        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 border-2 border-paper/40 px-4 py-1.5 font-mono text-[10px] tracking-[0.2em] text-paper/70 transition-colors duration-200 hover:border-paper hover:text-paper"
+      >
+        ENTER →
+      </button>
     </div>
   );
 }

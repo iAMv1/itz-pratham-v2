@@ -70,7 +70,10 @@ export function Contact() {
               >
                 {copied ? "COPIED ✓" : profile.email} <span aria-hidden>{copied ? "" : "→"}</span>
               </button>
-              <p role="status" aria-live="polite" className="sr-only">
+              <p className="mt-3 max-w-[52ch] font-mono text-[11.5px] leading-relaxed tracking-wide text-muted-foreground">
+              USEFUL TO INCLUDE: the problem, desired outcome, timeline, technical constraints, and how you found me.
+            </p>
+            <p role="status" aria-live="polite" className="sr-only">
                 {copied ? "Email copied to clipboard" : ""}
               </p>
               <a

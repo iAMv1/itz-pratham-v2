@@ -40,7 +40,7 @@ export default function AboutPage() {
               </p>
               <p className="max-w-[52ch] border-t border-ink/15 pt-5 text-lg font-medium leading-relaxed">
                 My brand promise is simple: <strong>builds that feel alive.</strong> Models that ship, interfaces with a
-                pulse, and work you can verify — every claim on this site links to a real repo.
+                pulse, and work you can verify — every claim is documented, with methodology attached.
               </p>
               <AnnotationCard label="brand · promise" rotate={-2}>
                 builds systems that actually ship — nothing leaves without receipts
