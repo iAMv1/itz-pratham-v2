@@ -286,6 +286,26 @@ html:not(.js) .preloader {
   background: radial-gradient(circle, rgba(245, 142, 32, 0.32) 0%, rgba(245, 142, 32, 0.09) 45%, transparent 70%);
 }
 
+/* Page dusk gradients — hero-inspired, one accent per page, theme-aware */
+.page-dusk-cobalt {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--paper) 58%, var(--cobalt)) 38%, var(--paper) 100%);
+}
+.dark .page-dusk-cobalt {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--ink-2) 52%, var(--cobalt)) 38%, var(--ink-2) 100%);
+}
+.page-dusk-terracotta {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--paper) 58%, var(--terracotta)) 38%, var(--paper) 100%);
+}
+.dark .page-dusk-terracotta {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--ink-2) 52%, var(--terracotta)) 38%, var(--ink-2) 100%);
+}
+.page-dusk-rose {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--paper) 58%, var(--rose)) 38%, var(--paper) 100%);
+}
+.dark .page-dusk-rose {
+  background: linear-gradient(to top, var(--paper) 0%, color-mix(in oklab, var(--ink-2) 52%, var(--rose)) 38%, var(--ink-2) 100%);
+}
+
 /* Editorial helpers */
 .drop-cap::first-letter {
   font-family: var(--font-teko);

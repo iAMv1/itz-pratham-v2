@@ -11,7 +11,7 @@ export default function ResumePage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+        <section className="page-dusk-rose relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
           <div className="relative z-10">
           <Reveal>

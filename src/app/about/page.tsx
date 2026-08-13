@@ -14,7 +14,7 @@ export default function AboutPage() {
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
-        <section className="relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
+        <section className="page-dusk-terracotta relative overflow-clip px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">
           <PaisleyField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
           <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
           <span aria-hidden className="pointer-events-none absolute -right-[8%] top-[34%] h-[26rem] w-[26rem] rounded-full border-[3px] border-ink/10" />
