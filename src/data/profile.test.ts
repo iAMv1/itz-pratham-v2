@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { metro, profile } from "@/data/profile";
+import { profile } from "@/data/profile";
 import { allProjects, getProject } from "@/content/projects";
+import { about, timeline, unresolved, metro, processContent } from "@/content/site";
 
-describe("profile content integrity", () => {
+describe("profile identity", () => {
   it("has real contact data", () => {
     expect(profile.email).toContain("@");
     expect(profile.resume).toContain(".pdf");
@@ -10,21 +11,10 @@ describe("profile content integrity", () => {
     expect(profile.links.linkedin).toContain("linkedin.com");
   });
 
-  it("has the wins proof band", () => {
-    expect(profile.proofBand).toHaveLength(4);
-    expect(profile.wins.list).toHaveLength(5);
-  });
-
-  it("metro map has 4 lines and a hub", () => {
-    expect(metro.lines).toHaveLength(4);
-    expect(metro.hub).toBeTruthy();
-    for (const l of metro.lines) {
-      expect(l.stations.length).toBeGreaterThanOrEqual(2);
-    }
-  });
-
-  it("stack has 4 groups", () => {
+  it("stack has 4 groups + marquees", () => {
     expect(profile.stack).toHaveLength(4);
+    expect(profile.skillsMarquee.length).toBeGreaterThan(10);
+    expect(profile.nameMarquee.length).toBeGreaterThanOrEqual(4);
   });
 });
 
@@ -42,6 +32,7 @@ describe("content repository (src/content/projects/*.mdx)", () => {
       expect(c.impact.length).toBeGreaterThanOrEqual(3);
       expect(c.stack.length).toBeGreaterThanOrEqual(3);
       expect(c.flow.length).toBeGreaterThanOrEqual(3);
+      expect(c.architecture.length).toBeGreaterThanOrEqual(3);
       expect(c.dive.length).toBeGreaterThanOrEqual(4);
       expect(c.evidence.length).toBeGreaterThanOrEqual(3);
       expect(c.counterfactuals.length).toBeGreaterThanOrEqual(2);
@@ -60,5 +51,37 @@ describe("content repository (src/content/projects/*.mdx)", () => {
     const mp = getProject("mindpulse-pro");
     expect(mp?.counterfactuals[0].label).toContain("server");
     expect(mp?.counterfactuals[0].answer.length).toBeGreaterThan(100);
+  });
+});
+
+describe("site content repository (src/content/site/*.mdx)", () => {
+  it("about carries stats, wins, proofBand and offClock", () => {
+    const a = about();
+    expect(a.stats).toHaveLength(4);
+    expect(a.wins.list).toHaveLength(5);
+    expect(a.proofBand).toHaveLength(4);
+    expect(a.offClock.books.length).toBeGreaterThanOrEqual(4);
+    expect(a.background.length).toBeGreaterThanOrEqual(4);
+    expect(a.facts.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("process has 4 steps with proofs + tools", () => {
+    const p = processContent();
+    expect(p.steps).toHaveLength(4);
+    for (const s of p.steps) expect(s.proof?.label).toBeTruthy();
+    expect(p.tools.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("timeline has 5 years and unresolved has 4 items", () => {
+    expect(timeline().years).toHaveLength(5);
+    expect(unresolved().items).toHaveLength(4);
+  });
+
+  it("metro has 4 lines and a hub", () => {
+    expect(metro().lines).toHaveLength(4);
+    expect(metro().hub).toBeTruthy();
+    for (const l of metro().lines) {
+      expect(l.stations.length).toBeGreaterThanOrEqual(2);
+    }
   });
 });

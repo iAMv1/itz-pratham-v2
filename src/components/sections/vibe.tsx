@@ -6,7 +6,7 @@ import { AnnotationCard } from "@/components/annotations/annotation-card";
 import { PaisleyField } from "@/components/canvas/fields";
 import { profile } from "@/data/profile";
 
-export function Vibe() {
+export function Vibe({ manifesto, cards, facts }: { manifesto: { html: string }[]; cards: { label: string; title: string; body: string }[]; facts: { key: string; value: string }[] }) {
   return (
     <section id="vibe" className="bg-jali relative px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <PaisleyField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
@@ -26,11 +26,11 @@ export function Vibe() {
           <Reveal className="space-y-5">
             <p
               className="max-w-[52ch] text-lg font-medium leading-relaxed drop-cap"
-              dangerouslySetInnerHTML={{ __html: profile.manifesto[0].html }}
+              dangerouslySetInnerHTML={{ __html: manifesto[0].html }}
             />
             <p
               className="max-w-[52ch] border-t border-ink/15 pt-5 text-lg font-medium leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: profile.manifesto[1].html }}
+              dangerouslySetInnerHTML={{ __html: manifesto[1].html }}
             />
             <div className="pt-2">
               <AnnotationCard label="handwritten · note" rotate={-2}>
@@ -41,7 +41,7 @@ export function Vibe() {
 
           <Reveal delay={0.1} className="space-y-6">
             <ul className="border-2 border-ink bg-paper-2 p-5 font-mono text-[13px] shadow-hard">
-              {profile.facts.map((f) => (
+              {facts.map((f) => (
                 <li key={f.key} className="flex items-baseline gap-3 py-1.5">
                   <span className="min-w-[64px] font-medium text-saffron-deep">{f.key}</span>
                   {f.value}
@@ -59,7 +59,7 @@ export function Vibe() {
         </div>
 
         <div className="mt-[clamp(40px,6vh,72px)] grid items-start gap-[clamp(14px,2vw,28px)] md:grid-cols-[1fr_1.25fr_1fr]">
-          {profile.cards.map((c, i) => (
+          {cards.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.1} className={i === 1 ? "md:mt-0" : "md:mt-11"}>
               <article
                 className={`flex h-full flex-col gap-2.5 border-2 border-ink bg-paper-2 p-[clamp(20px,2.6vw,30px)] shadow-hard transition-transform duration-300 ease-out hover:-translate-y-1.5 hover:rotate-[-0.5deg] hover:shadow-[8px_8px_0_0_var(--shadow-ink)] ${

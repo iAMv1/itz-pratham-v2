@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
-import { unresolved, timelineMachine, offClock, profile } from "@/data/profile";
+import { profile } from "@/data/profile";
 import { allProjects } from "@/content/projects";
+import { about, timeline, unresolved, metro, processContent } from "@/content/site";
 
-/** Machine-readable mirror of the typed content model (src/data/profile.ts). */
+/** Machine-readable mirror of the typed content model (src/data/profile.ts + content/*). */
 export async function GET() {
-  return NextResponse.json({
-    meta: {
-      name: profile.name,
-      url: "https://itzpratham.in/",
-      generated: new Date().toISOString(),
-      agentToolkit: "https://itzpratham.in/api/agent?action=list",
-    },
+  return NextResponse.json(
+    {
+      meta: {
+        name: profile.name,
+        url: "https://itzpratham.in/",
+        generated: new Date().toISOString(),
+        agentToolkit: "https://itzpratham.in/api/agent?action=list",
+      },
     profile: {
       name: profile.name,
       shortName: profile.shortName,
@@ -21,18 +23,14 @@ export async function GET() {
       links: profile.links,
       rota: profile.rota,
       deck: profile.deck,
-      stats: profile.stats,
-      facts: profile.facts,
-      manifesto: profile.manifesto,
-      cards: profile.cards,
       skills: profile.stack,
-      process: profile.process,
-      background: profile.background,
-      wins: profile.wins,
-      proofBand: profile.proofBand,
-      timelineMachine,
-      offClock,
+      marquee: { skills: profile.skillsMarquee, name: profile.nameMarquee },
     },
+    about: about(),
+    process: processContent(),
+    timeline: timeline(),
+    unresolved: unresolved().items,
+    metro: metro(),
     caseStudies: allProjects().map((c) => ({
       slug: c.slug,
       index: c.index,
@@ -56,6 +54,7 @@ export async function GET() {
       counterfactuals: c.counterfactuals,
       bodyHtml: c.bodyHtml,
     })),
-    unresolved,
-  });
+    },
+    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
+  );
 }

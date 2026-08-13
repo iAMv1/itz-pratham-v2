@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
 import { AnnotationCard } from "@/components/annotations/annotation-card";
-import { metro, profile, unresolved, timelineMachine, offClock } from "@/data/profile";
+import { about, timeline, unresolved, metro } from "@/content/site";
 import { MetroMap } from "./metro-map";
 import { TimelineMachine } from "@/components/ui/timeline-machine";
 import { ContributionGraph } from "@/components/ui/contribution-graph";
@@ -48,7 +48,7 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <ul className="border-2 border-ink bg-paper-2 p-5 font-mono text-[13px] shadow-hard">
-                {profile.facts.map((f) => (
+                {about().facts.map((f) => (
                   <li key={f.key} className="flex items-baseline gap-3 py-1.5">
                     <span className="min-w-[64px] font-medium text-saffron-deep">{f.key}</span>
                     {f.value}
@@ -68,7 +68,7 @@ export default function AboutPage() {
               what I&apos;m trying, what I&apos;m reading, what&apos;s next.
             </p>
             <div className="mt-6 border-t-2 border-ink">
-              {unresolved.map((u, i) => (
+              {unresolved().items.map((u, i) => (
                 <details key={u.title} className="group border-b border-ink/20">
                   <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-2 py-3 transition-colors hover:bg-paper-2 [&::-webkit-details-marker]:hidden">
                     <span className="flex items-baseline gap-4">
@@ -115,9 +115,9 @@ export default function AboutPage() {
 
           {/* the journey — timeline */}
           <Reveal className="mt-16">
-            <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">{metro.title}</h2>
+            <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">{metro().title}</h2>
             <div className="mt-6 border-2 border-ink bg-paper-2 p-6 shadow-hard">
-              <MetroMap />
+              <MetroMap metro={metro()} />
             </div>
           </Reveal>
 
@@ -125,16 +125,16 @@ export default function AboutPage() {
           <Reveal className="mt-16">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
-                {timelineMachine.title}
+                {timeline().years.length ? "THE TIMELINE MACHINE" : ""}
               </h2>
-              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{timelineMachine.sub}</p>
+              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{timeline().years.length ? "scrub the years — watch the builder change" : ""}</p>
             </div>
             <p className="mt-3 max-w-[60ch] text-[15px] text-muted-foreground">
               Drag the scrubber — the years change what I was building, learning, and becoming. A media timeline as a
-              time machine.
+              time machine. <em>(the last year is a trajectory, not a promise)</em>
             </p>
             <div className="mt-5">
-              <TimelineMachine />
+              <TimelineMachine years={timeline().years} />
             </div>
           </Reveal>
 
@@ -144,13 +144,13 @@ export default function AboutPage() {
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">
                 OFF THE <span className="text-cobalt">CLOCK</span>
               </h2>
-              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{offClock.sub}</p>
+              <p className="font-mono text-[11px] tracking-widest text-muted-foreground">{about().offClock.sub}</p>
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               <div className="border-2 border-ink bg-paper-2 p-[clamp(18px,2.5vw,26px)] shadow-hard">
                 <p className="mb-3 font-mono text-[11px] tracking-widest text-cobalt">BOOKS — THE SHELF</p>
                 <ul className="space-y-3">
-                  {offClock.books.map((b) => (
+                  {about().offClock.books.map((b) => (
                     <li key={b.title} className="border-b border-ink/15 pb-2.5 last:border-b-0">
                       <p className="font-display text-[15px] font-semibold uppercase leading-tight">{b.title}</p>
                       <p className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">{b.take}</p>
@@ -161,7 +161,7 @@ export default function AboutPage() {
               <div className="border-2 border-ink bg-paper-2 p-[clamp(18px,2.5vw,26px)] shadow-hard">
                 <p className="mb-3 font-mono text-[11px] tracking-widest text-cobalt">SETUP — THE WORKBENCH</p>
                 <dl className="space-y-3">
-                  {offClock.setup.map((s) => (
+                  {about().offClock.setup.map((s) => (
                     <div key={s.name} className="border-b border-ink/15 pb-2.5 last:border-b-0">
                       <dt className="font-mono text-[12px] tracking-widest text-saffron-deep">{s.name}</dt>
                       <dd className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">{s.detail}</dd>
@@ -178,11 +178,11 @@ export default function AboutPage() {
               THE <span className="text-cobalt">TIMELINE</span>
             </h2>
             <div className="mt-6 border-t border-ink">
-              {profile.background.map((b, i) => (
+              {about().background.map((b, i) => (
                 <Reveal key={b.role} delay={i * 0.06}>
                   <article className="relative grid items-start gap-4 border-b border-ink px-2 py-6 md:grid-cols-[150px_1fr_auto] md:gap-10 md:py-10">
                     <span aria-hidden className="absolute -left-[34px] top-[34px] size-3 rounded-full border-2 border-ink bg-saffron" />
-                    {i < profile.background.length - 1 && (
+                    {i < about().background.length - 1 && (
                       <span aria-hidden className="absolute -left-[29px] top-[52px] bottom-[-8px] w-0.5 bg-ink/25" />
                     )}
                     <span className="font-display text-[clamp(1.8rem,2.6vw,2.6rem)] font-semibold leading-none">{b.years}</span>

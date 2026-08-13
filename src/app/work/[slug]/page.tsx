@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { ArtImage } from "@/components/ui/art-image";
 import { RepoFrame } from "@/components/ui/repo-frame";
 import { VtLink } from "@/components/ui/vt-link";
+import { ArchitectureDiagram } from "@/components/ui/architecture-diagram";
 import { markdownContentClass } from "@/lib/markdown";
 import { allProjects, getProject } from "@/content/projects";
 import { SiteShell } from "@/components/layout/site-shell";
@@ -16,7 +17,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const s = getProject(slug);
-  return { title: s ? `${s.title} — Pratham Nahata` : "Case study — Pratham Nahata" };
+  if (!s) return { title: "Case study — Pratham Nahata" };
+  return {
+    title: `${s.title} — Pratham Nahata`,
+    description: s.blurb,
+    openGraph: {
+      title: `${s.title} — Pratham Nahata`,
+      description: s.blurb,
+      images: [{ url: `/assets/og/${s.slug}.png`, width: 1200, height: 630, alt: s.title }],
+    },
+  };
 }
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -99,6 +109,23 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             </Reveal>
           </div>
 
+          {/* architecture — the real diagram, data-driven from the project file */}
+          {study.architecture.length > 0 && (
+            <Reveal className="mt-12">
+              <section>
+                <h2 className="font-display text-3xl font-semibold uppercase">
+                  THE <span className="text-cobalt">ARCHITECTURE</span>
+                </h2>
+                <p className="mt-2 max-w-[56ch] text-[15px] text-muted-foreground">
+                  Layered, labelled, honest — the system as it actually stands.
+                </p>
+                <div className="mt-5">
+                  <ArchitectureDiagram layers={study.architecture} />
+                </div>
+              </section>
+            </Reveal>
+          )}
+
           {/* full story — rendered from the project's .mdx body */}
           {study.bodyHtml && (
             <Reveal className="mt-12">
@@ -136,6 +163,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   <p className="mt-1 font-mono text-[13px] tracking-wide text-cobalt group-hover:underline">
                     GITHUB REPO <span aria-hidden>↗</span>
                   </p>
+                  {!study.readme && (
+                    <p className="mt-1 font-mono text-[9.5px] tracking-widest text-saffron-deep">
+                      NO PUBLIC REPO — PRIVATE WORKSPACE
+                    </p>
+                  )}
                 </a>
                 <a href="#system-flow" className="group bg-paper-2 p-4 transition-colors hover:bg-paper">
                   <p className="font-mono text-[10px] tracking-widest text-muted-foreground">ARCHITECTURE</p>
@@ -159,6 +191,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     </li>
                   ))}
                 </ul>
+              )}
+              {study.receipts && study.receipts.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {study.receipts.map((r) => (
+                    <a
+                      key={r.label}
+                      href={r.href}
+                      target={r.href.startsWith("http") ? "_blank" : undefined}
+                      rel={r.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-2 border-2 border-ink px-3 py-1.5 font-mono text-[11px] tracking-wider transition-colors duration-200 hover:bg-ink hover:text-paper"
+                    >
+                      {r.label} <span aria-hidden>↗</span>
+                    </a>
+                  ))}
+                </div>
               )}
             </section>
           </Reveal>

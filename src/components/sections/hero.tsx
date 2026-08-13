@@ -14,7 +14,7 @@ import { NowBuilding } from "@/components/ui/now-building";
 
 const ROTA_EGG = 900;
 
-export function Hero() {
+export function Hero({ stats }: { stats: { value: number; prefix?: string; suffix?: string; label: string; headline?: string }[] }) {
   const reduced = useReducedMotion();
   const [eggIdx, setEggIdx] = useState<number | null>(null);
 
@@ -141,7 +141,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mt-8 grid w-fit max-w-full grid-cols-2 border-2 border-ink bg-paper shadow-hard divide-x divide-y divide-ink/15 sm:grid-cols-4 sm:divide-y-0">
-        {profile.stats.map((s) => (
+        {stats.map((s) => (
           <div key={s.label} className="px-4 py-3">
             <p className="font-mono text-[15px] font-medium text-saffron-deep">
               {s.headline ? (

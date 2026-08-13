@@ -34,6 +34,23 @@ flow:
   - 7 surface adapters
   - Defense-in-depth engine
   - Unified reports
+architecture:
+  - title: TARGET
+    nodes: [URL, Binary, Container, Device]
+    via: adapter resolution
+  - title: ADAPTERS
+    nodes: [Web, Extension, Desktop, Mobile, Cloud, AI/LLM, Hardware, Supply-chain]
+    via: isolated per-surface plugins
+  - title: ENGINE
+    nodes: [Defense-in-depth layers, Ordered checks, Manifest validation]
+    via: unified severity model
+  - title: OUTPUT
+    nodes: [Unified reports, Machine-readable findings]
+receipts:
+  - label: BENCHMARK — METHODOLOGY
+    href: /receipts/omnisectester/benchmark.md
+  - label: REPO
+    href: https://github.com/iAMv1/omnisectester
 href: https://github.com/iAMv1/omnisectester
 art: /assets/art-omni.jpg
 # screenshot: /assets/shots/omnisectester.png

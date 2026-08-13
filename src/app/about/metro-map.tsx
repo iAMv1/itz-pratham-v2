@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { metro } from "@/data/profile";
+import type { Metro } from "@/content/site";
 
 /** DMRC-realistic career map: casing, roundels, terminus ticks, interchange corridor,
  *  moving trains, station tooltips + indices. All visibility is mount-driven (never IO-gated). */
@@ -47,7 +47,7 @@ const HUB = { x: 96, y: 170 };
 type Station = { name: string; x: number; y: number };
 type LineGeom = { path: string; stations: Station[]; terminusTick: { x: number; y: number } };
 
-function geom(id: string): LineGeom {
+function geom(metro: Metro, id: string): LineGeom {
   const stationsOf = metro.lines.find((l) => l.id === id)!.stations;
   switch (id) {
     case "blue": {
@@ -83,12 +83,12 @@ function geom(id: string): LineGeom {
   }
 }
 
-export function MetroMap() {
+export function MetroMap({ metro }: { metro: Metro }) {
   return (
     <div>
       <svg viewBox="0 0 920 300" role="img" aria-label={metro.title} className="w-full text-ink">
         {(["blue", "yellow", "pink", "violet"] as const).map((lid, li) => {
-          const g = geom(lid);
+          const g = geom(metro, lid);
           const color = DMRC[lid];
           return (
             <g key={lid}>

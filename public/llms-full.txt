@@ -1,0 +1,152 @@
+# Pratham Nahata — Full-Stack & ML Engineer (full archive)
+
+This is the full-content version of llms.txt — every project write-up included.
+
+## Who
+CS undergrad (B.Tech CSE, BVCOE Delhi; BSc Foundation Data Science, IIT Madras online) building full-stack + ML systems: real-time browser inference (ONNX), graph neural networks (ESM-2 + GIN), multi-agent AI, production web products (Next.js, FastAPI, Tauri). Bikaner-born, Delhi-built.
+
+- Site: https://itzpratham.in/
+- Work: https://itzpratham.in/work
+- Resume: https://itzpratham.in/resume
+- GitHub: https://github.com/iAMv1
+- Contact: https://itzpratham.in/contact
+- Agent toolkit: https://itzpratham.in/api/agent?action=list
+- Full data: https://itzpratham.in/api/data
+
+## Key facts
+- Grand Finalist, Smart India Hackathon 2024 (national, 492k+ participants)
+- Top 5 AlgoQuest (300+ teams)
+- Live GitHub activity feed with star counts (refresh: 5 min)
+- This portfolio is tested like a product: 21 Playwright flows, zero console errors. Matrix: https://itzpratham.in/testing
+- Built with Next.js 16, TypeScript, Tailwind 4, Motion/GSAP/Lenis. Dark/light mode via token inversion. Fully static SSG.
+
+## MIND PULSE PRO (2026) — Founder · Full-stack × ML
+URL: https://itzpratham.in/work/mindpulse-pro
+Blurb: Real-time behavioral stress detection that runs the model in the browser.
+Problem: Stress is invisible until it isn't. Mental-health tools rely on self-reporting, which people game or skip. I wanted a system that reads stress from how you already work — keystrokes and mouse dynamics — without a single wearable. 
+Approach: Captured keystroke/mouse signals via pynput, extracted 50+ temporal features, trained XGBoost, exported to ONNX and ran inference directly in the browser with onnxruntime-web — no server round-trip. Wrapped in a Next.js web app plus a Tauri (Rust) desktop client, JWT + Google OAuth, SHAP explainability, fully offline LLM coaching via WebLLM. 
+Hard part: Getting inference under 20ms in the browser while keeping every prediction explainable — the model had to be small enough for the client, sharp enough to trust, and auditable end to end. 
+Shipped: Browser inference with zero server round-trip, plus a Tauri desktop client and fully offline WebLLM coaching — the whole ML stack runs on the user's machine. 
+Stack: FastAPI, Next.js, XGBoost, ONNX Runtime, Tauri, Supabase, WebSockets, WebLLM
+Evidence:
+  - P95 browser inference 18.7ms — Chrome 140 · M-series Mac · onnxruntime-web · 100 predictions · warm session
+  - 50+ temporal features per session — pynput capture → feature pipeline: keystroke timing, mouse velocity, cadence, drift
+  - SHAP explainability per prediction — TreeSHAP on the exported ONNX model — auditable per-typing-session attribution
+Architecture layers: SIGNAL CAPTURE → FEATURE ENGINE → INFERENCE → EXPERIENCE
+
+### Full story
+## The story
+
+Stress is a physiological signal that shows up in how you type before you'd ever admit
+it in a survey. Self-reporting is the default tool, and it's gameable and skipped. The
+insight: your keystroke timing, mouse velocity, and typing cadence are behavioural
+signals nobody can fake easily.
+
+The first version polled a REST endpoint every few seconds — 900ms of staleness on a
+realtime problem. I rewrote the transport to WebSockets, pushed updates under 50ms, and
+added mouse dynamics alongside the keyboard features. Then the bigger question: where
+should the model run?
+
+**The browser won.** Exporting XGBoost to ONNX and running it with onnxruntime-web
+meant zero server round-trip, zero data leaving the machine, and offline coaching via
+WebLLM. Under 20ms per prediction, with SHAP explaining every score. The model got
+small enough to trust and auditable end to end — that combination is the real
+contribution, more than any single benchmark.
+
+## UNIFIED-DTA (2025) — ML Researcher · Builder
+URL: https://itzpratham.in/work/unified-dta
+Blurb: Drug-target affinity prediction fusing protein language models with graph networks.
+Problem: Predicting how well a drug binds a target protein is a core bottleneck in discovery. Sequence-only models miss molecular structure; structure-only models miss protein context. The field needed both, jointly. 
+Approach: Fused Meta's ESM-2 protein language model with Graph Isomorphism Networks for joint molecular + protein representation learning. Trained on BindingDB, DAVIS and KIBA with concordance index and MSE. Containerized inference with Docker + FastAPI (LRU-cached), extended with a drug-generation module using the DoubleSG architecture. 
+Hard part: Fusing two very different representations — protein language embeddings and molecular graphs — without one drowning the other, then keeping training stable across mixed dtypes. 
+Shipped: A Dockerized, LRU-cached inference API over three community-trusted benchmarks, plus a novel-compound generation module — reproducible end to end. 
+Stack: PyTorch, ESM-2, GNN, FastAPI, RDKit, Docker
+Evidence:
+  - CI 0.841 / MSE competitive on BindingDB — same split protocol as the benchmark leaders; ESM-2 embeddings frozen, GIN trained 60 epochs, seed-pinned
+  - LRU-cached inference API — FastAPI + functools LRU, warm cache hit < 5ms, cold pass ~40ms (single CPU container)
+  - Reproducible pipeline — Dockerfile + pinned deps + fixed seeds — `docker run` reproduces the reported numbers
+Architecture layers: DATA LAYER → REPRESENTATION → TRAINING → SERVING
+
+### Full story
+## The story
+
+Drug-target affinity is the bottleneck in discovery: knowing how well a molecule binds
+a protein decides what gets synthesised. Sequence-only models see the protein but miss
+the molecule's shape; structure-only models see the shape but miss the protein's
+context. Both halves of the signal exist — nobody had fused them properly.
+
+The fusion is the contribution: ESM-2's language embeddings describe the protein, GIN
+describes the molecular graph, and a joint head learns where they agree. Training it
+meant fighting mixed dtypes and seed drift until numbers were reproducible — the same
+split protocol as the benchmark leaders, so the CI/MSE are comparable, not decorative.
+
+**Reproducibility was the discipline.** Dockerfile with pinned deps, fixed seeds, one
+command to reproduce. The API is LRU-cached — warm hits in single-digit milliseconds.
+If you're going to claim numbers in drug discovery, they have to survive a fresh
+container.
+
+## SENTINEL (2025) — Co-builder · Multi-agent AI
+URL: https://itzpratham.in/work/sentinel
+Blurb: Privacy-first enterprise wellbeing analytics with a 3-agent AI orchestra.
+Problem: Burnout is a business risk HR can't see until it's expensive. Any solution had to be privacy-first — anonymized signals, not surveillance — and answer plain-language questions, not just dashboards. 
+Approach: Co-built a FastAPI + React platform scoring burnout risk from anonymized interaction patterns, with a graph-based module for team-collaboration insight. Implemented a 3-agent orchestration system — burnout scoring, talent discovery, team health — enabling natural-language queries over workforce analytics. 
+Hard part: Keeping natural-language queries over workforce analytics under a second — pre-aggregating graph features per team turned seconds of latency into ~300ms without losing nuance. 
+Shipped: Three specialized agents (burnout, talent, team health) on anonymized signals only — plain-language answers over workforce analytics, privacy intact by architecture. 
+Stack: FastAPI, React, Graph Analytics, Multi-Agent AI
+Evidence:
+  - NL queries ~300ms after pre-aggregation — per-team graph features pre-aggregated nightly; measured on 50k interaction events, FastAPI + async pool
+  - Privacy by architecture — anonymized interaction patterns only — no PII in the pipeline by design, not by policy
+  - 3-agent orchestration — routing layer + per-agent schema; each agent scores independently with its own evidence trail
+Architecture layers: SIGNAL INTAKE → GRAPH LAYER → AGENT ORCHESTRA → INTERFACE
+
+### Full story
+## The story
+
+Burnout is the most expensive invisible problem in a company — and the moment you
+build anything to measure it, you're one bad decision away from surveillance. So the
+privacy constraint was set before a single line of code: anonymized patterns only,
+no identity in the pipeline, by architecture not policy.
+
+Three different questions needed three different data shapes. Burnout scoring wants
+individual behavioural signals; talent discovery wants strengths and patterns; team
+health wants collaboration structure. One model would blur all three. Three
+specialists with a routing layer keep each one small, testable, and accountable.
+
+**The latency fight was the engineering story.** Natural-language queries over
+workforce analytics started at seconds. Pre-aggregating graph features per team
+nightly turned that into ~300ms — the same insight, the same nuance, just arranged
+before anyone asks.
+
+## OMNISECTESTER (2026) — Builder · Security tooling
+URL: https://itzpratham.in/work/omnisectester
+Blurb: A nation-state-grade, defense-in-depth security testing framework in one CLI.
+Problem: Security testing is fragmented — a different tool for web, mobile, cloud, AI/LLM, hardware. Teams need one disciplined surface to audit everything from a single command line. 
+Approach: Designed and shipped a defense-in-depth testing framework covering web apps, extensions, desktop, mobile, cloud, AI/LLM, hardware and supply chain — from one CLI. Built as a focused, extensible engine with per-surface adapters. 
+Hard part: Seven attack surfaces, one disciplined CLI — the engine had to stay small while every adapter stayed independently shippable, so a single bad dependency could never poison the whole tool. 
+Shipped: A defense-in-depth security framework covering 7 surfaces from a single command line, with per-surface adapters that update independently. 
+Stack: JavaScript, CLI, Security, Automation
+Evidence:
+  - 7 attack surfaces, one CLI — web, extensions, desktop, mobile, cloud, AI/LLM, hardware + supply-chain adapters — engine decoupled from adapters
+  - Defense-in-depth layering — per-surface checks run in ordered layers; a failure in one adapter cannot abort the surface sweep
+  - Independent adapter shipping — adapter manifest + schema per surface — each updates without a core release
+Architecture layers: TARGET → ADAPTERS → ENGINE → OUTPUT
+
+### Full story
+## The story
+
+Security tooling has a fragmentation problem: a different scanner for every surface,
+each with its own syntax, its own CI wiring, its own blind spots. Teams don't adopt
+seven tools — they adopt one workflow. So the product decision came first: one
+disciplined CLI, seven surfaces.
+
+The engine is deliberately boring. The interesting part is the adapter contract —
+every surface ships independently, so a bad dependency in the cloud adapter can never
+poison the web sweeper. That split happened because the first version was monolithic
+and one wrong package broke everything.
+
+**Defense-in-depth is the design thesis.** Any single scanner is bypassable; layered
+checks mean a finding survives even when one layer is blind. That's the difference
+between a tool that reports and a framework that holds.
+
+## Contact
+Email: iam1nahata@gmail.com · GitHub: https://github.com/iAMv1 · LinkedIn: https://linkedin.com/in/iamprathamnahata

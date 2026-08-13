@@ -3,6 +3,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Tilt } from "@/components/motion/tilt";
 import { Process } from "@/components/sections/process";
 import { SiteShell } from "@/components/layout/site-shell";
+import { processContent } from "@/content/site";
 
 export const metadata: Metadata = { title: "Process — Pratham Nahata", description: "How I build: a live terminal session of the process — discover, design, build, polish. 2 weeks not 2 months, everything proven." };
 
@@ -38,7 +39,7 @@ export default function ProcessPage() {
     <SiteShell>
       <main id="main" className="flex-1">
         <div className="pt-[72px]">
-          <Process />
+          <Process process={processContent()} />
         </div>
 
         <section className="px-[clamp(20px,4vw,48px)] pb-[clamp(64px,8vh,110px)]">

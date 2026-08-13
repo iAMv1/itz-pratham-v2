@@ -3,9 +3,9 @@
 import { Reveal } from "@/components/motion/reveal";
 import { CountUp } from "@/components/motion/count-up";
 import { RangoliField } from "@/components/canvas/fields";
-import { profile } from "@/data/profile";
+import type { About } from "@/content/site";
 
-export function Wins() {
+export function Wins({ wins }: { wins: About["wins"] }) {
   return (
     <section id="wins" className="bg-bandhani relative bg-saffron px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <RangoliField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
@@ -27,24 +27,24 @@ export function Wins() {
         <Reveal>
           <article className="mt-10 grid items-center gap-[clamp(18px,3vw,40px)] border-2 border-ink bg-ink-2 p-[clamp(20px,3vw,34px)] text-paper shadow-[8px_8px_0_0_var(--shadow-ink)] md:grid-cols-[auto_1fr_auto]">
             <CountUp
-              value={profile.wins.featured.value}
-              suffix={profile.wins.featured.suffix}
+              value={wins.featured.value}
+              suffix={wins.featured.suffix}
               className="font-display text-[clamp(3rem,6vw,5rem)] font-semibold leading-none text-saffron"
             />
             <div>
               <h3 className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-semibold uppercase leading-tight">
-                {profile.wins.featured.title}
+                {wins.featured.title}
               </h3>
-              <p className="mt-1.5 max-w-[60ch] text-[15px] text-paper/70">{profile.wins.featured.desc}</p>
+              <p className="mt-1.5 max-w-[60ch] text-[15px] text-paper/70">{wins.featured.desc}</p>
             </div>
             <span className="hidden border border-saffron px-3 py-1.5 font-mono text-[11px] tracking-widest text-saffron md:block">
-              {profile.wins.featured.tag}
+              {wins.featured.tag}
             </span>
           </article>
         </Reveal>
 
         <ul className="mt-6 border-t-2 border-ink">
-          {profile.wins.list.map((w, i) => (
+          {wins.list.map((w, i) => (
             <Reveal key={w.num} delay={i * 0.05}>
               <li className="grid items-baseline gap-4 border-b border-ink/25 px-2 py-4 font-mono text-[14px] tracking-wide transition-colors duration-150 hover:bg-paper-2/60 md:grid-cols-[48px_1fr_auto]">
                 <span className="text-xs text-cobalt">{w.num}</span>
@@ -62,10 +62,10 @@ export function Wins() {
   );
 }
 
-export function ProofBand() {
+export function ProofBand({ band }: { band: About["proofBand"] }) {
   return (
     <div aria-hidden className="grid grid-cols-2 border-y-[3px] border-ink bg-saffron md:grid-cols-4">
-      {profile.proofBand.map((s, i) => (
+      {band.map((s, i) => (
         <div
           key={s.label}
           className={`flex flex-col gap-2 p-[clamp(24px,3.5vw,40px)] ${

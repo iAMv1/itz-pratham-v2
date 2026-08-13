@@ -37,6 +37,21 @@ flow:
   - Graph team analysis
   - Talent discovery agent
   - Natural-language queries
+architecture:
+  - title: SIGNAL INTAKE
+    nodes: [Anonymized interaction patterns, PII-free by design]
+    via: nightly pre-aggregation
+  - title: GRAPH LAYER
+    nodes: [Team-collaboration graph, Pre-aggregated features]
+    via: ~300ms queries
+  - title: AGENT ORCHESTRA
+    nodes: [Burnout scoring, Talent discovery, Team health]
+    via: routing layer + per-agent schema
+  - title: INTERFACE
+    nodes: [Natural-language answers, Cohort reports]
+receipts:
+  - label: BENCHMARK — METHODOLOGY
+    href: /receipts/sentinel/benchmark.md
 href: https://github.com/iAMv1
 art: /assets/art-sentinel.jpg
 # screenshot: /assets/shots/sentinel.png

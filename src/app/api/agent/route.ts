@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { unresolved, timelineMachine, profile } from "@/data/profile";
+import { profile } from "@/data/profile";
 import { allProjects, getProject } from "@/content/projects";
+import { about, timeline, unresolved, processContent } from "@/content/site";
 
 /**
  * PRATHAM TOOLKIT — agent-readable actions (WebMCP-aligned).
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
   const slug = searchParams.get("slug") ?? "";
 
   const ok = (data: unknown, extra: Record<string, unknown> = {}) =>
-    NextResponse.json({ action, ok: true, ...extra, data });
+    NextResponse.json({ action, ok: true, ...extra, data }, { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } });
 
   const err = (message: string) => NextResponse.json({ action, ok: false, error: message }, { status: 400 });
 
@@ -31,9 +32,9 @@ export async function GET(request: Request) {
         email: profile.email,
         rota: profile.rota,
         deck: profile.deck,
-        stats: profile.stats,
-        facts: profile.facts,
-        manifesto: profile.manifesto,
+        stats: about().stats,
+        facts: about().facts,
+        manifesto: about().manifesto,
       });
 
     case "find_project": {
@@ -76,10 +77,10 @@ export async function GET(request: Request) {
     }
 
     case "get_experience":
-      return ok({ background: profile.background, wins: profile.wins, timeline: timelineMachine?.years ?? null });
+      return ok({ background: about().background, wins: about().wins, timeline: timeline().years, facts: about().facts });
 
     case "get_skills":
-      return ok({ groups: profile.stack, process: { steps: profile.process.steps, tools: profile.process.tools, stats: profile.process.stats } });
+      return ok({ groups: profile.stack, process: { steps: processContent().steps, tools: processContent().tools, stats: processContent().stats } });
 
     case "get_resume":
       return ok({ pdf: profile.resume, page: "https://itzpratham.in/resume" });
@@ -104,7 +105,7 @@ export async function GET(request: Request) {
           (c.evidence ?? []).map((e) => ({ project: c.slug, claim: e.claim, method: e.method }))
         )
         .filter((e) => e.claim.toLowerCase().includes(q) || e.method.toLowerCase().includes(q));
-      const unresolvedHits = unresolved
+      const unresolvedHits = unresolved().items
         .filter((u) => (u.title + u.understand + u.dont + u.trying + u.reading).toLowerCase().includes(q))
         .map((u) => ({ project: "unresolved", claim: u.title, method: u.next }));
       return ok({ evidence: hits, relatedOpenQuestions: unresolvedHits }, { query: q, count: hits.length });

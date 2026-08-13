@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { timelineMachine } from "@/data/profile";
+
 
 /** The Timeline Machine — a media scrubber used as a time machine across the builder's years. */
-export function TimelineMachine() {
+export function TimelineMachine({ years }: { years: { year: string; stage: string; building: string; learning: string; identity: string }[] }) {
   const reduced = useReducedMotion();
   const [idx, setIdx] = useState(2); // default: 2025
-  const current = timelineMachine.years[idx];
+  const current = years[idx];
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIdx(Number(e.target.value));
@@ -55,14 +55,14 @@ export function TimelineMachine() {
         <input
           type="range"
           min={0}
-          max={timelineMachine.years.length - 1}
+          max={years.length - 1}
           value={idx}
           onChange={onInput}
           aria-label="Scrub through the timeline machine"
           className="w-full cursor-ew-resize appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:border [&::-webkit-slider-runnable-track]:border-ink [&::-webkit-slider-runnable-track]:bg-paper [&::-webkit-slider-thumb]:mt-[-7px] [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-ink [&::-webkit-slider-thumb]:bg-saffron"
         />
         <div className="mt-2 flex justify-between font-mono text-[10px] tracking-widest text-muted-foreground">
-          {timelineMachine.years.map((y, i) => (
+          {years.map((y, i) => (
             <button
               key={y.year}
               type="button"

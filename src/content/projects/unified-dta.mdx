@@ -39,6 +39,23 @@ flow:
   - Joint representation
   - CI / MSE benchmarks
   - Dockerized API
+architecture:
+  - title: DATA LAYER
+    nodes: [BindingDB, DAVIS, KIBA]
+    via: same split protocol as leaders
+  - title: REPRESENTATION
+    nodes: [ESM-2 protein embeddings, GIN molecular graph]
+    via: joint fusion head
+  - title: TRAINING
+    nodes: [CI / MSE objectives, Seed-pinned, Mixed-dtype normalization]
+    via: frozen ESM-2
+  - title: SERVING
+    nodes: [FastAPI, LRU cache, Docker container]
+receipts:
+  - label: BENCHMARK — METHODOLOGY
+    href: /receipts/unified-dta/benchmark.md
+  - label: REPO
+    href: https://github.com/iAMv1/unified-dta-project
 href: https://github.com/iAMv1/unified-dta-project
 art: /assets/art-dta.jpg
 # screenshot: /assets/shots/unified-dta.png

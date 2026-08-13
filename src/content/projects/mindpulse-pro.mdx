@@ -42,6 +42,23 @@ flow:
   - XGBoost → ONNX
   - Browser inference <20ms
   - SHAP + WebLLM coach
+architecture:
+  - title: SIGNAL CAPTURE
+    nodes: [Keystroke timing, Mouse velocity, Cadence & drift]
+    via: pynput → feature pipeline
+  - title: FEATURE ENGINE
+    nodes: [50+ temporal features, Session windows, Privacy filter]
+    via: WebSockets < 50ms
+  - title: INFERENCE
+    nodes: [XGBoost → ONNX, onnxruntime-web, TreeSHAP explainer]
+    via: zero server round-trip
+  - title: EXPERIENCE
+    nodes: [Next.js dashboard, Tauri desktop, WebLLM coach]
+receipts:
+  - label: BENCHMARK — METHODOLOGY
+    href: /receipts/mindpulse-pro/benchmark.md
+  - label: REPO
+    href: https://github.com/iAMv1/mindpulse
 href: https://github.com/iAMv1/mindpulse
 art: /assets/art-mindpulse.jpg
 # screenshot: /assets/shots/mindpulse.png   ← drop a real product screenshot here and it auto-renders

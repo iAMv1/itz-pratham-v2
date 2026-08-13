@@ -1,0 +1,72 @@
+---
+title: pratham@nahata — bash — 80×24
+lines:
+  - kind: comment
+    text: "# shipping production systems since 2023"
+  - kind: cmd
+    text: pratham --plan --stack fastapi nextjs pytorch
+    cursor: true
+  - kind: step
+    num: 01 · DISCOVER
+    text: unpack the problem — talk to real humans, find the actual pain
+  - kind: step
+    num: 02 · DESIGN
+    text: sketch the product — type, motion language, lo-fi prototypes
+  - kind: step
+    num: 03 · BUILD
+    text: ship fast — semantic HTML, design tokens, CI green
+  - kind: step
+    num: 04 · POLISH
+    text: measure & refine — micro-interactions, a11y, perf, make it hold up in production
+  - kind: ok
+    text: "✓ done in 2 weeks, not 2 months — you keep the source, I keep shipping"
+steps:
+  - num: "01"
+    title: DISCOVER
+    sub: talk to real humans · find the pain
+    cmd: pratham --plan
+    out: unpack the problem — real users, real constraints, the actual pain underneath the ask
+    artifacts: [USER INTERVIEWS, PAIN MAP, ONE-PAGE BRIEF]
+    proof:
+      label: THE PROBLEMS →
+      href: /work
+  - num: "02"
+    title: DESIGN
+    sub: type · motion language · lo-fi
+    cmd: pratham --design
+    out: sketch the product — type scale, motion language, lo-fi prototypes you can click
+    artifacts: [MOODBOARDS, DESIGN TOKENS, LO-FI PROTOTYPE]
+    proof:
+      label: DESIGN EVIDENCE →
+      href: /about
+  - num: "03"
+    title: BUILD
+    sub: semantic HTML · tokens · fast
+    cmd: pratham --build
+    out: ship fast — semantic markup, tokens not chaos, CI-green, preview links every day
+    artifacts: [COMPONENT LIBRARY, CI GREEN, DAILY PREVIEWS]
+    proof:
+      label: ARCHITECTURE →
+      href: /work/mindpulse-pro#system-flow
+  - num: "04"
+    title: POLISH
+    sub: a11y · perf · production-ready
+    cmd: pratham --polish
+    out: measure & refine — a11y pass, perf budget, load tests until it holds up in production
+    artifacts: [A11Y PASS, PERF BUDGET, SHIP LOG]
+    proof:
+      label: MEASURED →
+      href: /process#perf
+stats:
+  - value: "4"
+    label: PHASES
+  - value: 2WK
+    label: AVG LOOP
+  - value: AA
+    label: CONTRAST
+  - value: 100%
+    label: SHIPPED
+tools:
+  - STACK — FastAPI · Next.js · PyTorch · ONNX · Supabase · Docker
+  - CRAFT — motion-first · tokens · a11y · perf budgets
+---

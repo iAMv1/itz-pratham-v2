@@ -10,6 +10,9 @@ import { RealityDialog } from "@/components/ui/reality-dialog";
 import { ProjectQuickView } from "@/components/ui/project-quickview";
 import { ArtImage } from "@/components/ui/art-image";
 import { allProjects } from "@/content/projects";
+import { about } from "@/content/site";
+import { Vibe } from "@/components/sections/vibe";
+import { Wins } from "@/components/sections/wins";
 
 export default function Home() {
   const featured = allProjects().slice(0, 3);
@@ -17,7 +20,7 @@ export default function Home() {
   return (
     <SiteShell rail>
       <main id="main" className="flex-1">
-        <Hero />
+        <Hero stats={about().stats} />
         <SkillsMarquee />
         <NameMarquee />
 
@@ -92,6 +95,12 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        {/* proof of work — the receipts */}
+        <Wins wins={about().wins} />
+
+        {/* craft — what I optimize for */}
+        <Vibe manifesto={about().manifesto} cards={about().cards} facts={about().facts} />
 
         {/* CTA band */}
         <section id="talk" className="scroll-mt-24 border-y-2 border-ink bg-ink-2 px-[clamp(20px,4vw,48px)] py-[clamp(56px,8vh,90px)] text-paper">
