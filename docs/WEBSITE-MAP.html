@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>itzpratham.in — Complete Website Map</title>
+<style>
+  :root {
+    --paper: #f4efe6; --paper-2: #fffdf8; --ink: #051024; --cobalt: #1d5b9e;
+    --saffron: #f58e20; --saffron-deep: #9c5200; --mint: #8de254; --muted: #4a5266;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; padding: 40px 24px 80px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  header { border: 3px solid var(--ink); background: var(--paper-2); padding: 28px 32px; box-shadow: 8px 8px 0 var(--ink); margin-bottom: 40px; }
+  header h1 { font-size: 34px; letter-spacing: .02em; text-transform: uppercase; }
+  header h1 span { color: var(--saffron-deep); }
+  header p { margin-top: 8px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .14em; color: var(--muted); }
+  .legend { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; font-family: ui-monospace, monospace; font-size: 11px; }
+  .badge { display: inline-block; padding: 2px 8px; border: 1.5px solid var(--ink); font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; vertical-align: middle; }
+  .b-hard { background: var(--saffron); }
+  .b-data { background: var(--mint); }
+  .b-both { background: var(--marigold, #f9ce34); }
+  nav { position: sticky; top: 12px; background: var(--paper-2); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 14px 18px; margin-bottom: 32px; font-family: ui-monospace, monospace; font-size: 12px; z-index: 5; }
+  nav a { color: var(--cobalt); text-decoration: none; margin-right: 14px; white-space: nowrap; }
+  nav a:hover { text-decoration: underline; }
+  section.page { border: 2px solid var(--ink); background: var(--paper-2); box-shadow: 6px 6px 0 var(--ink); margin-bottom: 36px; overflow: hidden; }
+  .phead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; background: var(--ink); color: var(--paper); padding: 12px 20px; flex-wrap: wrap; }
+  .phead h2 { font-size: 20px; text-transform: uppercase; letter-spacing: .04em; }
+  .phead .route { font-family: ui-monospace, monospace; font-size: 11px; color: var(--saffron); letter-spacing: .12em; }
+  .pbody { padding: 20px; }
+  .flowline { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); margin-bottom: 14px; letter-spacing: .03em; }
+  .flowline b { color: var(--ink); font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+  th { text-align: left; font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; color: var(--muted); border-bottom: 2px solid var(--ink); padding: 8px 10px; }
+  td { border-bottom: 1px solid rgba(5,16,36,.15); padding: 8px 10px; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.comp { font-family: ui-monospace, monospace; font-size: 11.5px; }
+  td.code { font-family: ui-monospace, monospace; font-size: 11px; color: var(--cobalt); }
+  .note { background: #fdf6e3; border-left: 3px solid var(--saffron); padding: 10px 14px; font-size: 13px; margin-top: 12px; font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); }
+  h3.sub { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; margin: 18px 0 8px; border-bottom: 1px solid rgba(5,16,36,.2); padding-bottom: 4px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+  footer { margin-top: 40px; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>itzpratham.in — <span>complete website map</span></h1>
+  <p>EVERY PAGE · EVERY COMPONENT · WHAT IS HARDCODED VS DATA-DRIVEN — SOURCE-VERIFIED</p>
+  <div class="legend">
+    <span><span class="badge b-hard">HARDCODED</span> = edit code to change</span>
+    <span><span class="badge b-data">DATA</span> = edit a content file / MDX</span>
+    <span><span class="badge b-both">MIXED</span> = some fields data, some code</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#home">1. Home</a><a href="#work">2. Work</a><a href="#case">3. Case Study</a><a href="#about">4. About</a><a href="#process">5. Process</a><a href="#contact">6. Contact</a><a href="#resume">7. Resume</a><a href="#progress">8. Progress</a><a href="#testing">9. Testing</a><a href="#errors">10. 404/500</a><a href="#data">11. Data Layer</a>
+</nav>
+
+<!-- ============ 1. HOME ============ -->
+<section class="page" id="home">
+  <div class="phead"><h2>1 · Home</h2><span class="route">/ — src/app/page.tsx</span></div>
+  <div class="pbody">
+    <p class="flowline">Shell (<b>SiteShell</b>) → <b>Preloader</b> → <b>Hero</b> → <b>SkillsMarquee</b> → <b>NameMarquee</b> → Capability band → Featured cards → CTA band → <b>Footer</b></p>
+    <table>
+      <tr><th>Section</th><th>Components</th><th>Hardcoded</th><th>Change via</th></tr>
+      <tr><td>Preloader</td><td class="comp">Preloader (GSAP curtain, ENTER skip)</td><td class="code">storyboard + meta lines</td><td class="code">preloader.tsx</td></tr>
+      <tr><td>Hero</td><td class="comp">Hero · HeroBackdrop · HeroAscii · NowBuilding · Annotate · Magnetic · Spotlight · CountUp</td><td class="code">deck line, WHAT I DO ▾, eyebrow, CTA labels</td><td class="code">profile.ts (name/email/rota) + about.mdx (stats)</td></tr>
+      <tr><td>Skills marquee</td><td class="comp">SkillsMarquee</td><td class="code">—</td><td class="code">profile.skillsMarquee</td></tr>
+      <tr><td>Name marquee</td><td class="comp">NameMarquee</td><td class="code">—</td><td class="code">profile.nameMarquee</td></tr>
+      <tr><td>Capability band</td><td class="comp">inline</td><td class="code"><span class="badge b-hard">HARDCODED</span> 4 items</td><td class="code">page.tsx L28-33</td></tr>
+      <tr><td>Featured work</td><td class="comp">MaskTitle · KineticArt · FloatingStats · RealityDialog · ProjectQuickView · ArtImage</td><td class="code">chip, heading, ALL PROJECTS, OPEN QUICK VIEW</td><td class="code"><span class="badge b-data">MDX</span> top 3 projects</td></tr>
+      <tr><td>CTA band</td><td class="comp">inline</td><td class="code"><span class="badge b-hard">HARDCODED</span> शुक्रिया · LET'S BUILD · email · buttons</td><td class="code">page.tsx L100-138</td></tr>
+    </table>
+    <div class="note">Rail (home only): fixed left index 00 TOP / 01 WORK / 02 TALK — sections hardcoded in rail.tsx.</div>
+  </div>
+</section>
+
+<!-- ============ 2. WORK ============ -->
+<section class="page" id="work">
+  <div class="phead"><h2>2 · Work</h2><span class="route">/work — src/app/work/page.tsx</span></div>
+  <div class="pbody">
+    <p class="flowline">Chip → <b>MaskTitle "SELECTED PROJECTS"</b> → intro → <b>काम watermark</b> → 4 cards (KineticArt → LookOut → ArtImage + FloatingStats) → footer bar</p>
+    <table>
+      <tr><th>Element</th><th>Components</th><th>Hardcoded</th><th>Change via</th></tr>
+      <tr><td>Chip WORK · 01—04</td><td class="comp">inline</td><td class="code"><span class="badge b-hard">HARD</span></td><td class="code">page</td></tr>
+      <tr><td>Heading</td><td class="comp">MaskTitle ["SELECTED","PROJECTS"]</td><td class="code"><span class="badge b-hard">HARD</span></td><td class="code">page</td></tr>
+      <tr><td>Hindi watermark</td><td class="comp">wm-drift + Yatra One</td><td class="code"><span class="badge b-hard">HARD</span> text = काम</td><td class="code">page L19-21</td></tr>
+      <tr><td>Intro paragraph</td><td class="comp">inline</td><td class="code"><span class="badge b-hard">HARD</span></td><td class="code">page</td></tr>
+      <tr><td>4 cards</td><td class="comp">Reveal→Link→KineticArt→LookOut→ArtImage + FloatingStats</td><td class="code">CTA label OPEN CASE STUDY</td><td class="code"><span class="badge b-data">MDX</span> art/role/title/blurb/outcome/metrics</td></tr>
+      <tr><td>Footer bar</td><td class="comp">inline</td><td class="code"><span class="badge b-hard">HARD</span> 4 FEATURED · EXPLORE ALL REPOS</td><td class="code">page L81-95</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 3. CASE STUDY ============ -->
+<section class="page" id="case">
+  <div class="phead"><h2>3 · Case Study (template for all 4)</h2><span class="route">/work/[slug] — src/app/work/[slug]/page.tsx</span></div>
+  <div class="pbody">
+    <p class="flowline">Header + AT A GLANCE → System Flow → PROBLEM/APPROACH/HARD PART/SHIPPED → Architecture → Full Story → Receipts → Impact → WHAT IF → Dive → Repo inside → CTAs + NEXT</p>
+    <table>
+      <tr><th>Section</th><th>Components</th><th>Hardcoded</th><th>Change via (MDX frontmatter)</th></tr>
+      <tr><td>Header</td><td class="comp">ArtImage (screenshot preferred) + AT A GLANCE + stack chips + disclaimer</td><td class="code">labels</td><td class="code">art / screenshot / status / outcome / limitations / disclaimer / stack</td></tr>
+      <tr><td>System flow</td><td class="comp">FlowDiagram</td><td class="code">label</td><td class="code">flow:</td></tr>
+      <tr><td>Narrative ×4</td><td class="comp">inline 2-col</td><td class="code">headings</td><td class="code">challenge / approach / hard / shipped / impact[0]</td></tr>
+      <tr><td>Architecture</td><td class="comp">ArchitectureDiagram</td><td class="code">heading + sub</td><td class="code">architecture: (layers + via)</td></tr>
+      <tr><td>Full story</td><td class="comp">markdownContentClass essay</td><td class="code">heading</td><td class="code"><b>MDX body</b></td></tr>
+      <tr><td>Receipts</td><td class="comp">3-link grid + claim/method grid + chips + private label</td><td class="code">labels</td><td class="code">href / evidence: / receipts: / readme:</td></tr>
+      <tr><td>Impact</td><td class="comp">inline list</td><td class="code">heading</td><td class="code">impact:</td></tr>
+      <tr><td>WHAT IF</td><td class="comp">details ×2</td><td class="code">heading + intro</td><td class="code">counterfactuals:</td></tr>
+      <tr><td>Dive deeper</td><td class="comp">details ×4</td><td class="code">heading + intro</td><td class="code">dive:</td></tr>
+      <tr><td>Repo inside</td><td class="comp">RepoFrame (README iframe)</td><td class="code">heading</td><td class="code">readme: (absent = private label)</td></tr>
+      <tr><td>CTAs</td><td class="comp">GITHUB ↗ · STAR THE REPO ★ · VtLink NEXT</td><td class="code">labels</td><td class="code">href + next auto</td></tr>
+    </table>
+    <div class="note">Files: src/content/projects/mindpulse-pro.mdx · unified-dta.mdx · sentinel.mdx · omnisectester.mdx — one file = one case study, auto-rendered everywhere.</div>
+  </div>
+</section>
+
+<!-- ============ 4. ABOUT ============ -->
+<section class="page" id="about">
+  <div class="phead"><h2>4 · About</h2><span class="route">/about — src/app/about/page.tsx</span></div>
+  <div class="pbody">
+    <p class="flowline">Backdrop + शिल्प → header → intro + facts → UNRESOLVED → Commits → Metro → Timeline Machine → Off the clock → Background timeline</p>
+    <table>
+      <tr><th>Section</th><th>Components</th><th>Hardcoded</th><th>Change via</th></tr>
+      <tr><td>Backdrop</td><td class="comp">PaisleyField + rings + watermark</td><td class="code"><span class="badge b-hard">HARD</span></td><td class="code">page</td></tr>
+      <tr><td>Header + intro</td><td class="comp">inline + AnnotationCard</td><td class="code"><span class="badge b-hard">HARD</span> copy</td><td class="code">page L37-47</td></tr>
+      <tr><td>Facts</td><td class="comp">inline</td><td class="code">—</td><td class="code">about.mdx facts:</td></tr>
+      <tr><td>UNRESOLVED</td><td class="comp">details ×4</td><td class="code">labels</td><td class="code">unresolved.mdx</td></tr>
+      <tr><td>Commits</td><td class="comp">ContributionGraph</td><td class="code">—</td><td class="code">live GitHub API</td></tr>
+      <tr><td>Metro</td><td class="comp">MetroMap</td><td class="code">—</td><td class="code">metro.mdx</td></tr>
+      <tr><td>Timeline machine</td><td class="comp">TimelineMachine</td><td class="code">—</td><td class="code">timeline.mdx</td></tr>
+      <tr><td>Off the clock</td><td class="comp">books + setup cards</td><td class="code">labels</td><td class="code">about.mdx</td></tr>
+      <tr><td>Background timeline</td><td class="comp">inline articles</td><td class="code">labels</td><td class="code">about.mdx</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 5. PROCESS ============ -->
+<section class="page" id="process">
+  <div class="phead"><h2>5 · Process</h2><span class="route">/process — src/app/process/page.tsx + components/sections/process.tsx</span></div>
+  <div class="pbody">
+    <div class="grid2">
+      <div>
+        <h3 class="sub">PRINCIPLES (4 cards)</h3>
+        <table>
+          <tr><th>Component</th><th>Status</th></tr>
+          <tr><td class="comp">Reveal → Tilt → article + WHY IT MATTERS details</td><td class="code"><span class="badge b-hard">HARD</span> — PRINCIPLES const in page.tsx</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 class="sub">THE PROCESS section</h3>
+        <table>
+          <tr><th>Element</th><th>Status</th></tr>
+          <tr><td class="comp">JaliField · AnnotationCard · terminal (CmdBlock)</td><td class="code">steps from process.mdx; comment lines hardcoded</td></tr>
+          <tr><td class="comp">Steps rail + proof links</td><td class="code"><span class="badge b-data">MDX</span> process.mdx</td></tr>
+          <tr><td class="comp">MEASURED band</td><td class="code"><span class="badge b-data">AUTO</span> performance.ts (measured)</td></tr>
+          <tr><td class="comp">TESTED-LIKE-A-PRODUCT → /testing</td><td class="code"><span class="badge b-hard">HARD</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. CONTACT ============ -->
+<section class="page" id="contact">
+  <div class="phead"><h2>6 · Contact</h2><span class="route">/contact — components/sections/contact.tsx</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>Element</th><th>Components</th><th>Status</th></tr>
+      <tr><td>Backdrop</td><td class="comp">MehndiField</td><td class="code">hardcoded styling</td></tr>
+      <tr><td>Heading</td><td class="comp">inline "A PROBLEM WORTH SOLVING?"</td><td class="code"><span class="badge b-hard">HARD</span></td></tr>
+      <tr><td>Email CTA + intake guidance</td><td class="comp">button (clipboard copy)</td><td class="code">email = data; guidance = hardcoded</td></tr>
+      <tr><td>Resume download</td><td class="comp">link</td><td class="code">profile.resume (data)</td></tr>
+      <tr><td>Socials</td><td class="comp">links</td><td class="code">profile.links (data)</td></tr>
+      <tr><td>Live GitHub feed</td><td class="comp">useLatestRepos + langColor + relativeTime</td><td class="code"><span class="badge b-data">LIVE</span> API + 5-min cache + fallback</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 7. RESUME ============ -->
+<section class="page" id="resume">
+  <div class="phead"><h2>7 · Resume</h2><span class="route">/resume — src/app/resume/page.tsx</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>Element</th><th>Status</th></tr>
+      <tr><td class="comp">Embedded PDF viewer iframe</td><td class="code">PDF path = data (profile.resume)</td></tr>
+      <tr><td class="comp">DOWNLOAD PDF (PDF) · OPEN IN TAB</td><td class="code">labels hardcoded</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 8. PROGRESS ============ -->
+<section class="page" id="progress">
+  <div class="phead"><h2>8 · Progress</h2><span class="route">/progress — src/app/progress/page.tsx + content/meta/progress.mdx</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>Element</th><th>Status</th></tr>
+      <tr><td class="comp">Build-log table rows (21 entries)</td><td class="code"><span class="badge b-data">DATA</span> — content/meta/progress.mdx (items: piece/wave/status/note)</td></tr>
+      <tr><td class="comp">Header copy, THE BAR line</td><td class="code"><span class="badge b-hard">HARD</span> — page copy</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 9. TESTING ============ -->
+<section class="page" id="testing">
+  <div class="phead"><h2>9 · Testing</h2><span class="route">/testing — src/app/testing/page.tsx + content/meta/testing.mdx</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>Element</th><th>Status</th></tr>
+      <tr><td class="comp">Suites + flows (5 suites, 20+ flows)</td><td class="code"><span class="badge b-data">DATA</span> — content/meta/testing.mdx (suites: name/flows[])</td></tr>
+      <tr><td class="comp">Flow count in intro ("Playwright · N flows")</td><td class="code"><span class="badge b-data">AUTO</span> — computed from the data</td></tr>
+      <tr><td class="comp">Header copy, run-it-yourself note</td><td class="code"><span class="badge b-hard">HARD</span> — page copy</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 10. ERRORS ============ -->
+<section class="page" id="errors">
+  <div class="phead"><h2>10 · 404 / 500</h2><span class="route">src/app/not-found.tsx · src/app/error.tsx</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>Element</th><th>Status</th></tr>
+      <tr><td class="comp">PeacockFlock (bobbing flock) + PeacockMascot (cursor eyes)</td><td class="code"><span class="badge b-hard">HARD</span> — copy, links, layout all in the files</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 11. DATA LAYER ============ -->
+<section class="page" id="data">
+  <div class="phead"><h2>11 · Data Layer (the "change via" targets)</h2><span class="route">content + data directories</span></div>
+  <div class="pbody">
+    <table>
+      <tr><th>File</th><th>Drives</th></tr>
+      <tr><td class="code">src/content/projects/*.mdx</td><td>entire case studies (work cards + case pages + sitemap + JSON-LD + APIs) — drop a file → auto-renders</td></tr>
+      <tr><td class="code">src/content/site/about.mdx</td><td>stats, facts, off-clock, background</td></tr>
+      <tr><td class="code">src/content/site/process.mdx</td><td>terminal steps, proof links, tools</td></tr>
+      <tr><td class="code">src/content/site/timeline.mdx</td><td>timeline machine years</td></tr>
+      <tr><td class="code">src/content/site/unresolved.mdx</td><td>UNRESOLVED items</td></tr>
+      <tr><td class="code">src/content/site/metro.mdx</td><td>metro map lines + hub</td></tr>
+      <tr><td class="code">src/data/profile.ts</td><td>name, location, email, links, rota, deck, stack, marquees</td></tr>
+      <tr><td class="code">src/data/github.ts</td><td>live feed config (TTL, fallback, lang colors)</td></tr>
+      <tr><td class="code">src/data/performance.ts</td><td>measured numbers — auto-generated by scripts/measure.mjs</td></tr>
+    </table>
+    <div class="note">Agent layer (auto-derived): /api/data · /api/agent (10 actions) · /llms.txt · /llms-full.txt</div>
+  </div>
+</section>
+
+<footer>SOURCE-VERIFIED · 2026-08-13 · GENERATED FROM THE REPO — NOT FROM MEMORY</footer>
+</div>
+</body>
+</html>

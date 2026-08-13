@@ -1,0 +1,37 @@
+---
+suites:
+  - name: SMOKE (Playwright)
+    flows:
+      - all routes load directly (8 pages + 4 case studies)
+      - client-side navigation via nav + CTAs
+      - resume page embeds the PDF viewer
+      - 404 page renders the peacock flock
+      - mobile menu opens and navigates
+      - mobile viewport renders hero content
+  - name: INTERACTION (Playwright)
+    flows:
+      - cinematic loader plays and lifts
+      - dialog opens as temporary reality and closes
+      - timeline machine scrubs between years
+      - case page counterfactuals expand
+      - dive-deeper descends four layers
+      - repo-inside iframe renders the README
+      - annotations open contextual popovers
+      - unresolved section descends into unknowns
+      - process principles reveal WHY IT MATTERS
+      - NOW BUILDING widget shows live GitHub + IST clock
+      - contribution graph renders the year in commits
+      - case pages offer STAR THE REPO
+      - dark mode toggles, persists across reloads
+  - name: AGENT TOOLKIT (Playwright)
+    flows:
+      - /api/agent actions respond with machine-readable data
+      - /api/data mirrors the content repository
+      - llms.txt + llms-full.txt served for AI clients
+  - name: UNIT (Vitest)
+    flows:
+      - 14 tests across content repositories, profile + easing
+  - name: GATES
+    flows:
+      - next build (SSG) · eslint · tsc --noEmit · vitest · playwright — all green per wave, enforced by CI
+---

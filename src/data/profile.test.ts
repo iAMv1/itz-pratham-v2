@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { profile } from "@/data/profile";
 import { allProjects, getProject } from "@/content/projects";
 import { about, timeline, unresolved, metro, processContent } from "@/content/site";
+import { progressEntries, testingSuites } from "@/content/meta";
 
 describe("profile identity", () => {
   it("has real contact data", () => {
@@ -80,6 +81,30 @@ describe("site content repository (src/content/site/*.mdx)", () => {
     expect(metro().hub).toBeTruthy();
     for (const l of metro().lines) {
       expect(l.stations.length).toBeGreaterThanOrEqual(2);
+    }
+  });
+});
+
+describe("meta content repository (src/content/meta/*.mdx)", () => {
+  it("progress log is data-driven with 21+ entries", () => {
+    const items = progressEntries();
+    expect(items.length).toBeGreaterThanOrEqual(21);
+    for (const it of items) {
+      expect(it.piece.length).toBeGreaterThan(2);
+      expect(it.wave).toBeTruthy();
+      expect(it.status).toBeTruthy();
+      expect(it.note.length).toBeGreaterThan(5);
+    }
+  });
+
+  it("testing matrix is data-driven with 20+ flows across suites", () => {
+    const suites = testingSuites();
+    expect(suites.length).toBeGreaterThanOrEqual(4);
+    const total = suites.reduce((acc, s) => acc + s.flows.length, 0);
+    expect(total).toBeGreaterThanOrEqual(20);
+    for (const s of suites) {
+      expect(s.name.length).toBeGreaterThan(2);
+      expect(s.flows.length).toBeGreaterThan(0);
     }
   });
 });

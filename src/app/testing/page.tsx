@@ -2,53 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { SiteShell } from "@/components/layout/site-shell";
+import { testingSuites } from "@/content/meta";
 
 export const metadata: Metadata = {
   title: "Testing — Pratham Nahata",
   description:
-    "This portfolio is tested like a product: Playwright 19 flows, vitest 9 units, zero console errors, lint + tsc gates.",
+    "This portfolio is tested like a product: Playwright flows, vitest units, zero console errors, lint + tsc gates.",
 };
 
-const SUITES = [
-  {
-    name: "SMOKE (Playwright)",
-    flows: [
-      "all routes load directly (8 pages + 4 case studies)",
-      "client-side navigation via nav + CTAs",
-      "resume page embeds the PDF viewer",
-      "404 page renders the peacock flock",
-      "mobile menu opens and navigates",
-      "mobile viewport renders hero content",
-    ],
-  },
-  {
-    name: "INTERACTION (Playwright)",
-    flows: [
-      "dialog opens as temporary reality and closes",
-      "timeline machine scrubs between years",
-      "case page counterfactuals expand",
-      "dive-deeper descends four layers",
-      "repo-inside iframe renders the README",
-      "annotations open contextual popovers",
-      "unresolved section descends into unknowns",
-      "process principles reveal WHY IT MATTERS",
-      "NOW BUILDING widget shows live GitHub + IST clock",
-      "contribution graph renders the year in commits",
-      "case pages offer STAR THE REPO",
-      "dark mode toggles, persists across reloads",
-    ],
-  },
-  {
-    name: "UNIT (Vitest)",
-    flows: ["9 tests across profile data + easing library"],
-  },
-  {
-    name: "GATES",
-    flows: ["next build (SSG) · eslint · tsc --noEmit · vitest · playwright — all green per wave"],
-  },
-];
-
 export default function TestingPage() {
+  const SUITES = testingSuites();
+  const totalFlows = SUITES.reduce((acc, s) => acc + s.flows.length, 0);
   return (
     <SiteShell>
       <main id="main" className="flex-1 pt-[96px]">
@@ -61,7 +25,7 @@ export default function TestingPage() {
               TEST <span className="text-cobalt">MATRIX</span>
             </h1>
             <p className="mt-4 max-w-[56ch] text-lg font-medium leading-relaxed">
-              This portfolio is tested like a product — <strong>Playwright · 19 flows · 0 console errors</strong>,
+              This portfolio is tested like a product — <strong>Playwright · {totalFlows} flows · 0 console errors</strong>,
               plus unit tests, lint and type gates on every wave.
             </p>
           </Reveal>
