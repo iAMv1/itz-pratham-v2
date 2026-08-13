@@ -45,16 +45,18 @@ export function Wins({ wins }: { wins: About["wins"] }) {
 
         <ul className="mt-6 border-t-2 border-ink">
           {wins.list.map((w, i) => (
-            <Reveal key={w.num} delay={i * 0.05}>
-              <li className="grid items-baseline gap-4 border-b border-ink/25 px-2 py-4 font-mono text-[14px] tracking-wide transition-colors duration-150 hover:bg-paper-2/60 md:grid-cols-[48px_1fr_auto]">
-                <span className="text-xs text-cobalt">{w.num}</span>
-                <span>
-                  {w.title}
-                  <small className="mt-0.5 block text-[11px] tracking-wide text-ink/55">{w.sub}</small>
-                </span>
-                <span className="hidden text-[11px] text-ink/50 md:block">{w.year}</span>
-              </li>
-            </Reveal>
+            <li key={w.num} className="border-b border-ink/25">
+              <Reveal delay={i * 0.05}>
+                <div className="grid items-baseline gap-4 px-2 py-4 font-mono text-[14px] tracking-wide transition-colors duration-150 hover:bg-paper-2/60 md:grid-cols-[48px_1fr_auto]">
+                  <span className="text-xs text-cobalt">{w.num}</span>
+                  <span>
+                    {w.title}
+                    <small className="mt-0.5 block text-[11px] tracking-wide text-ink/55">{w.sub}</small>
+                  </span>
+                  <span className="hidden text-[11px] text-ink/50 md:block">{w.year}</span>
+                </div>
+              </Reveal>
+            </li>
           ))}
         </ul>
       </div>
