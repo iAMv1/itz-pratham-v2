@@ -70,7 +70,7 @@ test("case page dive descends four layers deep", async ({ page }) => {
   await page.getByText("Why FastAPI + WebSockets?").first().click();
   await expect(page.getByText(/polling added ~900ms staleness/)).toBeVisible();
   await page.getByText("What went wrong?").first().click();
-  await expect(page.getByText(/rewrote the transport to WebSockets/)).toBeVisible();
+  await expect(page.locator("#dive").getByText(/rewrote the transport to WebSockets/)).toBeVisible();
   expect(ERRORS.filter((e) => !e.includes("favicon") && !e.startsWith("Failed to load resource"))).toEqual([]);
 });
 
