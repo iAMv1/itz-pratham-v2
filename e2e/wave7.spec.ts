@@ -163,7 +163,7 @@ test("llms.txt and api/data are served", async ({ page }) => {
   const data = await page.request.get(`${BASE}/api/data`);
   expect(data.status()).toBe(200);
   const body = await data.json();
-  expect(body.caseStudies.length).toBe(4);
+  expect(body.caseStudies.length).toBeGreaterThanOrEqual(4);
 });
 
 test("cinematic loader plays and lifts", async ({ page }) => {

@@ -1,0 +1,104 @@
+---
+slug: itz-pratham-v2
+index: "05"
+year: "2026"
+title: THIS PORTFOLIO
+role: Builder · Full-stack × ML
+blurb: The site you're reading — a content-repository portfolio engineered like a product.
+outcome: "A fully data-driven portfolio: drop a project file and it renders everywhere — tested like a product, measured honestly."
+status: SHIPPED — LIVE AT ITZPRATHAM.IN
+limitations: "Metrics are measured on the live site; the cinematic curtain intentionally taxes first-visit LCP."
+challenge: |
+  Portfolios rot. The content lives in components, so updating means editing code,
+  and nobody updates code. The system had to treat content as data — projects,
+  timeline, metro, process — with the UI as a pure container.
+approach: |
+  Built on Next.js 16 with a content repository: every project is one .mdx file in
+  src/content/projects/; every site section lives in src/content/site/. A typed
+  loader validates + memoizes at build; pages, sitemap, JSON-LD and the agent APIs
+  all read from the same source. Dark/light mode is a CSS token inversion. CI runs
+  lint, tsc, vitest and 22 Playwright flows on every push.
+hard: |
+  Keeping the "drop a file" promise honest — YAML in MDX frontmatter is unforgiving,
+  so every file is schema-validated with loud build errors, and the measured numbers
+  on the process page come from a real Lighthouse run, not markup.
+shipped: |
+  A live, data-driven portfolio with an agent layer (llms.txt, /api/data,
+  /api/agent), offline support, dark mode, and a CI-enforced quality bar.
+impact:
+  - 100 a11y · 100 best-practices · 100 SEO (live measured)
+  - 22 Playwright flows · zero console errors · CI green
+  - Projects are content — adding one is a file drop, not a code change
+stack:
+  - Next.js 16
+  - TypeScript
+  - Tailwind 4
+  - Motion
+  - GSAP
+  - Lenis
+  - MDX / gray-matter
+flow:
+  - Content repository
+  - Typed loader + validation
+  - Static generation
+  - Theme tokens
+  - CI + measurement
+architecture:
+  - title: CONTENT LAYER
+    nodes: [Projects MDX, Site MDX, Meta MDX]
+    via: gray-matter + validation
+  - title: BUILD LAYER
+    nodes: [Typed loader, Memoized parse, Static generation]
+    via: SSG
+  - title: RENDER LAYER
+    nodes: [Pages, Cards, Sitemap, JSON-LD, APIs]
+    via: one source of truth
+  - title: QUALITY
+    nodes: [CI gates, Lighthouse measure, Playwright 22]
+href: https://github.com/iAMv1/itz-pratham-v2
+art: /assets/og-image.png
+# screenshot: /assets/shots/itz-pratham-v2.png
+accent: "#1D5B9E"
+metrics: "100 A11Y · 22 FLOWS · CONTENT-REPO"
+live: https://itzpratham.in/
+readme: iAMv1/itz-pratham-v2@HEAD/README.md
+dive:
+  - q: Why a content repository instead of a CMS?
+    a: A CMS adds a service and an auth story. MDX files are versioned, reviewable, and build-time — the simplest thing that stays honest.
+  - q: Why is dark mode a token inversion?
+    a: One :root block swaps paper/ink and every component follows. No per-component theme code to drift.
+  - q: What went wrong?
+    a: Early MDX files broke builds on unquoted YAML colons, and a restored section once shipped invalid list markup — both caught by the same loud-error + CI loop they now enforce.
+  - q: What would I do now?
+    a: Move the remaining identity fields into content too, and add visual-regression gates for the canvas art.
+evidence:
+  - claim: A11y 100 · BP 100 · SEO 100 (live)
+    method: Lighthouse 13 against https://itzpratham.in — see /receipts/itz-pratham-v2/benchmark.md
+  - claim: 22 Playwright flows, zero console errors
+    method: every flow asserts clean consoles, not just visible elements — matrix at /testing
+  - claim: Adding a project = dropping one file
+    method: typed loader + schema validation — a broken file fails the build with the field name
+counterfactuals:
+  - label: What if the content lived in a database instead of MDX?
+    answer: You'd buy runtime caching, auth and a UI to edit prose that changes twice a year. MDX keeps it build-time, versioned and CI-checked — the right trade at this scale, and the content loader is the seam where a DB could slot in later without touching the UI.
+  - label: What if it had 100 projects?
+    answer: The loader memoizes and the work grid pages automatically; the bottleneck becomes art assets, not code. I'd add card pagination or a filter bar before the index got long — still data-only changes.
+---
+
+## The story
+
+Every portfolio ages the same way: the content is welded into components, so the
+owner stops updating it. This one was built backwards on purpose — **the content is
+the system, the UI is a container.**
+
+Projects are one file each. The timeline, metro, process, even the build log and the
+test matrix are MDX. A typed loader validates every file at build and memoizes the
+parse, so "drop a project in" is literally true: the work index, case pages, sitemap,
+JSON-LD and the agent APIs all read the same source.
+
+The quality loop is part of the product too: CI runs lint, types, unit tests and 22
+Playwright flows on every push; the process page's numbers come from a real Lighthouse
+run against the live site, refreshed per deploy — no hand-typed claims.
+
+It's the dogfood project: everything this site says about building systems, it does to
+itself.

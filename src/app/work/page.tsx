@@ -21,7 +21,7 @@ export default function WorkPage() {
           </span>
           <Reveal>
             <p className="mb-4 inline-block border border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] shadow-[3px_3px_0_0_var(--shadow-ink)]">
-              WORK · 01—04
+              WORK · 01—{allProjects().length}
             </p>
             <MaskTitle
               lines={["SELECTED", "PROJECTS"]}
@@ -30,7 +30,7 @@ export default function WorkPage() {
               className="font-display text-[clamp(3.2rem,9vw,8rem)] font-semibold uppercase leading-[0.86]"
             />
             <p className="mt-6 max-w-[52ch] text-lg font-medium leading-relaxed">
-              Four systems, each opened like a jharokha window — tap any to read the full story. Every claim is
+              Every system completed recently — tap any to read the full story. Every claim is
               documented: repos where public, methodology always.
             </p>
           </Reveal>
@@ -46,7 +46,7 @@ export default function WorkPage() {
                     <KineticArt className="absolute inset-0">
                       <LookOut className="h-full w-full">
                         <ArtImage
-                          src={p.art}
+                          src={p.screenshot ?? p.art}
                           alt=""
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]"
                         />
@@ -81,7 +81,7 @@ export default function WorkPage() {
           <Reveal className="mt-12">
             <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-ink pt-8">
               <p className="font-mono text-[12px] tracking-widest text-muted-foreground">
-                ▸ 4 FEATURED — <span className="text-cobalt">18+ MORE REPOS LIVE ON GITHUB</span>
+                ▸ {allProjects().length} FEATURED — <span className="text-cobalt">18+ MORE REPOS LIVE ON GITHUB</span>
               </p>
               <a
                 href="https://github.com/iAMv1"

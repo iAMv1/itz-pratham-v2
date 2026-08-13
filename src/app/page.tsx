@@ -49,7 +49,7 @@ export default function Home() {
                     <div className="group flex h-full flex-col border-2 border-ink bg-paper-2 shadow-hard transition-[transform,box-shadow] duration-250 ease-out hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[8px_8px_0_0_var(--shadow-ink)]">
                       <span className="relative block aspect-[16/10] overflow-hidden border-b-2 border-ink bg-paper">
                         <KineticArt className="absolute inset-0">
-                          <ArtImage src={p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
+                          <ArtImage src={p.screenshot ?? p.art} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]" />
                         </KineticArt>
                         <FloatingStats items={p.metrics.split(" · ")} />
                         <span aria-hidden className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest">

@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("all routes load directly", async ({ page }) => {
-  for (const route of ["/", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/work/mindpulse-pro"]) {
+  for (const route of ["/", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/work/mindpulse-pro", "/work/itz-pratham-v2"]) {
     const res = await page.goto(`${BASE}${route}`, { waitUntil: "load" });
     expect(res?.status(), `route ${route}`).toBe(200);
   }

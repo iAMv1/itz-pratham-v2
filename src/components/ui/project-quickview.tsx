@@ -24,7 +24,7 @@ export function ProjectQuickView({ study }: { study: Project }) {
       </div>
 
       <div className="relative aspect-[16/7] overflow-hidden border-b-2 border-ink bg-paper">
-        <ArtImage src={study.art} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <ArtImage src={study.screenshot ?? study.art} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <span className="absolute left-3 top-3 border border-ink bg-paper-2/90 px-2 py-1 font-mono text-[10px] tracking-widest">
           {study.title}
         </span>
