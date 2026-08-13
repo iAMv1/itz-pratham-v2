@@ -22,7 +22,6 @@ export function Hero({ stats }: { stats: { value: number; prefix?: string; suffi
   const titleY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : 120]);
   const titleOpacity = useTransform(scrollY, [0, 700], [1, reduced ? 1 : 0.15]);
   const portraitY = useTransform(scrollY, [0, 800], [0, reduced ? 0 : -90]);
-  const namasteX = useTransform(scrollY, [0, 600], [0, reduced ? 0 : 70]);
   const watermarkY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : 160]);
 
   /* easter egg: click the identity and it cycles the old role labels once, then settles */
@@ -63,7 +62,7 @@ export function Hero({ stats }: { stats: { value: number; prefix?: string; suffi
 
       <motion.h1
         style={{ y: titleY, opacity: titleOpacity }}
-        className="relative z-10 mt-4 font-display text-[clamp(4.5rem,15vw,14rem)] font-semibold uppercase leading-[0.8] tracking-wide"
+        className="pointer-events-none relative z-10 mt-4 select-none font-display text-[clamp(4.5rem,15vw,14rem)] font-semibold uppercase leading-[0.8] tracking-wide"
       >
         <span className="block pl-[0.05em]">PRATHAM</span>
         <span className="block pl-[0.28em] text-transparent [-webkit-text-stroke:3.5px_var(--ink)]">
@@ -155,47 +154,58 @@ export function Hero({ stats }: { stats: { value: number; prefix?: string; suffi
         ))}
       </div>
 
-      {/* jharokha portrait window */}
+      {/* stamp portrait — silhouette base, hover sweeps to reveal */}
       <motion.div
         style={{ y: portraitY }}
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        aria-hidden
-        className="group absolute right-[clamp(20px,5vw,90px)] top-[12%] z-[1] hidden w-[min(320px,36vw)] lg:block"
+        className="group absolute right-[clamp(20px,5vw,90px)] top-[10%] z-[1] hidden w-[min(320px,36vw)] lg:block"
       >
-        <div className="relative aspect-[4/5] overflow-visible">
-          <div className="absolute inset-0 translate-x-2.5 translate-y-2.5 border-2 border-ink bg-cobalt transition-transform duration-300 ease-out group-hover:translate-x-4 group-hover:translate-y-4" />
-          <div className="relative h-full w-full overflow-hidden border-2 border-ink bg-ink-2 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:border-cobalt">
+        {/* saffron block — behind the stamp, like the identity card */}
+        <div
+          aria-hidden
+          className="absolute -right-8 -top-8 z-[-1] size-[150px] rotate-[4deg] border-2 border-ink bg-saffron"
+        />
+        <span
+          aria-hidden
+          className="absolute -top-[52px] right-[92px] z-10 rotate-[-9deg] font-dev text-[2.2rem] text-saffron-deep [text-shadow:2px_2px_0_var(--paper)]"
+        >
+          नमस्ते
+        </span>
+
+        {/* the stamp */}
+        <div className="relative border-2 border-ink bg-paper-2 p-3 shadow-hard">
+          <div aria-hidden className="pointer-events-none absolute inset-1.5 border border-dashed border-cobalt/60" />
+          <div className="relative aspect-[4/5] overflow-hidden border-2 border-ink bg-ink-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/art-hero-arch.jpg"
+              src="/assets/pratham-silhouette.jpg"
               alt=""
               width={640}
-              height={384}
+              height={800}
               fetchPriority="high"
-              className="absolute inset-0 h-full w-full object-cover opacity-90 [clip-path:path('M0_0_L320_0_L320_400_L24_400_C24_310_60_250_160_250_C260_250_296_310_296_400_L0_400_Z')]"
+              className="absolute inset-0 h-full w-full object-cover grayscale brightness-[0.82] transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0 group-hover:brightness-100"
             />
-            <svg viewBox="0 0 320 400" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full opacity-75">
-              <path d="M24 400 V190 C24 92 68 44 160 44 C252 44 296 92 296 190 V400" fill="none" stroke="#F4EFE6" strokeWidth="3" />
-              <path d="M46 400 V195 C46 116 86 70 160 70 C234 70 274 116 274 195 V400" fill="none" stroke="#F4EFE6" strokeWidth="1.5" opacity="0.55" />
-              <path d="M160 44 V10 M160 10 L170 22 L160 30 L150 22 Z" fill="none" stroke="#F4EFE6" strokeWidth="2" />
-              <circle cx="160" cy="22" r="3" fill="#F58E20" />
-            </svg>
-            <span className="absolute bottom-2 left-2 border border-paper/30 bg-ink-2/80 px-2.5 py-1 font-mono text-[10px] tracking-[0.22em] text-paper/70">
-              JHAROKHA // 01
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/reveal-image.jpg"
+              alt=""
+              width={640}
+              height={800}
+              className="absolute inset-0 h-full w-full object-cover [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:[clip-path:inset(0_0_0_0)]"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-y-0 left-0 z-10 w-[3px] bg-saffron transition-[left] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-full"
+            />
+          </div>
+          <div className="mt-2 flex items-baseline justify-between font-mono text-[10px] tracking-[0.16em] text-muted-foreground">
+            <span>PRATHAM NAHATA</span>
+            <span className="text-cobalt">№ 01 — THE BUILDER</span>
           </div>
         </div>
       </motion.div>
-
-      <motion.p
-        aria-hidden
-        style={{ x: namasteX }}
-        className="absolute right-[calc(clamp(20px,5vw,90px)+2.5rem)] top-[7%] z-[2] hidden rotate-[-4deg] font-dev text-[clamp(2.6rem,5.5vw,4.6rem)] text-saffron [text-shadow:3px_3px_0_var(--ink)] lg:block"
-      >
-        नमस्ते
-      </motion.p>
 
       <div className="absolute bottom-[clamp(96px,12vh,140px)] right-[clamp(20px,5vw,90px)] z-[2] hidden min-w-[200px] lg:block">
         <NowBuilding />

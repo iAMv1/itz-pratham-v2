@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Variations — Pratham Nahata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=DM+Mono:wght@400;500&family=Yatra+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4efe6; --paper-2: #fffdf8; --ink: #051024; --ink-2: #0b0b0b;
+    --cobalt: #1d5b9e; --saffron: #f58e20; --saffron-deep: #9c5200;
+    --mint: #8de254; --marigold: #f9ce34; --muted: #4a5266;
+    --shadow: 5px 5px 0 0 var(--ink);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', system-ui, sans-serif; }
+  .display { font-family: 'Teko', 'Arial Narrow', sans-serif; }
+  .mono { font-family: 'DM Mono', ui-monospace, monospace; }
+  .dev { font-family: 'Yatra One', serif; }
+
+  /* ---------- page chrome ---------- */
+  .doc-head { border-bottom: 3px solid var(--ink); background: var(--paper-2); padding: 22px 28px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; position: sticky; top: 0; z-index: 50; }
+  .doc-head h1 { font-size: 26px; text-transform: uppercase; letter-spacing: .02em; }
+  .doc-head h1 span { color: var(--saffron-deep); }
+  .doc-head .mono { font-size: 11px; color: var(--muted); letter-spacing: .12em; }
+  .variant-label { background: var(--ink); color: var(--paper); padding: 10px 28px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .variant-label h2 { font-size: 18px; text-transform: uppercase; letter-spacing: .06em; }
+  .variant-label h2 span { color: var(--saffron); }
+  .variant-label .mono { font-size: 10.5px; color: rgba(244,239,230,.7); letter-spacing: .14em; }
+  .hrz { height: 28px; background: repeating-linear-gradient(-45deg, var(--paper) 0 12px, #e9e0cc 12px 24px); }
+
+  /* ---------- hero base ---------- */
+  .hero { position: relative; min-height: 100vh; overflow: hidden; background: var(--paper); padding: 0 4vw; }
+  .hero .inner { position: relative; z-index: 3; height: 100vh; display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 3vw; max-width: 1440px; margin: 0 auto; }
+  .eyebrow { font-size: 12.5px; letter-spacing: .22em; color: var(--muted); }
+  .hero h1.name { font-size: clamp(92px, 13vw, 190px); line-height: .82; font-weight: 600; text-transform: uppercase; letter-spacing: .01em; margin-top: 10px; }
+  .hero h1.name .stroke { color: transparent; -webkit-text-stroke: 3px var(--ink); }
+  .hero h1.name .cursor { display: inline-block; width: 6px; height: 24px; background: var(--saffron); margin-left: 6px; transform: translateY(-4px); animation: blink 1.1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .roleline { margin-top: 16px; font-size: 13px; letter-spacing: .2em; color: var(--cobalt); font-weight: 500; }
+  .whatido { margin-left: 10px; font-size: 10px; letter-spacing: .14em; color: var(--muted); border-bottom: 2px dashed rgba(29,91,158,.5); cursor: help; }
+  .deck { margin-top: 14px; max-width: 46ch; font-size: 19px; line-height: 1.55; font-weight: 500; }
+  .deck mark { background: var(--marigold); color: var(--ink); padding: 0 6px; }
+  .ctas { margin-top: 26px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; border: 2px solid var(--ink); padding: 15px 26px; font-size: 13.5px; letter-spacing: .1em; text-decoration: none; color: var(--ink); transition: .15s; cursor: pointer; }
+  .btn.primary { background: var(--saffron); box-shadow: var(--shadow); }
+  .btn.primary:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .stats { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); max-width: 560px; border: 2px solid var(--ink); box-shadow: var(--shadow); background: var(--paper-2); }
+  .stats > div { padding: 12px 14px; border-right: 1px solid rgba(5,16,36,.15); border-bottom: 1px solid rgba(5,16,36,.15); }
+  .stats > div:nth-child(2n) { border-right: none; }
+  .stats > div:nth-child(n+3) { border-bottom: none; }
+  .stats b { display: block; font-size: 15px; font-weight: 500; color: var(--saffron-deep); letter-spacing: .04em; }
+  .stats small { font-size: 10px; color: var(--muted); letter-spacing: .06em; line-height: 1.35; display: block; margin-top: 2px; }
+  .jali { position: absolute; inset: 0; opacity: .5; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M48 10 L86 48 L48 86 L10 48 Z' fill='none' stroke='%23051024' stroke-opacity='0.08'/%3E%3Ccircle cx='48' cy='48' r='26' fill='none' stroke='%23051024' stroke-opacity='0.06'/%3E%3C/svg%3E"); }
+
+  /* silhouette treatments */
+  .fig { position: relative; display: flex; justify-content: center; }
+  .fig img { display: block; max-width: 100%; height: auto; }
+
+  /* V1 — the arch frame */
+  .v1 .archwrap { position: relative; }
+  .v1 .arch { position: relative; width: min(420px, 34vw); aspect-ratio: 4/5; border: 3px solid var(--ink); border-radius: 999px 999px 0 0; overflow: hidden; background: var(--ink-2); box-shadow: 10px 10px 0 0 var(--cobalt); }
+  .v1 .arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92; }
+  .v1 .arch::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(244,239,230,.5); border-radius: inherit; }
+  .v1 .arch .tag { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-size: 10px; letter-spacing: .22em; color: var(--paper); opacity: .8; }
+  .v1 .sun { position: absolute; top: -26px; left: 50%; transform: translateX(-50%); width: 52px; height: 52px; border-radius: 50%; background: var(--saffron); border: 3px solid var(--ink); z-index: 2; }
+  .v1 .dev-badge { position: absolute; top: -70px; right: -14px; font-size: 46px; color: var(--saffron); transform: rotate(6deg); text-shadow: 3px 3px 0 var(--ink); }
+
+  /* V2 — the stamp */
+  .v2 .stamp { position: relative; width: min(360px, 30vw); background: var(--paper-2); border: 3px solid var(--ink); box-shadow: 10px 10px 0 0 var(--ink); padding: 14px; }
+  .v2 .stamp::before { content: ""; position: absolute; inset: 7px; border: 1.5px dashed var(--cobalt); pointer-events: none; }
+  .v2 .stamp .innerbox { position: relative; border: 2px solid var(--ink); overflow: hidden; background: var(--ink-2); }
+  .v2 .stamp img { display: block; width: 100%; height: auto; opacity: .94; }
+  .v2 .stamp .caption { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-size: 10px; letter-spacing: .16em; color: var(--muted); }
+  .v2 .stamp .caption b { color: var(--cobalt); }
+  .v2 .saffron-block { position: absolute; top: -34px; right: -34px; width: 170px; height: 170px; background: var(--saffron); border: 3px solid var(--ink); z-index: -1; transform: rotate(4deg); }
+  .v2 .overlap { position: relative; }
+  .v2 .overlap h1.name { position: relative; z-index: 2; }
+  .v2 .meta-rail { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 10.5px; letter-spacing: .18em; color: var(--muted); border-left: 2px solid var(--ink); padding-left: 14px; }
+  .v2 .meta-rail b { color: var(--ink); font-weight: 500; }
+
+  /* V3 — the spotlight */
+  .v3 .spot { position: relative; display: flex; justify-content: center; }
+  .v3 .glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 42vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(245,142,32,.45) 0%, rgba(245,142,32,.12) 45%, transparent 70%); }
+  .v3 .ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(400px, 33vw); aspect-ratio: 1; border: 2px dashed var(--cobalt); border-radius: 50%; animation: spin 40s linear infinite; }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  .v3 .portrait { position: relative; width: min(340px, 28vw); aspect-ratio: 4/5; overflow: hidden; border: 3px solid var(--ink); box-shadow: 0 0 0 6px var(--paper), 0 0 0 9px var(--ink); }
+  .v3 .portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .v3 .name-over { position: absolute; left: -60px; bottom: 40px; z-index: 4; }
+  .v3 .name-over h1.name { font-size: clamp(88px, 12vw, 170px); text-shadow: 4px 4px 0 var(--paper); }
+  .v3 .namaste { position: absolute; top: -58px; right: -10px; font-size: 44px; color: var(--saffron); transform: rotate(-6deg); text-shadow: 3px 3px 0 var(--ink); }
+  .v3 .chips { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; max-width: 520px; }
+  .v3 .chips span { border: 1.5px solid var(--ink); background: var(--paper-2); padding: 7px 14px; font-size: 11px; letter-spacing: .1em; }
+  .v3 .chips span b { color: var(--saffron-deep); }
+
+  /* V4 — shutter reveal: hover the arch, the door opens */
+  .reveal .arch { perspective: 1000px; }
+  .reveal .arch img { transition: filter .7s ease, transform .9s cubic-bezier(.16,1,.3,1); filter: grayscale(1) brightness(.8); transform: scale(1.02); }
+  .shutter { position: absolute; top: 0; bottom: 0; width: 52%; background: var(--ink-2); border-right: 1.5px solid rgba(244,239,230,.35); transition: transform .7s cubic-bezier(.16,1,.3,1); will-change: transform; z-index: 3; }
+  .shutter::before { content: ""; position: absolute; inset: 14px; border: 1.5px solid rgba(244,239,230,.45); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 6 L74 40 L40 74 L6 40 Z' fill='none' stroke='%23F58E20' stroke-opacity='.28'/%3E%3C/svg%3E"); }
+  .shutter-l { left: 0; transform-origin: left center; }
+  .shutter-r { right: 0; border-right: none; border-left: 1.5px solid rgba(244,239,230,.35); transform-origin: right center; }
+  .reveal:hover .shutter-l { transform: rotateY(-108deg); }
+  .reveal:hover .shutter-r { transform: rotateY(108deg); }
+  .reveal:hover .arch img { filter: grayscale(0) brightness(1); transform: scale(1.06); }
+  .reveal:hover .arch .tag { opacity: 0; }
+  .glow-bloom { position: absolute; inset: -30px; z-index: 1; pointer-events: none; background: radial-gradient(circle at 50% 55%, rgba(245,142,32,.35) 0%, transparent 62%); opacity: 0; transition: opacity .8s ease; }
+  .reveal:hover .glow-bloom { opacity: 1; }
+  .hint { margin-top: 18px; font-size: 11px; letter-spacing: .18em; color: var(--cobalt); animation: hint-pulse 1.6s ease-in-out infinite; }
+  @keyframes hint-pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+  /* V5/V6 — two-image stack: silhouette base, hover reveals the second image */
+  .stackbox { position: relative; width: min(400px, 33vw); aspect-ratio: 4/5; border: 3px solid var(--ink); background: var(--ink-2); box-shadow: 10px 10px 0 0 var(--ink); overflow: hidden; }
+  .stackbox img.layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .stackbox .base { filter: grayscale(1) brightness(.82); z-index: 1; }
+  .stackbox .reveal-layer { z-index: 2; }
+  .stackbox .saffron-line { position: absolute; top: 0; bottom: 0; width: 3px; background: var(--saffron); z-index: 3; pointer-events: none; }
+  /* V5 sweep */
+  .v5 .reveal-layer { clip-path: inset(0 100% 0 0); transition: clip-path .8s cubic-bezier(.16,1,.3,1); }
+  .v5:hover .reveal-layer { clip-path: inset(0 0 0 0); }
+  .v5 .saffron-line { left: 0; transition: left .8s cubic-bezier(.16,1,.3,1); }
+  .v5:hover .saffron-line { left: 100%; }
+  /* V6 cursor lens */
+  .v6 .lens { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .35s ease; background: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.97) 0%, rgba(255,255,255,.85) 40%, transparent 72%); mix-blend-mode: normal; -webkit-mask-image: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 72%); mask-image: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 72%); }
+  .v6:hover .lens { opacity: 1; }
+  .v6 .lensborder { position: absolute; left: var(--mx, 50%); top: var(--my, 50%); width: 260px; height: 260px; transform: translate(-50%,-50%); border: 2px solid var(--saffron); border-radius: 50%; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .35s ease; }
+  .v6:hover .lensborder { opacity: 1; }
+  .tag-under { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 4; font-size: 10px; letter-spacing: .2em; color: var(--paper); background: rgba(11,11,11,.7); padding: 5px 12px; pointer-events: none; }
+
+  /* V7 — stamp-framed sweep + marquees */
+  .v7 .fig { z-index: 0; }
+  .v7 .stampbox { position: relative; width: min(380px, 31vw); background: var(--paper-2); border: 3px solid var(--ink); box-shadow: 10px 10px 0 0 var(--ink); padding: 14px; }
+  .v7 .stampbox::before { content: ""; position: absolute; inset: 7px; border: 1.5px dashed var(--cobalt); pointer-events: none; z-index: 5; }
+  .v7 .stampbox .stackbox { width: 100%; box-shadow: none; }
+  .v7 .saffron-block { position: absolute; top: -34px; right: -34px; width: 170px; height: 170px; background: var(--saffron); border: 3px solid var(--ink); z-index: -1; transform: rotate(4deg); }
+  .v7 .namaste-stamp { position: absolute; top: -60px; right: 96px; z-index: 7; font-size: 40px; color: var(--saffron-deep); transform: rotate(-9deg); text-shadow: 2px 2px 0 var(--paper), 4px 4px 0 rgba(5,16,36,.15); }
+  .v7 .stamp-caption { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-size: 10px; letter-spacing: .16em; color: var(--muted); z-index: 6; position: relative; }
+  .v7 .stamp-caption b { color: var(--cobalt); }
+  .v7 .stampbox .reveal-layer { clip-path: inset(0 100% 0 0); transition: clip-path .8s cubic-bezier(.16,1,.3,1); }
+  .v7 .stampbox:hover .reveal-layer { clip-path: inset(0 0 0 0); }
+  .v7 .stampbox .saffron-line { left: 0; transition: left .8s cubic-bezier(.16,1,.3,1); }
+  .v7 .stampbox:hover .saffron-line { left: 100%; }
+
+  /* marquees — same as home */
+  .marquee { overflow: hidden; width: 100%; border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); background: var(--paper); }
+  .marquee .track { display: flex; width: max-content; animation: marquee-left 26s linear infinite; }
+  .marquee .track span { white-space: nowrap; padding: 12px 18px; }
+  .marquee.skills .track span { font-family: 'Teko', sans-serif; font-size: 34px; text-transform: uppercase; letter-spacing: .04em; }
+  .marquee.skills .track span em { color: var(--saffron); font-style: normal; }
+  .marquee.names { border-top: none; }
+  .marquee.names .track { animation-duration: 34s; }
+  .marquee.names .track span { font-family: 'Teko', sans-serif; font-size: clamp(60px, 7vw, 96px); text-transform: uppercase; letter-spacing: .02em; color: transparent; -webkit-text-stroke: 2px var(--ink); line-height: 1.1; padding: 10px 16px; }
+  .marquee.names .track span em { color: var(--saffron); -webkit-text-stroke: 0; font-style: normal; }
+  .marquee.names .track span.solid { color: var(--ink); -webkit-text-stroke: 0; }
+  @keyframes marquee-left { to { transform: translateX(-50%); } }
+
+  @media (max-width: 860px) {
+    .hero .inner { grid-template-columns: 1fr; align-items: start; padding: 90px 0 60px; height: auto; }
+    .fig { order: -1; margin-bottom: 30px; }
+    .v1 .arch, .v2 .stamp, .v3 .portrait { width: min(300px, 78vw); }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1 class="display">Hero Variations <span>· three directions</span></h1>
+  <p class="mono">BRAND CONSTANT · SILHOUETTE USED ON THE RIGHT · NOT DEPLOYED — TEST ONLY</p>
+</div>
+
+<!-- ================= V1 ================= -->
+<div class="variant-label"><h2 class="display">V1 · <span>The Jharokha Frame</span></h2><p class="mono">ARCH + SUN + SILHOUETTE — HERITAGE DOOR AS THE PORTRAIT</p></div>
+<section class="hero v1">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+    </div>
+    <div class="fig">
+      <div class="archwrap">
+        <div class="sun"></div>
+        <span class="dev dev-badge">नमस्ते</span>
+        <div class="arch">
+          <img src="pratham-silhouette.png" alt="Pratham silhouette">
+          <span class="mono tag">JHAROKHA // 01 — THE BUILDER</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="hrz"></div>
+
+<!-- ================= V2 ================= -->
+<div class="variant-label"><h2 class="display">V2 · <span>The Stamp</span></h2><p class="mono">POSTAGE-STAMP PORTRAIT + OVERLAPPING NAME — IDENTITY CARD ENERGY</p></div>
+<section class="hero v2">
+  <div class="jali"></div>
+  <div class="inner">
+    <div class="overlap">
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+      <div class="meta-rail mono">
+        <span>ORIGIN <b>बीकानेर → DELHI</b></span>
+        <span>STATUS <b>● SHIPPING</b></span>
+        <span>IST <b>NOW BUILDING ▸ itz-pratham-v2</b></span>
+      </div>
+    </div>
+    <div class="fig">
+      <div class="saffron-block"></div>
+      <div class="stamp">
+        <div class="innerbox"><img src="pratham-silhouette.png" alt="Pratham silhouette"></div>
+        <div class="caption mono"><span>PRATHAM NAHATA</span><b>№ 01 — THE BUILDER</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="hrz"></div>
+
+<!-- ================= V3 ================= -->
+<div class="variant-label"><h2 class="display">V3 · <span>The Spotlight</span></h2><p class="mono">GLOW + RING + TYPE-OVER-PORTRAIT — CINEMATIC INTRO</p></div>
+<section class="hero v3">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="chips mono">
+        <span><b>20MS</b> BROWSER INFERENCE</span>
+        <span><b>ESM-2 + GIN</b> GNNs</span>
+        <span><b>3-AGENT</b> ORCHESTRATION</span>
+        <span><b>SIH</b> GRAND FINALIST</span>
+      </div>
+    </div>
+    <div class="fig spot">
+      <div class="glow"></div>
+      <div class="ring"></div>
+      <span class="dev namaste">नमस्ते</span>
+      <div class="portrait">
+        <img src="pratham-silhouette.png" alt="Pratham silhouette">
+      </div>
+      <div class="name-over">
+        <h1 class="name display">NAHATA</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= V4 ================= -->
+<div class="variant-label"><h2 class="display">V4 · <span>The Shutter Reveal</span></h2><p class="mono">HOVER THE ARCH — THE DOOR OPENS, THE IMAGE REVEALS (MIRRORS THE LOADER)</p></div>
+<section class="hero v1">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+      <p class="mono hint">HOVER THE ARCH →</p>
+    </div>
+    <div class="fig">
+      <div class="archwrap reveal">
+        <div class="sun"></div>
+        <span class="dev dev-badge">नमस्ते</span>
+        <div class="arch">
+          <img src="pratham-silhouette.png" alt="Pratham silhouette">
+          <span class="mono tag">JHAROKHA // 01 — HOVER TO OPEN</span>
+          <span class="shutter shutter-l"></span>
+          <span class="shutter shutter-r"></span>
+          <span class="jali-shutter"></span>
+        </div>
+        <div class="glow-bloom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="hrz"></div>
+
+<!-- ================= V5 ================= -->
+<div class="variant-label"><h2 class="display">V5 · <span>The Sweep</span></h2><p class="mono">TWO IMAGES STACKED — HOVER SWEEPS THE SILHOUETTE AWAY, THE SECOND IMAGE TAKES OVER</p></div>
+<section class="hero v5">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+      <p class="mono hint">HOVER THE PORTRAIT →</p>
+    </div>
+    <div class="fig">
+      <div class="stackbox">
+        <img class="layer base" src="pratham-silhouette.png" alt="silhouette">
+        <img class="layer reveal-layer" src="reveal-image.png" alt="reveal">
+        <span class="saffron-line"></span>
+        <span class="tag-under mono">SILHOUETTE → REVEAL</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="hrz"></div>
+
+<!-- ================= V6 ================= -->
+<div class="variant-label"><h2 class="display">V6 · <span>The Cursor Lens</span></h2><p class="mono">TWO IMAGES STACKED — THE CURSOR IS A LENS: MOVE IT AND THE SECOND IMAGE SHOWS THROUGH</p></div>
+<section class="hero v6">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+      <p class="mono hint">MOVE THE CURSOR OVER THE PORTRAIT →</p>
+    </div>
+    <div class="fig">
+      <div class="stackbox lensbox">
+        <img class="layer base" src="pratham-silhouette.png" alt="silhouette">
+        <img class="layer reveal-layer" src="reveal-image.png" alt="reveal">
+        <div class="lens"></div>
+        <div class="lensborder"></div>
+        <span class="tag-under mono">MOVE THE LENS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= V7 ================= -->
+<div class="variant-label"><h2 class="display">V7 · <span>The Stamp Sweep</span></h2><p class="mono">STAMP FRAME + SWEEP REVEAL + नमस्ते BY THE BLOCK + THE HOME MARQUEES</p></div>
+<section class="hero v7">
+  <div class="jali"></div>
+  <div class="inner">
+    <div>
+      <p class="mono eyebrow">PORTFOLIO ©2026 — DELHI, INDIA · बीकानेर ORIGIN</p>
+      <h1 class="name display">PRATHAM<br><span class="stroke">NAHATA</span><span class="cursor"></span></h1>
+      <p class="mono roleline">FULL-STACK × ML ENGINEER <span class="whatido">WHAT I DO ▾</span></p>
+      <p class="deck">I build full-stack products and ML <mark>systems</mark> — browser inference, AI workflows, realtime interfaces. Models that actually ship.</p>
+      <div class="ctas">
+        <a class="btn primary mono" href="#">Start a project <span>→</span></a>
+        <a class="btn ghost mono" href="#">View projects <span>↓</span></a>
+      </div>
+      <div class="stats mono">
+        <div><b>GRAND FINALIST</b><small>SIH 2024 · national · 492k+ participants</small></div>
+        <div><b>TOP 5</b><small>AlgoQuest · 300+ teams</small></div>
+        <div><b>&lt;20MS</b><small>browser ML inference — measured</small></div>
+        <div><b>4 SHIPPED</b><small>production-shaped systems with receipts</small></div>
+      </div>
+      <p class="mono hint">HOVER THE STAMP →</p>
+    </div>
+    <div class="fig">
+      <div class="stampbox">
+        <span class="dev namaste-stamp">नमस्ते</span>
+        <div class="saffron-block"></div>
+        <div class="stackbox">
+          <img class="layer base" src="pratham-silhouette.png" alt="silhouette">
+          <img class="layer reveal-layer" src="reveal-image.png" alt="reveal">
+          <span class="saffron-line"></span>
+        </div>
+        <div class="stamp-caption mono"><span>PRATHAM NAHATA</span><b>№ 01 — THE BUILDER</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- home marquees, exactly as on the homepage -->
+<div class="marquee skills" aria-hidden="true">
+  <div class="track">
+    <span>PYTHON <em>✦</em> FASTAPI <em>✦</em> NEXT.JS <em>✦</em> REACT <em>✦</em> PYTORCH <em>✦</em> ONNX <em>✦</em> TYPESCRIPT <em>✦</em> GRAPH NEURAL NETWORKS <em>✦</em> LLMs &amp; RAG <em>✦</em> DOCKER <em>✦</em> SUPABASE <em>✦</em> TAURI <em>✦</em>&nbsp;</span>
+    <span>PYTHON <em>✦</em> FASTAPI <em>✦</em> NEXT.JS <em>✦</em> REACT <em>✦</em> PYTORCH <em>✦</em> ONNX <em>✦</em> TYPESCRIPT <em>✦</em> GRAPH NEURAL NETWORKS <em>✦</em> LLMs &amp; RAG <em>✦</em> DOCKER <em>✦</em> SUPABASE <em>✦</em> TAURI <em>✦</em>&nbsp;</span>
+  </div>
+</div>
+<div class="marquee names" aria-hidden="true">
+  <div class="track">
+    <span class="solid">PRATHAM NAHATA <em>✦</em> <span class="dev">नमस्ते</span> <em>✦</em> <span class="dev">बीकानेर</span> <em>✦</em> JAI BIKANER <em>✦</em>&nbsp;</span>
+    <span class="solid">PRATHAM NAHATA <em>✦</em> <span class="dev">नमस्ते</span> <em>✦</em> <span class="dev">बीकानेर</span> <em>✦</em> JAI BIKANER <em>✦</em>&nbsp;</span>
+  </div>
+</div>
+<div class="hrz"></div>
+
+<div class="doc-head" style="margin-top:24px">
+  <p class="mono">OPEN IN A BROWSER · IMAGES: pratham-silhouette.png (base) + reveal-image.png (revealed) — SAME FOLDER · BRAND TOKENS IDENTICAL ACROSS ALL SEVEN</p>
+</div>
+
+<script>
+  // V6 lens: track the cursor inside the portrait box
+  document.querySelectorAll(".lensbox").forEach((box) => {
+    box.addEventListener("pointermove", (e) => {
+      const r = box.getBoundingClientRect();
+      box.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      box.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+</script>
+
+</body>
+</html>
