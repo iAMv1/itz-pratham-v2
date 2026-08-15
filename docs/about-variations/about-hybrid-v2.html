@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Hybrid v2 · Machine-Inspired Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=DM+Mono:wght@400;500&family=Yatra+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f4efe6; --paper-2:#fffdf8; --ink:#051024; --cobalt:#1d5b9e;
+    --saffron:#f58e20; --saffron-deep:#9c5200; --terracotta:#c96f4a;
+    --mint:#8de254; --marigold:#f9ce34; --rose:#d9607e; --muted:#4a5266;
+    --shadow:5px 5px 0 0 var(--ink);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--paper); color:var(--ink); font-family:'DM Sans',system-ui,sans-serif; }
+  .display { font-family:'Teko','Arial Narrow',sans-serif; }
+  .mono { font-family:'DM Mono',ui-monospace,monospace; }
+  .dev { font-family:'Yatra One',serif; }
+
+  .doc-head { border-bottom:3px solid var(--ink); background:var(--paper-2); padding:20px 28px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; position:sticky; top:0; z-index:50; }
+  .doc-head h1 { font-size:24px; text-transform:uppercase; letter-spacing:.02em; }
+  .doc-head h1 span { color:var(--cobalt); }
+  .doc-head .mono { font-size:11px; color:var(--muted); letter-spacing:.12em; }
+  .warn { border:1.5px dashed var(--saffron-deep); background:#fdf6e3; color:var(--saffron-deep); padding:10px 14px; font-size:11.5px; line-height:1.55; margin-bottom:18px; }
+  .warn b { font-weight:600; }
+  .q { display:inline-block; border:1.5px dashed var(--saffron-deep); color:var(--saffron-deep); font-size:10px; padding:1px 7px; margin-left:8px; letter-spacing:.06em; }
+
+  .page { min-height:100vh; background:linear-gradient(to top, var(--paper) 0%, color-mix(in oklab,var(--paper) 58%, var(--cobalt)) 38%, var(--paper) 100%); padding:0 4vw 90px; }
+  .wrap { max-width:1180px; margin:0 auto; padding-top:70px; }
+
+  .header { display:grid; grid-template-columns:1.4fr .6fr; gap:34px; align-items:start; }
+  .chip { display:inline-block; border:2px solid var(--ink); background:var(--saffron); padding:6px 14px; font-size:11px; letter-spacing:.12em; box-shadow:3px 3px 0 var(--ink); }
+  h1.name { font-size:clamp(72px,9vw,130px); line-height:.85; text-transform:uppercase; font-weight:600; margin-top:14px; }
+  h1.name span { color:var(--cobalt); }
+  .intro { margin-top:18px; max-width:54ch; font-size:17.5px; line-height:1.6; font-weight:500; }
+  .intro em { color:var(--saffron-deep); }
+  .note-card { display:inline-block; margin-top:16px; border:2px solid var(--ink); background:var(--paper-2); padding:8px 14px; transform:rotate(-1.5deg); font-size:12px; letter-spacing:.08em; box-shadow:var(--shadow); }
+  .facts { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:18px 20px; }
+  .facts p { display:flex; gap:12px; padding:7px 0; border-bottom:1px solid rgba(5,16,36,.12); font-size:13px; letter-spacing:.06em; }
+  .facts p:last-child { border:none; }
+  .facts b { min-width:64px; color:var(--saffron-deep); font-weight:500; }
+  .facts .live { color:var(--mint); }
+
+  .sec-head { display:flex; align-items:baseline; justify-content:space-between; gap:14px; border-top:3px solid var(--ink); margin-top:64px; padding-top:14px; flex-wrap:wrap; }
+  .sec-head .num { font-size:13px; letter-spacing:.18em; color:var(--saffron-deep); }
+  .sec-head h2 { font-size:clamp(32px,4.2vw,52px); text-transform:uppercase; letter-spacing:.02em; line-height:.9; }
+  .sec-head .mono { font-size:10.5px; color:var(--muted); letter-spacing:.14em; }
+
+  /* metro */
+  .metro { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:20px; margin-top:22px; }
+  .metro svg { width:100%; height:auto; display:block; }
+  .station-chip { font-size:10.5px; letter-spacing:.06em; }
+
+  /* machine-inspired timeline */
+  .machine { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:22px; margin-top:22px; }
+  .track { position:relative; height:34px; border-top:3px solid var(--ink); margin-top:26px; }
+  .track .marker { position:absolute; top:-11px; transform:translateX(-50%); width:15px; height:22px; background:var(--saffron); border:1.5px solid var(--ink); }
+  .track .marker.now { background:var(--cobalt); }
+  .years { display:flex; justify-content:space-between; font-size:11px; letter-spacing:.14em; color:var(--muted); margin-top:8px; }
+  .years b { color:var(--ink); font-weight:500; }
+  .years b.on { color:var(--saffron-deep); }
+  .year-cards { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:20px; }
+  .year-card { border:2px solid var(--ink); background:var(--paper); padding:14px; position:relative; }
+  .year-card.future { border-style:dashed; }
+  .year-card .y { font-size:28px; line-height:.9; }
+  .year-card .tag { display:block; font-size:9.5px; letter-spacing:.16em; color:var(--cobalt); margin-top:5px; }
+  .year-card .dive { margin-top:10px; }
+  .year-card details { border-top:1px solid rgba(5,16,36,.15); }
+  .year-card details summary { display:flex; justify-content:space-between; gap:8px; padding:8px 2px; cursor:pointer; list-style:none; font-size:11.5px; letter-spacing:.08em; }
+  .year-card details summary::-webkit-details-marker { display:none; }
+  .year-card details summary .plus { color:var(--saffron-deep); }
+  .year-card details p { font-size:12px; line-height:1.5; color:var(--muted); padding:0 2px 8px; }
+  .year-card details ul { list-style:none; padding:0 2px 8px; }
+  .year-card details li { font-size:12px; line-height:1.5; color:var(--muted); padding:3px 0; border-bottom:1px dashed rgba(5,16,36,.12); }
+  .year-card details li b { color:var(--ink); font-weight:600; }
+  .year-card .pending-item { border:1.5px dashed var(--saffron-deep); color:var(--saffron-deep); font-size:10px; padding:6px 8px; margin-top:8px; letter-spacing:.05em; }
+
+  .now-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:22px; }
+  .unrow { border-bottom:1px solid rgba(5,16,36,.18); }
+  .unrow summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 2px; cursor:pointer; list-style:none; }
+  .unrow summary::-webkit-details-marker { display:none; }
+  .unrow summary .n { font-size:11px; color:var(--saffron-deep); letter-spacing:.1em; }
+  .unrow summary h3 { font-size:17px; text-transform:uppercase; letter-spacing:.03em; }
+  .unrow summary .plus { font-size:18px; color:var(--cobalt); }
+  .unrow .body { display:grid; grid-template-columns:1fr; gap:9px; padding:0 2px 14px; font-size:13px; line-height:1.5; }
+  .unrow .body .cell { border-left:3px solid var(--cobalt); padding-left:10px; }
+  .unrow .body .cell b { display:block; font-size:9px; letter-spacing:.16em; color:var(--muted); font-weight:500; margin-bottom:2px; }
+  .commits { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:16px; }
+  .commits .grid { display:grid; grid-template-columns:repeat(26,1fr); gap:2px; margin-top:12px; }
+  .commits .grid span { aspect-ratio:1; border-radius:1px; }
+  .l0{background:#e9e0cc}.l1{background:#c9d9a6}.l2{background:#8de254}.l3{background:#5cb83c}.l4{background:#2e7d32}
+
+  .otc-details { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); margin-top:22px; }
+  .otc-details summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 18px; cursor:pointer; list-style:none; }
+  .otc-details summary::-webkit-details-marker { display:none; }
+  .otc-details summary h3 { font-size:18px; text-transform:uppercase; letter-spacing:.04em; }
+  .otc-details summary .plus { font-size:20px; color:var(--cobalt); }
+  .otc-details .body { display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:0 18px 18px; }
+  .otc-details li { list-style:none; padding:8px 0; border-bottom:1px solid rgba(5,16,36,.12); font-size:13px; line-height:1.45; }
+  .otc-details li:last-child { border:none; }
+  .otc-details li b { display:block; font-size:14px; text-transform:uppercase; letter-spacing:.03em; }
+  .otc-details li span { color:var(--muted); font-size:12px; }
+  .otc-details dl div { padding:8px 0; border-bottom:1px solid rgba(5,16,36,.12); }
+  .otc-details dl div:last-child { border:none; }
+  .otc-details dt { font-size:11px; letter-spacing:.1em; color:var(--saffron-deep); }
+  .otc-details dd { font-size:12px; color:var(--muted); margin-top:2px; }
+
+  @media (max-width:900px){ .header,.now-grid,.otc-details .body { grid-template-columns:1fr; } .year-cards { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1 class="display">About — <span>Hybrid v2</span></h1>
+  <p class="mono">01 WHO I AM (A) · 02 JOURNEY (MACHINE-INSPIRED TIMELINE) · 03 NOW · 04 OFF THE CLOCK (B)</p>
+</div>
+
+<section class="page">
+  <div class="wrap">
+
+    <div class="warn mono">⚠ <b>STILL PENDING:</b> internships data (dashed slots) · GSSoC placement (your call) · IIT-M year confirm · metro stations confirm · 2027 keep/drop</div>
+
+    <!-- 01 · WHO I AM -->
+    <div class="header">
+      <div>
+        <span class="chip mono">ABOUT · THE BUILDER</span>
+        <h1 class="name display">PRATHAM<br>NAHATA</h1>
+        <p class="intro">I'm a CS undergrad from Delhi building full-stack + ML systems with the patience of a craftsman and the impatience of a hacker. <em>Bikaner-raised in spirit, internet-raised in practice.</em></p>
+        <p class="intro">My brand promise: models that ship, interfaces with a pulse, and work you can verify — every claim documented, methodology attached.</p>
+        <span class="note-card mono">builds systems that actually ship — nothing leaves without receipts</span>
+      </div>
+      <div class="facts mono">
+        <p><b>FROM</b> Delhi, India</p>
+        <p><b>DEGREE</b> B.Tech CSE · BVCOE</p>
+        <p><b>FOCUS</b> Full-stack × ML</p>
+        <p><b>NOW</b> <span class="live">●</span> MindPulse Pro v2</p>
+      </div>
+    </div>
+
+    <!-- 02 · JOURNEY -->
+    <div class="sec-head"><span class="num mono">01 · JOURNEY</span><h2 class="display">The journey</h2><span class="mono">ROUTE + SCRUBBABLE TIMELINE</span></div>
+
+    <div class="metro">
+      <p class="mono" style="font-size:10.5px;letter-spacing:.14em;color:var(--muted);margin-bottom:8px">DELHI METRO — THE CAREER LINE MAP <span class="q">DATA?</span></p>
+      <svg viewBox="0 0 460 180">
+        <path d="M60 45 H220 L260 20 H430" fill="none" stroke="#1d5b9e" stroke-width="8" stroke-linecap="round"/>
+        <path d="M60 130 H210 L250 160 H430" fill="none" stroke="#f9ce34" stroke-width="8" stroke-linecap="round"/>
+        <path d="M60 85 H150 L180 55 H300" fill="none" stroke="#d9607e" stroke-width="8" stroke-linecap="round"/>
+        <path d="M60 160 H430" fill="none" stroke="#6a4c9c" stroke-width="8" stroke-linecap="round" stroke-dasharray="5 4"/>
+        <circle cx="60" cy="85" r="11" fill="#f58e20" stroke="#051024" stroke-width="2.5"/>
+        <text x="60" y="90" font-family="ui-monospace" font-size="8" text-anchor="middle" font-weight="bold">P</text>
+        <circle cx="220" cy="45" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="220" y="32" font-family="ui-monospace" font-size="9" text-anchor="middle">BVCOE ’23</text>
+        <circle cx="260" cy="20" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="260" y="11" font-family="ui-monospace" font-size="9" text-anchor="middle">IIT-M ’25 (1YR)<span class="q" style="font-size:8px">?</span></text>
+        <circle cx="210" cy="130" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="210" y="146" font-family="ui-monospace" font-size="9" text-anchor="middle">GSSoC ’24</text>
+        <circle cx="250" cy="160" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="250" y="174" font-family="ui-monospace" font-size="9" text-anchor="middle">WORKSHOP ’24</text>
+        <circle cx="150" cy="85" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="150" y="101" font-family="ui-monospace" font-size="9" text-anchor="middle">MIND PULSE ’26</text>
+        <circle cx="180" cy="55" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="180" y="44" font-family="ui-monospace" font-size="9" text-anchor="middle">UNIFIED-DTA ’25</text>
+        <circle cx="280" cy="160" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="280" y="174" font-family="ui-monospace" font-size="9" text-anchor="middle">SIH ’24</text>
+        <circle cx="430" cy="160" r="5.5" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <text x="430" y="174" font-family="ui-monospace" font-size="9" text-anchor="end">INTERNSHIPS <span class="q" style="font-size:8px">?</span></text>
+      </svg>
+      <p class="mono" style="margin-top:6px;font-size:9.5px;color:var(--muted)">EDUCATION · OPEN SOURCE · BUILT · WINS/EXPERIENCE (PENDING)</p>
+    </div>
+
+    <!-- machine-inspired timeline -->
+    <div class="machine">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+        <p class="display" style="font-size:24px;text-transform:uppercase">The Timeline — scrub the years</p>
+        <p class="mono" style="font-size:10px;color:var(--muted);letter-spacing:.12em">2023 → 2027 · every year is a drawer</p>
+      </div>
+      <div class="track"><span class="marker now" style="left:56%"></span></div>
+      <div class="years mono"><b>2023</b><b>2024</b><b class="on">2025</b><b>2026</b><b>2027</b></div>
+
+      <div class="year-cards">
+        <!-- 2023 -->
+        <div class="year-card">
+          <p class="y display">2023</p>
+          <span class="tag mono">THE START</span>
+          <details class="dive"><summary class="mono">BVCOE — B.Tech CSE <span class="plus">+</span></summary>
+            <ul>
+              <li><b>First repo</b> — the chatbot nobody asked for</li>
+              <li><b>CS50</b> — how computers actually work</li>
+              <li><b>3 AM project ideas</b> — most started here</li>
+            </ul>
+          </details>
+          <div class="pending-item mono">MORE COLLEGE STUFF? <span class="q">ADD</span></div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="year-card">
+          <p class="y display">2024</p>
+          <span class="tag mono">THE BLOODED YEAR</span>
+          <details class="dive" open><summary class="mono">Inside college <span class="plus">+</span></summary>
+            <ul>
+              <li><b>Workshop Lead — GenAI</b> (50+ participants)</li>
+              <li><b>GSSoC '24</b> — open source, merged PRs <span class="q">PLACE?</span></li>
+              <li><b>SIH 2024</b> — grand finalist, 492k+ pool</li>
+              <li><b>AlgoQuest</b> — top 5, 300+ teams</li>
+              <li><b>Certifications</b> — CS50W · ML Spec · Postman</li>
+            </ul>
+          </details>
+          <div class="pending-item mono">OTHER 2024 THINGS? <span class="q">ADD</span></div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="year-card">
+          <p class="y display">2025</p>
+          <span class="tag mono">SYSTEMS YEAR</span>
+          <details class="dive"><summary class="mono">IIT Madras (online) <span class="plus">+</span></summary>
+            <p>BSc Foundation, Data Science — one year, then stopped. Math + stats foundations, on pause by choice.</p>
+          </details>
+          <details class="dive"><summary class="mono">Unified-DTA · Sentinel <span class="plus">+</span></summary>
+            <p>ESM-2 + GIN fusion · 3-agent orchestration — the research-flavored year.</p>
+          </details>
+          <div class="pending-item mono">INTERNSHIP 1 <span class="q">DATA?</span></div>
+        </div>
+
+        <!-- 2026 -->
+        <div class="year-card">
+          <p class="y display">2026</p>
+          <span class="tag mono">SHIP YEAR</span>
+          <details class="dive"><summary class="mono">MindPulse Pro · OmniSecTester <span class="plus">+</span></summary>
+            <p>Browser inference under 20ms · 7-surface security CLI · this portfolio.</p>
+          </details>
+          <div class="pending-item mono">INTERNSHIP 2 <span class="q">DATA?</span></div>
+        </div>
+
+        <!-- 2027 -->
+        <div class="year-card future">
+          <p class="y display">2027</p>
+          <span class="tag mono">NEXT</span>
+          <details class="dive"><summary class="mono">The trajectory <span class="plus">+</span></summary>
+            <p>WebGPU · distributed inference · better questions. A direction, not a promise.</p>
+          </details>
+          <div class="pending-item mono">KEEP / DROP THIS CARD? <span class="q">?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 · NOW -->
+    <div class="sec-head"><span class="num mono">02 · NOW</span><h2 class="display">Currently</h2><span class="mono">OPEN QUESTIONS + LIVE OUTPUT</span></div>
+    <div class="now-grid">
+      <div>
+        <p class="mono" style="font-size:10.5px;letter-spacing:.14em;color:var(--muted);margin-bottom:8px">CURRENTLY UNRESOLVED</p>
+        <details class="unrow" open><summary><span class="mono n">01</span><h3 class="display">Distributed systems, properly</h3><span class="plus">+</span></summary><div class="body"><div class="cell"><b>TRYING</b> A toy RAFT log in Rust on weekends.</div><div class="cell"><b>NEXT</b> Distributed MindPulse backend, zero-downtime inference.</div></div></details>
+        <details class="unrow"><summary><span class="mono n">02</span><h3 class="display">WebGPU compute</h3><span class="plus">+</span></summary><div class="body"><div class="cell"><b>TRYING</b> Porting the jali lattice to a WebGPU compute pass.</div></div></details>
+        <details class="unrow"><summary><span class="mono n">03</span><h3 class="display">A better testing strategy</h3><span class="plus">+</span></summary><div class="body"><div class="cell"><b>TRYING</b> Golden-image tests for the canvas fields.</div></div></details>
+        <details class="unrow"><summary><span class="mono n">04</span><h3 class="display">Motion that never betrays content</h3><span class="plus">+</span></summary><div class="body"><div class="cell"><b>TRYING</b> A shared motion token map.</div></div></details>
+      </div>
+      <div class="commits">
+        <p class="mono" style="font-size:10.5px;letter-spacing:.14em;color:var(--muted)">THE YEAR IN COMMITS — LIVE</p>
+        <div class="grid"><script>document.write(Array(26).fill(0).map(()=>{let s='';for(let i=0;i<7;i++)s+=`<span class="l${Math.random()<.55?0:Math.random()<.5?1:Math.random()<.5?2:Math.random()<.5?3:4}"></span>`;return s}).join(''))</script></div>
+        <p class="mono" style="margin-top:10px;font-size:9.5px;color:var(--muted)">321 CONTRIBUTIONS THIS YEAR</p>
+      </div>
+    </div>
+
+    <!-- 04 · OFF THE CLOCK -->
+    <div class="sec-head"><span class="num mono">03 · HUMAN</span><h2 class="display">Off the clock</h2><span class="mono">OPTIONAL — CLICK TO OPEN</span></div>
+    <details class="otc-details">
+      <summary><h3 class="display">Books + Setup</h3><span class="plus">+</span></summary>
+      <div class="body">
+        <ul>
+          <li><b>Designing Data-Intensive Applications</b><span>the closest thing to a system-design gym</span></li>
+          <li><b>The Pragmatic Programmer</b><span>the 'broken windows' chapter is why the 404 has a peacock</span></li>
+          <li><b>Atomic Habits</b><span>2 weeks not 2 months — the 1% rule applied to shipping</span></li>
+          <li><b>Deep Work</b><span>4 AM hackathon hours, phone in another room</span></li>
+        </ul>
+        <dl>
+          <div><dt>EDITOR</dt><dd>Cursor + VSCode — AI pair programmer, human reviewer</dd></div>
+          <div><dt>SHELL</dt><dd>PowerShell → WSL zsh → Starship</dd></div>
+          <div><dt>STACK</dt><dd>Next.js · FastAPI · PyTorch · ONNX · Tauri · Supabase</dd></div>
+          <div><dt>MACHINE</dt><dd>A laptop that's been to more hackathons than hotels</dd></div>
+        </dl>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<div class="doc-head" style="margin-top:0"><p class="mono">HYBRID V2 — MOCK ONLY · NOT DEPLOYED</p></div>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Variation A · Person → Direction → Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=DM+Mono:wght@400;500&family=Yatra+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#f4efe6; --paper-2:#fffdf8; --ink:#051024; --cobalt:#1d5b9e;
+    --saffron:#f58e20; --saffron-deep:#9c5200; --terracotta:#c96f4a;
+    --mint:#8de254; --muted:#4a5266; --shadow:5px 5px 0 0 var(--ink);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--paper); color:var(--ink); font-family:'DM Sans',system-ui,sans-serif; }
+  .display { font-family:'Teko','Arial Narrow',sans-serif; }
+  .mono { font-family:'DM Mono',ui-monospace,monospace; }
+  .dev { font-family:'Yatra One',serif; }
+
+  .doc-head { border-bottom:3px solid var(--ink); background:var(--paper-2); padding:20px 28px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; position:sticky; top:0; z-index:50; }
+  .doc-head h1 { font-size:24px; text-transform:uppercase; letter-spacing:.02em; }
+  .doc-head h1 span { color:var(--saffron-deep); }
+  .doc-head .mono { font-size:11px; color:var(--muted); letter-spacing:.12em; }
+
+  /* page: terracotta dusk */
+  .page { min-height:100vh; background:linear-gradient(to top, var(--paper) 0%, color-mix(in oklab,var(--paper) 58%, var(--terracotta)) 38%, var(--paper) 100%); padding:0 4vw 90px; }
+  .wrap { max-width:1180px; margin:0 auto; padding-top:70px; }
+
+  /* section frames */
+  .sec-head { display:flex; align-items:baseline; justify-content:space-between; gap:14px; border-top:3px solid var(--ink); margin-top:70px; padding-top:14px; flex-wrap:wrap; }
+  .sec-head .num { font-size:13px; letter-spacing:.18em; color:var(--saffron-deep); }
+  .sec-head h2 { font-size:clamp(34px,4.5vw,54px); text-transform:uppercase; letter-spacing:.02em; line-height:.9; }
+  .sec-head .mono { font-size:10.5px; color:var(--muted); letter-spacing:.14em; }
+  .sec-first { border-top:none; margin-top:0; padding-top:0; }
+
+  /* header block */
+  .header { display:grid; grid-template-columns:1.4fr .6fr; gap:34px; align-items:start; }
+  .chip { display:inline-block; border:2px solid var(--ink); background:var(--saffron); padding:6px 14px; font-size:11px; letter-spacing:.12em; box-shadow:3px 3px 0 var(--ink); }
+  h1.name { font-size:clamp(72px,9vw,130px); line-height:.85; text-transform:uppercase; font-weight:600; margin-top:14px; }
+  h1.name span { color:var(--cobalt); }
+  .intro { margin-top:18px; max-width:54ch; font-size:17.5px; line-height:1.6; font-weight:500; }
+  .intro em { color:var(--saffron-deep); }
+  .note-card { display:inline-block; margin-top:16px; border:2px solid var(--ink); background:var(--paper-2); padding:8px 14px; transform:rotate(-1.5deg); font-size:12px; letter-spacing:.08em; box-shadow:var(--shadow); }
+  .facts { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:18px 20px; }
+  .facts p { display:flex; gap:12px; padding:7px 0; border-bottom:1px solid rgba(5,16,36,.12); font-size:13px; letter-spacing:.06em; }
+  .facts p:last-child { border:none; }
+  .facts b { min-width:64px; color:var(--saffron-deep); font-weight:500; }
+  .facts .live { color:var(--mint); }
+
+  /* unresolved accordions */
+  .unrow { border-bottom:1px solid rgba(5,16,36,.18); }
+  .unrow summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 4px; cursor:pointer; list-style:none; }
+  .unrow summary::-webkit-details-marker { display:none; }
+  .unrow summary .n { font-size:12px; color:var(--saffron-deep); letter-spacing:.1em; }
+  .unrow summary h3 { font-size:20px; text-transform:uppercase; letter-spacing:.03em; }
+  .unrow summary .plus { font-size:20px; color:var(--cobalt); }
+  .unrow .body { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0 4px 18px; font-size:13.5px; line-height:1.55; }
+  .unrow .body .cell { border-left:3px solid var(--cobalt); padding-left:10px; }
+  .unrow .body .cell.g { border-color:var(--mint); } .unrow .body .cell.o { border-color:var(--saffron); }
+  .unrow .body .cell b { display:block; font-size:9.5px; letter-spacing:.16em; color:var(--muted); font-weight:500; margin-bottom:3px; }
+
+  /* commits grid */
+  .commits { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:18px; }
+  .commits .grid { display:grid; grid-template-columns:repeat(52,1fr); gap:2px; margin-top:14px; overflow:hidden; }
+  .commits .grid span { aspect-ratio:1; border-radius:1px; }
+  .l0{background:#e9e0cc}.l1{background:#c9d9a6}.l2{background:#8de254}.l3{background:#5cb83c}.l4{background:#2e7d32}
+
+  /* journey blocks */
+  .metro { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:22px; }
+  .metro svg { width:100%; height:auto; display:block; }
+  .m-station { font-size:10.5px; letter-spacing:.08em; }
+  .machine { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:22px; }
+  .machine .bar { height:8px; border:1.5px solid var(--ink); background:rgba(5,16,36,.08); margin:18px 0 10px; position:relative; }
+  .machine .bar i { position:absolute; top:-4px; width:14px; height:16px; background:var(--saffron); border:1.5px solid var(--ink); left:40%; }
+  .machine .years { display:flex; justify-content:space-between; font-size:10px; letter-spacing:.14em; color:var(--muted); }
+  .machine .years b { color:var(--ink); font-weight:500; }
+  .bglines { border-top:1px solid rgba(5,16,36,.2); }
+  .bgrow { display:grid; grid-template-columns:150px 1fr auto; gap:18px; padding:20px 4px; border-bottom:1px solid rgba(5,16,36,.18); align-items:start; }
+  .bgrow .years { font-size:24px; line-height:1; }
+  .bgrow h4 { font-size:20px; text-transform:uppercase; letter-spacing:.02em; }
+  .bgrow h4 span { color:var(--cobalt); }
+  .bgrow p { margin-top:6px; font-size:14.5px; line-height:1.55; }
+  .bgrow .tags { margin-top:8px; font-size:10.5px; letter-spacing:.16em; color:var(--muted); }
+  .bgrow .status { border:1px solid var(--ink); background:var(--paper-2); padding:5px 12px; font-size:10.5px; letter-spacing:.12em; }
+
+  /* off the clock */
+  .otc { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .otc .card { border:2px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow); padding:20px; }
+  .otc .card h3 { font-size:12px; letter-spacing:.14em; color:var(--cobalt); margin-bottom:12px; }
+  .otc .card li { list-style:none; padding:9px 0; border-bottom:1px solid rgba(5,16,36,.12); font-size:13.5px; line-height:1.45; }
+  .otc .card li:last-child { border:none; }
+  .otc .card li b { display:block; font-size:15px; text-transform:uppercase; letter-spacing:.03em; }
+  .otc .card li span { color:var(--muted); font-size:12.5px; }
+  .otc .card dl div { padding:9px 0; border-bottom:1px solid rgba(5,16,36,.12); }
+  .otc .card dl div:last-child { border:none; }
+  .otc .card dt { font-size:12px; letter-spacing:.1em; color:var(--saffron-deep); }
+  .otc .card dd { font-size:12.5px; color:var(--muted); margin-top:2px; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  @media (max-width:860px){ .header,.two-col,.otc { grid-template-columns:1fr; } .bgrow { grid-template-columns:1fr; } .commits .grid { grid-template-columns:repeat(26,1fr); } }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <h1 class="display">About — Variation <span>A</span></h1>
+  <p class="mono">PERSON → DIRECTION → JOURNEY · 4 SECTIONS · TERRA COTTA DUSK</p>
+</div>
+
+<section class="page">
+  <div class="wrap">
+
+    <!-- 1 · WHO I AM -->
+    <div class="header">
+      <div>
+        <span class="chip mono">ABOUT · THE BUILDER</span>
+        <h1 class="name display">PRATHAM<br>NAHATA</h1>
+        <p class="intro">I'm a CS undergrad from Delhi building full-stack + ML systems with the patience of a craftsman and the impatience of a hacker. <em>Bikaner-raised in spirit, internet-raised in practice.</em></p>
+        <p class="intro">My brand promise: models that ship, interfaces with a pulse, and work you can verify — every claim documented, methodology attached.</p>
+        <span class="note-card mono">builds systems that actually ship — nothing leaves without receipts</span>
+      </div>
+      <div class="facts mono">
+        <p><b>FROM</b> Delhi, India</p>
+        <p><b>DEGREE</b> B.Tech CSE · BVCOE</p>
+        <p><b>FOCUS</b> Full-stack × ML</p>
+        <p><b>NOW</b> <span class="live">●</span> MindPulse Pro v2</p>
+      </div>
+    </div>
+
+    <!-- 2 · WHAT I'M DOING NOW -->
+    <div class="sec-head sec-first"><span class="num mono">02 · NOW</span><h2 class="display">What I'm doing <span style="color:var(--cobalt)">right now</span></h2></div>
+    <div class="two-col" style="margin-top:22px">
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.14em;color:var(--muted);margin-bottom:8px">CURRENTLY UNRESOLVED — OPEN PROBLEMS, CLICK TO DESCEND</p>
+        <details class="unrow" open>
+          <summary><span class="mono n">01</span><h3 class="display">Distributed systems, properly</h3><span class="plus">+</span></summary>
+          <div class="body">
+            <div class="cell g"><b>UNDERSTAND</b> Single-node ML inference inside a browser — ONNX, WebLLM, real constraints.</div>
+            <div class="cell"><b>DON'T</b> Consensus, partitioning, exactly-once semantics in the wild.</div>
+            <div class="cell o"><b>TRYING</b> Building a toy RAFT log in Rust on weekends.</div>
+            <div class="cell"><b>READING · NEXT</b> DDIA ch.8 → distributed MindPulse backend.</div>
+          </div>
+        </details>
+        <details class="unrow"><summary><span class="mono n">02</span><h3 class="display">WebGPU compute</h3><span class="plus">+</span></summary><div class="body"><div class="cell g"><b>UNDERSTAND</b> Canvas 2D particles, DPR discipline, rAF budgets.</div><div class="cell"><b>DON'T</b> Why my first WGSL kernel was 8× slower than JS.</div></div></details>
+        <details class="unrow"><summary><span class="mono n">03</span><h3 class="display">A better testing strategy</h3><span class="plus">+</span></summary><div class="body"><div class="cell g"><b>UNDERSTAND</b> Vitest units, Playwright smoke, Lighthouse gates.</div><div class="cell"><b>DON'T</b> Visual regression — my canvases hate pixel diffs.</div></div></details>
+        <details class="unrow"><summary><span class="mono n">04</span><h3 class="display">Motion that never betrays content</h3><span class="plus">+</span></summary><div class="body"><div class="cell g"><b>UNDERSTAND</b> Reduced-motion, IO-gated reveals.</div><div class="cell"><b>DON'T</b> When scrub-parallax fights pinned sections.</div></div></details>
+      </div>
+      <div class="commits">
+        <p class="mono" style="font-size:11px;letter-spacing:.14em;color:var(--muted)">THE YEAR IN COMMITS — LIVE GITHUB DATA</p>
+        <div class="grid">
+          <script>document.write(Array(52).fill(0).map(()=>{let s='';for(let i=0;i<7;i++)s+=`<span class="l${Math.random()<.55?0:Math.random()<.5?1:Math.random()<.5?2:Math.random()<.5?3:4}"></span>`;return s}).join(''))</script>
+        </div>
+        <p class="mono" style="margin-top:12px;font-size:10px;color:var(--muted)">321 CONTRIBUTIONS THIS YEAR · LIVE FROM GITHUB</p>
+      </div>
+    </div>
+
+    <!-- 3 · THE JOURNEY -->
+    <div class="sec-head"><span class="num mono">03 · JOURNEY</span><h2 class="display">The journey</h2><span class="mono">ROUTE → YEARS → RECEIPTS</span></div>
+
+    <div class="metro" style="margin-top:22px">
+      <p class="mono" style="font-size:11px;letter-spacing:.14em;color:var(--muted)">DELHI METRO — THE CAREER LINE MAP</p>
+      <svg viewBox="0 0 920 200">
+        <path d="M120 90 H320 L380 40 H700" fill="none" stroke="#1d5b9e" stroke-width="10" stroke-linecap="round"/>
+        <path d="M120 140 H420 L480 190 H820" fill="none" stroke="#f9ce34" stroke-width="10" stroke-linecap="round"/>
+        <path d="M120 175 H220 L260 120 H600" fill="none" stroke="#d9607e" stroke-width="10" stroke-linecap="round"/>
+        <circle cx="120" cy="90" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/><circle cx="120" cy="140" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/><circle cx="120" cy="175" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <circle cx="700" cy="40" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/><circle cx="820" cy="190" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/><circle cx="600" cy="120" r="7" fill="#f4efe6" stroke="#051024" stroke-width="2"/>
+        <circle cx="380" cy="40" r="6" fill="#f58e20" stroke="#051024" stroke-width="2"/><circle cx="480" cy="190" r="6" fill="#f58e20" stroke="#051024" stroke-width="2"/><circle cx="260" cy="120" r="6" fill="#f58e20" stroke="#051024" stroke-width="2"/>
+        <text x="700" y="22" font-family="ui-monospace" font-size="11" letter-spacing="1">BVCOE DELHI</text>
+        <text x="790" y="205" font-family="ui-monospace" font-size="11" letter-spacing="1">GSSoC '24</text>
+        <text x="600" y="102" font-family="ui-monospace" font-size="11" letter-spacing="1">SIH 2024</text>
+        <text x="250" y="115" font-family="ui-monospace" font-size="12" letter-spacing="1" font-weight="bold">PRATHAM CENTRAL</text>
+      </svg>
+    </div>
+
+    <div class="machine" style="margin-top:22px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+        <p class="display" style="font-size:24px;text-transform:uppercase">The Timeline Machine</p>
+        <p class="mono" style="font-size:10px;color:var(--muted);letter-spacing:.12em">scrub the years — watch the builder change</p>
+      </div>
+      <div class="bar"><i></i></div>
+      <div class="years mono"><b>2023</b><b>2024</b><b style="color:var(--saffron-deep)">2025</b><b>2026</b><b>2027</b></div>
+      <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div><p class="mono" style="font-size:9.5px;letter-spacing:.16em;color:var(--muted)">BUILDING</p><p style="font-size:14px;line-height:1.5">Unified-DTA · Sentinel · production-shaped pipelines</p></div>
+        <div><p class="mono" style="font-size:9.5px;letter-spacing:.16em;color:var(--muted)">LEARNING</p><p style="font-size:14px;line-height:1.5">GNNs · ESM-2 · multi-agent orchestration</p></div>
+        <div><p class="mono" style="font-size:9.5px;letter-spacing:.16em;color:var(--muted)">IDENTITY</p><p style="font-size:14px;line-height:1.5;font-style:italic">“engineer who designs”</p></div>
+      </div>
+    </div>
+
+    <div class="bglines" style="margin-top:26px">
+      <div class="bgrow"><span class="years display">2023—27</span><div><h4 class="display">B.Tech, Computer Science <span>@ BVCOE Delhi</span></h4><p>Systems, ML and the parts of engineering that ship. Where most of the 3am project ideas started.</p><p class="tags mono">DATA STRUCTURES · ML · SYSTEMS</p></div><span class="status mono">UNDERGRAD</span></div>
+      <div class="bgrow"><span class="years display">2025—26</span><div><h4 class="display">BSc Foundation, Data Science <span>@ IIT Madras (online)</span></h4><p>Mathematics, statistics and ML foundations from one of India's best — the theory behind the shipped models.</p><p class="tags mono">MATH · STATS · ML FOUNDATIONS</p></div><span class="status mono">ONGOING</span></div>
+      <div class="bgrow"><span class="years display">2024</span><div><h4 class="display">Open Source Contributor <span>@ GSSoC 2024</span></h4><p>Shipped merged contributions across open-source repos during GirlScript Summer of Code.</p><p class="tags mono">OPEN SOURCE · COLLABORATION</p></div><span class="status mono">OSS</span></div>
+      <div class="bgrow"><span class="years display">2024</span><div><h4 class="display">Organizer &amp; Lead <span>@ Generative AI Workshop</span></h4><p>Designed and delivered a hands-on workshop on real-world LLM applications for 50+ participants.</p><p class="tags mono">LLMS · TEACHING · WORKSHOPS</p></div><span class="status mono">LED</span></div>
+    </div>
+
+    <!-- 4 · OFF THE CLOCK -->
+    <div class="sec-head"><span class="num mono">04 · HUMAN</span><h2 class="display">Off the clock</h2><span class="mono">what feeds the builder when the repo is closed</span></div>
+    <div class="otc" style="margin-top:22px">
+      <div class="card"><h3 class="mono">BOOKS — THE SHELF</h3>
+        <ul>
+          <li><b>Designing Data-Intensive Applications</b><span>chapter 8, still slowly — the closest thing to a system-design gym</span></li>
+          <li><b>The Pragmatic Programmer</b><span>the 'broken windows' chapter is why this site's 404 has a peacock</span></li>
+          <li><b>Atomic Habits</b><span>2 weeks not 2 months — the 1% rule applied to shipping</span></li>
+          <li><b>Deep Work</b><span>4 AM hackathon hours, but with the phone in another room</span></li>
+        </ul>
+      </div>
+      <div class="card"><h3 class="mono">SETUP — THE WORKBENCH</h3>
+        <dl>
+          <div><dt>EDITOR</dt><dd>Cursor + VSCode — AI pair programmer, human reviewer</dd></div>
+          <div><dt>SHELL</dt><dd>PowerShell → WSL zsh → Starship — the journey is the setup</dd></div>
+          <div><dt>STACK</dt><dd>Next.js · FastAPI · PyTorch · ONNX · Tauri · Supabase</dd></div>
+          <div><dt>MACHINE</dt><dd>Windows 11 laptop that's been to more hackathons than hotels</dd></div>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="doc-head" style="margin-top:0"><p class="mono">VARIATION A — MOCK ONLY · NOT DEPLOYED</p></div>
+
+</body>
+</html>

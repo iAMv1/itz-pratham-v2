@@ -19,7 +19,6 @@ export function HeroBackdrop() {
         style={{ y: sunY }}
         className="hero-sun absolute right-[14%] top-[16%] size-[clamp(150px,24vw,280px)] rounded-full"
       />
-      <div className="absolute inset-x-0 bottom-[10%] h-[2px] bg-saffron/60" />
       <DustField className="absolute inset-0 h-full w-full" />
     </div>
   );

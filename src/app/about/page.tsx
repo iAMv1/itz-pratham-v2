@@ -33,7 +33,7 @@ export default function AboutPage() {
             </h1>
           </Reveal>
 
-          <div className="mt-10 grid items-start gap-10 lg:grid-cols-[1.5fr_1fr]">
+          <div className="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.5fr_1fr]">
             <Reveal className="space-y-5">
               <p className="max-w-[52ch] text-lg font-medium leading-relaxed drop-cap">
                 I&apos;m a CS undergrad from Delhi building full-stack + ML systems with the patience of a craftsman and
@@ -117,8 +117,10 @@ export default function AboutPage() {
           {/* the journey — timeline */}
           <Reveal className="mt-16">
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] font-semibold uppercase">{metro().title}</h2>
-            <div className="mt-6 border-2 border-ink bg-paper-2 p-6 shadow-hard">
-              <MetroMap metro={metro()} />
+            <div className="mt-6 overflow-x-auto border-2 border-ink bg-paper-2 p-6 shadow-hard">
+              <div className="min-w-[680px]">
+                <MetroMap metro={metro()} />
+              </div>
             </div>
           </Reveal>
 

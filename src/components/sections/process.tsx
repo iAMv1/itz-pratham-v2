@@ -128,7 +128,7 @@ export function Process({ process }: { process: ProcessContent }) {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid items-start gap-[clamp(24px,3vw,48px)] lg:grid-cols-[1.55fr_1fr]">
+        <div className="mt-10 grid grid-cols-1 items-start gap-[clamp(24px,3vw,48px)] lg:grid-cols-[1.55fr_1fr]">
           {/* terminal session */}
           <div className="border-2 border-ink bg-paper-2 shadow-[8px_8px_0_0_#1D5B9E]">
             <div className="flex items-center gap-2 border-b-2 border-ink px-4 py-3">
@@ -226,7 +226,7 @@ export function Process({ process }: { process: ProcessContent }) {
               LAST MEASURED · {performanceData.measuredAtLabel} · LIGHTHOUSE · LIVE RUN
             </p>
           </div>
-          <div className="mt-4 grid gap-px border-2 border-ink bg-ink sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-4 grid grid-cols-1 gap-px border-2 border-ink bg-ink sm:grid-cols-3 lg:grid-cols-6">
             {[
               { k: "A11Y", v: String(performanceData.scores.a11y) },
               { k: "BEST PRACTICES", v: String(performanceData.scores.bp) },

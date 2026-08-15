@@ -15,23 +15,19 @@ const DMRC = {
 
 const LINE_NAMES = {
   blue: "BLUE LINE",
-  yellow: "YELLOW LINE",
   pink: "PINK LINE",
   violet: "VIOLET LINE",
 } as const;
 
 const TERMINI: Record<string, [string, string]> = {
   blue: ["BVCOE DELHI", "IIT MADRAS (ONLINE)"],
-  yellow: ["GSSOC '24", "WORKSHOP LEAD"],
   pink: ["SIH 2024", "MINDPULSE PRO"],
   violet: ["OMNISECTESTER", "MINDPULSE PRO"],
 };
 
 const STATION_NOTES: Record<string, string> = {
   "BVCOE DELHI": "B.Tech CSE · 2023—27",
-  "IIT MADRAS (ONLINE)": "BSc Data Science · 2025—26",
-  "GSSOC '24": "Open-source contributor",
-  "WORKSHOP LEAD": "GenAI workshop · 50+ students",
+  "IIT MADRAS (ONLINE)": "BSc Foundation · 1 year · certified",
   "SIH 2024": "Grand finalist · 492,960+ participants",
   ALGOQUEST: "Top 5 · 300+ teams",
   RANBHOOMI: "2nd · volleyball & basketball",
@@ -54,10 +50,6 @@ function geom(metro: Metro, id: string): LineGeom {
       const y = ROW.r0;
       const path = `M ${HUB.x} ${HUB.y} L ${HUB.x + 34} ${HUB.y} L ${HUB.x + 66} ${y} L 470 ${y}`;
       return { path, stations: [{ name: stationsOf[0], x: 230, y }, { name: stationsOf[1], x: 470, y }], terminusTick: { x: 492, y } };
-    }
-    case "yellow": {
-      const y = ROW.r2;
-      return { path: `M ${HUB.x} ${HUB.y} L 320 ${y} L 620 ${y}`, stations: [{ name: stationsOf[0], x: 320, y }, { name: stationsOf[1], x: 620, y }], terminusTick: { x: 642, y } };
     }
     case "pink": {
       const y = ROW.r1;
@@ -87,7 +79,7 @@ export function MetroMap({ metro }: { metro: Metro }) {
   return (
     <div>
       <svg viewBox="0 0 920 300" role="img" aria-label={metro.title} className="w-full text-ink">
-        {(["blue", "yellow", "pink", "violet"] as const).map((lid, li) => {
+        {(["blue", "pink", "violet"] as const).map((lid, li) => {
           const g = geom(metro, lid);
           const color = DMRC[lid];
           return (
@@ -118,7 +110,7 @@ export function MetroMap({ metro }: { metro: Metro }) {
               {/* stations */}
               {g.stations.map((s, si) => {
                 const isInterchange = lid === "pink" && s.name === "MINDPULSE";
-                const important = isInterchange || s.name === "GSSOC '24";
+                const important = isInterchange;
                 return (
                   <motion.g
                     key={si}
@@ -179,7 +171,7 @@ export function MetroMap({ metro }: { metro: Metro }) {
       </svg>
 
       <div className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-t-2 border-ink pt-3 font-mono text-[10.5px] tracking-wider text-muted-foreground">
-        {(["blue", "yellow", "pink", "violet"] as const).map((lid) => (
+        {(["blue", "pink", "violet"] as const).map((lid) => (
           <span key={lid} className="flex items-center gap-2">
             <span aria-hidden className="h-1 w-6 rounded-full" style={{ background: DMRC[lid] }} />
             {LINE_NAMES[lid]}

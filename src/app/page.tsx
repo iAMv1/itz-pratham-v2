@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Hero } from "@/components/sections/hero";
-import { SkillsMarquee, NameMarquee } from "@/components/sections/marquee-band";
+import { SkillsMarquee } from "@/components/sections/marquee-band";
 import { Reveal } from "@/components/motion/reveal";
 import { KineticArt } from "@/components/motion/kinetic-art";
 import { MaskTitle } from "@/components/motion/mask-title";
@@ -19,7 +19,6 @@ export default function Home() {
       <main id="main" className="flex-1">
         <Hero />
         <SkillsMarquee />
-        <NameMarquee />
 
         {/* featured work → /work/[slug] */}
         <section id="featured" className="bg-jali scroll-mt-24 px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
@@ -82,7 +81,7 @@ export default function Home() {
         {/* CTA band */}
         <section id="talk" className="scroll-mt-24 border-y-2 border-ink bg-ink-2 px-[clamp(20px,4vw,48px)] py-[clamp(56px,8vh,90px)] text-paper">
           <Reveal>
-            <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto]">
               <div>
                 <p aria-hidden className="font-dev text-[clamp(2rem,4.5vw,3.6rem)] text-saffron">शुक्रिया</p>
                 <h2 className="mt-2 font-display text-[clamp(2.4rem,6vw,5rem)] font-semibold uppercase leading-[0.9]">

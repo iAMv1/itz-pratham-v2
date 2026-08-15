@@ -40,7 +40,7 @@ export function Contact() {
     <section id="contact" className="bg-jali relative overflow-hidden border-t-2 border-ink bg-paper px-[clamp(20px,4vw,48px)] py-[clamp(64px,8vh,110px)]">
       <MehndiField className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
       <span aria-hidden className="pointer-events-none absolute -left-[15%] top-[-20%] h-[60%] w-[60%] rounded-full bg-cobalt/10 blur-[120px]" />
-      <div className="relative z-10 grid items-start gap-[clamp(28px,4vw,64px)] lg:grid-cols-[1.35fr_1fr]">
+      <div className="relative z-10 grid grid-cols-1 items-start gap-[clamp(28px,4vw,64px)] lg:grid-cols-[1.35fr_1fr]">
         <div>
           <Reveal>
             <p className="mb-4 inline-block border-2 border-ink bg-saffron px-3 py-1.5 font-mono text-xs tracking-[0.12em] text-ink shadow-[3px_3px_0_0_var(--shadow-ink)]">
@@ -66,7 +66,7 @@ export function Contact() {
                 type="button"
                 onClick={copyEmail}
                 aria-label="Copy email address to clipboard"
-                className="relative inline-flex min-w-[min(320px,100%)] items-center justify-center gap-2.5 border-2 border-ink bg-saffron px-8 py-5 font-mono text-[17px] font-medium tracking-wide text-ink shadow-[4px_4px_0_0_var(--shadow-ink)] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97]"
+                className="relative inline-flex w-full min-w-0 items-center justify-center gap-2.5 border-2 border-ink bg-saffron px-8 py-5 font-mono text-[17px] font-medium tracking-wide text-ink shadow-[4px_4px_0_0_var(--shadow-ink)] transition-[transform,box-shadow] duration-150 ease-out hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--shadow-ink)] active:scale-[0.97] sm:w-auto sm:min-w-[320px]"
               >
                 {copied ? "COPIED ✓" : profile.email} <span aria-hidden>{copied ? "" : "→"}</span>
               </button>
@@ -78,14 +78,11 @@ export function Contact() {
               </p>
               <a
                 href={profile.resume}
-                className="inline-flex min-w-[min(320px,100%)] items-center justify-center gap-2.5 border-2 border-ink px-8 py-5 font-mono text-[17px] tracking-wide text-ink transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97]"
+                className="inline-flex w-full min-w-0 items-center justify-center gap-2.5 border-2 border-ink px-8 py-5 font-mono text-[17px] tracking-wide text-ink transition-colors duration-200 hover:bg-ink hover:text-paper active:scale-[0.97] sm:w-auto sm:min-w-[320px]"
               >
                 Download resume <span aria-hidden>↗</span>
               </a>
             </div>
-            <p aria-hidden className="pointer-events-none absolute bottom-[clamp(24px,5vh,60px)] left-[clamp(20px,4vw,48px)] z-0 rotate-[-3deg] font-dev text-[clamp(1.6rem,3vw,2.6rem)] text-saffron-deep/70">
-              शुक्रिया
-            </p>
             <ul className="flex flex-wrap gap-x-12 gap-y-3 font-mono text-sm tracking-wider">
               {[
                 { href: profile.links.github, label: "GITHUB ↗" },
@@ -102,6 +99,9 @@ export function Contact() {
                 </li>
               ))}
             </ul>
+            <p aria-hidden className="mt-10 rotate-[-2deg] font-dev text-[clamp(1.6rem,3vw,2.6rem)] leading-none text-saffron-deep/70">
+              शुक्रिया
+            </p>
           </Reveal>
         </div>
 

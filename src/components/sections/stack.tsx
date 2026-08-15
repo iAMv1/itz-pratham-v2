@@ -15,7 +15,7 @@ export function Stack() {
         </h2>
       </Reveal>
 
-      <div className="mt-10 grid gap-[clamp(14px,2vw,28px)] lg:grid-cols-[1.15fr_1fr_1fr] lg:[grid-template-areas:'ai_lang_frame'_'ai_tools_tools']">
+      <div className="mt-10 grid grid-cols-1 gap-[clamp(14px,2vw,28px)] lg:grid-cols-[1.15fr_1fr_1fr] lg:[grid-template-areas:'ai_lang_frame'_'ai_tools_tools']">
         {profile.stack.map((g, i) => (
           <Reveal key={g.name} delay={i * 0.06} className={g.wide ? "lg:[grid-area:ai]" : ""}>
             <div
