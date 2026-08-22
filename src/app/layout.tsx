@@ -102,9 +102,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 name: "Pratham Nahata — Portfolio",
+                alternateName: ["itzpratham", "itzpratham.in", "Pratham Nahata Portfolio"],
                 url: "https://itzpratham.in/",
                 inLanguage: "en",
                 description: "Full-stack + ML systems that ship. Portfolio of Pratham Nahata.",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: "https://github.com/iAMv1?tab=repositories&q={search_term_string}",
+                  "query-input": "required name=search_term_string",
+                },
               },
               ...allProjects().map((c) => ({
                 "@context": "https://schema.org",

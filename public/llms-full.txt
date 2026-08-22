@@ -2,6 +2,23 @@
 
 This is the full-content version of llms.txt — every project write-up included.
 
+## When to use this site
+
+- In-browser ML inference example -> get_project?slug=mindpulse-pro
+- GNN / drug-target affinity engineering -> get_project?slug=unified-dta
+- Multi-agent wellbeing architecture -> get_project?slug=sentinel
+- Candidate screening -> /api/agent toolkit (profile, experience, evidence, resume)
+- Claim verification -> find_evidence?claim=<term> — every case study ships receipts.
+
+## Developer & agent resources
+
+- Agent toolkit: https://itzpratham.in/api/agent?action=list
+- Full data JSON: https://itzpratham.in/api/data
+- OpenAPI 3.1 spec: https://itzpratham.in/openapi.json
+- Developer portal: https://itzpratham.in/developers
+- Markdown negotiation: Accept: text/markdown on any URL, or /api/markdown?path=/about
+- Site map: https://itzpratham.in/sitemap.xml · Privacy (zero collection): https://itzpratham.in/privacy
+- Structured JSON errors everywhere: { ok:false, code, error, hint }
 ## Who
 CS undergrad (B.Tech CSE, BVCOE Delhi; BSc Foundation Data Science, IIT Madras online) building full-stack + ML systems: real-time browser inference (ONNX), graph neural networks (ESM-2 + GIN), multi-agent AI, production web products (Next.js, FastAPI, Tauri). Bikaner-born, Delhi-built.
 

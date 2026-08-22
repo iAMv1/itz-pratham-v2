@@ -20,7 +20,8 @@ export async function GET(request: Request) {
   const ok = (data: unknown, extra: Record<string, unknown> = {}) =>
     NextResponse.json({ action, ok: true, ...extra, data }, { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } });
 
-  const err = (message: string) => NextResponse.json({ action, ok: false, error: message }, { status: 400 });
+  const err = (message: string, code: "unknown_action" | "missing_param" | "not_found", hint: string) =>
+    NextResponse.json({ action, ok: false, error: message, code, hint }, { status: code === "not_found" ? 404 : 400 });
 
   switch (action) {
     case "get_profile":
@@ -53,7 +54,7 @@ export async function GET(request: Request) {
 
     case "get_project": {
       const c = getProject(slug);
-      if (!c) return err(`no project with slug "${slug}" — try: ${allProjects().map((s) => s.slug).join(", ")}`);
+      if (!c) return err(`no project with slug "${slug}"`, "not_found", `known slugs: ${allProjects().map((s) => s.slug).join(", ")}`);
       return ok({
         slug: c.slug,
         title: c.title,
@@ -90,7 +91,7 @@ export async function GET(request: Request) {
     case "compare_projects": {
       const a = getProject(slug);
       const b = getProject(searchParams.get("with") ?? "");
-      if (!a || !b) return err("compare_projects needs ?slug=A&with=B");
+      if (!a || !b) return err("compare_projects needs ?slug=A&with=B", "missing_param", "pass two known slugs, e.g. ?action=compare_projects&slug=mindpulse-pro&with=sentinel — list: /api/agent?action=list");
       return ok({
         a: { slug: a.slug, title: a.title, stack: a.stack, metrics: a.metrics, focus: a.blurb },
         b: { slug: b.slug, title: b.title, stack: b.stack, metrics: b.metrics, focus: b.blurb },
@@ -127,6 +128,6 @@ export async function GET(request: Request) {
       });
 
     default:
-      return err(`unknown action "${action}" — GET /api/agent?action=list`);
+      return err(`unknown action "${action}"`, "unknown_action", 'discover valid actions at /api/agent?action=list');
   }
 }

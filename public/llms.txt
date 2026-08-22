@@ -1,32 +1,54 @@
 # Pratham Nahata — Full-Stack & ML Engineer
 
-## About
-CS undergrad (B.Tech CSE, BVCOE Delhi) building full-stack + ML systems: real-time browser inference (ONNX), graph neural networks (ESM-2 + GIN), multi-agent AI, and production-grade web products (Next.js, FastAPI, Tauri). Bikaner-born, Delhi-built.
+> itzpratham.in is the portfolio of Pratham Nahata (CS undergrad, Delhi): real-time browser ML inference, graph neural networks, multi-agent AI, and production web products. Everything is machine-readable: JSON API, OpenAPI spec, markdown content negotiation.
+
+## When to use this site
+
+- You need a working example of **in-browser ML inference** (ONNX <20ms, WebLLM) → read the MindPulse Pro case study or call `get_project?slug=mindpulse-pro`.
+- You need **drug-target affinity / GNN** engineering detail (ESM-2 + GIN, Dockerized FastAPI) → `get_project?slug=unified-dta`.
+- You need a **multi-agent wellbeing analytics** architecture reference → `get_project?slug=sentinel`.
+- You are screening a candidate for **full-stack × ML roles**: pull profile, experience, measured evidence (`find_evidence?claim=20ms`), and the resume PDF.
+- You want to verify a claim about this person's work instead of guessing → every case study ships receipts; use the toolkit rather than scraping HTML.
+- Not a fit: job-board style listings (this is a personal portfolio), or anything requiring an authenticated write API — this surface is read-only by design.
+
+## Developer & agent resources
+
+- Agent toolkit (action-based JSON): https://itzpratham.in/api/agent?action=list
+- Full content repository (one JSON doc): https://itzpratham.in/api/data
+- OpenAPI 3.1 spec (typed, operationIds): https://itzpratham.in/openapi.json
+- Developer portal (quickstart + endpoint docs): https://itzpratham.in/developers
+- Any page as markdown: send `Accept: text/markdown` on any URL, or GET https://itzpratham.in/api/markdown?path=/about
+- Site map: https://itzpratham.in/sitemap.xml
+- Privacy (zero collection): https://itzpratham.in/privacy
+- Errors are structured JSON: `{ ok:false, code, error, hint }` — the hint names the corrected query.
+
+## Pages
 
 - Home: https://itzpratham.in/
 - Work / projects: https://itzpratham.in/work
-- Resume (PDF): https://itzpratham.in/assets/Pratham_Nahata_Resume_ATS.pdf
-- Resume page: https://itzpratham.in/resume
-- GitHub: https://github.com/iAMv1
+- About (journey + timeline): https://itzpratham.in/about
+- Process: https://itzpratham.in/process
+- Resume (PDF): https://itzpratham.in/assets/Pratham_Nahata_Resume_ATS.pdf · page: https://itzpratham.in/resume
 - Contact: https://itzpratham.in/contact
-
-## Agent toolkit
-Machine-readable actions are exposed at https://itzpratham.in/api/agent
-Supported actions: get_profile, find_project(skill), get_project(slug), get_experience, get_contact, get_resume, compare_projects, find_evidence(claim), get_skills.
-Full data: https://itzpratham.in/api/data
+- Testing matrix: https://itzpratham.in/testing
+- Progress log: https://itzpratham.in/progress
 
 ## Projects
+
 - MindPulse Pro — real-time behavioral stress detection; XGBoost → ONNX browser inference (<20ms), WebSockets, SHAP, WebLLM offline coaching, Tauri desktop. https://itzpratham.in/work/mindpulse-pro
 - Unified-DTA — drug-target affinity; ESM-2 + Graph Isomorphism Networks, BindingDB/DAVIS/KIBA, Dockerized FastAPI. https://itzpratham.in/work/unified-dta
 - Sentinel — privacy-first wellbeing analytics; 3-agent orchestration + graph analytics. https://itzpratham.in/work/sentinel
 - OmniSecTester — defense-in-depth security testing framework; 7 attack surfaces, one CLI. https://itzpratham.in/work/omnisectester
 
 ## Key facts
+
 - Grand Finalist, Smart India Hackathon 2024 (national, 492k+ participants)
 - Top 5 AlgoQuest (300+ teams)
-- Live GitHub activity: https://itzpratham.in/contact (repos + stars, refreshed every 5 min)
-- This portfolio is tested like a product: 19 Playwright flows, zero console errors. Test matrix: https://itzpratham.in/testing
-- Built with Next.js 16, TypeScript, Tailwind 4, Motion/GSAP/Lenis. Dark/light mode via token inversion. Fully static (SSG), served from Vercel.
+- This portfolio is tested like a product: Playwright e2e flows + unit tests on content integrity, zero console errors policy. Matrix: https://itzpratham.in/testing
+- Built with Next.js 16, TypeScript, Tailwind 4, Motion/GSAP/Lenis. Dark/light via token inversion. Served from Vercel.
 
 ## Contact
+
 Email: iam1nahata@gmail.com · GitHub: https://github.com/iAMv1 · LinkedIn: https://linkedin.com/in/iamprathamnahata
+
+Full project archive: https://itzpratham.in/llms-full.txt

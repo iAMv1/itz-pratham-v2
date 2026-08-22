@@ -24,6 +24,20 @@ export function Footer() {
         >
           PROCESS ↗
         </a>{" "}
+        ·{" "}
+        <a
+          href="/developers"
+          className="underline-offset-4 transition-colors hover:text-marigold"
+        >
+          AGENTS/API ↗
+        </a>{" "}
+        ·{" "}
+        <a
+          href="/privacy"
+          className="underline-offset-4 transition-colors hover:text-marigold"
+        >
+          PRIVACY
+        </a>{" "}
         · NO TEMPLATES WERE HARMED
       </p>
     </footer>

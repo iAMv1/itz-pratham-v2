@@ -35,6 +35,20 @@ export default function NotFound() {
           TELL THE BUILDER ↗
         </a>
       </p>
+      <details className="mt-2 max-w-[560px] border-2 border-ink bg-paper-2 p-4 text-left font-mono text-[12px] leading-relaxed text-muted-foreground shadow-hard">
+        <summary className="cursor-pointer list-none tracking-[0.14em] text-cobalt">
+          FOR AGENTS &amp; CRAWLERS — HOW TO RECOVER ▾
+        </summary>
+        <div className="mt-3 space-y-1.5">
+          <p>HTTP 404 is real. This path does not exist. Useful next hops:</p>
+          <p>· <a href="/sitemap.xml" className="underline underline-offset-2 hover:text-saffron-deep">/sitemap.xml</a> — every real URL</p>
+          <p>· <a href="/llms.txt" className="underline underline-offset-2 hover:text-saffron-deep">/llms.txt</a> — site guide for LLMs (when to use what)</p>
+          <p>· <a href="/developers" className="underline underline-offset-2 hover:text-saffron-deep">/developers</a> — API + docs portal</p>
+          <p>· <a href="/openapi.json" className="underline underline-offset-2 hover:text-saffron-deep">/openapi.json</a> — OpenAPI spec</p>
+          <p>· <Link href="/api/data" className="underline underline-offset-2 hover:text-saffron-deep">/api/data</Link> — full content as JSON</p>
+          <p>· <Link href="/api/markdown?path=/" className="underline underline-offset-2 hover:text-saffron-deep">/api/markdown?path=/</Link> — pages as markdown</p>
+        </div>
+      </details>
     </main>
   );
 }

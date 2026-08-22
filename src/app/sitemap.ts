@@ -4,7 +4,7 @@ import { allProjects } from "@/content/projects";
 const BASE = "https://itzpratham.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/testing"].map((r) => ({
+  const staticRoutes = ["", "/work", "/about", "/process", "/contact", "/progress", "/resume", "/testing", "/developers", "/privacy"].map((r) => ({
     url: `${BASE}${r}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
